@@ -4,22 +4,24 @@ import java.util.Date;
 
 public abstract class Usuario {
 
-	private String nickname;
-	private String nombre;
+	String nickname;
+	String nombre;
 	private String apellido;
 	private String mail;
 	private Date f_nac;
 	private Image imagen;
+
+    public Usuario(String nickname, String nombre, String apellido, String mail, Date f_nac, Image imagen) {
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.f_nac = f_nac;
+        this.imagen = imagen;
+    }
 	
 	
-	public Usuario() {
-		// TODO Apéndice de constructor generado automáticamente
-	}
-
-	/**
-	 * @param args
-	 */
-
+	
 	public String getNickname() {
 		return nickname;
 	}

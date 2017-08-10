@@ -1,4 +1,6 @@
 
+import java.awt.Image;
+import java.util.Date;
 import java.util.List;
 
 
@@ -7,12 +9,11 @@ public class Artista extends Usuario{
     private String link;
     private List<String> listDiscos;
 
-    public Artista() {
-        super();
-    }
-    
 
-    public Artista(String biografia, String link, List<String> listDiscos) {
+    
+    public Artista(String nickname, String nombre, String apellido, String mail, Date f_nac,
+            Image imagen, String biografia, String link, List<String> listDiscos) {
+        super(nickname,nombre,apellido,mail,f_nac,imagen);
         this.biografia = biografia;
         this.link = link;
         this.listDiscos = listDiscos;
