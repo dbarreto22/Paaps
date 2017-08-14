@@ -1,14 +1,25 @@
 
 import java.awt.Image;
 import java.util.Date;
+import java.util.List;
 
 
 public class Album {
     private String nombre;
-    private Date anioCreado;
-    private Image imagenAlbum;
+    private int anioCreado;
+    private String imagenAlbum;
+    
+    private List<Temas> listTemas;
 
-    public Album(String nombre, Date anioCreado, Image imagenAlbum) {
+    public List<Temas> getListTemas() {
+        return listTemas;
+    }
+
+    public void setListTemas(List<Temas> listTemas) {
+        this.listTemas = listTemas;
+    }
+
+    public Album(String nombre, int anioCreado, String imagenAlbum) {
         this.nombre = nombre;
         this.anioCreado = anioCreado;
         this.imagenAlbum = imagenAlbum;
@@ -22,19 +33,19 @@ public class Album {
         this.nombre = nombre;
     }
 
-    public Date getAnioCreado() {
+    public int getAnioCreado() {
         return anioCreado;
     }
 
-    public void setAnioCreado(Date anioCreado) {
+    public void setAnioCreado(int anioCreado) {
         this.anioCreado = anioCreado;
     }
 
-    public Image getImagenAlbum() {
+    public String getImagenAlbum() {
         return imagenAlbum;
     }
 
-    public void setImagenAlbum(Image imagenAlbum) {
+    public void setImagenAlbum(String imagenAlbum) {
         this.imagenAlbum = imagenAlbum;
     }
     

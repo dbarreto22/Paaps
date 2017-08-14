@@ -4,14 +4,14 @@ import java.util.Date;
 
 public abstract class Usuario {
 
-	private String nickname;
-	private String nombre;
+	String nickname;
+	String nombre;
 	private String apellido;
 	private String mail;
 	private Date f_nac;
-	private String imagen;
+	private Image imagen;
 
-    public Usuario(String nickname, String nombre, String apellido, String mail, Date f_nac, String imagen) {
+    public Usuario(String nickname, String nombre, String apellido, String mail, Date f_nac, Image imagen) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -62,11 +62,11 @@ public abstract class Usuario {
 		this.f_nac = f_nac;
 	}
 
-	public String getImagen() {
+	public Image getImagen() {
 		return imagen;
 	}
 
-	public void setImagen(String imagen) {
+	public void setImagen(Image imagen) {
 		this.imagen = imagen;
 	}
 

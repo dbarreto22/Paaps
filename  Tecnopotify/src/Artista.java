@@ -12,7 +12,7 @@ public class Artista extends Usuario{
 
     
     public Artista(String nickname, String nombre, String apellido, String mail, Date f_nac,
-            Image imagen, String biografia, String link, List<String> listDiscos) {
+            String imagen, String biografia, String link, List<String> listDiscos) {
         super(nickname,nombre,apellido,mail,f_nac,imagen);
         this.biografia = biografia;
         this.link = link;
