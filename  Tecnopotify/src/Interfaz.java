@@ -1,11 +1,13 @@
 
 import java.util.Date;
-
+import java.util.ArrayList;
 
 public interface Interfaz {
     
-    public int altaUsuario(String nickname, String nombre, String apellido,
-            String mail, Date f_nac, String imagen, boolean b);
+    public ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario> ();
+    
+    public void altaUsuario(String nickname, String nombre, String apellido,
+            String mail, Date f_nac, String imagen);
     public void otrosDatos(String a, String b);
     public int altaGenero(String a, String b);
     public int altaAlbum (String a);

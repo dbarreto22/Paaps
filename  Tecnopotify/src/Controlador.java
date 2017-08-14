@@ -1,15 +1,24 @@
 
-import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Date;
 
-//public List<Usuario> ListUsuarios;
+
+
 
 
 public class Controlador implements Interfaz {
-    public int altaUsuario(String nickname , String nombre, String apellido,
-            String mail, Date f_nac, String imagen, boolean b){
-        return 0;
-
+    
+    public void altaUsuario(String nickname , String nombre, String apellido,
+            String mail, Date f_nac, String imagen){
+        Usuario U = new Usuario(nickname, nombre, apellido,mail,f_nac, imagen) {};
+        Iterator<Usuario> UIter = listaUsuarios.iterator();
+        while (UIter.hasNext()){
+            listaUsuarios.add(U); 
+        }
     }
     
     public void otrosDatos(String a, String b){
