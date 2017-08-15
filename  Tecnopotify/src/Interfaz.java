@@ -2,12 +2,15 @@
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public interface Interfaz {
     
    // public ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario> ();
     public Map<String, Usuario> listaUsuarios = new HashMap<String, Usuario>();
+    //public Map<String, Album> listaAlbum = new HashMap<String, Album>();
+    public ArrayList<Album> listaAlbum = new ArrayList<Album> ();
     public void altaUsuario(String nickname, String nombre, String apellido,
             String mail, Date f_nac, String imagen);
     public void otrosDatos(String a, String b);
