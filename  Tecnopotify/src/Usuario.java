@@ -2,7 +2,7 @@ import java.awt.Image;
 import java.util.Date;
 
 
-public abstract class Usuario {
+public  class Usuario {
 
 	private String nickname;
 	private String nombre;
