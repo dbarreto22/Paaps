@@ -37,12 +37,10 @@ public class Controlador implements Interfaz {
 
     
     public int altaGenero(String nombre, String padre) {
-        Genero g = new Genero();
+        Genero g = new Genero(nombre, padre);
+       
         return 0;
     
-    
-    
- 
     }
 
     //cambiar nombre.
@@ -57,7 +55,13 @@ public class Controlador implements Interfaz {
 
     
     public void altaTema(String nombre, String duracion, int posicion) {
-
+      /*  Temas T = new Temas(nombre, duracion,posicion);
+        if (manejador.listaTemas.contains(T)){
+            System.out.println("El Tema ya existe");
+        }
+        else{
+        manejador.listaTemas.add(T);  
+        }*/
     }
 
     
@@ -116,17 +120,18 @@ public class Controlador implements Interfaz {
     }
 
     
-    public int seleccionarLista(String b, String c) {
+    public int seleccionarLista(String nickname, String nombreLista) {
+        
         return 0;
     }
 
     
-    public void quitarTema(String a) {
+    public void quitarTemaLista(String nombreTema) {
 
     }
 
     
-    public void agregarTema(String a) {
+    public void agregarTemaLista(String a) {
 
     }
 

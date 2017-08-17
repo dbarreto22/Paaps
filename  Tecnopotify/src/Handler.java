@@ -10,6 +10,7 @@ public class Handler {
     //public Map<String, Album> listaAlbum = new HashMap<String, Album>();
     public ArrayList<Album> listaAlbum = new ArrayList<Album> ();
     public ArrayList<Genero> generos = new ArrayList<Genero> ();
+    public ArrayList<Temas> listaTemas = new ArrayList<Temas> ();
     
     private Handler() {
     }

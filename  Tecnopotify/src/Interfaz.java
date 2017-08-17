@@ -26,9 +26,9 @@ public interface Interfaz {
     public int dejarDeSeguirUsuario(boolean a, String b, String c);
     public int SeguirUsuario(boolean a, String b, String c);
     public int publicarLista(String b, String c);
-    public int seleccionarLista(String b, String c);
-    public void quitarTema(String a);
-    public void agregarTema(String a);
+    public int seleccionarLista(String nickname, String nombreLista);
+    public void quitarTemaLista(String nombreTema);
+    public void agregarTemaLista(String a);
     public int crearListaRep(boolean a, String b, String c);
     public void crearLista(String b, boolean a);
 }
