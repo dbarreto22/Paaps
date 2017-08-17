@@ -15,15 +15,18 @@ import java.util.HashMap;
 
 public class Controlador implements Interfaz {
     
-    public void altaUsuario(String nickname , String nombre, String apellido,
+    Handler manejador = Handler.getInstance();
+    
+    public int altaUsuario(String nickname , String nombre, String apellido,
             String mail, Date f_nac, String imagen){
         
         Usuario U = new Usuario(nickname, nombre, apellido,mail,f_nac, imagen);
-        if (listaUsuarios.containsKey(nickname)){
-        System.out.println("No se puede introducir el Usuario. Nickname ya existe.");
+        if (manejador.listaUsuarios.containsKey(nickname)){
+        return 0;
     }
     else{
-        listaUsuarios.put(U.getNickname(), U);               
+        manejador.listaUsuarios.put(U.getNickname(), U);  
+        return 1;
     }
 }
 
@@ -33,12 +36,17 @@ public class Controlador implements Interfaz {
     }
 
     
-    public int altaGenero(String a, String b) {
+    public int altaGenero(String nombre, String padre) {
+        Genero g = new Genero();
         return 0;
+    
+    
+    
+ 
     }
 
-    
-    public int altaAlbum(String a) {
+    //cambiar nombre.
+    public int altaAlbum(String nombreArtista) {
         return 0;
     }
 

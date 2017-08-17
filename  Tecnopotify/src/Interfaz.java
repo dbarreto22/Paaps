@@ -7,15 +7,12 @@ import java.util.Map;
 
 public interface Interfaz {
     
-   // public ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario> ();
-    public Map<String, Usuario> listaUsuarios = new HashMap<String, Usuario>();
-    //public Map<String, Album> listaAlbum = new HashMap<String, Album>();
-    public ArrayList<Album> listaAlbum = new ArrayList<Album> ();
-    public void altaUsuario(String nickname, String nombre, String apellido,
+  
+    public int altaUsuario(String nickname, String nombre, String apellido,
             String mail, Date f_nac, String imagen);
     public void otrosDatos(String a, String b);
     public int altaGenero(String a, String b);
-    public int altaAlbum (String a);
+    public int altaAlbum (String nombreArtista);
     public void datosAlbum(String nombre, int anioCreado, String imagen);
     public void altaTema(String nombre, String duracion, int posicion);
     public void seleccionarLista(String a);
