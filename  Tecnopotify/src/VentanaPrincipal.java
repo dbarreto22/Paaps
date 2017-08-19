@@ -1,3 +1,4 @@
+package tecnopotify;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,77 +27,196 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jInternalFrame2 = new javax.swing.JInternalFrame();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu12 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        panelAltas = new javax.swing.JInternalFrame();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaAltas = new javax.swing.JTable();
+        lblPanelAltaTipo = new javax.swing.JLabel();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        menuUuarios = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        menuGenero = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        menuAlbum = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        menuFavs = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        menuLista = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
 
-        jInternalFrame1.setVisible(true);
+        jMenu12.setText("jMenu12");
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("frPrincipal"); // NOI18N
 
-        jInternalFrame2.setVisible(true);
+        panelAltas.setClosable(true);
+        panelAltas.setResizable(true);
+        panelAltas.setTitle("Alta album");
+        panelAltas.setVisible(true);
 
-        jMenu1.setText("Menu");
+        tablaAltas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaAltas);
 
-        jMenuItem1.setText("Crear");
+        lblPanelAltaTipo.setText("jLabel1");
+
+        javax.swing.GroupLayout panelAltasLayout = new javax.swing.GroupLayout(panelAltas.getContentPane());
+        panelAltas.getContentPane().setLayout(panelAltasLayout);
+        panelAltasLayout.setHorizontalGroup(
+            panelAltasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblPanelAltaTipo)
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+        panelAltasLayout.setVerticalGroup(
+            panelAltasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAltasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelAltasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPanelAltaTipo)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(206, Short.MAX_VALUE))
+        );
+
+        jMenu3.setText("Menu");
+
+        menuUuarios.setText("Usuarios");
+
+        jMenuItem1.setText("Crear usuario");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuUuarios.add(jMenuItem1);
 
-        jMenuItem2.setText("Modificar");
-        jMenu1.add(jMenuItem2);
+        jMenuItem3.setText("Consultar cliente");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        menuUuarios.add(jMenuItem3);
 
-        jMenuItem3.setText("Eliminar");
-        jMenu1.add(jMenuItem3);
+        jMenuItem14.setText("Consultar artista");
+        menuUuarios.add(jMenuItem14);
 
-        jMenuBar1.add(jMenu1);
+        jMenu3.add(menuUuarios);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        menuGenero.setText("Generos");
 
-        jInternalFrame2.setJMenuBar(jMenuBar1);
+        jMenuItem4.setText("Crear genero");
+        menuGenero.add(jMenuItem4);
 
-        javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
-        jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
-        jInternalFrame2Layout.setHorizontalGroup(
-            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 384, Short.MAX_VALUE)
-        );
-        jInternalFrame2Layout.setVerticalGroup(
-            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 257, Short.MAX_VALUE)
-        );
+        jMenu3.add(menuGenero);
+
+        menuAlbum.setText("Albums");
+        menuAlbum.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuAlbumMouseClicked(evt);
+            }
+        });
+
+        jMenuItem5.setText("Crear album");
+        jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem5MouseClicked(evt);
+            }
+        });
+        menuAlbum.add(jMenuItem5);
+
+        jMenuItem15.setText("Consultar album");
+        menuAlbum.add(jMenuItem15);
+
+        jMenu3.add(menuAlbum);
+
+        menuFavs.setText("Favoritos");
+
+        jMenuItem10.setText("Seguir usuario");
+        menuFavs.add(jMenuItem10);
+
+        jMenuItem11.setText("Dejar de seguir");
+        menuFavs.add(jMenuItem11);
+
+        jMenuItem12.setText("Guardar tema/lista/album");
+        menuFavs.add(jMenuItem12);
+
+        jMenuItem13.setText("Quitar  tema/lista/album");
+        menuFavs.add(jMenuItem13);
+
+        jMenu3.add(menuFavs);
+
+        menuLista.setText("Lista de reproduccion");
+
+        jMenuItem6.setText("Crear lista rep.");
+        menuLista.add(jMenuItem6);
+
+        jMenuItem7.setText("Agregar tema");
+        menuLista.add(jMenuItem7);
+
+        jMenuItem8.setText("Quitar tema");
+        menuLista.add(jMenuItem8);
+
+        jMenuItem9.setText("Publicar lista");
+        menuLista.add(jMenuItem9);
+
+        jMenuItem16.setText("Consultar lista");
+        menuLista.add(jMenuItem16);
+
+        jMenu3.add(menuLista);
+
+        jMenuBar3.add(jMenu3);
+
+        jMenu5.setText("Edit");
+        jMenuBar3.add(jMenu5);
+
+        setJMenuBar(jMenuBar3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(panelAltas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(panelAltas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(154, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleName("ventanaPrincipal");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -104,6 +224,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void menuAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAlbumMouseClicked
+
+    }//GEN-LAST:event_menuAlbumMouseClicked
+
+    private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
+       //Muestra el panel de altas y lo prepara para el alta de usuarios
+        panelAltas.setVisible(true);
+        panelAltas.setTitle("Alta Album");
+        lblPanelAltaTipo.setText("Elegir artista");
+    }//GEN-LAST:event_jMenuItem5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -141,14 +276,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JInternalFrame jInternalFrame2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenu12;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblPanelAltaTipo;
+    private javax.swing.JMenu menuAlbum;
+    private javax.swing.JMenu menuFavs;
+    private javax.swing.JMenu menuGenero;
+    private javax.swing.JMenu menuLista;
+    private javax.swing.JMenu menuUuarios;
+    private javax.swing.JInternalFrame panelAltas;
+    private javax.swing.JTable tablaAltas;
     // End of variables declaration//GEN-END:variables
 }
