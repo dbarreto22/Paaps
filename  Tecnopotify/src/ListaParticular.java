@@ -15,6 +15,7 @@ public class ListaParticular extends ListaReproduccion{
 
     public ListaParticular(String nombre, String imagen) {
         super(nombre, imagen);
+        esPrivada = false;
     }
 
     public boolean isEsPrivada() {
@@ -49,7 +50,6 @@ public class ListaParticular extends ListaReproduccion{
         this.imagen = imagen;
     }
 
-    
     
     
 }

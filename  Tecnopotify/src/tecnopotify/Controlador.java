@@ -119,7 +119,10 @@ public class Controlador implements Interfaz {
     }
 
     
-    public int publicarLista(String b, String c) {
+    public int publicarLista(String nickname, String nombreLista) {
+        Cliente cli = (Cliente) manejador.listaUsuarios.get(nickname);
+        ListaParticular lis = cli.listasReprParticular.get(nombreLista);
+        lis.setEsPrivada(true);
         return 0;
     }
 
