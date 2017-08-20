@@ -168,10 +168,9 @@ public class Controlador implements Interfaz {
         return aux;
     }
     
-    public void crearListaParticular(boolean privado, Cliente cliente,
-            String nombreLista,String imagen){
-         ListaParticular listaP = new ListaParticular(privado,cliente,
-                 nombreLista,imagen);  
+    public void crearListaParticular(boolean privado, Cliente cliente, String nombreLista,String imagen){
+        
+        ListaParticular listaP = new ListaParticular(privado,cliente,nombreLista,imagen);  
     }
     
     public int crearListaRep(boolean defecto, String nombreLista, String imagen){
