@@ -169,8 +169,8 @@ public class Controlador implements Interfaz {
     }
     
     public void crearListaParticular(boolean privado, Cliente cliente, String nombreLista,String imagen){
-        
         ListaParticular listaP = new ListaParticular(privado,cliente,nombreLista,imagen);  
+        cliente.listasReprParticular.put(nombreLista,listaP);
     }
     
     public int crearListaRep(boolean defecto, String nombreLista, String imagen){
