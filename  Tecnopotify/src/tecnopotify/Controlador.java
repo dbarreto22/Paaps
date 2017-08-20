@@ -120,21 +120,22 @@ public class Controlador implements Interfaz {
 
     
     public int publicarLista(String nickname, String nombreLista) {
-        Cliente cli = (Cliente) manejador.listaUsuarios.get(nickname);
-        ListaParticular lis = cli.listasReprParticular.get(nombreLista);
+        ListaParticular lis = seleccionarLista(nickname, nombreLista);
         lis.setEsPrivada(true);
         return 0;
     }
 
     
-    public int seleccionarLista(String nickname, String nombreLista) {
-        
-        return 0;
+    public ListaParticular seleccionarLista(String nickname, String nombreLista) {
+        Cliente cli = (Cliente) manejador.listaUsuarios.get(nickname);
+        ListaParticular lis = cli.listasReprParticular.get(nombreLista);
+        return lis;
     }
 
     
-    public void quitarTemaLista(String nombreTema) {
-
+    public void quitarTemaLista(String nombreTema, ListaReproduccion lista) {
+        //ya deberia saber la lista, o sea que se le pasa la lista por parametro
+        lista.listaTemas.remove(nombreTema);
     }
 
     
