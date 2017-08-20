@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Scanner;
 
 
 
@@ -38,9 +39,13 @@ public class Controlador implements Interfaz {
     
     public int altaGenero(String nombre, String padre) {
         Genero g = new Genero(nombre, padre);
-       
+        if (manejador.generos.contains(g)){
         return 0;
-    
+    }
+    else{
+        manejador.generos.add(g);  
+        return 1;
+    }
     }
 
     //cambiar nombre.
@@ -55,13 +60,13 @@ public class Controlador implements Interfaz {
 
     
     public void altaTema(String nombre, String duracion, int posicion) {
-      /*  Temas T = new Temas(nombre, duracion,posicion);
+       Temas T = new Temas(nombre, duracion,posicion);
         if (manejador.listaTemas.contains(T)){
             System.out.println("El Tema ya existe");
         }
         else{
         manejador.listaTemas.add(T);  
-        }*/
+        }
     }
 
     
@@ -131,13 +136,62 @@ public class Controlador implements Interfaz {
     }
 
     
-    public void agregarTemaLista(String a) {
+    public void agregarTemaLista(String nombreTema) {
+        
 
     }
-
     
-    public int crearListaRep(boolean a, String b, String c) {
-        return 0;
+    public void mostrarListaGenero() {
+        int i = 1;
+        Iterator<Genero> it = manejador.generos.iterator();
+        while (it.hasNext()) {
+            System.out.println(i + "-" + it.next());
+            i ++;
+        }
+
+    }
+    
+    public void crearListaDefecto(Genero genero,String nombreLista,String imagen){
+         ListaDefecto listaD = new ListaDefecto(genero,nombreLista,imagen);  
+    }
+
+    public Cliente devolverCliente(String nickname){
+         int i = 1;
+        Cliente aux = new Cliente();
+        Iterator<String> it = manejador.listaUsuarios.keySet().iterator();
+        while (it.hasNext()) {
+            if (manejador.listaUsuarios.containsKey(nickname)) {
+                aux = (Cliente) manejador.listaUsuarios.get(it);
+            }
+        }
+        return aux;
+    }
+    
+    public void crearListaParticular(boolean privado, Cliente cliente,
+            String nombreLista,String imagen){
+         ListaParticular listaP = new ListaParticular(privado,cliente,
+                 nombreLista,imagen);  
+    }
+    
+    public int crearListaRep(boolean defecto, String nombreLista, String imagen){
+        if(defecto){
+            Genero aux = new Genero();
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Elija Genero");
+            mostrarListaGenero();
+            int generoPos = sc.nextInt();
+            aux = manejador.generos.get(generoPos-1);
+            crearListaDefecto(aux, nombreLista, imagen); 
+            return 1;
+        }else{
+           Scanner sc = new Scanner(System.in);
+           System.out.println("Ingrese Nickname"); 
+           String nickname = sc.nextLine();
+           Cliente aux = devolverCliente(nickname);
+           boolean privado = true;
+           crearListaParticular(privado,aux,nombreLista,imagen);
+           return 2;
+        }
     }
 
     

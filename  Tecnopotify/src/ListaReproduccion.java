@@ -1,12 +1,12 @@
 
-import java.awt.Image;
+
 
 
 public class ListaReproduccion {
     String nombre;
-    Image imagen;
+    String imagen;
 
-    public ListaReproduccion(String nombre, Image imagen) {
+    public ListaReproduccion(String nombre, String imagen) {
         this.nombre = nombre;
         this.imagen = imagen;
     }
@@ -19,11 +19,11 @@ public class ListaReproduccion {
         this.nombre = nombre;
     }
 
-    public Image getImagen() {
+    public String getStringn() {
         return imagen;
     }
 
-    public void setImagen(Image imagen) {
+    public void setStringn(String imagen) {
         this.imagen = imagen;
     }
     

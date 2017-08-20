@@ -28,7 +28,10 @@ public interface Interfaz {
     public int publicarLista(String b, String c);
     public int seleccionarLista(String nickname, String nombreLista);
     public void quitarTemaLista(String nombreTema);
-    public void agregarTemaLista(String a);
-    public int crearListaRep(boolean a, String b, String c);
+    public void agregarTemaLista(String nombreTema);
+    public int crearListaRep(boolean defecto, String nombreLista, String imagen);
     public void crearLista(String b, boolean a);
+    public void mostrarListaGenero();
+    public Cliente devolverCliente(String nickname);
+    public void crearListaDefecto(Genero genero,String nombreLista,String imagen);
 }
