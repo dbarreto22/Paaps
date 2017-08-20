@@ -94,11 +94,11 @@ public class Controlador implements Interfaz {
     }
 
     
-    public int seleccionarCliente(String a) {
-        return 0;
+    public Cliente seleccionarCliente(String nickname) {
+        Cliente cli = (Cliente) manejador.listaUsuarios.get(nickname);
+        return cli;
     }
 
-    
     public void eliminarFavorito(boolean b, boolean c, boolean d, String a) {
 
     }
