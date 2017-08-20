@@ -151,11 +151,13 @@ public class Controlador implements Interfaz {
     }
     
     public void crearListaDefecto(Genero genero,String nombreLista,String imagen){
-         ListaDefecto listaD = new ListaDefecto(genero,nombreLista,imagen);  
+        ListaDefecto listaD = new ListaDefecto(genero,nombreLista,imagen);  
+        //Iterator<Genero> ite = manejador.generos.iterator().equals(genero); LINEA AL PEDO
+        genero.listasReprGenero.put(nombreLista, listaD);
     }
 
     public Cliente devolverCliente(String nickname){
-         int i = 1;
+        int i = 1;
         Cliente aux = new Cliente();
         Iterator<String> it = manejador.listaUsuarios.keySet().iterator();
         while (it.hasNext()) {
