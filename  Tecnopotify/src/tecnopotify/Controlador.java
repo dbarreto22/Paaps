@@ -60,11 +60,11 @@ public class Controlador implements Interfaz {
     
     public void altaTema(String nombre, String duracion, int posicion) {
        Temas T = new Temas(nombre, duracion,posicion);
-        if (manejador.listaTemas.contains(T)){
+        if (manejador.listaTemas.containsKey(nombre)){ //si existe el tema
             System.out.println("El Tema ya existe");
         }
         else{
-        manejador.listaTemas.add(T);  
+            manejador.listaTemas.put(nombre, T);  
         }
     }
 
@@ -137,10 +137,9 @@ public class Controlador implements Interfaz {
         //ya deberia saber la lista, o sea que se le pasa la lista por parametro
         lista.listaTemas.remove(nombreTema);
     }
-
     
-    public void agregarTemaLista(String nombreTema) {
-        
+    public void agregarTemaLista(String nombreTema, ListaReproduccion lista) {
+        lista.listaTemas.put(nombreTema, manejador.listaTemas.get(nombreTema));
 
     }
     
