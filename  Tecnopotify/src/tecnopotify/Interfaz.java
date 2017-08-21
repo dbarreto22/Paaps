@@ -18,7 +18,7 @@ public interface Interfaz {
     public int consultarListaRep(boolean a, boolean b);
     public int consultarAlbum(boolean a, boolean b);
     public void seleccionarAlbum(String a);
-    public int seleccionarArtista(String a);
+    public Artista seleccionarArtista(String nombreArtista);
     public Cliente seleccionarCliente(String nickname);
     public void eliminarFavorito(boolean b, boolean c, boolean d,String a);
     public void agregarFavorito(boolean b, boolean c, boolean d,String a);

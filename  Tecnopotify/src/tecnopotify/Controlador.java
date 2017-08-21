@@ -25,12 +25,10 @@ public class Controlador implements Interfaz {
         return 1;
     }
 }
-
     
     public void otrosDatos(String a, String b) {
         
     }
-
     
     public int altaGenero(String nombre, String padre) {
         Genero g = new Genero(nombre, padre);
@@ -47,12 +45,10 @@ public class Controlador implements Interfaz {
     public int altaAlbum(String nombreArtista) {
         return 0;
     }
-
     
     public void datosAlbum(String nombre, int anioCreado, String imagen) {
 
     }
-
     
     public void altaTema(String nombre, String duracion, int posicion) {
        Temas T = new Temas(nombre, duracion,posicion);
@@ -64,31 +60,26 @@ public class Controlador implements Interfaz {
         }
     }
 
-    
     public void seleccionarLista(String a) {
 
     }
-
     
     public int consultarListaRep(boolean a, boolean b) {
         return 0;
     }
-
     
     public int consultarAlbum(boolean a, boolean b) {
         return 0;
     }
-
     
     public void seleccionarAlbum(String a) {
 
     }
 
-    
-    public int seleccionarArtista(String a) {
-        return 0;
+    public Artista seleccionarArtista(String nombreArtista) {
+        Artista ar = (Artista) manejador.listaUsuarios.get(nombreArtista);
+        return ar;
     }
-
     
     public Cliente seleccionarCliente(String nickname) {
         Cliente cli = (Cliente) manejador.listaUsuarios.get(nickname);
@@ -123,7 +114,6 @@ public class Controlador implements Interfaz {
         lis.setEsPrivada(true);
         return 0;
     }
-
     
     public ListaParticular seleccionarLista(String nickname, String nombreLista) {
         Cliente cli = (Cliente) manejador.listaUsuarios.get(nickname);
@@ -131,7 +121,6 @@ public class Controlador implements Interfaz {
         return lis;
     }
 
-    
     public void quitarTemaLista(String nombreTema, ListaReproduccion lista) {
         //ya deberia saber la lista, o sea que se le pasa la lista por parametro
         lista.listaTemas.remove(nombreTema);
@@ -149,7 +138,6 @@ public class Controlador implements Interfaz {
             System.out.println(i + "-" + it.next());
             i ++;
         }
-
     }
     
     public void crearListaDefecto(Genero genero,String nombreLista,String imagen){
