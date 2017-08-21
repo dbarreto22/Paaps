@@ -7,6 +7,8 @@ import java.util.Map;
 public class Cliente extends Usuario {
     
     public Map<String, ListaParticular> listasReprParticular = new HashMap<String, ListaParticular>();
+    public Map<String, Usuario> seguidos = new HashMap<String, Usuario>();
+
 
     public Cliente(String nickname, String nombre, String apellido, String mail, Date f_nac, String imagen) {
         super(nickname, nombre, apellido, mail, f_nac, imagen);

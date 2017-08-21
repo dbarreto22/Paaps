@@ -22,7 +22,7 @@ public interface Interfaz {
     public Cliente seleccionarCliente(String nickname);
     public void eliminarFavorito(boolean b, boolean c, boolean d,String a);
     public void agregarFavorito(boolean b, boolean c, boolean d,String a);
-    public int dejarDeSeguirUsuario(boolean a, String b, String c);
+    public int dejarDeSeguirUsuario(String nickCliente, String nickUsr);
     public int SeguirUsuario(boolean a, String b, String c);
     public int publicarLista(String nickname, String nombreLista);
     public ListaParticular seleccionarLista(String nickname, String nombreLista);

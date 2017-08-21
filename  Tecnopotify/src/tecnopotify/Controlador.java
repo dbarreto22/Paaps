@@ -109,7 +109,10 @@ public class Controlador implements Interfaz {
     }
 
     
-    public int dejarDeSeguirUsuario(boolean a, String b, String c) {
+    public int dejarDeSeguirUsuario(String nickCliente, String nickUsr) {
+        //cliente es el que desea dejar el seguimiento
+        Cliente cli = (Cliente) manejador.listaUsuarios.get(nickCliente);
+        cli.seguidos.remove(nickUsr);
         return 0;
     }
 
