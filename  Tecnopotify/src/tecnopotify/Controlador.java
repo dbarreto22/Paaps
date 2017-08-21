@@ -103,20 +103,20 @@ public class Controlador implements Interfaz {
     public void agregarFavorito(boolean b, boolean c, boolean d, String a) {
 
     }
-
     
     public int dejarDeSeguirUsuario(String nickCliente, String nickUsr) {
         //cliente es el que desea dejar el seguimiento
-        Cliente cli = (Cliente) manejador.listaUsuarios.get(nickCliente);
-        cli.seguidos.remove(nickUsr);
+        Cliente cliente = seleccionarCliente(nickCliente);
+        cliente.seguidos.remove(nickUsr);
         return 0;
     }
 
-    
-    public int SeguirUsuario(boolean a, String b, String c) {
+    public int seguirUsuario(String nickCliente, String nickUsr) {
+        Cliente cliee = seleccionarCliente(nickCliente);
+        Usuario usr = manejador.listaUsuarios.get(nickUsr);
+        cliee.seguidos.put(nickUsr, usr);
         return 0;
     }
-
     
     public int publicarLista(String nickname, String nombreLista) {
         ListaParticular lis = seleccionarLista(nickname, nombreLista);
