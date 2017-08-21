@@ -43,27 +43,33 @@ public class Controlador implements Interfaz {
     
     }
 
-    //cambiar nombre.
-    public int altaAlbum(String nombreArtista) {
-        return 0;
+    //Funciones caso de uso Crear album
+    public Usuario buscarUSuario(String nombreUsuario) 
+          /*Busca un usuario en el manejador         */
+    {
+        return manejador.getUsuario(nombreUsuario);
+    }
+    
+    public void altaAlbum(String artista, String nombre, int anioCreado, String imagen)
+            //Crea el album y lo agrega en el artista correspondiente
+    {
+        Album album=new Album( nombre, anioCreado, imagen);
+        Artista usr=(Artista)manejador.getUsuario(artista);
+        usr.setAlbum(album);
     }
 
     
-    public void datosAlbum(String nombre, int anioCreado, String imagen) {
-
+    public void altaTema(String nomArtista, String nomAlbum, String nombre, String duracion, int posicion)
+    //Crea el tema y lo agrega en el album que corresponde al usuario correspondiente
+    {
+         Temas tema=new Temas(nombre, duracion, posicion);
+         Artista usr=(Artista)manejador.getUsuario(nomArtista);
+         Album album = usr.getAlbum(nomAlbum);
+         album.setTema(tema);
     }
 
+    //Fin caso de uso crear album 
     
-    public void altaTema(String nombre, String duracion, int posicion) {
-      /*  Temas T = new Temas(nombre, duracion,posicion);
-        if (manejador.listaTemas.contains(T)){
-            System.out.println("El Tema ya existe");
-        }
-        else{
-        manejador.listaTemas.add(T);  
-        }*/
-    }
-
     
     public void seleccionarLista(String a) {
 
@@ -144,5 +150,5 @@ public class Controlador implements Interfaz {
     public void crearLista(String b, boolean a) {
 
     }
-    
+
 }
