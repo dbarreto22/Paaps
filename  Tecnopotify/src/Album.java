@@ -49,4 +49,8 @@ public class Album {
         this.imagenAlbum = imagenAlbum;
     }
     
+    public  void setTema(Temas tema)
+    {
+        
+    }
 }

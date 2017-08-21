@@ -12,9 +12,9 @@ public interface Interfaz {
             String mail, Date f_nac, String imagen);
     public void otrosDatos(String a, String b);
     public int altaGenero(String a, String b);
-    public int altaAlbum (String nombreArtista);
-    public void datosAlbum(String nombre, int anioCreado, String imagen);
-    public void altaTema(String nombre, String duracion, int posicion);
+    public Usuario buscarUSuario(String nombreUsuario);
+    public void altaAlbum(String artista, String nombre, int anioCreado, String imagen);
+    public void altaTema(String nomArtista, String nomAlbum, String nombre, String duracion, int posicion);
     public void seleccionarLista(String a);
     public int consultarListaRep(boolean a, boolean b);
     public int consultarAlbum(boolean a, boolean b);
