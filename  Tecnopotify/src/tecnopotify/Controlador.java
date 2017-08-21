@@ -9,10 +9,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 
-
-
-
-
 public class Controlador implements Interfaz {
     
     Handler manejador = Handler.getInstance();
