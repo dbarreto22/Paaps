@@ -3,6 +3,7 @@
   <persistence-unit name="TecnopotifyPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>edu.tecnopotify.entidades.Album</class>
+    <class>edu.tecnopotify.entidades.Cliente</class>
     <class>edu.tecnopotify.entidades.Temas</class>
     <class>edu.tecnopotify.entidades.Artista</class>
     <class>edu.tecnopotify.entidades.Usuario</class>
