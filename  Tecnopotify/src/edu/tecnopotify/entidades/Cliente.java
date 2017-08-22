@@ -1,10 +1,13 @@
+package edu.tecnopotify.entidades;
+
 
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cliente extends Usuario {
+public class Cliente extends Usuario implements Serializable{
     
     public Map<String, ListaParticular> listasReprParticular = new HashMap<String, ListaParticular>();
     public Map<String, Usuario> seguidos = new HashMap<String, Usuario>();

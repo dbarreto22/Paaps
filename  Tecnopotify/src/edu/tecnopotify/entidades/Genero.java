@@ -1,13 +1,29 @@
+package edu.tecnopotify.entidades;
 
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-public class Genero {
- 
-    String nombre;
-    String padre;
-
+@Entity
+public class Genero implements Serializable{
     
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column
+    private String nombre;
+    @Column
+    private String padre;
+
+    @OneToMany
     public Map<String, ListaDefecto> listasReprGenero = new HashMap<String, ListaDefecto>();
     
     public Genero(String nombre, String padre) {

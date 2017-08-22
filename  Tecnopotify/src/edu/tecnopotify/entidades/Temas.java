@@ -1,8 +1,28 @@
+package edu.tecnopotify.entidades;
 
-public class Temas {
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Temas implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    
+    @Column
     private String nombre;
+    @Column
     private String duracion;
+    @Column
     private int posicion;
+
+    public Temas() {
+    }
 
     public Temas(String nombre, String duracion, int posicion) {
         this.nombre = nombre;

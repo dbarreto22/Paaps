@@ -1,14 +1,26 @@
+package edu.tecnopotify.entidades;
+
 import java.awt.Image;
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-
-public  class Usuario {
-
+@Entity
+public  class Usuario implements Serializable{
+    
+        @Id
 	private String nickname;
+        @Column
 	private String nombre;
+        @Column
 	private String apellido;
+        @Column
 	private String mail;
+        @Column
 	private Date f_nac;
+        @Column
 	private String imagen;
 
     public Usuario(String nickname, String nombre, String apellido, String mail, Date f_nac, String imagen) {

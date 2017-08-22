@@ -1,10 +1,15 @@
+package edu.tecnopotify.entidades;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
-
-
-public class ListaParticular extends ListaReproduccion{
+@Entity
+public class ListaParticular extends ListaReproduccion implements Serializable{
     
+    @Column
     private boolean esPrivada;
+    @Column
     private Cliente cliente;
 
     public ListaParticular(boolean esPrivada, Cliente cliente, String nombre, String imagen) {

@@ -1,9 +1,13 @@
+package edu.tecnopotify.entidades;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
-
-
-public class ListaDefecto extends ListaReproduccion {
+@Entity
+public class ListaDefecto extends ListaReproduccion implements Serializable{
     
+    @Column
     private Genero genero;
     
     public ListaDefecto(String nombre, String imagen, Genero genero) {
