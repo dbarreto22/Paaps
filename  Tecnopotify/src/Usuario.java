@@ -19,6 +19,10 @@ public  class Usuario {
         this.f_nac = f_nac;
         this.imagen = imagen;
     }
+
+    public Usuario() {
+    }
+    
 	
 	
 	

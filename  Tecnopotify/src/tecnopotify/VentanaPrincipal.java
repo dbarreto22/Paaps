@@ -1,4 +1,3 @@
-package tecnopotify;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,12 +9,18 @@ package tecnopotify;
  * @author Carlox
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
+    
+    private Interfaz ctrl;
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
+        this.setSize(550, 550);
+        
+        Fabrica fabrica = Fabrica.getInstance();
+        ctrl = (Interfaz) fabrica.getIControlador();
     }
 
     /**
@@ -306,4 +311,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JInternalFrame panelAltas;
     private javax.swing.JTable tablaAltas;
     // End of variables declaration//GEN-END:variables
+
+    private static class Interfaz {
+
+        public Interfaz() {
+        }
+    }
 }

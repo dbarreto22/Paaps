@@ -1,12 +1,18 @@
 
-import java.awt.Image;
+import java.util.Map;
+import java.util.HashMap;
+
+
+
 
 
 public class ListaReproduccion {
     String nombre;
-    Image imagen;
+    String imagen;
+    public Map<String, Temas> listaTemas = new HashMap<String,Temas>();
 
-    public ListaReproduccion(String nombre, Image imagen) {
+    
+    public ListaReproduccion(String nombre, String imagen) {
         this.nombre = nombre;
         this.imagen = imagen;
     }
@@ -19,11 +25,11 @@ public class ListaReproduccion {
         this.nombre = nombre;
     }
 
-    public Image getImagen() {
+    public String getStringn() {
         return imagen;
     }
 
-    public void setImagen(Image imagen) {
+    public void setStringn(String imagen) {
         this.imagen = imagen;
     }
     

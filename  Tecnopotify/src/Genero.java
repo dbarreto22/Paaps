@@ -1,9 +1,15 @@
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Genero {
  
     String nombre;
     String padre;
 
+    
+    public Map<String, ListaDefecto> listasReprGenero = new HashMap<String, ListaDefecto>();
+    
     public Genero(String nombre, String padre) {
         this.nombre = nombre;
         this.padre = padre;
