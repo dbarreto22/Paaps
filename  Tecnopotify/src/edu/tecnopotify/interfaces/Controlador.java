@@ -5,14 +5,6 @@ package edu.tecnopotify.interfaces;
 import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.entidades.ListaReproduccion;
 import edu.tecnopotify.datatypes.dataUsuario;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Scanner;
 
 
