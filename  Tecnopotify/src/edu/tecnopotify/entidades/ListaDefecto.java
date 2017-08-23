@@ -1,5 +1,6 @@
 package edu.tecnopotify.entidades;
 
+import edu.tecnopotify.datatypes.dataListaReproduccion;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,16 +10,16 @@ public class ListaDefecto extends ListaReproduccion implements Serializable{
     
     @Column
     private Genero genero;
-    
-    public ListaDefecto(String nombre, String imagen, Genero genero) {
-        super(nombre, imagen);
+
+    public ListaDefecto(dataListaReproduccion listaRep) {
+        super(listaRep);
     }
 
-    public ListaDefecto(Genero genero, String nombre, String imagen) {
-        super(nombre, imagen);
+    public ListaDefecto(Genero genero, dataListaReproduccion listaRep) {
+        super(listaRep);
         this.genero = genero;
     }
-
+    
     public Genero getGenero() {
         return genero;
     }

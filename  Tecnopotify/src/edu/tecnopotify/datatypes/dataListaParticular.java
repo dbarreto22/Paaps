@@ -13,6 +13,13 @@ public class dataListaParticular extends ListaReproduccion {
     private Cliente cliente;
 
     public dataListaParticular(boolean esPrivada, Cliente cliente, 
+            dataListaReproduccion listaRep) {
+        super(listaRep);
+        this.esPrivada = esPrivada;
+        this.cliente = cliente;
+    }
+/*
+    public dataListaParticular(boolean esPrivada, Cliente cliente, 
             String nombre, String imagen) {
         super(nombre, imagen);
         this.esPrivada = esPrivada;
@@ -22,7 +29,7 @@ public class dataListaParticular extends ListaReproduccion {
     public dataListaParticular(String nombre, String imagen) {
         super(nombre, imagen);
         esPrivada = false;
-    }
+    }*/
 
     public boolean isEsPrivada() {
         return esPrivada;

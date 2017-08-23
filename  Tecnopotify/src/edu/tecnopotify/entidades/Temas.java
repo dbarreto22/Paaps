@@ -1,5 +1,6 @@
 package edu.tecnopotify.entidades;
 
+import edu.tecnopotify.datatypes.dataTemas;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,10 +25,10 @@ public class Temas implements Serializable {
     public Temas() {
     }
 
-    public Temas(String nombre, String duracion, int posicion) {
-        this.nombre = nombre;
-        this.duracion = duracion;
-        this.posicion = posicion;
+    public Temas(dataTemas tema) {
+        this.nombre = tema.getNombre();
+        this.duracion = tema.getDuracion();
+        this.posicion = tema.getPosicion();
     }
 
     public String getNombre() {

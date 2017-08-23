@@ -2,6 +2,7 @@ package edu.tecnopotify.entidades;
 
 
 
+import edu.tecnopotify.datatypes.dataUsuario;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -19,15 +20,14 @@ public class Artista extends Usuario implements Serializable{
     @OneToMany
     private List<Album> listAlbum;
 
-
-    
-    public Artista(String nickname, String nombre, String apellido, String mail, Date f_nac,
-            String imagen, String biografia, String link, List<Album> listAlbum) {
-        super(nickname,nombre,apellido,mail,f_nac,imagen);
+    public Artista(String biografia, String link, List<Album> listAlbum,
+            dataUsuario usuario) {
+        super(usuario);
         this.biografia = biografia;
         this.link = link;
         this.listAlbum = listAlbum;
-    }    
+    }
+    
 
     public String getBiografia() {
         return biografia;

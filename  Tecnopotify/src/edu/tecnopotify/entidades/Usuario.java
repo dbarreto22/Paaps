@@ -1,4 +1,6 @@
 package edu.tecnopotify.entidades;
+import edu.tecnopotify.datatypes.dataUsuario;
+import edu.tecnopotify.datatypes.dataFecha;
 
 import java.awt.Image;
 import java.io.Serializable;
@@ -19,17 +21,17 @@ public  class Usuario implements Serializable{
         @Column
 	private String mail;
         @Column
-	private Date f_nac;
+	private dataFecha f_nac;
         @Column
 	private String imagen;
 
-    public Usuario(String nickname, String nombre, String apellido, String mail, Date f_nac, String imagen) {
-        this.nickname = nickname;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.mail = mail;
-        this.f_nac = f_nac;
-        this.imagen = imagen;
+    public Usuario(dataUsuario usuario) {
+        this.nickname = usuario.getNickname();
+        this.nombre = usuario.getNombre();
+        this.apellido = usuario.getApellido();
+        this.mail = usuario.getMail();
+        this.f_nac = usuario.getF_nac();
+        this.imagen = usuario.getImagen();
     }
 
     public Usuario() {
@@ -70,11 +72,11 @@ public  class Usuario implements Serializable{
 		this.mail = mail;
 	}
 
-	public Date getF_nac() {
+	public dataFecha getF_nac() {
 		return f_nac;
 	}
 
-	public void setF_nac(Date f_nac) {
+	public void setF_nac(dataFecha f_nac) {
 		this.f_nac = f_nac;
 	}
 

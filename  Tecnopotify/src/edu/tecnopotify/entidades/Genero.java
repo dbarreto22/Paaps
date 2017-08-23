@@ -1,6 +1,6 @@
 package edu.tecnopotify.entidades;
 
-
+import edu.tecnopotify.datatypes.dataGenero;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,9 +26,9 @@ public class Genero implements Serializable{
     @OneToMany
     public Map<String, ListaDefecto> listasReprGenero = new HashMap<String, ListaDefecto>();
     
-    public Genero(String nombre, String padre) {
-        this.nombre = nombre;
-        this.padre = padre;
+    public Genero(dataGenero genero) {
+        this.nombre = genero.getNombre();
+        this.padre = genero.getPadre();
     }
 
     public Genero() {

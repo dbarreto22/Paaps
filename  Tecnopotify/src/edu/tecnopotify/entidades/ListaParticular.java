@@ -1,5 +1,6 @@
 package edu.tecnopotify.entidades;
 
+import edu.tecnopotify.datatypes.dataListaReproduccion;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,15 +13,15 @@ public class ListaParticular extends ListaReproduccion implements Serializable{
     @Column
     private Cliente cliente;
 
-    public ListaParticular(boolean esPrivada, Cliente cliente, String nombre, String imagen) {
-        super(nombre, imagen);
+    public ListaParticular(boolean esPrivada, Cliente cliente, 
+            dataListaReproduccion listaRep) {
+        super(listaRep);
         this.esPrivada = esPrivada;
         this.cliente = cliente;
     }
 
-    public ListaParticular(String nombre, String imagen) {
-        super(nombre, imagen);
-        esPrivada = false;
+    public ListaParticular(dataListaReproduccion listaRep) {
+        super(listaRep);
     }
 
     public boolean isEsPrivada() {

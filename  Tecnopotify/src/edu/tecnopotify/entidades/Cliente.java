@@ -1,9 +1,8 @@
 package edu.tecnopotify.entidades;
 
-
-import java.awt.Image;
+import edu.tecnopotify.datatypes.dataCliente;
+import edu.tecnopotify.datatypes.dataUsuario;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.Entity;
@@ -16,9 +15,8 @@ public class Cliente extends Usuario implements Serializable{
     @OneToMany
     public Map<String, Usuario> seguidos = new HashMap<String, Usuario>();
 
-
-    public Cliente(String nickname, String nombre, String apellido, String mail, Date f_nac, String imagen) {
-        super(nickname, nombre, apellido, mail, f_nac, imagen);
+    public Cliente(dataUsuario usuario) {
+        super(usuario);
     }
 
     public Cliente() {

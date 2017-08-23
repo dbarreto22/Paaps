@@ -1,4 +1,10 @@
+package edu.tecnopotify.interfaces;
 
+
+
+import edu.tecnopotify.entidades.Genero;
+import edu.tecnopotify.entidades.ListaReproduccion;
+import edu.tecnopotify.datatypes.dataUsuario;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,10 +18,9 @@ import java.util.Scanner;
 
 public class Controlador implements Interfaz {
     
-    Handler manejador = Handler.getInstance();
+    //Handler manejador = Handler.getInstance();
     
-    public int altaUsuario(String nickname , String nombre, String apellido,
-            String mail, Date f_nac, String imagen){
+    public int altaUsuario(dataUsuario usuario){
         
         Usuario U = new Usuario(nickname, nombre, apellido,mail,f_nac, imagen);
         if (manejador.listaUsuarios.containsKey(nickname)){
@@ -188,6 +193,21 @@ public class Controlador implements Interfaz {
     
     public void crearLista(String b, boolean a) {
 
+    }
+
+    @Override
+    public void quitarTemaLista(String nombreTema, ListaReproduccion lista) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void agregarTemaLista(String nombreTema, ListaReproduccion lista) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void crearListaDefecto(Genero genero, String nombreLista, String imagen) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

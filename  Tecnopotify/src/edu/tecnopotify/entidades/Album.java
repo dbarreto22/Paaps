@@ -1,5 +1,6 @@
 package edu.tecnopotify.entidades;
 
+import edu.tecnopotify.datatypes.dataAlbum;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
@@ -28,6 +29,12 @@ public class Album implements Serializable {
     @Column
     @OneToMany
     private List<Temas> listTemas;
+    
+    public Album(dataAlbum album) {
+        this.nombre = album.getNombre();
+        this.anioCreado = album.getAnioCreado();
+        this.imagenAlbum = album.getImagenAlbum();
+    }
 
     public List<Temas> getListTemas() {
         return listTemas;
@@ -35,12 +42,6 @@ public class Album implements Serializable {
 
     public void setListTemas(List<Temas> listTemas) {
         this.listTemas = listTemas;
-    }
-
-    public Album(String nombre, int anioCreado, String imagenAlbum) {
-        this.nombre = nombre;
-        this.anioCreado = anioCreado;
-        this.imagenAlbum = imagenAlbum;
     }
 
     public String getNombre() {

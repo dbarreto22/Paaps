@@ -1,6 +1,6 @@
 package edu.tecnopotify.entidades;
 
-
+import edu.tecnopotify.datatypes.dataListaReproduccion;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.HashMap;
@@ -26,9 +26,9 @@ public class ListaReproduccion implements Serializable{
     public Map<String, Temas> listaTemas = new HashMap<String,Temas>();
 
     
-    public ListaReproduccion(String nombre, String imagen) {
-        this.nombre = nombre;
-        this.imagen = imagen;
+    public ListaReproduccion(dataListaReproduccion listaRep) {
+        this.nombre = listaRep.getNombre();
+        this.imagen = listaRep.getStringn();
     }
 
     public String getNombre() {
