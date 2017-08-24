@@ -67,5 +67,5 @@ public class Album implements Serializable {
     public void setImagenAlbum(String imagenAlbum) {
         this.imagenAlbum = imagenAlbum;
     }
-    
+   
 }

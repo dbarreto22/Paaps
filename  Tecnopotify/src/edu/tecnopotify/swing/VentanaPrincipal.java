@@ -38,16 +38,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAltas = new javax.swing.JTable();
         lblPanelAltaTipo = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuUuarios = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuCrearUsuario = new javax.swing.JMenuItem();
+        jMenuConsultarCliente = new javax.swing.JMenuItem();
+        jMenuConsultarArtista = new javax.swing.JMenuItem();
         menuGenero = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         menuAlbum = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuCrearAlbum = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         menuFavs = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
@@ -73,6 +76,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         panelAltas.setResizable(true);
         panelAltas.setTitle("Alta album");
         panelAltas.setVisible(true);
+        panelAltas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelAltasMouseClicked(evt);
+            }
+        });
 
         tablaAltas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,16 +97,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         lblPanelAltaTipo.setText("jLabel1");
 
+        jButton1.setText("jButton1");
+
+        jTextField1.setText("jTextField1");
+
+        jTextField2.setText("jTextField2");
+
         javax.swing.GroupLayout panelAltasLayout = new javax.swing.GroupLayout(panelAltas.getContentPane());
         panelAltas.getContentPane().setLayout(panelAltasLayout);
         panelAltasLayout.setHorizontalGroup(
             panelAltasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblPanelAltaTipo)
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+            .addGroup(panelAltasLayout.createSequentialGroup()
+                .addContainerGap(37, Short.MAX_VALUE)
+                .addGroup(panelAltasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltasLayout.createSequentialGroup()
+                        .addComponent(lblPanelAltaTipo)
+                        .addGap(48, 48, 48)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAltasLayout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(78, 78, 78))))
+            .addGroup(panelAltasLayout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(143, 143, 143))
         );
         panelAltasLayout.setVerticalGroup(
             panelAltasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,31 +132,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(panelAltasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPanelAltaTipo)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addGroup(panelAltasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(57, 57, 57))
         );
 
         jMenu3.setText("Menu");
 
         menuUuarios.setText("Usuarios");
 
-        jMenuItem1.setText("Crear usuario");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuCrearUsuario.setText("Crear usuario");
+        jMenuCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuCrearUsuarioActionPerformed(evt);
             }
         });
-        menuUuarios.add(jMenuItem1);
+        menuUuarios.add(jMenuCrearUsuario);
 
-        jMenuItem3.setText("Consultar cliente");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuConsultarCliente.setText("Consultar cliente");
+        jMenuConsultarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuConsultarClienteActionPerformed(evt);
             }
         });
-        menuUuarios.add(jMenuItem3);
+        menuUuarios.add(jMenuConsultarCliente);
 
-        jMenuItem14.setText("Consultar artista");
-        menuUuarios.add(jMenuItem14);
+        jMenuConsultarArtista.setText("Consultar artista");
+        menuUuarios.add(jMenuConsultarArtista);
 
         jMenu3.add(menuUuarios);
 
@@ -149,13 +180,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem5.setText("Crear album");
-        jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenuCrearAlbum.setText("Crear album");
+        jMenuCrearAlbum.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem5MouseClicked(evt);
+                jMenuCrearAlbumMouseClicked(evt);
             }
         });
-        menuAlbum.add(jMenuItem5);
+        menuAlbum.add(jMenuCrearAlbum);
 
         jMenuItem15.setText("Consultar album");
         menuAlbum.add(jMenuItem15);
@@ -209,16 +240,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(78, 78, 78)
                 .addComponent(panelAltas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(27, 27, 27)
                 .addComponent(panelAltas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("ventanaPrincipal");
@@ -226,24 +257,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCrearUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuCrearUsuarioActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuConsultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuConsultarClienteActionPerformed
 
     private void menuAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAlbumMouseClicked
 
     }//GEN-LAST:event_menuAlbumMouseClicked
 
-    private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
+    private void jMenuCrearAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCrearAlbumMouseClicked
        //Muestra el panel de altas y lo prepara para el alta de usuarios
         panelAltas.setVisible(true);
         panelAltas.setTitle("Alta Album");
         lblPanelAltaTipo.setText("Elegir artista");
-    }//GEN-LAST:event_jMenuItem5MouseClicked
+    }//GEN-LAST:event_jMenuCrearAlbumMouseClicked
+
+    private void panelAltasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelAltasMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_panelAltasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -281,27 +316,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar3;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuConsultarArtista;
+    private javax.swing.JMenuItem jMenuConsultarCliente;
+    private javax.swing.JMenuItem jMenuCrearAlbum;
+    private javax.swing.JMenuItem jMenuCrearUsuario;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblPanelAltaTipo;
     private javax.swing.JMenu menuAlbum;
     private javax.swing.JMenu menuFavs;
