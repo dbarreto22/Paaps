@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package edu.tecnopotify.controladores;
 
 import edu.tecnopotify.controladores.exceptions.NonexistentEntityException;
@@ -12,7 +16,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-
+/**
+ *
+ * @author diego-lucia
+ */
 public class ListaReproduccionJpaController implements Serializable {
 
     public ListaReproduccionJpaController(EntityManagerFactory emf) {

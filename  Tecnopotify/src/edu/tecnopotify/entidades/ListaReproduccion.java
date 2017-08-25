@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -19,16 +20,18 @@ public class ListaReproduccion implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     
     @Column
-    String nombre;
+    private String nombre;
     @Column
-    String imagen;
-    @OneToMany
-    public Map<String, Temas> listaTemas = new HashMap<String,Temas>();
+    private String imagen;
+    @ManyToMany
+    private Map<String, Temas> listaTemas = new HashMap<String,Temas>();
 
+    
     
     public ListaReproduccion(dataListaReproduccion listaRep) {
         this.nombre = listaRep.getNombre();
-        this.imagen = listaRep.getStringn();
+        this.imagen = listaRep.getImagen();
+        this.listaTemas = listaRep.getListaTemas();
     }
 
     public String getNombre() {
@@ -37,15 +40,22 @@ public class ListaReproduccion implements Serializable{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getStringn() {
+    }   
+    
+    public String getImagen() {
         return imagen;
     }
 
-    public void setStringn(String imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
-    
+
+    public Map<String, Temas> getListaTemas() {
+        return listaTemas;
+    }
+
+    public void setListaTemas(Map<String, Temas> listaTemas) {
+        this.listaTemas = listaTemas;
+    }
+
 }

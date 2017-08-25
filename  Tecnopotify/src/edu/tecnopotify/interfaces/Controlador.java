@@ -180,11 +180,7 @@ public class Controlador implements Interfaz {
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
         Temas aux = ctrTema.findTemas(nombreTema);
         ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(lista);
-        
-        
-        
-       
-
+        Laux.getListaTemas().put(aux.getNombre(), aux);
     }
     
     public void mostrarListaGenero() {

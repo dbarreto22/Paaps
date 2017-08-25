@@ -9,14 +9,15 @@ import java.util.HashMap;
 
 public class dataListaReproduccion{
     
-    String nombre;
-    String imagen;
-    public Map<String, Temas> listaTemas = new HashMap<String,Temas>();
+    private String nombre;
+    private String imagen;
+    private Map<String, Temas> listaTemas = new HashMap<String,Temas>();
 
     
-    public dataListaReproduccion(String nombre, String imagen) {
+    public dataListaReproduccion(String nombre, String imagen, Map<String, Temas> listaTemas) {
         this.nombre = nombre;
         this.imagen = imagen;
+        this.listaTemas = listaTemas;
     }
 
     public String getNombre() {
@@ -27,13 +28,25 @@ public class dataListaReproduccion{
         this.nombre = nombre;
     }
 
-    public String getStringn() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setStringn(String imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+
+    public Map<String, Temas> getListaTemas() {
+        return listaTemas;
+    }
+
+    public void setListaTemas(Map<String, Temas> listaTemas) {
+        this.listaTemas = listaTemas;
+    }
+    
+    
+
+
     
     
 }

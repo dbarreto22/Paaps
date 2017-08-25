@@ -27,21 +27,4 @@ public class ListaDefecto extends ListaReproduccion implements Serializable{
     public void setGenero(Genero genero) {
         this.genero = genero;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getStringn() {
-        return imagen;
-    }
-
-    public void setStringn(String imagen) {
-        this.imagen = imagen;
-    }
-    
 }

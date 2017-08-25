@@ -39,23 +39,5 @@ public class ListaParticular extends ListaReproduccion implements Serializable{
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    
-    
+  
 }

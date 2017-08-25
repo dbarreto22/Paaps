@@ -2,11 +2,15 @@ package edu.tecnopotify.entidades;
 
 import edu.tecnopotify.datatypes.dataTemas;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Temas implements Serializable {
@@ -21,6 +25,10 @@ public class Temas implements Serializable {
     private String duracion;
     @Column
     private int posicion;
+    
+    @ManyToMany
+    public Map<String, ListaReproduccion> listaR = new HashMap<String,ListaReproduccion>();
+    
 
     public Temas() {
     }

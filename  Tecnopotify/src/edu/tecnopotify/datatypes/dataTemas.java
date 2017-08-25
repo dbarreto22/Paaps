@@ -1,5 +1,9 @@
 package edu.tecnopotify.datatypes;
 
+import edu.tecnopotify.entidades.ListaReproduccion;
+import java.util.HashMap;
+import java.util.Map;
+
 
 
 
@@ -8,14 +12,24 @@ public class dataTemas{
     private String nombre;
     private String duracion;
     private int posicion;
+    private Map<String, ListaReproduccion> listaR = new HashMap<String,ListaReproduccion>();
 
     public dataTemas() {
     }
 
-    public dataTemas(String nombre, String duracion, int posicion) {
+    public dataTemas(String nombre, String duracion, int posicion, Map<String, ListaReproduccion> l) {
         this.nombre = nombre;
         this.duracion = duracion;
         this.posicion = posicion;
+        this.listaR = l;
+    }
+
+    public Map<String, ListaReproduccion> getListaR() {
+        return listaR;
+    }
+
+    public void setListaR(Map<String, ListaReproduccion> listaR) {
+        this.listaR = listaR;
     }
 
     public String getNombre() {
