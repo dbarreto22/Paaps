@@ -24,10 +24,10 @@ public interface Interfaz {
     public int altaAlbum (String nombreArtista);
     public void datosAlbum(String nombre, int anioCreado, String imagen);
     public void altaTema(dataTemas tema);
-    public void seleccionarLista(String a);
+   // public void seleccionarLista(String a);
     public int consultarListaRep(boolean a, boolean b);
     public int consultarAlbum(boolean a, boolean b);
-    public void seleccionarAlbum(String a);
+    public Album seleccionarAlbum(String id);
     public Artista seleccionarArtista(String nombreArtista);
     public Cliente seleccionarCliente(String nickname);
     public void eliminarFavorito(boolean b, boolean c, boolean d,String a);
@@ -35,12 +35,12 @@ public interface Interfaz {
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr);
     public void seguirUsuario(String nickCliente, String nickUsr);
     public void publicarLista(String nickname, String nombreLista);
-    public ListaParticular seleccionarLista(String nickname, String nombreLista);
+    public ListaParticular seleccionarLista(String id);
     public void quitarTemaLista(String nombreTema, ListaReproduccion lista);
     public void agregarTemaLista(String nombreTema, ListaReproduccion lista);
     public void crearListaDefecto(dataListaReproduccion listaD);
     public void crearListaParticular(boolean privado, Cliente cliente, dataListaReproduccion listaP);
     public void mostrarListaGenero();
-    public Cliente devolverCliente(String nickname);
+    //public Cliente devolverCliente(String nickname);
     
 }

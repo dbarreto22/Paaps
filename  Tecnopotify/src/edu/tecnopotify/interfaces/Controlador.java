@@ -1,5 +1,6 @@
 package edu.tecnopotify.interfaces;
 
+import edu.tecnopotify.controladores.AlbumJpaController;
 import edu.tecnopotify.controladores.ArtistaJpaController;
 import edu.tecnopotify.controladores.ClienteJpaController;
 import edu.tecnopotify.controladores.GeneroJpaController;
@@ -99,6 +100,30 @@ public class Controlador implements Interfaz {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Artista seleccionarArtista(String nickname) {
+        ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
+        Artista aux = ctrArtista.findArtista(nickname);
+        return aux;
+    }
+    
+    public Cliente seleccionarCliente(String nickname) {
+        ClienteJpaController ctrCliente = new ClienteJpaController(fact);
+        Cliente aux = ctrCliente.findCliente(nickname);
+        return aux;      
+    }
+    
+    public Album seleccionarAlbum(String id) {
+        AlbumJpaController ctrAlbum = new AlbumJpaController(fact);
+        Album aux = ctrAlbum.findAlbum(id);
+        return aux; 
+    }
+    
+    public ListaParticular seleccionarLista(String id){
+        ListaParticularJpaController ctrListaParticular = new ListaParticularJpaController(fact);
+        ListaParticular aux = ctrListaParticular.findListaParticular(id);
+        return aux;    
+    }
 
     public void otrosDatos(String a, String b) {
         
@@ -112,10 +137,10 @@ public class Controlador implements Interfaz {
     public void datosAlbum(String nombre, int anioCreado, String imagen) {
 
     }
-
+/*
     public void seleccionarLista(String a) {
 
-    }
+    }*/
     
     public int consultarListaRep(boolean a, boolean b) {
         return 0;
@@ -125,18 +150,6 @@ public class Controlador implements Interfaz {
         return 0;
     }
     
-    public void seleccionarAlbum(String a) {
-
-    }
-
-    public Artista seleccionarArtista(String nombreArtista) {
-      
-    }
-    
-    public Cliente seleccionarCliente(String nickname) {
-       
-    }
-
     public void eliminarFavorito(boolean b, boolean c, boolean d, String a) {
 
     }
@@ -157,30 +170,33 @@ public class Controlador implements Interfaz {
     public void publicarLista(String nickname, String nombreLista) {
         
     }
-    
-    public ListaParticular seleccionarLista(String nickname, String nombreLista) {
-       
-    }
 
     public void quitarTemaLista(String nombreTema, ListaReproduccion lista) {
        
     }
     
-    public void agregarTemaLista(String nombreTema, ListaReproduccion lista) {
+    public void agregarTemaLista(String nombreTema, String lista) {
+        TemasJpaController ctrTema = new TemasJpaController(fact);
+        ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
+        Temas aux = ctrTema.findTemas(nombreTema);
+        ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(lista);
         
+        
+        
+       
 
     }
     
     public void mostrarListaGenero() {
         
     }
-
+/*
     public Cliente devolverCliente(String nickname){
        
         Cliente aux = new Cliente();
         
         return aux;
-    }
+    }*/
     
     
     
