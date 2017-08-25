@@ -124,6 +124,22 @@ public class Controlador implements Interfaz {
         ListaParticular aux = ctrListaParticular.findListaParticular(id);
         return aux;    
     }
+    
+    public void agregarTemaLista(String nombreTema, String lista) {
+        TemasJpaController ctrTema = new TemasJpaController(fact);
+        ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
+        Temas aux = ctrTema.findTemas(nombreTema);
+        ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(lista);
+        Laux.getListaTemas().put(aux.getNombre(), aux);
+    }
+    
+    public void quitarTemaLista(String nombreTema, String lista) {
+       TemasJpaController ctrTema = new TemasJpaController(fact);
+        ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
+        Temas aux = ctrTema.findTemas(nombreTema);
+        ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(lista);
+        Laux.getListaTemas().remove(aux.getNombre(), Laux);
+    }
 
     public void otrosDatos(String a, String b) {
         
@@ -171,17 +187,9 @@ public class Controlador implements Interfaz {
         
     }
 
-    public void quitarTemaLista(String nombreTema, ListaReproduccion lista) {
-       
-    }
+
     
-    public void agregarTemaLista(String nombreTema, String lista) {
-        TemasJpaController ctrTema = new TemasJpaController(fact);
-        ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
-        Temas aux = ctrTema.findTemas(nombreTema);
-        ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(lista);
-        Laux.getListaTemas().put(aux.getNombre(), aux);
-    }
+
     
     public void mostrarListaGenero() {
         
