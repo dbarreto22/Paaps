@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import edu.tecnopotify.controladores.UsuarioJpaController;
+import edu.tecnopotify.datatypes.dataAlbum;
 import edu.tecnopotify.datatypes.dataGenero;
 import edu.tecnopotify.datatypes.dataListaDefecto;
 import edu.tecnopotify.datatypes.dataListaParticular;
@@ -145,13 +146,23 @@ public class Controlador implements Interfaz {
         
     }
 
-    //cambiar nombre.
-    public int altaAlbum(String nombreArtista) {
-        return 0;
-    }
-    
-    public void datosAlbum(String nombre, int anioCreado, String imagen) {
-
+    public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum) {
+        //Crea un album y lo agrega a su artista
+        ArtistaJpaController ctrArtista= new ArtistaJpaController(fact);
+        //Busca al artista
+        Artista oArtista= ctrArtista.findArtista(nickNameArtista);
+        AlbumJpaController ctrAlbum=new AlbumJpaController(fact);
+        //Crea el album
+        Album oAlbum = new Album(dtAlbum);
+        //Agrega el album a la lista del artista
+        oArtista.getListDiscos().add(oAlbum);
+        try {
+            //Persiste el album y modifica el artista 
+            ctrArtista.edit(oArtista);            
+            ctrAlbum.create(oAlbum);            
+        } catch (Exception e) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 /*
     public void seleccionarLista(String a) {
