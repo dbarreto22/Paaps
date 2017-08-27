@@ -126,19 +126,20 @@ public class Controlador implements Interfaz {
         return aux;    
     }
     
-    public void agregarTemaLista(String nombreTema, String lista) {
+    public void agregarTemaLista(dataTemas tema, dataListaReproduccion listaR) {
+        
         TemasJpaController ctrTema = new TemasJpaController(fact);
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
-        Temas aux = ctrTema.findTemas(nombreTema);
-        ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(lista);
+        Temas aux = ctrTema.findTemas(tema.getNombre());
+        ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(listaR.getNombre());
         Laux.getListaTemas().put(aux.getNombre(), aux);
     }
     
-    public void quitarTemaLista(String nombreTema, String lista) {
+    public void quitarTemaLista(dataTemas tema, dataListaReproduccion listaR) {
        TemasJpaController ctrTema = new TemasJpaController(fact);
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
-        Temas aux = ctrTema.findTemas(nombreTema);
-        ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(lista);
+        Temas aux = ctrTema.findTemas(tema.getNombre());
+        ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(listaR.getNombre());
         Laux.getListaTemas().remove(aux.getNombre(), Laux);
     }
 

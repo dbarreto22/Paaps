@@ -36,8 +36,8 @@ public interface Interfaz {
     public void seguirUsuario(String nickCliente, String nickUsr);
     public void publicarLista(String nickname, String nombreLista);
     public ListaParticular seleccionarLista(String id);
-    public void quitarTemaLista(String nombreTema, String lista);
-    public void agregarTemaLista(String nombreTema, String lista);
+    public void quitarTemaLista(dataTemas tema, dataListaReproduccion listaR);
+    public void agregarTemaLista(dataTemas tema, dataListaReproduccion listaR);
     public void crearListaDefecto(dataListaReproduccion listaD);
     public void crearListaParticular(boolean privado, Cliente cliente, dataListaReproduccion listaP);
     public void mostrarListaGenero();
