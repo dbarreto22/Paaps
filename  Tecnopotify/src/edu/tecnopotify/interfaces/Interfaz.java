@@ -1,5 +1,6 @@
 package edu.tecnopotify.interfaces;
 
+import edu.tecnopotify.datatypes.dataAlbum;
 import edu.tecnopotify.datatypes.dataGenero;
 import edu.tecnopotify.datatypes.dataListaReproduccion;
 import edu.tecnopotify.datatypes.dataTemas;
@@ -21,14 +22,13 @@ public interface Interfaz {
     public void crearArtista(String biografia, String link, List<Album> listAlbum,dataUsuario usuario);
     public void otrosDatos(String a, String b);
     public void altaGenero(dataGenero genero);
-    public int altaAlbum (String nombreArtista);
-    public void datosAlbum(String nombre, int anioCreado, String imagen);
+    public void crearAlbum(String nickNameArtista,dataAlbum dtAlbum);
     public void altaTema(dataTemas tema);
    // public void seleccionarLista(String a);
     public int consultarListaRep(boolean a, boolean b);
     public int consultarAlbum(boolean a, boolean b);
     public Album seleccionarAlbum(String id);
-    public Artista seleccionarArtista(String nombreArtista);
+    public Artista seleccionarArtista(String nombreArtista);//
     public Cliente seleccionarCliente(String nickname);
     public void eliminarFavorito(boolean b, boolean c, boolean d,String a);
     public void agregarFavorito(boolean b, boolean c, boolean d,String a);
