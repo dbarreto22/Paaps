@@ -187,10 +187,6 @@ public class Controlador implements Interfaz {
         
     }
 
-
-    
-
-    
     public void mostrarListaGenero() {
         
     }
