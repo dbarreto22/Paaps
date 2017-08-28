@@ -28,7 +28,7 @@ public interface Interfaz {
    // public void seleccionarLista(String a);
     public int consultarListaRep(boolean a, boolean b);
     public void consultarAlbumPorArtista(dataArtista artista) ;
-    public void consultarAlbumPorGenero(dataGenero genero); 
+    public List<Album> consultarAlbumPorGenero(dataGenero genero); 
     public Album seleccionarAlbum(String id);
     public Artista seleccionarArtista(String nombreArtista);//
     public Cliente seleccionarCliente(String nickname);

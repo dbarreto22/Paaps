@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -29,6 +30,10 @@ public class Album implements Serializable {
     @Column
     @OneToMany
     private List<Temas> listTemas;
+    
+    @Column
+    @ManyToMany
+    private List<Genero> listGenero;
     
     public Album(dataAlbum album) {
         this.nombre = album.getNombre();

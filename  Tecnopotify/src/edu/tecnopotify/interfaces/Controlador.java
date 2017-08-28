@@ -193,9 +193,14 @@ public class Controlador implements Interfaz {
               } 
     }
     
-    public void consultarAlbumPorGenero(dataGenero genero){
-  
-        
+    public List<Album> consultarAlbumPorGenero(dataGenero genero){
+        //Funcion que obtiene los albums que pertenecen a un genero
+        GeneroJpaController ctrGenero= new GeneroJpaController(fact);
+        //Obtiene el genero deseado
+        Genero oGeneros= ctrGenero.findGenero(genero.getNombre());
+        //Devuelve la lista de albums que pertenecen a dicho genero
+        return oGeneros.getListAlbum();
+                
     }
 /*
     public void seleccionarLista(String a) {

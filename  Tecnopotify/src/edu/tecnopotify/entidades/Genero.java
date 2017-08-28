@@ -3,12 +3,14 @@ package edu.tecnopotify.entidades;
 import edu.tecnopotify.datatypes.dataGenero;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -25,6 +27,10 @@ public class Genero implements Serializable{
 
     @OneToMany
     public Map<String, ListaDefecto> listasReprGenero = new HashMap<String, ListaDefecto>();
+    
+    @Column
+    @ManyToMany(mappedBy="listGenero")
+    private List<Album> listAlbum;
     
     public Genero(dataGenero genero) {
         this.nombre = genero.getNombre();
@@ -48,6 +54,14 @@ public class Genero implements Serializable{
 
     public void setPadre(String padre) {
         this.padre = padre;
+    }
+    
+    public List<Album> getListAlbum() {
+        return listAlbum;
+    }
+
+    public void setListAlbum(List<Album> aux) {
+        this.listAlbum = aux;
     }
     
     
