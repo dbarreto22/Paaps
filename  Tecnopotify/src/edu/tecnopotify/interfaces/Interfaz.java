@@ -21,7 +21,6 @@ public interface Interfaz {
   
     public void crearCliente(dataUsuario usuario);
     public void crearArtista(String biografia, String link, List<Album> listAlbum,dataUsuario usuario);
-    public void otrosDatos(String a, String b);
     public void altaGenero(dataGenero genero);
     public void crearAlbum(String nickNameArtista,dataAlbum dtAlbum);
     public void altaTema(dataTemas tema);

@@ -148,10 +148,6 @@ public class Controlador implements Interfaz {
         Laux.getListaTemas().remove(aux.getNombre(), Laux);
     }
 
-    public void otrosDatos(String a, String b) {
-        
-    }
-
     public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum) {
         //Crea un album y lo agrega a su artista
         ArtistaJpaController ctrArtista= new ArtistaJpaController(fact);
