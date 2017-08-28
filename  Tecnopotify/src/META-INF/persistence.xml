@@ -11,6 +11,7 @@
     <class>edu.tecnopotify.entidades.ListaReproduccion</class>
     <class>edu.tecnopotify.entidades.ListaDefecto</class>
     <class>edu.tecnopotify.entidades.ListaParticular</class>
+    <class>edu.tecnopotify.entidades.Favoritos</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:hsql://localhost/tecnopotify"/>
       <property name="javax.persistence.jdbc.user" value="sa"/>
