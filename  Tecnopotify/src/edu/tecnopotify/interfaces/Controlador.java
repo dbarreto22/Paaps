@@ -190,7 +190,6 @@ public class Controlador implements Interfaz {
         Genero oGeneros= ctrGenero.findGenero(genero.getSerialVersioUID());
         //Devuelve la lista de albums que pertenecen a dicho genero
         return oGeneros.getListAlbum();
-                
     }
 /*
     public void seleccionarLista(String a) {
