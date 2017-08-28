@@ -183,6 +183,7 @@ public class Controlador implements Interfaz {
     }
     
         //sirven para consultar Album, se le pregunta al usuario por que quiere consultar
+    //Que lo muestre es parte de la capa de persistencia
     public void consultarAlbumPorArtista(dataArtista artista) {
         ArtistaJpaController ctrArtista= new ArtistaJpaController(fact);
         Artista oArtista = ctrArtista.findArtista(artista.getNickname());
@@ -200,7 +201,6 @@ public class Controlador implements Interfaz {
         Genero oGeneros= ctrGenero.findGenero(genero.getNombre());
         //Devuelve la lista de albums que pertenecen a dicho genero
         return oGeneros.getListAlbum();
-                
     }
 /*
     public void seleccionarLista(String a) {

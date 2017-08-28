@@ -8,9 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import tecnopotify.Persistence;
+//import tecnopotify.Persistence;
 
 
 public class PersistenceJpaController implements Serializable {
@@ -38,50 +39,49 @@ public class PersistenceJpaController implements Serializable {
         }
     }
 
-    public void edit(Persistence persistence) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            persistence = em.merge(persistence);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
-                Long id = persistence.getId();
-                if (findPersistence(id) == null) {
-                    throw new NonexistentEntityException("The persistence with id " + id + " no longer exists.");
-                }
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+    /*public void edit(Persistence persistence) throws NonexistentEntityException, Exception {
+    EntityManager em = null;
+    try {
+    em = getEntityManager();
+    em.getTransaction().begin();
+    persistence = em.merge(persistence);
+    em.getTransaction().commit();
+    } catch (Exception ex) {
+    String msg = ex.getLocalizedMessage();
+    if (msg == null || msg.length() == 0) {
+    Long id = persistence.getId();
+    if (findPersistence(id) == null) {
+    throw new NonexistentEntityException("The persistence with id " + id + " no longer exists.");
     }
-
+    }
+    throw ex;
+    } finally {
+    if (em != null) {
+    em.close();
+    }
+    }
+    }
+    
     public void destroy(Long id) throws NonexistentEntityException {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Persistence persistence;
-            try {
-                persistence = em.getReference(Persistence.class, id);
-                persistence.getId();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The persistence with id " + id + " no longer exists.", enfe);
-            }
-            em.remove(persistence);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+    EntityManager em = null;
+    try {
+    em = getEntityManager();
+    em.getTransaction().begin();
+    Persistence persistence;
+    try {
+    persistence = em.getReference(Persistence.class, id);
+    persistence.getId();
+    } catch (EntityNotFoundException enfe) {
+    throw new NonexistentEntityException("The persistence with id " + id + " no longer exists.", enfe);
     }
-
+    em.remove(persistence);
+    em.getTransaction().commit();
+    } finally {
+    if (em != null) {
+    em.close();
+    }
+    }
+    }*/
     public List<Persistence> findPersistenceEntities() {
         return findPersistenceEntities(true, -1, -1);
     }

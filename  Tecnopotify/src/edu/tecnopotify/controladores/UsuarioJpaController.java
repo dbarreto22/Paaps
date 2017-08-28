@@ -1,19 +1,27 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package edu.tecnopotify.controladores;
 
 import edu.tecnopotify.controladores.exceptions.NonexistentEntityException;
 import edu.tecnopotify.controladores.exceptions.PreexistingEntityException;
-import edu.tecnopotify.entidades.Usuario;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import edu.tecnopotify.entidades.Usuario;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
-
+/**
+ *
+ * @author Carlox
+ */
 public class UsuarioJpaController implements Serializable {
 
     public UsuarioJpaController(EntityManagerFactory emf) {
@@ -26,15 +34,41 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void create(Usuario usuario) throws PreexistingEntityException, Exception {
+        if (usuario.getLstSeguidores() == null) {
+            usuario.setLstSeguidores(new ArrayList<Usuario>());
+        }
+        if (usuario.getLstSeguidos() == null) {
+            usuario.setLstSeguidos(new ArrayList<Usuario>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Usuario> attachedLstSeguidores = new ArrayList<Usuario>();
+            for (Usuario lstSeguidoresUsuarioToAttach : usuario.getLstSeguidores()) {
+                lstSeguidoresUsuarioToAttach = em.getReference(lstSeguidoresUsuarioToAttach.getClass(), lstSeguidoresUsuarioToAttach.getNickname());
+                attachedLstSeguidores.add(lstSeguidoresUsuarioToAttach);
+            }
+            usuario.setLstSeguidores(attachedLstSeguidores);
+            List<Usuario> attachedLstSeguidos = new ArrayList<Usuario>();
+            for (Usuario lstSeguidosUsuarioToAttach : usuario.getLstSeguidos()) {
+                lstSeguidosUsuarioToAttach = em.getReference(lstSeguidosUsuarioToAttach.getClass(), lstSeguidosUsuarioToAttach.getNickname());
+                attachedLstSeguidos.add(lstSeguidosUsuarioToAttach);
+            }
+            usuario.setLstSeguidos(attachedLstSeguidos);
             em.persist(usuario);
+            for (Usuario lstSeguidoresUsuario : usuario.getLstSeguidores()) {
+                lstSeguidoresUsuario.getLstSeguidos().add(usuario);
+                lstSeguidoresUsuario = em.merge(lstSeguidoresUsuario);
+            }
+            for (Usuario lstSeguidosUsuario : usuario.getLstSeguidos()) {
+                lstSeguidosUsuario.getLstSeguidos().add(usuario);
+                lstSeguidosUsuario = em.merge(lstSeguidosUsuario);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findUsuario(usuario.getNickname()) != null) {
-                throw new PreexistingEntityException("Usuario " + usuario + " Ya existe.", ex);
+                throw new PreexistingEntityException("Usuario " + usuario + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -49,7 +83,50 @@ public class UsuarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Usuario persistentUsuario = em.find(Usuario.class, usuario.getNickname());
+            List<Usuario> lstSeguidoresOld = persistentUsuario.getLstSeguidores();
+            List<Usuario> lstSeguidoresNew = usuario.getLstSeguidores();
+            List<Usuario> lstSeguidosOld = persistentUsuario.getLstSeguidos();
+            List<Usuario> lstSeguidosNew = usuario.getLstSeguidos();
+            List<Usuario> attachedLstSeguidoresNew = new ArrayList<Usuario>();
+            for (Usuario lstSeguidoresNewUsuarioToAttach : lstSeguidoresNew) {
+                lstSeguidoresNewUsuarioToAttach = em.getReference(lstSeguidoresNewUsuarioToAttach.getClass(), lstSeguidoresNewUsuarioToAttach.getNickname());
+                attachedLstSeguidoresNew.add(lstSeguidoresNewUsuarioToAttach);
+            }
+            lstSeguidoresNew = attachedLstSeguidoresNew;
+            usuario.setLstSeguidores(lstSeguidoresNew);
+            List<Usuario> attachedLstSeguidosNew = new ArrayList<Usuario>();
+            for (Usuario lstSeguidosNewUsuarioToAttach : lstSeguidosNew) {
+                lstSeguidosNewUsuarioToAttach = em.getReference(lstSeguidosNewUsuarioToAttach.getClass(), lstSeguidosNewUsuarioToAttach.getNickname());
+                attachedLstSeguidosNew.add(lstSeguidosNewUsuarioToAttach);
+            }
+            lstSeguidosNew = attachedLstSeguidosNew;
+            usuario.setLstSeguidos(lstSeguidosNew);
             usuario = em.merge(usuario);
+            for (Usuario lstSeguidoresOldUsuario : lstSeguidoresOld) {
+                if (!lstSeguidoresNew.contains(lstSeguidoresOldUsuario)) {
+                    lstSeguidoresOldUsuario.getLstSeguidos().remove(usuario);
+                    lstSeguidoresOldUsuario = em.merge(lstSeguidoresOldUsuario);
+                }
+            }
+            for (Usuario lstSeguidoresNewUsuario : lstSeguidoresNew) {
+                if (!lstSeguidoresOld.contains(lstSeguidoresNewUsuario)) {
+                    lstSeguidoresNewUsuario.getLstSeguidos().add(usuario);
+                    lstSeguidoresNewUsuario = em.merge(lstSeguidoresNewUsuario);
+                }
+            }
+            for (Usuario lstSeguidosOldUsuario : lstSeguidosOld) {
+                if (!lstSeguidosNew.contains(lstSeguidosOldUsuario)) {
+                    lstSeguidosOldUsuario.getLstSeguidos().remove(usuario);
+                    lstSeguidosOldUsuario = em.merge(lstSeguidosOldUsuario);
+                }
+            }
+            for (Usuario lstSeguidosNewUsuario : lstSeguidosNew) {
+                if (!lstSeguidosOld.contains(lstSeguidosNewUsuario)) {
+                    lstSeguidosNewUsuario.getLstSeguidos().add(usuario);
+                    lstSeguidosNewUsuario = em.merge(lstSeguidosNewUsuario);
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -78,6 +155,16 @@ public class UsuarioJpaController implements Serializable {
                 usuario.getNickname();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
+            }
+            List<Usuario> lstSeguidores = usuario.getLstSeguidores();
+            for (Usuario lstSeguidoresUsuario : lstSeguidores) {
+                lstSeguidoresUsuario.getLstSeguidos().remove(usuario);
+                lstSeguidoresUsuario = em.merge(lstSeguidoresUsuario);
+            }
+            List<Usuario> lstSeguidos = usuario.getLstSeguidos();
+            for (Usuario lstSeguidosUsuario : lstSeguidos) {
+                lstSeguidosUsuario.getLstSeguidos().remove(usuario);
+                lstSeguidosUsuario = em.merge(lstSeguidosUsuario);
             }
             em.remove(usuario);
             em.getTransaction().commit();
