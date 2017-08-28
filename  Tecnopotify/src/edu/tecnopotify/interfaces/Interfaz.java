@@ -27,7 +27,7 @@ public interface Interfaz {
     public void altaTema(dataTemas tema);
    // public void seleccionarLista(String a);
     public int consultarListaRep(boolean a, boolean b);
-    public void consultarAlbumPorArtista(dataArtista artista) ;
+    public List<Album> consultarAlbumPorArtista(dataArtista artista);
     public List<Album> consultarAlbumPorGenero(dataGenero genero); 
     public Album seleccionarAlbum(String id);
     public Artista seleccionarArtista(String nombreArtista);//
@@ -38,11 +38,11 @@ public interface Interfaz {
     public void seguirUsuario(String nickCliente, String nickUsr);
     public void publicarLista(String nickname, String nombreLista);
     public ListaParticular seleccionarLista(String id);
-    public void quitarTemaLista(dataTemas tema, dataListaReproduccion listaR);
-    public void agregarTemaLista(dataTemas tema, dataListaReproduccion listaR);
+    public void quitarTemaLista(long idTema, dataListaReproduccion listaR);
+    public void agregarTemaLista(long idTema, dataListaReproduccion listaR);
     public void crearListaDefecto(dataListaReproduccion listaD);
     public void crearListaParticular(boolean privado, Cliente cliente, dataListaReproduccion listaP);
-    public void mostrarListaGenero();
+    public List <Genero> mostrarListaGenero();
     //public Cliente devolverCliente(String nickname);
     
 }

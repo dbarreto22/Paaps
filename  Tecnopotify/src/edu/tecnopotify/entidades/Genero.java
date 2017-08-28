@@ -38,8 +38,22 @@ public class Genero implements Serializable{
     }
 
     public Genero() {
+        
+    }
+    
+     public Long getSerialVersioUID() {
+        return serialVersionUID;
     }
 
+    public Map<String, ListaDefecto> getListasReprGenero() {
+        return listasReprGenero;
+    }
+
+    public void setListasReprGenero(Map<String, ListaDefecto> listasReprGenero) {
+        this.listasReprGenero = listasReprGenero;
+    }
+    
+    
     public String getNombre() {
         return nombre;
     }

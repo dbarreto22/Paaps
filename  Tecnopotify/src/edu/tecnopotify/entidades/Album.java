@@ -34,6 +34,14 @@ public class Album implements Serializable {
     @Column
     @ManyToMany
     private List<Genero> listGenero;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public List<Genero> getListGenero() {
+        return listGenero;
+    }
     
     public Album(dataAlbum album) {
         this.nombre = album.getNombre();

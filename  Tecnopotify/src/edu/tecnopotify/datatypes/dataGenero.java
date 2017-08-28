@@ -35,6 +35,10 @@ public class dataGenero{
     public void setPadre(String padre) {
         this.padre = padre;
     }
+
+    public long getSerialVersioUID() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

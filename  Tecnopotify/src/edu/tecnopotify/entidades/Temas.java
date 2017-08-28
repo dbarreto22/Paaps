@@ -28,8 +28,15 @@ public class Temas implements Serializable {
     
     @ManyToMany
     public Map<String, ListaReproduccion> listaR = new HashMap<String,ListaReproduccion>();
-    
 
+    public Map<String, ListaReproduccion> getListaR() {
+        return listaR;
+    }
+
+    public void setListaR(Map<String, ListaReproduccion> listaR) {
+        this.listaR = listaR;
+    }
+    
     public Temas() {
     }
 
@@ -61,6 +68,10 @@ public class Temas implements Serializable {
 
     public void setPosicion(int posicion) {
         this.posicion = posicion;
+    }
+
+    public Long getSerialVersioUID() {
+        return serialVersionUID;
     }
     
 }
