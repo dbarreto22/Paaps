@@ -30,9 +30,13 @@ import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.ListaDefecto;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.Temas;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import static javax.swing.text.html.HTML.Tag.SELECT;
 
 public class Controlador implements Interfaz {
     
@@ -165,6 +169,18 @@ public class Controlador implements Interfaz {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+    
+    //debe devolver Dts?
+    public void mostrarListaGenero() {
+          TypedQuery<Genero> query =manager.createQuery( "SELECT c FROM Genero c" 
+                  , Genero.class ) ;
+          List <Genero> resultados = query.getResultList();
+          dataGenero G;
+          Iterator<Genero> it = resultados.iterator();
+          while (it.hasNext()) {
+              System.out.println(it.next());
+              }  
+    }
 /*
     public void seleccionarLista(String a) {
 
@@ -173,9 +189,13 @@ public class Controlador implements Interfaz {
     public int consultarListaRep(boolean a, boolean b) {
         return 0;
     }
+    //sirven para contar Album, se le pregunta al usuario por que quiere consultar
+    public void consultarAlbumPorArtista() {
+        
+    }
     
-    public int consultarAlbum(boolean a, boolean b) {
-        return 0;
+    public void consultarAlbumPorGenero(){
+        
     }
     
     public void eliminarFavorito(boolean b, boolean c, boolean d, String a) {
@@ -199,9 +219,6 @@ public class Controlador implements Interfaz {
         
     }
 
-    public void mostrarListaGenero() {
-        
-    }
 /*
     public Cliente devolverCliente(String nickname){
        

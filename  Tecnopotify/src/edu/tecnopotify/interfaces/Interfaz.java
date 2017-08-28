@@ -26,7 +26,8 @@ public interface Interfaz {
     public void altaTema(dataTemas tema);
    // public void seleccionarLista(String a);
     public int consultarListaRep(boolean a, boolean b);
-    public int consultarAlbum(boolean a, boolean b);
+    public void consultarAlbumPorArtista() ;
+    public void consultarAlbumPorGenero(); 
     public Album seleccionarAlbum(String id);
     public Artista seleccionarArtista(String nombreArtista);//
     public Cliente seleccionarCliente(String nickname);
