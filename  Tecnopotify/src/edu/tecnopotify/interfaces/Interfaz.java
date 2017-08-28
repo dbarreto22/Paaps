@@ -1,6 +1,7 @@
 package edu.tecnopotify.interfaces;
 
 import edu.tecnopotify.datatypes.dataAlbum;
+import edu.tecnopotify.datatypes.dataArtista;
 import edu.tecnopotify.datatypes.dataGenero;
 import edu.tecnopotify.datatypes.dataListaReproduccion;
 import edu.tecnopotify.datatypes.dataTemas;
@@ -26,8 +27,8 @@ public interface Interfaz {
     public void altaTema(dataTemas tema);
    // public void seleccionarLista(String a);
     public int consultarListaRep(boolean a, boolean b);
-    public void consultarAlbumPorArtista() ;
-    public void consultarAlbumPorGenero(); 
+    public void consultarAlbumPorArtista(dataArtista artista) ;
+    public void consultarAlbumPorGenero(dataGenero genero); 
     public Album seleccionarAlbum(String id);
     public Artista seleccionarArtista(String nombreArtista);//
     public Cliente seleccionarCliente(String nickname);

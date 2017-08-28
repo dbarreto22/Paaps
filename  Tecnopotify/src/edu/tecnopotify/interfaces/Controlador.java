@@ -19,6 +19,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import edu.tecnopotify.controladores.UsuarioJpaController;
 import edu.tecnopotify.datatypes.dataAlbum;
+import edu.tecnopotify.datatypes.dataArtista;
 import edu.tecnopotify.datatypes.dataGenero;
 import edu.tecnopotify.datatypes.dataListaDefecto;
 import edu.tecnopotify.datatypes.dataListaParticular;
@@ -175,11 +176,26 @@ public class Controlador implements Interfaz {
           TypedQuery<Genero> query =manager.createQuery( "SELECT c FROM Genero c" 
                   , Genero.class ) ;
           List <Genero> resultados = query.getResultList();
-          dataGenero G;
           Iterator<Genero> it = resultados.iterator();
           while (it.hasNext()) {
               System.out.println(it.next());
               }  
+    }
+    
+        //sirven para consultar Album, se le pregunta al usuario por que quiere consultar
+    public void consultarAlbumPorArtista(dataArtista artista) {
+        ArtistaJpaController ctrArtista= new ArtistaJpaController(fact);
+        Artista oArtista = ctrArtista.findArtista(artista.getNickname());
+        List<Album> listAlbumArtista = oArtista.getListDiscos();
+        Iterator<Album> it = listAlbumArtista.iterator();
+          while (it.hasNext()) {
+              System.out.println(it.next());
+              } 
+    }
+    
+    public void consultarAlbumPorGenero(dataGenero genero){
+  
+        
     }
 /*
     public void seleccionarLista(String a) {
@@ -189,14 +205,7 @@ public class Controlador implements Interfaz {
     public int consultarListaRep(boolean a, boolean b) {
         return 0;
     }
-    //sirven para contar Album, se le pregunta al usuario por que quiere consultar
-    public void consultarAlbumPorArtista() {
-        
-    }
-    
-    public void consultarAlbumPorGenero(){
-        
-    }
+
     
     public void eliminarFavorito(boolean b, boolean c, boolean d, String a) {
 
