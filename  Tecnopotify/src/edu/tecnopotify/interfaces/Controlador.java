@@ -131,19 +131,19 @@ public class Controlador implements Interfaz {
         return aux;    
     }
     
-    public void agregarTemaLista(dataTemas tema, dataListaReproduccion listaR) {
+    public void agregarTemaLista(long idTema, dataListaReproduccion listaR) {
         
         TemasJpaController ctrTema = new TemasJpaController(fact);
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
-        Temas aux = ctrTema.findTemas(tema.getNombre());
+        Temas aux = ctrTema.findTemas(idTema);
         ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(listaR.getNombre());
         Laux.getListaTemas().put(aux.getNombre(), aux);
     }
     
-    public void quitarTemaLista(dataTemas tema, dataListaReproduccion listaR) {
+    public void quitarTemaLista(long idTema, dataListaReproduccion listaR) {
        TemasJpaController ctrTema = new TemasJpaController(fact);
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
-        Temas aux = ctrTema.findTemas(tema.getNombre());
+        Temas aux = ctrTema.findTemas(idTema);
         ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(listaR.getNombre());
         Laux.getListaTemas().remove(aux.getNombre(), Laux);
     }
@@ -172,33 +172,26 @@ public class Controlador implements Interfaz {
     }
     
     //debe devolver Dts?
-    public void mostrarListaGenero() {
+    public List <Genero> mostrarListaGenero() {
           TypedQuery<Genero> query =manager.createQuery( "SELECT c FROM Genero c" 
                   , Genero.class ) ;
           List <Genero> resultados = query.getResultList();
-          Iterator<Genero> it = resultados.iterator();
-          while (it.hasNext()) {
-              System.out.println(it.next());
-              }  
+          return resultados;
     }
     
         //sirven para consultar Album, se le pregunta al usuario por que quiere consultar
-    //Que lo muestre es parte de la capa de persistencia
-    public void consultarAlbumPorArtista(dataArtista artista) {
+    public List<Album> consultarAlbumPorArtista(dataArtista artista) {
         ArtistaJpaController ctrArtista= new ArtistaJpaController(fact);
         Artista oArtista = ctrArtista.findArtista(artista.getNickname());
         List<Album> listAlbumArtista = oArtista.getListDiscos();
-        Iterator<Album> it = listAlbumArtista.iterator();
-          while (it.hasNext()) {
-              System.out.println(it.next());
-              } 
+        return listAlbumArtista;
     }
     
     public List<Album> consultarAlbumPorGenero(dataGenero genero){
         //Funcion que obtiene los albums que pertenecen a un genero
         GeneroJpaController ctrGenero= new GeneroJpaController(fact);
         //Obtiene el genero deseado
-        Genero oGeneros= ctrGenero.findGenero(genero.getNombre());
+        Genero oGeneros= ctrGenero.findGenero(genero.getSerialVersioUID());
         //Devuelve la lista de albums que pertenecen a dicho genero
         return oGeneros.getListAlbum();
     }
@@ -233,13 +226,7 @@ public class Controlador implements Interfaz {
         
     }
 
-/*
-    public Cliente devolverCliente(String nickname){
-       
-        Cliente aux = new Cliente();
-        
-        return aux;
-    }*/
+
     
     
     

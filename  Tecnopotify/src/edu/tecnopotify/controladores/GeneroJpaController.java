@@ -48,7 +48,7 @@ public class GeneroJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = genero.getNombre();
+                long id = genero.getSerialVersioUID();
                 if (findGenero(id) == null) {
                     throw new NonexistentEntityException("The genero with id " + id + " no longer exists.");
                 }
@@ -106,7 +106,7 @@ public class GeneroJpaController implements Serializable {
         }
     }
 
-    public Genero findGenero(String id) {
+    public Genero findGenero(long id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Genero.class, id);
