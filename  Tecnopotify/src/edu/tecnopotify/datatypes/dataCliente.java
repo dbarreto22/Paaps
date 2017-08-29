@@ -4,6 +4,7 @@ package edu.tecnopotify.datatypes;
 import edu.tecnopotify.entidades.*;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -13,12 +14,11 @@ public class dataCliente extends dataUsuario{
     public Map<String, ListaParticular> listasReprParticular = new HashMap<String, ListaParticular>();
     public Map<String, Usuario> seguidos = new HashMap<String, Usuario>();
 
-    public dataCliente(String nickname, String nombre, String apellido, 
-            String mail, dataFecha f_nac, String imagen) {
-        super(nickname, nombre, apellido, mail, f_nac, imagen);
-    }
 
-    public dataCliente() {
+        public dataCliente(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen, List<Usuario> lstSeguidos, List<Usuario> lstSeguidores) {
+        super(nickname, nombre, apellido, mail, f_nac, imagen, lstSeguidos, lstSeguidores);
+    }
+public dataCliente() {
         super();
     }
 
