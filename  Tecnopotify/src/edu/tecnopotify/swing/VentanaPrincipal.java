@@ -1,5 +1,9 @@
 package edu.tecnopotify.swing;
 
+import java.awt.Component;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,7 +17,9 @@ package edu.tecnopotify.swing;
 public class VentanaPrincipal extends javax.swing.JFrame {
     
     private Interfaz ctrl;
-    private jFrameCrearUsuario crearUsuario;
+    private JInternalFrameAltaUsuario altaUsuario;
+    private JFrame frame = new JFrame();
+    private JDesktopPane desktop;
 
 
     /**
@@ -21,11 +27,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
-        crearUsuario= new jFrameCrearUsuario();
-        crearUsuario.setVisible(true);
-        this.getContentPane().add(crearUsuario);
-        this.setSize(550, 550);
-        
+        //this.getContentPane().add(altaUsuario);
+        //this.setSize(550, 550);
+        altaUsuario= new JInternalFrameAltaUsuario();
+        Desktop.add(altaUsuario);
+        altaUsuario.setVisible(true);
+        altaUsuario.setBounds(8, 8, 400, 400);
+        altaUsuario.setResizable(true);
+        altaUsuario.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+
     }
 
     /**
@@ -39,7 +50,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu12 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
+        Desktop = new javax.swing.JDesktopPane();
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuUuarios = new javax.swing.JMenu();
@@ -70,19 +81,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("frPrincipal"); // NOI18N
-
-        jInternalFrame1.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 181, Short.MAX_VALUE)
-        );
 
         jMenu3.setText("Menu");
 
@@ -182,17 +180,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(504, Short.MAX_VALUE)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(111, 111, 111))
+            .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 916, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+            .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
         );
 
         getAccessibleContext().setAccessibleName("ventanaPrincipal");
@@ -214,7 +206,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuCrearAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCrearAlbumMouseClicked
        //Muestra el panel de altas y lo prepara para el alta de usuarios
-       crearUsuario.setVisible(true);
+       altaUsuario.setVisible(true);
     }//GEN-LAST:event_jMenuCrearAlbumMouseClicked
 
     /**
@@ -253,7 +245,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
@@ -280,6 +272,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuLista;
     private javax.swing.JMenu menuUuarios;
     // End of variables declaration//GEN-END:variables
+
+    
 
     private static class Interfaz {
 
