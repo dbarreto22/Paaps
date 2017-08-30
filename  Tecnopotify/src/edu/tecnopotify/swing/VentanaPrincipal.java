@@ -9,34 +9,34 @@ import javax.swing.JFrame;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Carlox
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    
+
     private Interfaz ctrl;
     private JInternalFrameAltaUsuario altaUsuario;
-    private JFrame frame = new JFrame();
-    private JDesktopPane desktop;
-
+    // private JFrame frame = new JFrame();
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
-        //this.getContentPane().add(altaUsuario);
-        //this.setSize(550, 550);
-        altaUsuario= new JInternalFrameAltaUsuario();
-        Desktop.add(altaUsuario);
-        altaUsuario.setVisible(true);
-        altaUsuario.setBounds(8, 8, 400, 400);
-        altaUsuario.setResizable(true);
-        altaUsuario.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 
+    }
+
+    protected void createFrameAltaUsuario() {
+        JInternalFrameAltaUsuario frame = new JInternalFrameAltaUsuario();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -180,21 +180,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 916, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(248, 248, 248)
+                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getAccessibleContext().setAccessibleName("ventanaPrincipal");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jMenuCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCrearUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuCrearUsuarioActionPerformed
 
     private void jMenuConsultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarClienteActionPerformed
         // TODO add your handling code here:
@@ -205,9 +206,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAlbumMouseClicked
 
     private void jMenuCrearAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCrearAlbumMouseClicked
-       //Muestra el panel de altas y lo prepara para el alta de usuarios
-       altaUsuario.setVisible(true);
+        //Muestra el panel de altas y lo prepara para el alta de usuarios
+
     }//GEN-LAST:event_jMenuCrearAlbumMouseClicked
+
+    private void jMenuCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCrearUsuarioActionPerformed
+        // TODO add your handling code here:
+        createFrameAltaUsuario();
+    }//GEN-LAST:event_jMenuCrearUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,8 +278,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuLista;
     private javax.swing.JMenu menuUuarios;
     // End of variables declaration//GEN-END:variables
-
-    
 
     private static class Interfaz {
 
