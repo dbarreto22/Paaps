@@ -196,12 +196,32 @@ public class Controlador implements Interfaz {
 
     }*/
     
-    public int consultarListaRep(boolean a, boolean b) {
-        return 0;
+    public List<ListaReproduccion> consultarListaRep(boolean artista, String id) {
+        //el bool artista se toma de la entrada, cuando el admin dice si la lista a consultar es de genero o artista
+        //retorna en la variable lista el listado de listas de reproduccion a mostrar en pantalla
+//        ListaDefectoJpaController retDefecto = new ListaDefectoJpaController(fact);
+//        ListaParticularJpaController retParticular = new ListaParticularJpaController(fact);
+//
+//        List<ListaReproduccion> lista = null;
+//        if (artista) { //string id de artista (nickname)
+//            //retornar listas de reproduccion del artista seleccionado
+//            ArtistaJpaController art = new ArtistaJpaController(fact);
+//            Artista a = art.findArtista(id);
+//            
+//            lista.addAll(0, retParticular.findListaParticularEntities());
+//        } else { //string nombreGenero
+//            //retornar listas de reproduccion del genero seleccionado
+//            lista.addAll(0, retDefecto.findListaDefectoEntities());
+//        }
+//        
+//        return lista;
+        return null;
     }
 
     
     public void eliminarFavorito(boolean b, boolean c, boolean d, String a) {
+        //eliminar tema/lista/album de los favoritos de un cliente
+        //selecciono un favorito y saco el elemento de la lista que corresponda
 
     }
 
@@ -211,11 +231,19 @@ public class Controlador implements Interfaz {
     }
     
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr) {
-      
+        UsuarioJpaController usrCtrl = new UsuarioJpaController(fact);
+        Usuario u = usrCtrl.findUsuario(nickCliente);
+        Usuario v = usrCtrl.findUsuario(nickUsr);
+        u.removeFromSeguidos(v);
+        v.removeFromSeguidores(u);
     }
 
     public void seguirUsuario(String nickCliente, String nickUsr) {
-        
+        UsuarioJpaController usrCtrl = new UsuarioJpaController(fact);
+        Usuario u = usrCtrl.findUsuario(nickCliente);
+        Usuario v = usrCtrl.findUsuario(nickUsr);
+        u.addToSeguidos(v); 
+        v.addToSeguidores(u);
     }
     
     public void publicarLista(String nickname, String nombreLista) {

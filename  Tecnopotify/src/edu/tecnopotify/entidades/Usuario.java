@@ -101,6 +101,22 @@ public class Usuario implements Serializable {
     public List<Usuario> getLstSeguidos() {
         return lstSeguidos;
     }
+    
+    public void addToSeguidos(Usuario usr){
+        this.lstSeguidos.add(usr);
+    }
+    
+    public void removeFromSeguidos(Usuario usr){
+        this.lstSeguidos.remove(usr);
+    }
+    
+    public void addToSeguidores(Usuario usr){
+        this.lstSeguidores.add(usr);
+    }
+    
+    public void removeFromSeguidores(Usuario usr){
+        this.lstSeguidores.remove(usr);
+    }
 
     public void setLstSeguidos(List<Usuario> lstSeguidos) {
         this.lstSeguidos = lstSeguidos;
