@@ -16,7 +16,8 @@ import javax.swing.JFrame;
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     private Interfaz ctrl;
-    private JInternalFrameAltaUsuario altaUsuario;
+    private JInternalFrameAltaCliente altaUsuario;
+    private AltaGeneroJInternalFrame alatGenero;
     // private JFrame frame = new JFrame();
 
     /**
@@ -25,11 +26,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
 
-
     }
 
-    protected void createFrameAltaUsuario() {
-        JInternalFrameAltaUsuario frame = new JInternalFrameAltaUsuario();
+    protected void createFrameAltaCliente() {
+        JInternalFrameAltaCliente frame = new JInternalFrameAltaCliente();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    protected void createFrameAltaArtista() {
+        AltaArtistaJInternalFrame frame = new AltaArtistaJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    protected void createFrameAltaGenero() {
+        AltaGeneroJInternalFrame frame = new AltaGeneroJInternalFrame();
         frame.setVisible(true);
         this.Desktop.add(frame);
         try {
@@ -54,7 +75,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuUuarios = new javax.swing.JMenu();
-        jMenuCrearUsuario = new javax.swing.JMenuItem();
+        jMenuCrearCliente = new javax.swing.JMenuItem();
+        jMenuCrearArtista = new javax.swing.JMenuItem();
         jMenuConsultarCliente = new javax.swing.JMenuItem();
         jMenuConsultarArtista = new javax.swing.JMenuItem();
         menuGenero = new javax.swing.JMenu();
@@ -86,13 +108,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuUuarios.setText("Usuarios");
 
-        jMenuCrearUsuario.setText("Crear usuario");
-        jMenuCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
+        jMenuCrearCliente.setText("Crear Cliente");
+        jMenuCrearCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCrearUsuarioActionPerformed(evt);
+                jMenuCrearClienteActionPerformed(evt);
             }
         });
-        menuUuarios.add(jMenuCrearUsuario);
+        menuUuarios.add(jMenuCrearCliente);
+
+        jMenuCrearArtista.setText("Crear Artista");
+        jMenuCrearArtista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCrearArtistaActionPerformed(evt);
+            }
+        });
+        menuUuarios.add(jMenuCrearArtista);
 
         jMenuConsultarCliente.setText("Consultar cliente");
         jMenuConsultarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +140,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuGenero.setText("Generos");
 
         jMenuItem4.setText("Crear genero");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCrearGeneroActionPerformed(evt);
+            }
+        });
         menuGenero.add(jMenuItem4);
 
         jMenu3.add(menuGenero);
@@ -180,15 +215,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(248, 248, 248)
-                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 1184, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -210,10 +245,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuCrearAlbumMouseClicked
 
-    private void jMenuCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCrearUsuarioActionPerformed
+    private void jMenuCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCrearClienteActionPerformed
         // TODO add your handling code here:
-        createFrameAltaUsuario();
-    }//GEN-LAST:event_jMenuCrearUsuarioActionPerformed
+        createFrameAltaCliente();
+    }//GEN-LAST:event_jMenuCrearClienteActionPerformed
+
+    private void jCrearGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCrearGeneroActionPerformed
+        // TODO add your handling code here:
+        createFrameAltaGenero();
+    }//GEN-LAST:event_jCrearGeneroActionPerformed
+
+    private void jMenuCrearArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCrearArtistaActionPerformed
+        // TODO add your handling code here:
+        createFrameAltaArtista();
+    }//GEN-LAST:event_jMenuCrearArtistaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,7 +304,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuConsultarArtista;
     private javax.swing.JMenuItem jMenuConsultarCliente;
     private javax.swing.JMenuItem jMenuCrearAlbum;
-    private javax.swing.JMenuItem jMenuCrearUsuario;
+    private javax.swing.JMenuItem jMenuCrearArtista;
+    private javax.swing.JMenuItem jMenuCrearCliente;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;

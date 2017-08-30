@@ -9,17 +9,17 @@ package edu.tecnopotify.swing;
  *
  * @author diego-lucia
  */
-public class JInternalFrameAltaUsuario extends javax.swing.JInternalFrame {
+public class JInternalFrameAltaCliente extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form JInternalFrameAltaUsuario
+     * Creates new form JInternalFrameAltaCliente
      */
     //In the constructor of MyInternalFrame, a JInternalFrame subclass:
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
 
-    public JInternalFrameAltaUsuario() {
-        super("Alta usuario #" + (++openFrameCount),
+    public JInternalFrameAltaCliente() {
+        super("Alta usuario" + (++openFrameCount),
                 true, //resizable
                 true, //closable
                 true, //maximizable
@@ -56,6 +56,9 @@ public class JInternalFrameAltaUsuario extends javax.swing.JInternalFrame {
         jTextFieldFNac = new javax.swing.JTextField();
         jLabelImagen = new javax.swing.JLabel();
         jButtonSImagen = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+
+        jFrameSelectorArchivos.setMinimumSize(new java.awt.Dimension(200, 200));
 
         javax.swing.GroupLayout jFrameSelectorArchivosLayout = new javax.swing.GroupLayout(jFrameSelectorArchivos.getContentPane());
         jFrameSelectorArchivos.getContentPane().setLayout(jFrameSelectorArchivosLayout);
@@ -103,6 +106,7 @@ public class JInternalFrameAltaUsuario extends javax.swing.JInternalFrame {
                 jButtonSImagenActionPerformed(evt);
             }
         });
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,7 +173,7 @@ public class JInternalFrameAltaUsuario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelImagen)
                     .addComponent(jButtonSImagen))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar)
                 .addGap(57, 57, 57))
         );
@@ -179,11 +183,12 @@ public class JInternalFrameAltaUsuario extends javax.swing.JInternalFrame {
 
     private void jButtonSImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSImagenActionPerformed
         // TODO add your handling code here:
+         jFrameSelectorArchivos.setVisible(true);
     }//GEN-LAST:event_jButtonSImagenActionPerformed
 
     private void jButtonSImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSImagenMouseClicked
         // TODO add your handling code here:
-        jFrameSelectorArchivos.setVisible(true);
+       
     }//GEN-LAST:event_jButtonSImagenMouseClicked
 
 
@@ -198,6 +203,7 @@ public class JInternalFrameAltaUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelMail;
     private javax.swing.JLabel jLabelNickName;
     private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldFNac;
     private javax.swing.JTextField jTextFieldMail;
