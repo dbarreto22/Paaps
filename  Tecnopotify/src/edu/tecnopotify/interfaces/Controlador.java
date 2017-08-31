@@ -246,8 +246,11 @@ public class Controlador implements Interfaz {
         v.addToSeguidores(u);
     }
     
-    public void publicarLista(String nickname, String nombreLista) {
-        
+    public void publicarLista(String idUsr, String nombreLista) {
+        ClienteJpaController cliCtrl = new ClienteJpaController(fact);
+        Cliente c = cliCtrl.findCliente(idUsr);
+        ListaParticular li = c.listasReprParticular.get(nombreLista);
+        li.setEsPrivada(true);
     }
 
 
