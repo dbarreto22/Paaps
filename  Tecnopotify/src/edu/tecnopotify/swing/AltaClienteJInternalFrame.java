@@ -9,16 +9,16 @@ package edu.tecnopotify.swing;
  *
  * @author diego-lucia
  */
-public class JInternalFrameAltaCliente extends javax.swing.JInternalFrame {
+public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form JInternalFrameAltaCliente
+     * Creates new form AltaClienteJInternalFrame
      */
     //In the constructor of MyInternalFrame, a JInternalFrame subclass:
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
 
-    public JInternalFrameAltaCliente() {
+    public AltaClienteJInternalFrame() {
         super("Alta usuario" + (++openFrameCount),
                 true, //resizable
                 true, //closable
@@ -60,11 +60,17 @@ public class JInternalFrameAltaCliente extends javax.swing.JInternalFrame {
 
         jFrameSelectorArchivos.setMinimumSize(new java.awt.Dimension(200, 200));
 
+        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFileChooser1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jFrameSelectorArchivosLayout = new javax.swing.GroupLayout(jFrameSelectorArchivos.getContentPane());
         jFrameSelectorArchivos.getContentPane().setLayout(jFrameSelectorArchivosLayout);
         jFrameSelectorArchivosLayout.setHorizontalGroup(
             jFrameSelectorArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrameSelectorArchivosLayout.createSequentialGroup()
+            .addGroup(jFrameSelectorArchivosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -78,7 +84,10 @@ public class JInternalFrameAltaCliente extends javax.swing.JInternalFrame {
         );
 
         setClosable(true);
+        setMaximizable(true);
         setResizable(true);
+        setTitle("Alta Cliente");
+        setMinimumSize(new java.awt.Dimension(200, 300));
         setVisible(true);
 
         jButtonConfirmar.setText("Confirmar");
@@ -191,6 +200,10 @@ public class JInternalFrameAltaCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_jButtonSImagenMouseClicked
+
+    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFileChooser1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

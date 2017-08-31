@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     private Interfaz ctrl;
-    private JInternalFrameAltaCliente altaUsuario;
+    private AltaClienteJInternalFrame altaUsuario;
     private AltaGeneroJInternalFrame alatGenero;
     // private JFrame frame = new JFrame();
 
@@ -29,7 +29,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     protected void createFrameAltaCliente() {
-        JInternalFrameAltaCliente frame = new JInternalFrameAltaCliente();
+        AltaClienteJInternalFrame frame = new AltaClienteJInternalFrame();
         frame.setVisible(true);
         this.Desktop.add(frame);
         try {
@@ -51,6 +51,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     protected void createFrameAltaGenero() {
         AltaGeneroJInternalFrame frame = new AltaGeneroJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    protected void createFrameAltaAlbum() {
+        AltaAlbumJInternalFrame frame = new AltaAlbumJInternalFrame();
         frame.setVisible(true);
         this.Desktop.add(frame);
         try {
@@ -162,6 +173,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 jMenuCrearAlbumMouseClicked(evt);
             }
         });
+        jMenuCrearAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCrearAlbumActionPerformed(evt);
+            }
+        });
         menuAlbum.add(jMenuCrearAlbum);
 
         jMenuItem15.setText("Consultar album");
@@ -259,6 +275,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         createFrameAltaArtista();
     }//GEN-LAST:event_jMenuCrearArtistaActionPerformed
+
+    private void jMenuCrearAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCrearAlbumActionPerformed
+        // TODO add your handling code here:
+        createFrameAltaAlbum();
+    }//GEN-LAST:event_jMenuCrearAlbumActionPerformed
 
     /**
      * @param args the command line arguments

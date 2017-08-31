@@ -5,7 +5,7 @@
  */
 package edu.tecnopotify.swing;
 
-import static edu.tecnopotify.swing.JInternalFrameAltaCliente.openFrameCount;
+import static edu.tecnopotify.swing.AltaClienteJInternalFrame.openFrameCount;
 
 /**
  *
