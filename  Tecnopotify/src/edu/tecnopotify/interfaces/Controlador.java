@@ -40,11 +40,11 @@ import javax.persistence.TypedQuery;
 import static javax.swing.text.html.HTML.Tag.SELECT;
 
 public class Controlador implements Interfaz {
-    
+
     EntityManagerFactory fact = Persistence.createEntityManagerFactory("TecnopotifyPU");
     EntityManager manager = fact.createEntityManager();
-    
-    public void crearCliente(dataUsuario usuario){
+
+    public void crearCliente(dataUsuario usuario) {
         Usuario U = new Cliente(usuario);
         ClienteJpaController ctrCl = new ClienteJpaController(fact);
         try {
@@ -53,10 +53,10 @@ public class Controlador implements Interfaz {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void crearArtista(String biografia, String link, List<Album> listAlbum,
-            dataUsuario usuario){
-        Usuario U = new Artista(biografia,link,listAlbum,usuario);
+            dataUsuario usuario) {
+        Usuario U = new Artista(biografia, link, listAlbum, usuario);
         ArtistaJpaController ctrA = new ArtistaJpaController(fact);
         try {
             ctrA.create((Artista) U);
@@ -72,22 +72,22 @@ public class Controlador implements Interfaz {
             crlTema.create(T);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+        }
     }
-    
-     public void crearListaDefecto(dataListaReproduccion listaD){
-        ListaReproduccion lista = new ListaDefecto(listaD);  
+
+    public void crearListaDefecto(dataListaReproduccion listaD) {
+        ListaReproduccion lista = new ListaDefecto(listaD);
         ListaDefectoJpaController crlListaD = new ListaDefectoJpaController(fact);
         try {
             crlListaD.create((ListaDefecto) lista);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-     
-     public void crearListaParticular(boolean privado, Cliente cliente, dataListaReproduccion listaP){
-        ListaReproduccion lista = new ListaParticular(privado, cliente,listaP);  
+
+    public void crearListaParticular(boolean privado, Cliente cliente, dataListaReproduccion listaP) {
+        ListaReproduccion lista = new ListaParticular(privado, cliente, listaP);
         ListaParticularJpaController crlListaP = new ListaParticularJpaController(fact);
         try {
             crlListaP.create((ListaParticular) lista);
@@ -95,8 +95,7 @@ public class Controlador implements Interfaz {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
-     
+
     public void altaGenero(dataGenero genero) {
         Genero G = new Genero(genero);
         GeneroJpaController crlG = new GeneroJpaController(fact);
@@ -106,42 +105,42 @@ public class Controlador implements Interfaz {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public Artista seleccionarArtista(String nickname) {
         ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
         Artista aux = ctrArtista.findArtista(nickname);
         return aux;
     }
-    
+
     public Cliente seleccionarCliente(String nickname) {
         ClienteJpaController ctrCliente = new ClienteJpaController(fact);
         Cliente aux = ctrCliente.findCliente(nickname);
-        return aux;      
+        return aux;
     }
-    
+
     public Album seleccionarAlbum(String id) {
         AlbumJpaController ctrAlbum = new AlbumJpaController(fact);
         Album aux = ctrAlbum.findAlbum(id);
-        return aux; 
+        return aux;
     }
-    
-    public ListaParticular seleccionarLista(String id){
+
+    public ListaParticular seleccionarLista(String id) {
         ListaParticularJpaController ctrListaParticular = new ListaParticularJpaController(fact);
         ListaParticular aux = ctrListaParticular.findListaParticular(id);
-        return aux;    
+        return aux;
     }
-    
+
     public void agregarTemaLista(long idTema, dataListaReproduccion listaR) {
-        
+
         TemasJpaController ctrTema = new TemasJpaController(fact);
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
         Temas aux = ctrTema.findTemas(idTema);
         ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(listaR.getNombre());
         Laux.getListaTemas().put(aux.getNombre(), aux);
     }
-    
+
     public void quitarTemaLista(long idTema, dataListaReproduccion listaR) {
-       TemasJpaController ctrTema = new TemasJpaController(fact);
+        TemasJpaController ctrTema = new TemasJpaController(fact);
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
         Temas aux = ctrTema.findTemas(idTema);
         ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(listaR.getNombre());
@@ -150,52 +149,52 @@ public class Controlador implements Interfaz {
 
     public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum) {
         //Crea un album y lo agrega a su artista
-        ArtistaJpaController ctrArtista= new ArtistaJpaController(fact);
+        ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
         //Busca al artista
-        Artista oArtista= ctrArtista.findArtista(nickNameArtista);
-        AlbumJpaController ctrAlbum=new AlbumJpaController(fact);
+        Artista oArtista = ctrArtista.findArtista(nickNameArtista);
+        AlbumJpaController ctrAlbum = new AlbumJpaController(fact);
         //Crea el album
         Album oAlbum = new Album(dtAlbum);
         //Agrega el album a la lista del artista
         oArtista.getListDiscos().add(oAlbum);
         try {
             //Persiste el album y modifica el artista 
-            ctrArtista.edit(oArtista);            
-            ctrAlbum.create(oAlbum);            
+            ctrArtista.edit(oArtista);
+            ctrAlbum.create(oAlbum);
         } catch (Exception e) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     //debe devolver Dts?
-    public List <Genero> mostrarListaGenero() {
-          TypedQuery<Genero> query =manager.createQuery( "SELECT c FROM Genero c" 
-                  , Genero.class ) ;
-          List <Genero> resultados = query.getResultList();
-          return resultados;
+    public List<Genero> mostrarListaGenero() {
+        GeneroJpaController ctrGenero = new GeneroJpaController(fact);
+        List<Genero> resultados = ctrGenero.findGeneroEntities();
+        return resultados;
     }
-    
-        //sirven para consultar Album, se le pregunta al usuario por que quiere consultar
+
+    //sirven para consultar Album, se le pregunta al usuario por que quiere consultar
     public List<Album> consultarAlbumPorArtista(dataArtista artista) {
-        ArtistaJpaController ctrArtista= new ArtistaJpaController(fact);
+        ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
         Artista oArtista = ctrArtista.findArtista(artista.getNickname());
         List<Album> listAlbumArtista = oArtista.getListDiscos();
         return listAlbumArtista;
     }
-    
-    public List<Album> consultarAlbumPorGenero(dataGenero genero){
+
+    public List<Album> consultarAlbumPorGenero(dataGenero genero) {
         //Funcion que obtiene los albums que pertenecen a un genero
-        GeneroJpaController ctrGenero= new GeneroJpaController(fact);
+        GeneroJpaController ctrGenero = new GeneroJpaController(fact);
         //Obtiene el genero deseado
-        Genero oGeneros= ctrGenero.findGenero(genero.getSerialVersioUID());
+        Genero oGeneros = ctrGenero.findGenero(genero.getSerialVersioUID());
         //Devuelve la lista de albums que pertenecen a dicho genero
         return oGeneros.getListAlbum();
     }
-/*
+
+    /*
     public void seleccionarLista(String a) {
 
     }*/
-    
+
     public List<ListaReproduccion> consultarListaRep(boolean artista, String id) {
         //el bool artista se toma de la entrada, cuando el admin dice si la lista a consultar es de genero o artista
         //retorna en la variable lista el listado de listas de reproduccion a mostrar en pantalla
@@ -218,18 +217,16 @@ public class Controlador implements Interfaz {
         return null;
     }
 
-    
     public void eliminarFavorito(boolean b, boolean c, boolean d, String a) {
         //eliminar tema/lista/album de los favoritos de un cliente
         //selecciono un favorito y saco el elemento de la lista que corresponda
 
     }
 
-    
     public void agregarFavorito(boolean b, boolean c, boolean d, String a) {
 
     }
-    
+
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr) {
         UsuarioJpaController usrCtrl = new UsuarioJpaController(fact);
         Usuario u = usrCtrl.findUsuario(nickCliente);
@@ -242,22 +239,12 @@ public class Controlador implements Interfaz {
         UsuarioJpaController usrCtrl = new UsuarioJpaController(fact);
         Usuario u = usrCtrl.findUsuario(nickCliente);
         Usuario v = usrCtrl.findUsuario(nickUsr);
-        u.addToSeguidos(v); 
+        u.addToSeguidos(v);
         v.addToSeguidores(u);
     }
-    
+
     public void publicarLista(String nickname, String nombreLista) {
-        
+
     }
 
-
-    
-    
-    
-    
-
-    
-
-
-    
 }
