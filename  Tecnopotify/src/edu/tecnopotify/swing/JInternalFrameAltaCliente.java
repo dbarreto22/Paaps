@@ -184,6 +184,7 @@ public class JInternalFrameAltaCliente extends javax.swing.JInternalFrame {
     private void jButtonSImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSImagenActionPerformed
         // TODO add your handling code here:
          jFrameSelectorArchivos.setVisible(true);
+        // https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
     }//GEN-LAST:event_jButtonSImagenActionPerformed
 
     private void jButtonSImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSImagenMouseClicked
