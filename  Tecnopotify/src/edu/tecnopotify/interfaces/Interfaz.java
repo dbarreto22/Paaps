@@ -35,7 +35,7 @@ public interface Interfaz {
     public void agregarFavorito(boolean b, boolean c, boolean d,String a);
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr);
     public void seguirUsuario(String nickCliente, String nickUsr);
-    public void publicarLista(String nickname, String nombreLista);
+    public void publicarLista(String idUsr, String nombreLista);
     public ListaParticular seleccionarLista(String id);
     public void quitarTemaLista(long idTema, dataListaReproduccion listaR);
     public void agregarTemaLista(long idTema, dataListaReproduccion listaR);
