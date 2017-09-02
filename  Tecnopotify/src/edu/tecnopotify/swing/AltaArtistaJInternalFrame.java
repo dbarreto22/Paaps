@@ -5,6 +5,14 @@
  */
 package edu.tecnopotify.swing;
 
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JInternalFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author diego-lucia
@@ -14,6 +22,7 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form AltaArtistaJInternalFrame
      */
+    private String path;
     public AltaArtistaJInternalFrame() {
         initComponents();
     }
@@ -27,7 +36,6 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFileChooserArtista = new javax.swing.JFileChooser();
         jLabelApellido = new javax.swing.JLabel();
         jLabelNombre = new javax.swing.JLabel();
         jLabelNickName = new javax.swing.JLabel();
@@ -166,15 +174,12 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jButtonConfirmar)
-                                .addContainerGap())))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonConfirmar, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jLabelBiografia))))
+                        .addComponent(jLabelBiografia)))
+                .addContainerGap())
         );
 
         pack();
@@ -187,14 +192,31 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonSImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSImagenActionPerformed
         // TODO add your handling code here:
-        jFileChooserArtista.setVisible(true);
+                //https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
+        JInternalFrame internal = new JInternalFrame();
+        internal.setVisible(true);
+        try {
+            internal.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(AltaAlbumJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JFileChooser fileChooser = new JFileChooser();
+        internal.add(fileChooser);
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        FileNameExtensionFilter filtro= new FileNameExtensionFilter("*.JPG", "jpg", "*.PNG", "png");
+        fileChooser.setFileFilter(filtro);
+        int seleccion=fileChooser.showOpenDialog(internal);
+        if(seleccion == JFileChooser.APPROVE_OPTION)
+        {
+            File archivo=fileChooser.getSelectedFile();
+            this.path=archivo.getAbsolutePath();
+        }
     }//GEN-LAST:event_jButtonSImagenActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonSImagen;
-    private javax.swing.JFileChooser jFileChooserArtista;
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelBiografia;
     private javax.swing.JLabel jLabelFNac;
