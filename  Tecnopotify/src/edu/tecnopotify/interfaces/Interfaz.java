@@ -31,7 +31,7 @@ public interface Interfaz {
     public Album seleccionarAlbum(String id);
     public Artista seleccionarArtista(String nombreArtista);//
     public Cliente seleccionarCliente(String nickname);
-    public void eliminarFavorito(boolean b, boolean c, boolean d, long idCliente);
+    public void eliminarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento);
     public void agregarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento);
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr);
     public void seguirUsuario(String nickCliente, String nickUsr);
