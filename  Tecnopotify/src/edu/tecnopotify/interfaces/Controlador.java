@@ -31,6 +31,7 @@ import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.ListaDefecto;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.Temas;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -185,7 +186,7 @@ public class Controlador implements Interfaz {
         //Funcion que obtiene los albums que pertenecen a un genero
         GeneroJpaController ctrGenero = new GeneroJpaController(fact);
         //Obtiene el genero deseado
-        Genero oGeneros = ctrGenero.findGenero(genero.getSerialVersioUID());
+        Genero oGeneros = ctrGenero.findGenero(genero.getNombre());
         //Devuelve la lista de albums que pertenecen a dicho genero
         return oGeneros.getListAlbum();
     }
@@ -195,26 +196,23 @@ public class Controlador implements Interfaz {
 
     }*/
 
-    public List<ListaReproduccion> consultarListaRep(boolean artista, String id) {
-        //el bool artista se toma de la entrada, cuando el admin dice si la lista a consultar es de genero o artista
-        //retorna en la variable lista el listado de listas de reproduccion a mostrar en pantalla
-//        ListaDefectoJpaController retDefecto = new ListaDefectoJpaController(fact);
-//        ListaParticularJpaController retParticular = new ListaParticularJpaController(fact);
-//
-//        List<ListaReproduccion> lista = null;
-//        if (artista) { //string id de artista (nickname)
-//            //retornar listas de reproduccion del artista seleccionado
-//            ArtistaJpaController art = new ArtistaJpaController(fact);
-//            Artista a = art.findArtista(id);
-//            
-//            lista.addAll(0, retParticular.findListaParticularEntities());
-//        } else { //string nombreGenero
-//            //retornar listas de reproduccion del genero seleccionado
-//            lista.addAll(0, retDefecto.findListaDefectoEntities());
-//        }
-//        
-//        return lista;
-        return null;
+    public List<ListaReproduccion> consultarListaRep(boolean cliente, String id) {
+        //el bool cliente se toma de la entrada, cuando el admin dice si la lista a consultar es de genero o artista
+        //retorna en la variable lista la colección de listas de reproduccion a mostrar en pantalla
+
+        List<ListaReproduccion> lista = null;
+        if (cliente) { //string id de cliente (nickname)
+            //retornar listas de reproduccion del cliente seleccionado
+            ClienteJpaController cli = new ClienteJpaController(fact);
+            Cliente c = cli.findCliente(id);
+            lista.addAll((Collection<? extends ListaReproduccion>) c.getListasReprParticular());
+        } else { //string nombreGenero
+            //retornar listas de reproduccion del genero seleccionado
+            GeneroJpaController gen = new GeneroJpaController(fact);
+            Genero g = gen.findGenero(id);
+            lista.addAll(0, (Collection<? extends ListaReproduccion>) g.getListasReprGenero());
+        }
+        return lista;
     }
 
     public void eliminarFavorito(boolean b, boolean c, boolean d, String a) {

@@ -25,7 +25,7 @@ public interface Interfaz {
     public void crearAlbum(String nickNameArtista,dataAlbum dtAlbum);
     public void altaTema(dataTemas tema);
    // public void seleccionarLista(String a);
-    public List<ListaReproduccion> consultarListaRep(boolean artista, String id);
+    public List<ListaReproduccion> consultarListaRep(boolean cliente, String id);
     public List<Album> consultarAlbumPorArtista(dataArtista artista);
     public List<Album> consultarAlbumPorGenero(dataGenero genero); 
     public Album seleccionarAlbum(String id);
