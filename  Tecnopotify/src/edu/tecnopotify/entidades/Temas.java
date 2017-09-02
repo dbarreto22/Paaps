@@ -15,10 +15,10 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Temas implements Serializable {
     
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private static final long serialVersionUID = 1L;
     
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
     @Column
     private String nombre;
     @Column
@@ -69,9 +69,9 @@ public class Temas implements Serializable {
     public void setPosicion(int posicion) {
         this.posicion = posicion;
     }
-
+/*
     public Long getSerialVersioUID() {
         return serialVersionUID;
     }
-    
+    */
 }

@@ -3,6 +3,7 @@ package edu.tecnopotify.interfaces;
 import edu.tecnopotify.controladores.AlbumJpaController;
 import edu.tecnopotify.controladores.ArtistaJpaController;
 import edu.tecnopotify.controladores.ClienteJpaController;
+import edu.tecnopotify.controladores.FavoritosJpaController;
 import edu.tecnopotify.controladores.GeneroJpaController;
 import edu.tecnopotify.controladores.ListaDefectoJpaController;
 import edu.tecnopotify.controladores.ListaParticularJpaController;
@@ -28,6 +29,7 @@ import edu.tecnopotify.datatypes.dataTemas;
 import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.Favoritos;
 import edu.tecnopotify.entidades.ListaDefecto;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.Temas;
@@ -131,7 +133,7 @@ public class Controlador implements Interfaz {
         return aux;
     }
 
-    public void agregarTemaLista(long idTema, dataListaReproduccion listaR) {
+    public void agregarTemaLista(String idTema, dataListaReproduccion listaR) {
 
         TemasJpaController ctrTema = new TemasJpaController(fact);
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
@@ -140,7 +142,7 @@ public class Controlador implements Interfaz {
         Laux.getListaTemas().put(aux.getNombre(), aux);
     }
 
-    public void quitarTemaLista(long idTema, dataListaReproduccion listaR) {
+    public void quitarTemaLista(String idTema, dataListaReproduccion listaR) {
         TemasJpaController ctrTema = new TemasJpaController(fact);
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
         Temas aux = ctrTema.findTemas(idTema);
@@ -215,13 +217,33 @@ public class Controlador implements Interfaz {
         return lista;
     }
 
-    public void eliminarFavorito(boolean b, boolean c, boolean d, String a) {
+    public void eliminarFavorito(boolean b, boolean c, boolean d, long idCliente) {
         //eliminar tema/lista/album de los favoritos de un cliente
         //selecciono un favorito y saco el elemento de la lista que corresponda
 
     }
 
-    public void agregarFavorito(boolean b, boolean c, boolean d, String a) {
+    public void agregarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento) {
+        FavoritosJpaController fav = new FavoritosJpaController(fact);
+        Favoritos f = fav.findFavoritos(idCliente);
+        
+        if (tema) {
+            TemasJpaController temactrl = new TemasJpaController(fact);
+            Temas t = temactrl.findTemas(idElemento);
+            f.getListTemas().add(t);            
+        }
+        
+        if (lista) {
+            ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
+            ListaReproduccion l = listactrl.findListaReproduccion(idElemento);
+            f.getListRep().add(l);            
+        }
+        
+        if (album) {
+            AlbumJpaController albctrl = new AlbumJpaController(fact);
+            Album a = albctrl.findAlbum(idElemento);
+            f.getListAlbum().add(a);            
+        }
 
     }
 

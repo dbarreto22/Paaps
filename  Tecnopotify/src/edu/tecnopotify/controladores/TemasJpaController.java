@@ -52,7 +52,7 @@ public class TemasJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                long id = temas.getSerialVersioUID();
+                String id = temas.getNombre();
                 if (findTemas(id) == null) {
                     throw new NonexistentEntityException("The temas with id " + id + " no longer exists.");
                 }
@@ -110,7 +110,7 @@ public class TemasJpaController implements Serializable {
         }
     }
 
-    public Temas findTemas(long id) {
+    public Temas findTemas(String id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Temas.class, id);

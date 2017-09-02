@@ -14,11 +14,11 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class ListaReproduccion implements Serializable{
-    
+    /*
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    
+    @GeneratedValue(strategy = GenerationType.AUTO)*/
+    @Id
     @Column
     private String nombre;
     @Column

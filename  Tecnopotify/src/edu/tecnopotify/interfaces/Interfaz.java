@@ -31,14 +31,14 @@ public interface Interfaz {
     public Album seleccionarAlbum(String id);
     public Artista seleccionarArtista(String nombreArtista);//
     public Cliente seleccionarCliente(String nickname);
-    public void eliminarFavorito(boolean b, boolean c, boolean d,String a);
-    public void agregarFavorito(boolean b, boolean c, boolean d,String a);
+    public void eliminarFavorito(boolean b, boolean c, boolean d, long idCliente);
+    public void agregarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento);
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr);
     public void seguirUsuario(String nickCliente, String nickUsr);
     public void publicarLista(String idUsr, String nombreLista);
     public ListaParticular seleccionarLista(String id);
-    public void quitarTemaLista(long idTema, dataListaReproduccion listaR);
-    public void agregarTemaLista(long idTema, dataListaReproduccion listaR);
+    public void quitarTemaLista(String idTema, dataListaReproduccion listaR);
+    public void agregarTemaLista(String idTema, dataListaReproduccion listaR);
     public void crearListaDefecto(dataListaReproduccion listaD);
     public void crearListaParticular(boolean privado, Cliente cliente, dataListaReproduccion listaP);
     public List <Genero> mostrarListaGenero();

@@ -14,9 +14,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class Album implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+//    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     
     @Column
     private String nombre;
@@ -34,10 +34,10 @@ public class Album implements Serializable {
     @Column
     @ManyToMany
     private List<Genero> listGenero;
-
+/*
     public static long getSerialVersionUID() {
         return serialVersionUID;
-    }
+    }*/
 
     public List<Genero> getListGenero() {
         return listGenero;
