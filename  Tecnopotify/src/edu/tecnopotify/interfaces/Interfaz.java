@@ -25,20 +25,20 @@ public interface Interfaz {
     public void crearAlbum(String nickNameArtista,dataAlbum dtAlbum);
     public void altaTema(dataTemas tema);
    // public void seleccionarLista(String a);
-    public List<ListaReproduccion> consultarListaRep(boolean artista, String id);
+    public List<ListaReproduccion> consultarListaRep(boolean cliente, String id);
     public List<Album> consultarAlbumPorArtista(dataArtista artista);
     public List<Album> consultarAlbumPorGenero(dataGenero genero); 
     public Album seleccionarAlbum(String id);
     public Artista seleccionarArtista(String nombreArtista);//
     public Cliente seleccionarCliente(String nickname);
-    public void eliminarFavorito(boolean b, boolean c, boolean d,String a);
-    public void agregarFavorito(boolean b, boolean c, boolean d,String a);
+    public void eliminarFavorito(boolean b, boolean c, boolean d, long idCliente);
+    public void agregarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento);
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr);
     public void seguirUsuario(String nickCliente, String nickUsr);
     public void publicarLista(String idUsr, String nombreLista);
     public ListaParticular seleccionarLista(String id);
-    public void quitarTemaLista(long idTema, dataListaReproduccion listaR);
-    public void agregarTemaLista(long idTema, dataListaReproduccion listaR);
+    public void quitarTemaLista(String idTema, dataListaReproduccion listaR);
+    public void agregarTemaLista(String idTema, dataListaReproduccion listaR);
     public void crearListaDefecto(dataListaReproduccion listaD);
     public void crearListaParticular(boolean privado, Cliente cliente, dataListaReproduccion listaP);
     public List <Genero> mostrarListaGenero();

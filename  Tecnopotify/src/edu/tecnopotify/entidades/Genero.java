@@ -16,17 +16,14 @@ import javax.persistence.OneToMany;
 @Entity
 public class Genero implements Serializable{
     
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    
-    @Column
     private String nombre;
     @Column
     private String padre;
 
     @OneToMany
-    public Map<String, ListaDefecto> listasReprGenero = new HashMap<String, ListaDefecto>();
+    private Map<String, ListaDefecto> listasReprGenero = new HashMap<String, ListaDefecto>();
     
     @Column
     @ManyToMany(mappedBy="listGenero")
@@ -40,10 +37,10 @@ public class Genero implements Serializable{
     public Genero() {
         
     }
-    
-     public Long getSerialVersioUID() {
-        return serialVersionUID;
-    }
+//    
+//     public Long getSerialVersioUID() {
+//        return serialVersionUID;
+//    }
 
     public Map<String, ListaDefecto> getListasReprGenero() {
         return listasReprGenero;
