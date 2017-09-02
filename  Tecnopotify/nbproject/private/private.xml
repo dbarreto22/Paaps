@@ -3,27 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
+            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/%20Tecnopotify/src/edu/tecnopotify/swing/AltaArtistaJInternalFrame.java</file>
+            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/%20Tecnopotify/src/edu/tecnopotify/datatypes/dataAlbum.java</file>
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/%20Tecnopotify/src/edu/tecnopotify/swing/VentanaPrincipal.java</file>
-            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/%20Tecnopotify/src/edu/tecnopotify/swing/JInternalFrameAltaCliente.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/home/diego-lucia/Escritorio/Paaps/%20Tecnopotify/src/edu/tecnopotify/swing/VentanaPrincipal.java</file>
-            <file>file:/home/diego-lucia/Escritorio/Paaps/%20Tecnopotify/src/edu/tecnopotify/entidades/Artista.java</file>
-            <file>file:/home/diego-lucia/Escritorio/Paaps/%20Tecnopotify/src/edu/tecnopotify/swing/AltaArtistaJInternalFrame.java</file>
-            <file>file:/home/diego-lucia/Escritorio/Paaps/%20Tecnopotify/src/edu/tecnopotify/entidades/Genero.java</file>
-=======
-            <file>file:/C:/Users/menan/Projects/Paaps/Paaps/%20Tecnopotify/src/edu/tecnopotify/entidades/Album.java</file>
-            <file>file:/C:/Users/menan/Projects/Paaps/Paaps/%20Tecnopotify/src/edu/tecnopotify/interfaces/Interfaz.java</file>
-            <file>file:/C:/Users/menan/Projects/Paaps/Paaps/%20Tecnopotify/src/edu/tecnopotify/entidades/Genero.java</file>
-            <file>file:/C:/Users/menan/Projects/Paaps/Paaps/%20Tecnopotify/src/edu/tecnopotify/entidades/Usuario.java</file>
-            <file>file:/C:/Users/menan/Projects/Paaps/Paaps/%20Tecnopotify/src/edu/tecnopotify/controladores/FavoritosJpaController.java</file>
-            <file>file:/C:/Users/menan/Projects/Paaps/Paaps/%20Tecnopotify/src/edu/tecnopotify/controladores/UsuarioJpaController.java</file>
-            <file>file:/C:/Users/menan/Projects/Paaps/Paaps/%20Tecnopotify/src/edu/tecnopotify/entidades/Favoritos.java</file>
-            <file>file:/C:/Users/menan/Projects/Paaps/Paaps/%20Tecnopotify/src/edu/tecnopotify/interfaces/Controlador.java</file>
-            <file>file:/C:/Users/menan/Projects/Paaps/Paaps/%20Tecnopotify/src/edu/tecnopotify/entidades/Artista.java</file>
->>>>>>> 11d92a96f2bfd194cf0b49c1f9b7552334c91b2d
->>>>>>> 3a8608cc01b405676b2fda8f3b7f9e772e775142
+            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/%20Tecnopotify/src/edu/tecnopotify/swing/AltaClienteJInternalFrame.java</file>
+            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/%20Tecnopotify/src/edu/tecnopotify/interfaces/Controlador.java</file>
+            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/%20Tecnopotify/src/edu/tecnopotify/swing/AltaAlbumJInternalFrame.java</file>
         </group>
     </open-files>
 </project-private>

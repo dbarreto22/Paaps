@@ -5,7 +5,16 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.datatypes.dataAlbum;
 import static edu.tecnopotify.swing.AltaClienteJInternalFrame.openFrameCount;
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -19,7 +28,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
     
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
-    
+    private String path;//Guarda el link a la imagen
     public AltaAlbumJInternalFrame() {
         super("Alta Album" + (++openFrameCount),
                 true, //resizable
@@ -43,28 +52,13 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrameSelectAltaAlbum = new javax.swing.JFrame();
-        jFileChooser1 = new javax.swing.JFileChooser();
         jButtonAceptar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelNombre = new javax.swing.JLabel();
+        jLabelAñoCreacion = new javax.swing.JLabel();
+        jLabelImagen = new javax.swing.JLabel();
         jTextNombre = new javax.swing.JTextField();
         jTextAnioCreado = new javax.swing.JTextField();
         jButtonImagen = new javax.swing.JButton();
-
-        jFrameSelectAltaAlbum.setMinimumSize(new java.awt.Dimension(200, 300));
-
-        javax.swing.GroupLayout jFrameSelectAltaAlbumLayout = new javax.swing.GroupLayout(jFrameSelectAltaAlbum.getContentPane());
-        jFrameSelectAltaAlbum.getContentPane().setLayout(jFrameSelectAltaAlbumLayout);
-        jFrameSelectAltaAlbumLayout.setHorizontalGroup(
-            jFrameSelectAltaAlbumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-        );
-        jFrameSelectAltaAlbumLayout.setVerticalGroup(
-            jFrameSelectAltaAlbumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
-        );
 
         setClosable(true);
         setMaximizable(true);
@@ -74,12 +68,17 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         setVisible(true);
 
         jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setText("Nombre");
+        jLabelNombre.setText("Nombre");
 
-        jLabel2.setText("Año Creaciòn");
+        jLabelAñoCreacion.setText("Año Creaciòn");
 
-        jLabel3.setText("Imagen");
+        jLabelImagen.setText("Imagen");
 
         jTextNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,37 +97,39 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAceptar)
-                .addGap(48, 48, 48))
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextAnioCreado)
-                    .addComponent(jButtonImagen)
-                    .addComponent(jTextNombre))
-                .addGap(83, 83, 83))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonAceptar)
+                        .addGap(48, 48, 48))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelNombre)
+                            .addComponent(jLabelImagen)
+                            .addComponent(jLabelAñoCreacion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextAnioCreado)
+                            .addComponent(jButtonImagen)
+                            .addComponent(jTextNombre))
+                        .addGap(83, 83, 83))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelNombre)
                     .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelAñoCreacion)
                     .addComponent(jTextAnioCreado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelImagen)
                     .addComponent(jButtonImagen))
                 .addGap(40, 40, 40)
                 .addComponent(jButtonAceptar)
@@ -144,18 +145,48 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImagenActionPerformed
         // TODO add your handling code here:
-        jFrameSelectAltaAlbum.setVisible(true);
+        //https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
+        //Creo un panel interno para agregar el file chooser
+        JInternalFrame internal = new JInternalFrame();
+        //Lo hago visible
+        internal.setVisible(true);
+        try {
+            internal.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(AltaAlbumJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Creo un file chooser
+        JFileChooser fileChooser = new JFileChooser();
+        //Lo agrego a mi panel interno
+        internal.add(fileChooser);
+        //Permito que se seleccionen archivos y directorios
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        //Creo un filtro de tipos
+        FileNameExtensionFilter filtro= new FileNameExtensionFilter("*.JPG", "jpg", "*.PNG", "png");
+        fileChooser.setFileFilter(filtro);
+        //guardo la opcion del usuario
+        int seleccion=fileChooser.showOpenDialog(internal);
+        if(seleccion == JFileChooser.APPROVE_OPTION)
+        {
+            File archivo=fileChooser.getSelectedFile();
+            this.path=archivo.getAbsolutePath();
+        }
     }//GEN-LAST:event_jButtonImagenActionPerformed
+
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
+        // TODO add your handling code here:
+        int anio=Integer.parseInt(jTextAnioCreado.getText());
+        dataAlbum odataAlbum=new dataAlbum(jTextNombre.getText(),anio , path);
+        
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonImagen;
-    private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JFrame jFrameSelectAltaAlbum;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelAñoCreacion;
+    private javax.swing.JLabel jLabelImagen;
+    private javax.swing.JLabel jLabelNombre;
     private javax.swing.JTextField jTextAnioCreado;
     private javax.swing.JTextField jTextNombre;
     // End of variables declaration//GEN-END:variables

@@ -5,6 +5,14 @@
  */
 package edu.tecnopotify.swing;
 
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JInternalFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author diego-lucia
@@ -17,6 +25,7 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
     //In the constructor of MyInternalFrame, a JInternalFrame subclass:
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
+    private String path;
 
     public AltaClienteJInternalFrame() {
         super("Alta usuario" + (++openFrameCount),
@@ -198,7 +207,25 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonSImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSImagenMouseClicked
         // TODO add your handling code here:
-       
+                //https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
+        JInternalFrame internal = new JInternalFrame();
+        internal.setVisible(true);
+        try {
+            internal.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(AltaAlbumJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JFileChooser fileChooser = new JFileChooser();
+        internal.add(fileChooser);
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        FileNameExtensionFilter filtro= new FileNameExtensionFilter("*.JPG", "jpg", "*.PNG", "png");
+        fileChooser.setFileFilter(filtro);
+        int seleccion=fileChooser.showOpenDialog(internal);
+        if(seleccion == JFileChooser.APPROVE_OPTION)
+        {
+            File archivo=fileChooser.getSelectedFile();
+            this.path=archivo.getAbsolutePath();
+        }       
     }//GEN-LAST:event_jButtonSImagenMouseClicked
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
