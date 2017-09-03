@@ -5,6 +5,9 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.datatypes.dataGenero;
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.AltaClienteJInternalFrame.openFrameCount;
 
 /**
@@ -18,6 +21,8 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
      */
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
+    private Fabrica fab = Fabrica.getInstance();
+    private IControlador ctrl = fab.getInstancia();
     
     public AltaGeneroJInternalFrame() {
         super("Alta Genero" + (++openFrameCount),
@@ -52,6 +57,11 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         setResizable(true);
 
         jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
 
         jLabelNombre.setText("Nombre");
 
@@ -88,6 +98,13 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
+        // TODO add your handling code here:
+        String nombreGenero = jTextFieldNombre.getText();
+        dataGenero dtGen = new dataGenero(nombreGenero,"0");
+        ctrl.altaGenero(dtGen);
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

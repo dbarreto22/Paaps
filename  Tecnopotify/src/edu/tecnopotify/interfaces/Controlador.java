@@ -114,7 +114,7 @@ public class Controlador implements IControlador {
         Artista aux = ctrArtista.findArtista(nickname);
         return aux;
     }
-
+    
     public Cliente seleccionarCliente(String nickname) {
         ClienteJpaController ctrCliente = new ClienteJpaController(fact);
         Cliente aux = ctrCliente.findCliente(nickname);

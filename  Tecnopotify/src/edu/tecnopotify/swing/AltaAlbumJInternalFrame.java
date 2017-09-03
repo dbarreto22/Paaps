@@ -6,6 +6,8 @@
 package edu.tecnopotify.swing;
 
 import edu.tecnopotify.datatypes.dataAlbum;
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.AltaClienteJInternalFrame.openFrameCount;
 import java.beans.PropertyVetoException;
 import java.io.File;
@@ -25,6 +27,8 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form AltaAbumJInternalFrame
      */
+    private Fabrica fab = Fabrica.getInstance();
+    private IControlador ctrl = fab.getInstancia();
     
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
@@ -59,6 +63,8 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         jTextNombre = new javax.swing.JTextField();
         jTextAnioCreado = new javax.swing.JTextField();
         jButtonImagen = new javax.swing.JButton();
+        jLabelNombreArtista = new javax.swing.JLabel();
+        jTextNombreArtista = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -93,33 +99,48 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabelNombreArtista.setText("Nombre del artista");
+
+        jTextNombreArtista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNombreArtistaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonAceptar)
-                        .addGap(48, 48, 48))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonAceptar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelNombre)
                             .addComponent(jLabelImagen)
-                            .addComponent(jLabelAñoCreacion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextAnioCreado)
-                            .addComponent(jButtonImagen)
-                            .addComponent(jTextNombre))
-                        .addGap(83, 83, 83))))
+                            .addComponent(jLabelAñoCreacion)
+                            .addComponent(jLabelNombreArtista))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextAnioCreado)
+                                .addComponent(jButtonImagen)
+                                .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(35, 35, 35)))
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelNombreArtista)
+                    .addComponent(jTextNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre)
                     .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -133,7 +154,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jButtonImagen))
                 .addGap(40, 40, 40)
                 .addComponent(jButtonAceptar)
-                .addGap(793, 793, 793))
+                .addContainerGap(731, Short.MAX_VALUE))
         );
 
         pack();
@@ -177,8 +198,12 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int anio=Integer.parseInt(jTextAnioCreado.getText());
         dataAlbum odataAlbum=new dataAlbum(jTextNombre.getText(),anio , path);
-        
+        ctrl.crearAlbum(jTextNombreArtista.getText(), odataAlbum);
     }//GEN-LAST:event_jButtonAceptarActionPerformed
+
+    private void jTextNombreArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreArtistaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNombreArtistaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -187,7 +212,9 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelAñoCreacion;
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelNombreArtista;
     private javax.swing.JTextField jTextAnioCreado;
     private javax.swing.JTextField jTextNombre;
+    private javax.swing.JTextField jTextNombreArtista;
     // End of variables declaration//GEN-END:variables
 }

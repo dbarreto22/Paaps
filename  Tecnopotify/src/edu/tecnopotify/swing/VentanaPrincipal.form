@@ -130,10 +130,13 @@
                 <Property name="text" type="java.lang.String" value="Lista de reproduccion"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+                <MenuItem class="javax.swing.JMenuItem" name="JMenuCrearListaRepr">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Crear lista rep."/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuCrearListaReprActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
                   <Properties>

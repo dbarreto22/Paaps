@@ -1,5 +1,6 @@
 package edu.tecnopotify.swing;
 
+//import edu.tecnopotify.interfaces.Interfaz;
 import java.awt.Component;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -15,7 +16,7 @@ import javax.swing.JFrame;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    private Interfaz ctrl;
+    //private Interfaz ctrl;
     private AltaClienteJInternalFrame altaUsuario;
     private AltaGeneroJInternalFrame alatGenero;
     // private JFrame frame = new JFrame();
@@ -71,6 +72,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    private void createFrameCrearListaRepr() {
+        CrearListaReproduccionJInternalFrame frame = new CrearListaReproduccionJInternalFrame();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,7 +105,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         menuLista = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        JMenuCrearListaRepr = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -203,8 +207,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuLista.setText("Lista de reproduccion");
 
-        jMenuItem6.setText("Crear lista rep.");
-        menuLista.add(jMenuItem6);
+        JMenuCrearListaRepr.setText("Crear lista rep.");
+        JMenuCrearListaRepr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuCrearListaReprActionPerformed(evt);
+            }
+        });
+        menuLista.add(JMenuCrearListaRepr);
 
         jMenuItem7.setText("Agregar tema");
         menuLista.add(jMenuItem7);
@@ -281,6 +290,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         createFrameAltaAlbum();
     }//GEN-LAST:event_jMenuCrearAlbumActionPerformed
 
+    private void JMenuCrearListaReprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCrearListaReprActionPerformed
+        // TODO add your handling code here:
+        createFrameCrearListaRepr();
+    }//GEN-LAST:event_JMenuCrearListaReprActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -311,13 +325,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrincipal().setVisible(true);
+                VentanaPrincipal ve = new VentanaPrincipal();
+                ve.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Desktop;
+    private javax.swing.JMenuItem JMenuCrearListaRepr;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
@@ -335,7 +351,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
@@ -346,9 +361,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuUuarios;
     // End of variables declaration//GEN-END:variables
 
-    private static class Interfaz {
 
-        public Interfaz() {
-        }
-    }
+
 }

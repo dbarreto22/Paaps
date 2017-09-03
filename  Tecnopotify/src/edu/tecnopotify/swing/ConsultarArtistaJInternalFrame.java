@@ -10,6 +10,10 @@ package edu.tecnopotify.swing;
  * @author diego-lucia
  */
 public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
+    
+    /*listar todos los artistas y seleccionar uno, de ahí de detallan los datos
+    del artista seleccionado
+    */
 
     /**
      * Creates new form AltaArtistaJInternalFrame
@@ -29,10 +33,6 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
 
         jFileChooserArtista = new javax.swing.JFileChooser();
         jLabelApellido = new javax.swing.JLabel();
-        jLabelNombre = new javax.swing.JLabel();
-        jLabelNickName = new javax.swing.JLabel();
-        jTextFieldNick = new javax.swing.JTextField();
-        jTextFieldNombre = new javax.swing.JTextField();
         jTextFieldApellido = new javax.swing.JTextField();
         jTextFieldMail = new javax.swing.JTextField();
         jLabelMail = new javax.swing.JLabel();
@@ -54,10 +54,6 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
         setVisible(true);
 
         jLabelApellido.setText("Apellido");
-
-        jLabelNombre.setText("Nombre");
-
-        jLabelNickName.setText("NickName");
 
         jLabelMail.setText("Mail");
 
@@ -111,18 +107,12 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelNickName)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabelNombre)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelMail)
-                                            .addComponent(jLabelApellido))))
-                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelMail)
+                                    .addComponent(jLabelApellido))
+                                .addGap(49, 49, 49)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldNick, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldNombre)
-                                    .addComponent(jTextFieldApellido)
+                                    .addComponent(jTextFieldApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                                     .addComponent(jTextFieldMail)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelFNac)
@@ -134,15 +124,7 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNickName)
-                    .addComponent(jTextFieldNick, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNombre)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(426, 426, 426)
+                .addGap(501, 501, 501)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelApellido)
                     .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -158,7 +140,7 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelImagen)
                     .addComponent(jButtonSImagen))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelLink))
@@ -198,15 +180,11 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelLink;
     private javax.swing.JLabel jLabelMail;
-    private javax.swing.JLabel jLabelNickName;
-    private javax.swing.JLabel jLabelNombre;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldFNac1;
     private javax.swing.JTextField jTextFieldLink;
     private javax.swing.JTextField jTextFieldMail;
-    private javax.swing.JTextField jTextFieldNick;
-    private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextPane jTextPaneBiografia;
     // End of variables declaration//GEN-END:variables
 }
