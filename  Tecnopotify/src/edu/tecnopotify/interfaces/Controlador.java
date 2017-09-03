@@ -217,10 +217,29 @@ public class Controlador implements IControlador {
         return lista;
     }
 
-    public void eliminarFavorito(boolean b, boolean c, boolean d, long idCliente) {
+    public void eliminarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento) {
         //eliminar tema/lista/album de los favoritos de un cliente
         //selecciono un favorito y saco el elemento de la lista que corresponda
-
+        FavoritosJpaController fav = new FavoritosJpaController(fact);
+        Favoritos f = fav.findFavoritos(idCliente);
+        
+        if (tema) {
+            TemasJpaController temactrl = new TemasJpaController(fact);
+            Temas t = temactrl.findTemas(idElemento);
+            f.getListTemas().remove(t);            
+        }
+        
+        if (lista) {
+            ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
+            ListaReproduccion l = listactrl.findListaReproduccion(idElemento);
+            f.getListRep().remove(l);            
+        }
+        
+        if (album) {
+            AlbumJpaController albctrl = new AlbumJpaController(fact);
+            Album a = albctrl.findAlbum(idElemento);
+            f.getListAlbum().remove(a);            
+        }
     }
 
     public void agregarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento) {
