@@ -5,6 +5,11 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.datatypes.dataCliente;
+import edu.tecnopotify.datatypes.dataFecha;
+import edu.tecnopotify.datatypes.dataUsuario;
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.Controlador;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.util.logging.Level;
@@ -12,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import edu.tecnopotify.interfaces.IControlador;
 
 /**
  *
@@ -26,6 +32,8 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
     private String path;
+    private Fabrica fab = Fabrica.getInstance();
+    private IControlador ctrl=fab.getInstancia();
 
     public AltaClienteJInternalFrame() {
         super("Alta usuario" + (++openFrameCount),
@@ -39,6 +47,8 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
         //Set the window's location.
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
+
+
     }
 
     /**
@@ -50,8 +60,6 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrameSelectorArchivos = new javax.swing.JFrame();
-        jFileChooser1 = new javax.swing.JFileChooser();
         jButtonConfirmar = new javax.swing.JButton();
         jLabelNickName = new javax.swing.JLabel();
         jLabelNombre = new javax.swing.JLabel();
@@ -62,35 +70,14 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
         jLabelMail = new javax.swing.JLabel();
         jTextFieldMail = new javax.swing.JTextField();
         jLabelFNac = new javax.swing.JLabel();
-        jTextFieldFNac = new javax.swing.JTextField();
+        jTextFieldDia = new javax.swing.JTextField();
         jLabelImagen = new javax.swing.JLabel();
         jButtonSImagen = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldMes = new javax.swing.JTextField();
+        jTextFieldAño = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
-
-        jFrameSelectorArchivos.setMinimumSize(new java.awt.Dimension(200, 200));
-
-        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFileChooser1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jFrameSelectorArchivosLayout = new javax.swing.GroupLayout(jFrameSelectorArchivos.getContentPane());
-        jFrameSelectorArchivos.getContentPane().setLayout(jFrameSelectorArchivosLayout);
-        jFrameSelectorArchivosLayout.setHorizontalGroup(
-            jFrameSelectorArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrameSelectorArchivosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jFrameSelectorArchivosLayout.setVerticalGroup(
-            jFrameSelectorArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrameSelectorArchivosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
 
         setClosable(true);
         setMaximizable(true);
@@ -100,6 +87,11 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
         setVisible(true);
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jLabelNickName.setText("NickName");
 
@@ -109,7 +101,7 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
 
         jLabelMail.setText("Mail");
 
-        jLabelFNac.setText("Fecha de nacimiento");
+        jLabelFNac.setText("Día");
 
         jLabelImagen.setText("Imagen");
 
@@ -124,19 +116,23 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
                 jButtonSImagenActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Mes");
+
+        jLabel2.setText("Año");
+
+        jTextFieldMes.setText("jTextField1");
+
+        jTextFieldAño.setText("jTextField2");
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonConfirmar)
-                .addGap(47, 47, 47))
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -153,15 +149,21 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelFNac)
-                            .addComponent(jLabelImagen))
+                            .addComponent(jLabelImagen)
+                            .addComponent(jLabel1))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addComponent(jButtonSImagen)
-                                .addGap(0, 1, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldFNac, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButtonConfirmar)
+                                    .addComponent(jButtonSImagen)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jLabel2))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,26 +188,28 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFNac)
-                    .addComponent(jTextFieldFNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelImagen)
-                    .addComponent(jButtonSImagen))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSImagen)
+                    .addComponent(jLabelImagen))
+                .addGap(39, 39, 39)
                 .addComponent(jButtonConfirmar)
-                .addGap(57, 57, 57))
+                .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSImagenActionPerformed
-        // TODO add your handling code here:
-         jFrameSelectorArchivos.setVisible(true);
-        // https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
-    }//GEN-LAST:event_jButtonSImagenActionPerformed
-
-    private void jButtonSImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSImagenMouseClicked
         // TODO add your handling code here:
                 //https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
         JInternalFrame internal = new JInternalFrame();
@@ -225,19 +229,30 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
         {
             File archivo=fileChooser.getSelectedFile();
             this.path=archivo.getAbsolutePath();
-        }       
+        } 
+    }//GEN-LAST:event_jButtonSImagenActionPerformed
+
+    private void jButtonSImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSImagenMouseClicked
+        // TODO add your handling code here:
+      
     }//GEN-LAST:event_jButtonSImagenMouseClicked
 
-    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFileChooser1ActionPerformed
+        int dia=Integer.parseInt(jTextFieldDia.getText());
+        int mes=Integer.parseInt(jTextFieldMes.getText());
+        int anio=Integer.parseInt(jTextFieldAño.getText());
+        dataFecha oDtFecha=new dataFecha(dia, mes, anio);
+        dataUsuario odtUsuario = new dataCliente(jTextFieldNick.getText(),jTextFieldNombre.getText(),jTextFieldApellido.getText(),jTextFieldMail.getText(),oDtFecha,path);
+        ctrl.crearCliente(odtUsuario);
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonSImagen;
-    private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JFrame jFrameSelectorArchivos;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelFNac;
     private javax.swing.JLabel jLabelImagen;
@@ -246,8 +261,10 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTextField jTextFieldApellido;
-    private javax.swing.JTextField jTextFieldFNac;
+    private javax.swing.JTextField jTextFieldAño;
+    private javax.swing.JTextField jTextFieldDia;
     private javax.swing.JTextField jTextFieldMail;
+    private javax.swing.JTextField jTextFieldMes;
     private javax.swing.JTextField jTextFieldNick;
     private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables

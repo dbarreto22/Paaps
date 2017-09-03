@@ -15,8 +15,8 @@ public class dataCliente extends dataUsuario{
     public Map<String, Usuario> seguidos = new HashMap<String, Usuario>();
 
 
-        public dataCliente(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen, List<Usuario> lstSeguidos, List<Usuario> lstSeguidores) {
-        super(nickname, nombre, apellido, mail, f_nac, imagen, lstSeguidos, lstSeguidores);
+        public dataCliente(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen) {
+        super(nickname, nombre, apellido, mail, f_nac, imagen);
     }
 public dataCliente() {
         super();

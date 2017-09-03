@@ -6,7 +6,7 @@
 package edu.tecnopotify.fabrica;
 
 import edu.tecnopotify.interfaces.Controlador;
-import edu.tecnopotify.interfaces.Interfaz;
+import edu.tecnopotify.interfaces.IControlador;
 
 /**
  *
@@ -14,7 +14,7 @@ import edu.tecnopotify.interfaces.Interfaz;
  */
 public class Fabrica {
     private static Fabrica Instancia;
-    private Fabrica() {
+    public Fabrica() {
     }
     
     public static Fabrica getInstance() {
@@ -25,9 +25,9 @@ public class Fabrica {
         return Instancia;
     }
     
-    private Interfaz getInstancia()
+    public IControlador getInstancia()
     {
-        Interfaz in=new Controlador();
+        IControlador in=new Controlador();
         return in;
     }
 }

@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public interface Interfaz {
+public interface IControlador {
     
   
     public void crearCliente(dataUsuario usuario);

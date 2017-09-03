@@ -5,6 +5,12 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.datatypes.dataArtista;
+import edu.tecnopotify.datatypes.dataCliente;
+import edu.tecnopotify.datatypes.dataFecha;
+import edu.tecnopotify.datatypes.dataUsuario;
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.util.logging.Level;
@@ -23,6 +29,9 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
      * Creates new form AltaArtistaJInternalFrame
      */
     private String path;
+    private Fabrica fab = Fabrica.getInstance();
+    private IControlador ctrl = fab.getInstancia();
+
     public AltaArtistaJInternalFrame() {
         initComponents();
     }
@@ -44,16 +53,20 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
         jTextFieldApellido = new javax.swing.JTextField();
         jTextFieldMail = new javax.swing.JTextField();
         jLabelMail = new javax.swing.JLabel();
-        jLabelFNac = new javax.swing.JLabel();
         jTextFieldLink = new javax.swing.JTextField();
         jLabelImagen = new javax.swing.JLabel();
         jButtonSImagen = new javax.swing.JButton();
         jButtonConfirmar = new javax.swing.JButton();
         jLabelLink = new javax.swing.JLabel();
-        jTextFieldFNac1 = new javax.swing.JTextField();
         jLabelBiografia = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPaneBiografia = new javax.swing.JTextPane();
+        jLabelFNac1 = new javax.swing.JLabel();
+        jTextFieldDia = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldMes = new javax.swing.JTextField();
+        jTextFieldAño = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -68,8 +81,6 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
         jLabelNickName.setText("NickName");
 
         jLabelMail.setText("Mail");
-
-        jLabelFNac.setText("Fecha de nacimiento");
 
         jLabelImagen.setText("Imagen");
 
@@ -86,12 +97,27 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
         });
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         jLabelLink.setText("Link");
 
         jLabelBiografia.setText("Biografia");
 
         jScrollPane1.setViewportView(jTextPaneBiografia);
+
+        jLabelFNac1.setText("Día");
+
+        jLabel1.setText("Mes");
+
+        jLabel2.setText("Año");
+
+        jTextFieldMes.setText("jTextField1");
+
+        jTextFieldAño.setText("jTextField2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,42 +128,53 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelNickName)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabelNombre)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelMail)
-                                            .addComponent(jLabelApellido))))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldNick, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldNombre)
-                                    .addComponent(jTextFieldApellido)
-                                    .addComponent(jTextFieldMail)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelFNac)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldFNac1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonSImagen))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabelNickName)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabelNombre)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelMail)
+                                    .addComponent(jLabelApellido))))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldNick, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(jTextFieldNombre)
+                            .addComponent(jTextFieldApellido)
+                            .addComponent(jTextFieldMail))
+                        .addGap(70, 70, 70))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelLink)
+                            .addComponent(jLabelBiografia)
+                            .addComponent(jLabelImagen))
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelLink)
-                                    .addComponent(jLabelBiografia))
-                                .addGap(49, 49, 49)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldLink, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1)))
+                                .addComponent(jButtonSImagen)
+                                .addGap(0, 92, Short.MAX_VALUE))
+                            .addComponent(jTextFieldLink, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addComponent(jButtonConfirmar)
+                .addGap(98, 98, 98))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelFNac1)
+                            .addComponent(jLabel1))
+                        .addGap(54, 54, 54)
+                        .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelImagen)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                        .addComponent(jButtonConfirmar)
-                        .addGap(98, 98, 98))))
+                                .addGap(78, 78, 78)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(30, 30, 30)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,28 +195,33 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelMail)
                     .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldFNac1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelFNac))
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelImagen)
-                    .addComponent(jButtonSImagen))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                    .addComponent(jLabelFNac1)
+                    .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSImagen)
+                    .addComponent(jLabelImagen))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldLink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelLink))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonConfirmar, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabelBiografia)))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonConfirmar, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jLabelBiografia, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,12 +229,12 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonSImagenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSImagenMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButtonSImagenMouseClicked
 
     private void jButtonSImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSImagenActionPerformed
         // TODO add your handling code here:
-                //https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
+        //https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
         JInternalFrame internal = new JInternalFrame();
         internal.setVisible(true);
         try {
@@ -203,23 +245,38 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
         JFileChooser fileChooser = new JFileChooser();
         internal.add(fileChooser);
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        FileNameExtensionFilter filtro= new FileNameExtensionFilter("*.JPG", "jpg", "*.PNG", "png");
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg", "*.PNG", "png");
         fileChooser.setFileFilter(filtro);
-        int seleccion=fileChooser.showOpenDialog(internal);
-        if(seleccion == JFileChooser.APPROVE_OPTION)
-        {
-            File archivo=fileChooser.getSelectedFile();
-            this.path=archivo.getAbsolutePath();
+        int seleccion = fileChooser.showOpenDialog(internal);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivo = fileChooser.getSelectedFile();
+            this.path = archivo.getAbsolutePath();
         }
     }//GEN-LAST:event_jButtonSImagenActionPerformed
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        // TODO add your handling code here:
+        int dia=Integer.parseInt(jTextFieldDia.getText());
+        int mes=Integer.parseInt(jTextFieldMes.getText());
+        int anio=Integer.parseInt(jTextFieldAño.getText());
+        dataFecha oDtFecha=new dataFecha(dia, mes, anio);
+        dataUsuario odtUsuario = new dataArtista(jTextPaneBiografia.getText(),
+                jTextFieldApellido.getText(),null,jTextFieldNick.getText(),
+                jTextFieldNombre.getText(),jTextFieldApellido.getText(),
+                jTextFieldMail.getText(),oDtFecha,path,null, null);
+        ctrl.crearArtista(jTextPaneBiografia.getText(),jTextFieldLink.getText(),
+                null,odtUsuario);
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonSImagen;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelBiografia;
-    private javax.swing.JLabel jLabelFNac;
+    private javax.swing.JLabel jLabelFNac1;
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelLink;
     private javax.swing.JLabel jLabelMail;
@@ -227,9 +284,11 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldApellido;
-    private javax.swing.JTextField jTextFieldFNac1;
+    private javax.swing.JTextField jTextFieldAño;
+    private javax.swing.JTextField jTextFieldDia;
     private javax.swing.JTextField jTextFieldLink;
     private javax.swing.JTextField jTextFieldMail;
+    private javax.swing.JTextField jTextFieldMes;
     private javax.swing.JTextField jTextFieldNick;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextPane jTextPaneBiografia;

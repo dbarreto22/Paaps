@@ -42,7 +42,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import static javax.swing.text.html.HTML.Tag.SELECT;
 
-public class Controlador implements Interfaz {
+public class Controlador implements IControlador {
 
     EntityManagerFactory fact = Persistence.createEntityManagerFactory("TecnopotifyPU");
     EntityManager manager = fact.createEntityManager();

@@ -133,7 +133,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jButtonImagen))
                 .addGap(40, 40, 40)
                 .addComponent(jButtonAceptar)
-                .addGap(270, 270, 270))
+                .addGap(793, 793, 793))
         );
 
         pack();

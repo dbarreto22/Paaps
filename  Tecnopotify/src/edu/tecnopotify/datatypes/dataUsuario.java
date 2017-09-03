@@ -15,15 +15,15 @@ public class dataUsuario implements Serializable {
     private List<Usuario> lstSeguidos;
     private List<Usuario> lstSeguidores;
 
-    public dataUsuario(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen, List<Usuario> lstSeguidos, List<Usuario> lstSeguidores) {
+    public dataUsuario(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.f_nac = f_nac;
         this.imagen = imagen;
-        this.lstSeguidores=lstSeguidores;
-        this.lstSeguidos=lstSeguidos;
+        this.lstSeguidores=null;
+        this.lstSeguidos=null;
     }
 
     public dataUsuario() {
