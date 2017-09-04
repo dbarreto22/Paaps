@@ -89,8 +89,9 @@ public class Controlador implements IControlador {
 
     }
 
-    public void crearListaParticular(boolean privado, Cliente cliente, dataListaReproduccion listaP) {
-        ListaReproduccion lista = new ListaParticular(privado, cliente, listaP);
+    public void crearListaParticular(boolean privado, String nickCliente, dataListaReproduccion listaP) {
+        Cliente cli = seleccionarCliente(nickCliente);
+        ListaReproduccion lista = new ListaParticular(privado, cli, listaP);
         ListaParticularJpaController crlListaP = new ListaParticularJpaController(fact);
         try {
             crlListaP.create((ListaParticular) lista);
