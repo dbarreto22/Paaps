@@ -2,8 +2,7 @@ package edu.tecnopotify.datatypes;
 
 import edu.tecnopotify.entidades.*;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
+
 
 
 public class dataListaParticular extends ListaReproduccion {
