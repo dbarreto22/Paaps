@@ -1,3 +1,0 @@
-Para compilar y correr el proyecto netbeans se debe incluir la biblioteca hsqldb.jar (ver la referencia en la letra) en el directorio /lib de la aplicacion.
-
-Luego de resolver las referencias del proyecto, compilar y correr.
