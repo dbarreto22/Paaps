@@ -49,9 +49,7 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
         List<Artista> a = crl.listarArtistas();
         for (Artista art : a) {
             jComboNick.addItem(art.getNickname());
-        }
-
-       
+        }  
         initComponents();
     }
 

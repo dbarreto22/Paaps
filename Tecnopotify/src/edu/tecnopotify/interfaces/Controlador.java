@@ -51,6 +51,9 @@ public class Controlador implements IControlador {
         }
     }
 
+
+
+    
     public void crearArtista(String biografia, String link,
             dataUsuario usuario) {
         Usuario U = new Artista(biografia, link, usuario);
@@ -72,27 +75,20 @@ public class Controlador implements IControlador {
         }
     }
 
-<<<<<<< HEAD
-    public void crearListaDefecto(dataListaReproduccion listaD) {
-        ListaReproduccion lista = new ListaDefecto(listaD);
-=======
     public void crearListaDefecto(dataListaReproduccion listaD, String nombreGenero) {
-        
->>>>>>> e5ab46ec5a517e7d48179de85d9207ce022746e9
         ListaDefectoJpaController crlListaD = new ListaDefectoJpaController(fact);
         GeneroJpaController genctrl = new GeneroJpaController(fact);
         try {
             Genero g = genctrl.findGenero(nombreGenero);
-            ListaReproduccion lista =  new ListaDefecto(g,listaD);
+            ListaReproduccion lista = new ListaDefecto(g, listaD);
             crlListaD.create((ListaDefecto) lista);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public void crearListaParticular(boolean privado, String nickCliente, dataListaReproduccion listaP) {
-        
+
         Cliente cli = seleccionarCliente(nickCliente);
         ListaReproduccion lista = new ListaParticular(privado, cli, listaP);
         ListaParticularJpaController crlListaP = new ListaParticularJpaController(fact);
@@ -298,11 +294,11 @@ public class Controlador implements IControlador {
         clientes = cliCtrl.findClienteEntities();
         return clientes;
     }
-    
-        public List<Artista> listarArtistas() {
+
+    public List<Artista> listarArtistas() {
         List<Artista> artista = null;
         ArtistaJpaController cliCtrl = new ArtistaJpaController(fact);
         artista = cliCtrl.findArtistaEntities();
-        return artista;   
+        return artista;
     }
 }

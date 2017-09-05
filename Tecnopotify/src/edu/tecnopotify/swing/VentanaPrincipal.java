@@ -84,16 +84,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void consultarArtistaJInternalFrame() {
-        ConsultarArtistaJInternalFrame frame = new ConsultarArtistaJInternalFrame();
-        frame.setVisible(true);
-        this.Desktop.add(frame);
-        try {
-            frame.setSelected(true);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    /*private void consultarArtistaJInternalFrame() {
+    ConsultarArtistaJInternalFrame frame = new ConsultarArtistaJInternalFrame();
+    frame.setVisible(true);
+    this.Desktop.add(frame);
+    try {
+    frame.setSelected(true);
+    } catch (Exception e) {
+    System.out.println(e.getMessage());
     }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -333,7 +333,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuConsultarArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarArtistaActionPerformed
         // TODO add your handling code here:
-        consultarArtistaJInternalFrame();
+       // consultarArtistaJInternalFrame();
     }//GEN-LAST:event_jMenuConsultarArtistaActionPerformed
 
     /**
