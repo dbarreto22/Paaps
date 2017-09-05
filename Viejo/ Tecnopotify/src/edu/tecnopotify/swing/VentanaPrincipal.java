@@ -72,8 +72,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void createFrameCrearListaRepr() {
+    private void createFrameCrearListaReproduccion() {
         CrearListaReproduccionJInternalFrame frame = new CrearListaReproduccionJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -292,7 +300,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void JMenuCrearListaReprActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCrearListaReprActionPerformed
         // TODO add your handling code here:
-        createFrameCrearListaRepr();
+        createFrameCrearListaReproduccion();
     }//GEN-LAST:event_JMenuCrearListaReprActionPerformed
 
     /**

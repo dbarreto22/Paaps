@@ -40,7 +40,7 @@ public interface IControlador {
     public void quitarTemaLista(String idTema, dataListaReproduccion listaR);
     public void agregarTemaLista(String idTema, dataListaReproduccion listaR);
     public void crearListaDefecto(dataListaReproduccion listaD);
-    public void crearListaParticular(boolean privado, Cliente cliente, dataListaReproduccion listaP);
+    public void crearListaParticular(boolean privado, String nickCliente, dataListaReproduccion listaP);
     public List <Genero> mostrarListaGenero();
     //public Cliente devolverCliente(String nickname);
     
