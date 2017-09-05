@@ -44,5 +44,5 @@ public interface IControlador {
     public void crearListaParticular(boolean privado, String nickCliente, dataListaReproduccion listaP);
     public List <Genero> mostrarListaGenero();
     //public Cliente devolverCliente(String nickname);
-    
+    public List<Cliente> listarClientes();
 }

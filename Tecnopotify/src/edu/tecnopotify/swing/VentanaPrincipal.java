@@ -274,6 +274,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuConsultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarClienteActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jMenuConsultarClienteActionPerformed
 
     private void menuAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAlbumMouseClicked

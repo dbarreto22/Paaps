@@ -286,5 +286,11 @@ public class Controlador implements IControlador {
         ListaParticular li = null; //= c.listasReprParticular.get(nombreLista);
         li.setEsPrivada(true);
     }
-
+        public List<Cliente> listarClientes()
+    {
+        List<Cliente> clientes=null;
+        ClienteJpaController cliCtrl = new ClienteJpaController(fact);
+        clientes = cliCtrl.findClienteEntities();
+        return clientes;
+    }
 }
