@@ -72,10 +72,18 @@ public class Controlador implements IControlador {
         }
     }
 
+<<<<<<< HEAD
     public void crearListaDefecto(dataListaReproduccion listaD) {
         ListaReproduccion lista = new ListaDefecto(listaD);
+=======
+    public void crearListaDefecto(dataListaReproduccion listaD, String nombreGenero) {
+        
+>>>>>>> e5ab46ec5a517e7d48179de85d9207ce022746e9
         ListaDefectoJpaController crlListaD = new ListaDefectoJpaController(fact);
+        GeneroJpaController genctrl = new GeneroJpaController(fact);
         try {
+            Genero g = genctrl.findGenero(nombreGenero);
+            ListaReproduccion lista =  new ListaDefecto(g,listaD);
             crlListaD.create((ListaDefecto) lista);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,8 +91,10 @@ public class Controlador implements IControlador {
 
     }
 
-    public void crearListaParticular(boolean privado, Cliente cliente, dataListaReproduccion listaP) {
-        ListaReproduccion lista = new ListaParticular(privado, cliente, listaP);
+    public void crearListaParticular(boolean privado, String nickCliente, dataListaReproduccion listaP) {
+        
+        Cliente cli = seleccionarCliente(nickCliente);
+        ListaReproduccion lista = new ListaParticular(privado, cli, listaP);
         ListaParticularJpaController crlListaP = new ListaParticularJpaController(fact);
         try {
             crlListaP.create((ListaParticular) lista);

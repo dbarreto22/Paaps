@@ -5,17 +5,17 @@ import java.io.Serializable;
 
 
 
-public class dataListaParticular extends ListaReproduccion {
+public class dataListaParticular extends dataListaReproduccion {
     
  
     private boolean esPrivada;
-    private Cliente cliente;
+    private String nickCliente;
 
-    public dataListaParticular(boolean esPrivada, Cliente cliente, 
+    public dataListaParticular(boolean esPrivada, String nickCliente, 
             dataListaReproduccion listaRep) {
-        super(listaRep);
+        super(listaRep.getNombre(),listaRep.getImagen(), null);
         this.esPrivada = esPrivada;
-        this.cliente = cliente;
+        this.nickCliente = nickCliente;
     }
 /*
     public dataListaParticular(boolean esPrivada, Cliente cliente, 
@@ -28,8 +28,12 @@ public class dataListaParticular extends ListaReproduccion {
     public dataListaParticular(String nombre, String imagen) {
         super(nombre, imagen);
         esPrivada = false;
-    }*/
+    }
 
+    public dataListaParticular(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+*/
     public boolean isEsPrivada() {
         return esPrivada;
     }
@@ -38,12 +42,12 @@ public class dataListaParticular extends ListaReproduccion {
         this.esPrivada = esPrivada;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public String getCliente() {
+        return nickCliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(String nickCliente) {
+        this.nickCliente = nickCliente;
     }
 
     

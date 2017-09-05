@@ -17,9 +17,9 @@ public class dataListaReproduccion{
     public dataListaReproduccion(String nombre, String imagen, Map<String, Temas> listaTemas) {
         this.nombre = nombre;
         this.imagen = imagen;
-        this.listaTemas = listaTemas;
+    //    this.listaTemas = listaTemas;
     }
-
+  
     public String getNombre() {
         return nombre;
     }
@@ -43,8 +43,7 @@ public class dataListaReproduccion{
     public void setListaTemas(Map<String, Temas> listaTemas) {
         this.listaTemas = listaTemas;
     }
-    
-    
+
 
 
     

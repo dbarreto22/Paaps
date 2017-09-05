@@ -6,9 +6,9 @@ import edu.tecnopotify.entidades.*;
 
 public class dataListaDefecto extends ListaReproduccion{
     
-    private Genero genero;
+    private String genero;
 
-    public dataListaDefecto(Genero genero, dataListaReproduccion listaRep) {
+    public dataListaDefecto(String genero, dataListaReproduccion listaRep) {
         super(listaRep);
         this.genero = genero;
     }
@@ -22,11 +22,11 @@ public class dataListaDefecto extends ListaReproduccion{
         this.genero = genero;
     }*/
 
-    public Genero getGenero() {
+    public String getGenero() {
         return genero;
     }
 
-    public void setGenero(Genero genero) {
+    public void setGenero(String genero) {
         this.genero = genero;
     }
     

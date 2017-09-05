@@ -5,6 +5,8 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.datatypes.dataListaParticular;
+import edu.tecnopotify.datatypes.dataListaReproduccion;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.AltaAlbumJInternalFrame.xOffset;
@@ -117,13 +119,15 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
+        String nombre = jTextFieldNombreLista.getText();
+        String nickCliOGenero = jTextFieldNickCliente.getText();
+        dataListaReproduccion dtLista = new dataListaReproduccion(nombre, "imagen", null);
+            
         if (jCheckBoxListaDefecto.isSelected()) {
-            /*crear lista en un cliente
-            dataListaParticular = new dataListaParticular(jTextFieldNombreLista.getText())
-            ctrl.crearListaParticular(true, jTextFieldNickCliente.getText(), );
-             */
-        } else {
-            //crear lista por defecto
+            //*crear lista en un cliente            
+            ctrl.crearListaParticular(true, nickCliOGenero, dtLista);             
+        } else {//crear lista por defecto
+            ctrl.crearListaDefecto(dtLista, nickCliOGenero);
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
