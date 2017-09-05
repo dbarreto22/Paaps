@@ -29,6 +29,7 @@ import edu.tecnopotify.entidades.ListaDefecto;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.Temas;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +53,7 @@ public class Controlador implements IControlador {
 
     public void crearArtista(String biografia, String link,
             dataUsuario usuario) {
-        Usuario U = new Artista(biografia, link , usuario);
+        Usuario U = new Artista(biografia, link, usuario);
         ArtistaJpaController ctrA = new ArtistaJpaController(fact);
         try {
             ctrA.create((Artista) U);
@@ -72,7 +73,7 @@ public class Controlador implements IControlador {
     }
 
     public void crearListaDefecto(dataListaReproduccion listaD) {
-        ListaReproduccion lista =  new ListaDefecto(listaD);
+        ListaReproduccion lista = new ListaDefecto(listaD);
         ListaDefectoJpaController crlListaD = new ListaDefectoJpaController(fact);
         try {
             crlListaD.create((ListaDefecto) lista);
@@ -190,7 +191,6 @@ public class Controlador implements IControlador {
     public void seleccionarLista(String a) {
 
     }*/
-
     public Collection<ListaReproduccion> consultarListaRep(boolean cliente, String id) {
         //el bool cliente se toma de la entrada, cuando el admin dice si la lista a consultar es de genero o artista
         //retorna en la variable lista la colección de listas de reproduccion a mostrar en pantalla
@@ -205,7 +205,7 @@ public class Controlador implements IControlador {
             //retornar listas de reproduccion del genero seleccionado
             GeneroJpaController gen = new GeneroJpaController(fact);
             Genero g = gen.findGenero(id);
-           // lista.addAll(0, (Collection<? extends ListaReproduccion>) g.getListasReprGenero());
+            // lista.addAll(0, (Collection<? extends ListaReproduccion>) g.getListasReprGenero());
         }
         return lista;
     }
@@ -215,46 +215,46 @@ public class Controlador implements IControlador {
         //selecciono un favorito y saco el elemento de la lista que corresponda
         FavoritosJpaController fav = new FavoritosJpaController(fact);
         Favoritos f = fav.findFavoritos(idCliente);
-        
+
         if (tema) {
             TemasJpaController temactrl = new TemasJpaController(fact);
             Temas t = temactrl.findTemas(idElemento);
-            f.getListTemas().remove(t);            
+            f.getListTemas().remove(t);
         }
-        
+
         if (lista) {
             ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
             ListaReproduccion l = listactrl.findListaReproduccion(idElemento);
-            f.getListRep().remove(l);            
+            f.getListRep().remove(l);
         }
-        
+
         if (album) {
             AlbumJpaController albctrl = new AlbumJpaController(fact);
             Album a = albctrl.findAlbum(idElemento);
-            f.getListAlbum().remove(a);            
+            f.getListAlbum().remove(a);
         }
     }
 
     public void agregarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento) {
         FavoritosJpaController fav = new FavoritosJpaController(fact);
         Favoritos f = fav.findFavoritos(idCliente);
-        
+
         if (tema) {
             TemasJpaController temactrl = new TemasJpaController(fact);
             Temas t = temactrl.findTemas(idElemento);
-            f.getListTemas().add(t);            
+            f.getListTemas().add(t);
         }
-        
+
         if (lista) {
             ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
             ListaReproduccion l = listactrl.findListaReproduccion(idElemento);
-            f.getListRep().add(l);            
+            f.getListRep().add(l);
         }
-        
+
         if (album) {
             AlbumJpaController albctrl = new AlbumJpaController(fact);
             Album a = albctrl.findAlbum(idElemento);
-            f.getListAlbum().add(a);            
+            f.getListAlbum().add(a);
         }
 
     }
@@ -266,7 +266,7 @@ public class Controlador implements IControlador {
         u.removeFromSeguidos(v);
         v.removeFromSeguidores(u);
     }
-    
+
     public void seguirUsuario(String nickCliente, String nickUsr) {
         UsuarioJpaController usrCtrl = new UsuarioJpaController(fact);
         Usuario u = usrCtrl.findUsuario(nickCliente);
@@ -274,18 +274,25 @@ public class Controlador implements IControlador {
         u.addToSeguidos(v);
         v.addToSeguidores(u);
     }
-    
+
     public void publicarLista(String idUsr, String nombreLista) {
         ClienteJpaController cliCtrl = new ClienteJpaController(fact);
         Cliente c = cliCtrl.findCliente(idUsr);
         ListaParticular li = null; //= c.listasReprParticular.get(nombreLista);
         li.setEsPrivada(true);
     }
-        public List<Cliente> listarClientes()
-    {
-        List<Cliente> clientes=null;
+
+    public List<Cliente> listarClientes() {
+        List<Cliente> clientes = null;
         ClienteJpaController cliCtrl = new ClienteJpaController(fact);
         clientes = cliCtrl.findClienteEntities();
         return clientes;
+    }
+    
+        public List<Artista> listarArtistas() {
+        List<Artista> artista = null;
+        ArtistaJpaController cliCtrl = new ArtistaJpaController(fact);
+        artista = cliCtrl.findArtistaEntities();
+        return artista;   
     }
 }

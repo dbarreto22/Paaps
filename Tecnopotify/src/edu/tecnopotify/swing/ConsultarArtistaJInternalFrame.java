@@ -5,8 +5,19 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.entidades.Artista;
+import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
+import static edu.tecnopotify.swing.consultarClienteJInternalFrame.xOffset;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import org.hsqldb.jdbc.JDBCDriver;
 
 /**
  *
@@ -17,10 +28,31 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form AltaArtistaJInternalFrame
      */
-    public ConsultarArtistaJInternalFrame() {
+    static int openFrameCount = 0;
+    static final int xOffset = 30, yOffset = 30;
+    private String path;
+    IControlador crl;
+
+    public ConsultarArtistaJInternalFrame() throws SQLException {
+        super("Consultar Artista",
+                true, //resizable
+                true, //closable
+                true, //maximizable
+                true);//iconifiable
+        //...Create the GUI and put it in the window...
+        //...Then set the window size or call pack...
+
+        //Set the window's location.
+        setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        List<Artista> a = crl.listarArtistas();
+        for (Artista art : a) {
+            jComboNick.addItem(art.getNickname());
+        }
+
+       
         initComponents();
-        ImageIcon imagen = new ImageIcon(title);
-        this.jLabelMostrarImagen.setIcon(frameIcon);
     }
 
     /**
@@ -53,6 +85,7 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
         jTextFieldMes = new javax.swing.JTextField();
         jLabelMostrarImagen = new javax.swing.JLabel();
         jComboNick = new javax.swing.JComboBox();
+        jButtonConfirmar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -68,7 +101,7 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Alta Artista");
+        setTitle("Consultar Artista");
         setVisible(true);
 
         jLabelApellido.setText("Apellido");
@@ -89,10 +122,27 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
 
         jScrollPane1.setViewportView(jTextPaneBiografia);
 
-        jComboNick.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabelMostrarImagen.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jLabelMostrarImagenComponentShown(evt);
+            }
+        });
+
+        jComboNick.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboNickItemStateChanged(evt);
+            }
+        });
         jComboNick.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboNickActionPerformed(evt);
+            }
+        });
+
+        jButtonConfirmar.setText("Confimar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
             }
         });
 
@@ -101,6 +151,10 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelBiografia)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -140,11 +194,9 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
                                         .addComponent(jLabelLink)
                                         .addGap(74, 74, 74)
                                         .addComponent(jTextFieldLink, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(185, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelBiografia)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(jButtonConfirmar)
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,9 +210,9 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jLabelNombre)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelApellido)
-                    .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelApellido))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelMail)
@@ -188,7 +240,9 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(jButtonConfirmar)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -196,10 +250,47 @@ public class ConsultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jComboNickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboNickActionPerformed
         // TODO add your handling code here:
+
+
     }//GEN-LAST:event_jComboNickActionPerformed
+
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        // TODO add your handling code here:
+        //Obtengo datos de los controles Swing
+        /*        String nick = jComboNick.getSelectedItem().toString();
+        Artista artista = crl.seleccionarArtista(nick);
+        jTextFieldNombre.setText(artista.getNombre());
+        jTextFieldApellido.setText(artista.getApellido());
+        jTextFieldMail.setText(artista.getMail());
+        jTextFieldLink.setText(artista.getLink());
+        jTextPaneBiografia.setText(artista.getBiografia());*/
+
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jLabelMostrarImagenComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabelMostrarImagenComponentShown
+        // TODO add your handling code here:
+
+        ImageIcon i = new ImageIcon(this.path);
+        this.jLabelMostrarImagen.setIcon(i);
+
+    }//GEN-LAST:event_jLabelMostrarImagenComponentShown
+
+    private void jComboNickItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboNickItemStateChanged
+        // TODO add your handling code here:
+        
+        String nick = jComboNick.getSelectedItem().toString();
+        Artista artista = crl.seleccionarArtista(nick);
+        jTextFieldNombre.setText(artista.getNombre());
+        jTextFieldApellido.setText(artista.getApellido());
+        jTextFieldMail.setText(artista.getMail());
+        jTextFieldLink.setText(artista.getLink());
+        jTextPaneBiografia.setText(artista.getBiografia());
+
+    }//GEN-LAST:event_jComboNickItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JComboBox<String> jComboNick;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JFileChooser jFileChooserArtista;

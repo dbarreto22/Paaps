@@ -82,7 +82,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
 
+    private void consultarArtistaJInternalFrame() {
+        ConsultarArtistaJInternalFrame frame = new ConsultarArtistaJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -158,6 +168,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuUuarios.add(jMenuConsultarCliente);
 
         jMenuConsultarArtista.setText("Consultar artista");
+        jMenuConsultarArtista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsultarArtistaActionPerformed(evt);
+            }
+        });
         menuUuarios.add(jMenuConsultarArtista);
 
         jMenu3.add(menuUuarios);
@@ -274,7 +289,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuConsultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarClienteActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenuConsultarClienteActionPerformed
 
     private void menuAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAlbumMouseClicked
@@ -315,6 +330,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         createFrameCrearListaReproduccion();
     }//GEN-LAST:event_JMenuCrearListaRepActionPerformed
+
+    private void jMenuConsultarArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarArtistaActionPerformed
+        // TODO add your handling code here:
+        consultarArtistaJInternalFrame();
+    }//GEN-LAST:event_jMenuConsultarArtistaActionPerformed
 
     /**
      * @param args the command line arguments
