@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import org.hsqldb.jdbc.JDBCDriver;
 
 /**
  *

@@ -10,6 +10,13 @@ import edu.tecnopotify.datatypes.dataListaReproduccion;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.AltaAlbumJInternalFrame.xOffset;
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JInternalFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -24,6 +31,7 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
     private IControlador ctrl = fab.getInstancia();
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
+    private String path;
 
     public CrearListaReproduccionJInternalFrame() {
         super("Crear Lista Reproduccion",
@@ -33,9 +41,10 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
                 true);//iconifiable
         //...Create the GUI and put it in the window...
         //...Then set the window size or call pack...
-
+        this.setTitle("Crear lista de reproducción");
         //Set the window's location.
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
+        
         initComponents();
     }
 
@@ -55,6 +64,8 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         jCheckBoxListaDefecto = new javax.swing.JCheckBox();
         nombreCliente = new java.awt.Label();
         jTextFieldNickCliente = new javax.swing.JTextField();
+        jButtonSubirImagen = new javax.swing.JButton();
+        jLabelImagen = new javax.swing.JLabel();
 
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +80,15 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
 
         nombreCliente.setText("Nickname:");
 
+        jButtonSubirImagen.setText("Subir Imagen");
+        jButtonSubirImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSubirImagenActionPerformed(evt);
+            }
+        });
+
+        jLabelImagen.setText("Imagen");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,19 +96,21 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar)
-                .addGap(83, 83, 83))
+                .addGap(84, 84, 84))
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(listaParticular, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldNombreLista, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBoxListaDefecto)
-                    .addComponent(jTextFieldNickCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(144, 144, 144))
+                    .addComponent(nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelImagen))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTextFieldNickCliente)
+                    .addComponent(jTextFieldNombreLista, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBoxListaDefecto, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonSubirImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(114, 114, 114))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,17 +121,19 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
                     .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(listaParticular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(listaParticular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBoxListaDefecto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nombreCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldNickCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSubirImagen)
+                    .addComponent(jLabelImagen))
+                .addGap(18, 18, 18)
                 .addComponent(jButtonConfirmar)
-                .addGap(75, 75, 75))
+                .addGap(26, 26, 26))
         );
 
         listaParticular.getAccessibleContext().setAccessibleName("Nombre");
@@ -131,11 +155,42 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         }
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
+    private void jButtonSubirImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubirImagenActionPerformed
+        // TODO add your handling code here:
+        //https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
+        //Creo un panel interno para agregar el file chooser
+        JInternalFrame internal = new JInternalFrame();
+        //Lo hago visible
+        internal.setVisible(true);
+        try {
+            internal.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(AltaAlbumJInternalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Creo un file chooser
+        JFileChooser fileChooser = new JFileChooser();
+        //Lo agrego a mi panel interno
+        internal.add(fileChooser);
+        //Permito que se seleccionen archivos y directorios
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        //Creo un filtro de tipos
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.JPG", "jpg", "*.PNG", "png");
+        fileChooser.setFileFilter(filtro);
+        //guardo la opcion del usuario
+        int seleccion = fileChooser.showOpenDialog(internal);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            File archivo = fileChooser.getSelectedFile();
+            this.path = archivo.getAbsolutePath();
+        }
+    }//GEN-LAST:event_jButtonSubirImagenActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Label Nombre;
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonSubirImagen;
     private javax.swing.JCheckBox jCheckBoxListaDefecto;
+    private javax.swing.JLabel jLabelImagen;
     private javax.swing.JTextField jTextFieldNickCliente;
     private javax.swing.JTextField jTextFieldNombreLista;
     private java.awt.Label listaParticular;
