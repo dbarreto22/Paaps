@@ -22,7 +22,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jButtonConfirmar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
@@ -30,14 +30,16 @@
                   <Component id="Nombre" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
                   <Component id="listaParticular" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
                   <Component id="nombreCliente" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                  <Component id="jLabelImagen" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="31" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTextFieldNombreLista" min="-2" pref="95" max="-2" attributes="0"/>
-                  <Component id="jCheckBoxListaDefecto" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldNickCliente" min="-2" pref="95" max="-2" attributes="0"/>
+              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jTextFieldNickCliente" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jTextFieldNombreLista" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jCheckBoxListaDefecto" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonSubirImagen" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,14 +56,19 @@
                   <Component id="listaParticular" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jCheckBoxListaDefecto" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="nombreCliente" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldNickCliente" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonSubirImagen" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelImagen" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButtonConfirmar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -98,6 +105,19 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNickCliente">
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonSubirImagen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Subir Imagen"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSubirImagenActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelImagen">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Imagen"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
