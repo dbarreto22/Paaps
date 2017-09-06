@@ -28,6 +28,7 @@ import edu.tecnopotify.entidades.Favoritos;
 import edu.tecnopotify.entidades.ListaDefecto;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.Temas;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;

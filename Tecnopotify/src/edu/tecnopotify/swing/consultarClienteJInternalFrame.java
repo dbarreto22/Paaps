@@ -33,7 +33,7 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
     IControlador crl;
 
     public consultarClienteJInternalFrame() {
-        super("Consultar Cliente" ,
+        super("Consultar Cliente",
                 true, //resizable
                 true, //closable
                 true, //maximizable
@@ -43,14 +43,14 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
 
         //Set the window's location.
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
+        initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         List<Cliente> clientes = crl.listarClientes();
-        for(Cliente cli : clientes)
-        {
-           jComboBoxNickname.addItem(cli.getNickname());
+        for (Cliente cli : clientes) {
+            jComboBoxNickname.addItem(cli.getNickname());
         }
-        initComponents();
+
     }
 
     /**
@@ -210,15 +210,21 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
-                // TODO add your handling code here:
+        // TODO add your handling code here:
 
         //Obtengo datos de los controles Swing
-     String nick =jComboBoxNickname.getSelectedItem().toString();
-     Cliente cliente = crl.seleccionarCliente(nick);
-     jTextFieldNombre.setText(cliente.getNombre());
-     jTextFieldApellido.setText(cliente.getApellido());
-     jTextFieldMail.setText(cliente.getMail());        
-        
+        String nick = jComboBoxNickname.getSelectedItem().toString();
+        Cliente cliente = crl.seleccionarCliente(nick);
+        jTextFieldNombre.setText(cliente.getNombre());
+        jTextFieldApellido.setText(cliente.getApellido());
+        jTextFieldMail.setText(cliente.getMail());
+        int d = cliente.getF_nac().getDia();
+        int m = cliente.getF_nac().getMes();
+        int a = cliente.getF_nac().getAnio();
+        jTextFieldDia.setText(String.valueOf(d));
+        jTextFieldMes.setText(String.valueOf(m));
+        jTextFieldAnio.setText(String.valueOf(a));
+
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
 

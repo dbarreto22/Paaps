@@ -45,5 +45,5 @@ public interface IControlador {
     public List <Genero> mostrarListaGenero();
     //public Cliente devolverCliente(String nickname);
     public List<Cliente> listarClientes();
-    public List<Artista> listarArtistas();
+    List<Artista> listarArtistas();
 }
