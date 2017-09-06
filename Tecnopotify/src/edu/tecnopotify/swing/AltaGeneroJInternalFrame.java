@@ -50,9 +50,9 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jButtonAceptar = new javax.swing.JButton();
-        jLabelNombre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldNombre = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTreeAltaGenero = new javax.swing.JTree();
 
         setClosable(true);
         setMaximizable(true);
@@ -65,37 +65,47 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabelNombre.setText("Nombre");
+        jTreeAltaGenero.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTreeAltaGeneroAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane1.setViewportView(jTreeAltaGenero);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAceptar)
-                .addGap(55, 55, 55))
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabelNombre))
-                .addGap(43, 43, 43)
-                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addGap(97, 97, 97)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 85, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonAceptar)
+                        .addGap(170, 170, 170))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNombre)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(jButtonAceptar)
-                .addGap(51, 51, 51))
+                .addGap(65, 65, 65))
         );
 
         pack();
@@ -103,19 +113,23 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-        String nombre = this.jTextFieldNombre.getText();
+        /*        String nombre = this.jTextFieldNombre.getText();
         dataGenero genero = new dataGenero(nombre);
         crl.altaGenero(genero);
         this.jTextFieldNombre.setText("");
         //Muestro éxito de la operación
-        JOptionPane.showMessageDialog(this, "Genero creado con éxito", "Crear Genero", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Genero creado con éxito", "Crear Genero", JOptionPane.INFORMATION_MESSAGE);*/
     }//GEN-LAST:event_jButtonAceptarActionPerformed
+
+    private void jTreeAltaGeneroAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTreeAltaGeneroAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTreeAltaGeneroAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabelNombre;
-    private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTree jTreeAltaGenero;
     // End of variables declaration//GEN-END:variables
 }

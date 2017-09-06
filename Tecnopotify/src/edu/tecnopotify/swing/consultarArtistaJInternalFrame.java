@@ -14,15 +14,10 @@ import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-<<<<<<< HEAD:Tecnopotify/src/edu/tecnopotify/swing/consultarArtistaJInternalFrame.java
 import javax.swing.JComboBox;
-=======
->>>>>>> dfdf132ba8e65ad499aaaee01026920d3e627240:Tecnopotify/src/edu/tecnopotify/swing/ConsultarArtistaJInternalFrame.java
 
-/**
- *
- * @author diego-lucia
- */
+
+
 public class consultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
 
     /**
