@@ -159,10 +159,13 @@
                     <Property name="text" type="java.lang.String" value="Publicar lista"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuConsultarListaReproduccion">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Consultar lista"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuConsultarListaReproduccionActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
