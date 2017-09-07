@@ -6,6 +6,7 @@
 package edu.tecnopotify.swing;
 
 import edu.tecnopotify.datatypes.dataAlbum;
+import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.AltaClienteJInternalFrame.openFrameCount;
@@ -17,7 +18,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 
 /**
  *
@@ -34,6 +41,9 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
     private String path;//Guarda el link a la imagen
+    private JTree tree;
+    private DefaultMutableTreeNode rootNode;
+    private DefaultTreeModel treeModel;
 
     public AltaAlbumJInternalFrame() {
         super("Alta Album",
@@ -47,6 +57,11 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         //Set the window's location.
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
+        rootNode = new DefaultMutableTreeNode("Genero");
+        treeModel = new DefaultTreeModel(rootNode);
+//      
+        treeGenero();
+
     }
 
     /**
@@ -67,6 +82,8 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         jButtonImagen = new javax.swing.JButton();
         jLabelNombre1 = new javax.swing.JLabel();
         jTextNombre1 = new javax.swing.JTextField();
+        jLabelGenero = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -109,6 +126,8 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabelGenero.setText("Genero");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,19 +142,21 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jLabelNombre)
                     .addComponent(jLabelImagen)
                     .addComponent(jLabelAñoCreacion)
-                    .addComponent(jLabelNombre1))
+                    .addComponent(jLabelNombre1)
+                    .addComponent(jLabelGenero))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextAnioCreado)
                     .addComponent(jButtonImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextNombreArtista)
-                    .addComponent(jTextNombre1))
+                    .addComponent(jTextNombre1)
+                    .addComponent(jTextField1))
                 .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelNombre1)
                     .addComponent(jTextNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -154,9 +175,13 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonImagen)
                     .addComponent(jLabelImagen))
-                .addGap(78, 78, 78)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelGenero)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
                 .addComponent(jButtonAceptar)
-                .addGap(183, 183, 183))
+                .addGap(289, 289, 289))
         );
 
         pack();
@@ -197,18 +222,17 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-        
+
         int anio = Integer.parseInt(jTextAnioCreado.getText());
         dataAlbum odataAlbum = new dataAlbum(jTextNombre1.getText(), anio, path);
         ctrl.crearAlbum(jTextNombreArtista.getText(), odataAlbum);
-        
-        
+
         this.jTextAnioCreado.setText("");
         this.jTextNombreArtista.setText("");
         this.jTextNombre1.setText("");
-        
-         JOptionPane.showMessageDialog(this, "Album creado con éxito", "Crear Album", JOptionPane.INFORMATION_MESSAGE);
-        
+
+        JOptionPane.showMessageDialog(this, "Album creado con éxito", "Crear Album", JOptionPane.INFORMATION_MESSAGE);
+
 
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
@@ -216,15 +240,59 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNombre1ActionPerformed
 
+    private void treeGenero() {
+//        treeModel.addTreeModelListener(new MyTreeModelListener());
+        tree = new JTree(treeModel);
+        tree.setEditable(true);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tree.setShowsRootHandles(true);
+        JScrollPane pane = new JScrollPane(tree);
+        this.add(pane);
+        pane.setViewportView(tree);
+
+    }
+
+    public DefaultMutableTreeNode addObject(Object child) {
+        DefaultMutableTreeNode parentNode = null;
+        TreePath parentPath = tree.getSelectionPath();
+
+        if (parentPath == null) {
+            //There is no selection. Default to the root node.
+            parentNode = rootNode;
+        } else {
+            parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
+        }
+
+        return addObject(parentNode, child, true);
+    }
+
+    
+public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
+            Object child,
+            boolean shouldBeVisible) {
+        DefaultMutableTreeNode childNode
+                = new DefaultMutableTreeNode(child);
+        
+        treeModel.insertNodeInto(childNode, parent,
+                parent.getChildCount());
+
+        //Make sure the user can see the lovely new node.
+        if (shouldBeVisible) {
+            tree.scrollPathToVisible(new TreePath(childNode.getPath()));
+        }
+        return childNode;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonImagen;
     private javax.swing.JLabel jLabelAñoCreacion;
+    private javax.swing.JLabel jLabelGenero;
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelNombre1;
     private javax.swing.JTextField jTextAnioCreado;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextNombre1;
     private javax.swing.JTextField jTextNombreArtista;
     // End of variables declaration//GEN-END:variables
