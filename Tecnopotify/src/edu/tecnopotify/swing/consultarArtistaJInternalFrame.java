@@ -39,8 +39,8 @@ public class consultarArtistaJInternalFrame extends javax.swing.JInternalFrame {
         //Set the window's location.
 
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
-        this.jLabelMostrarImagen.setVisible(true);
         initComponents();
+        this.jLabelMostrarImagen.setVisible(true);
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         List<Artista> a = crl.listarArtistas();

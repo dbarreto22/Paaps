@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -153,6 +154,8 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         } else {//crear lista por defecto
             ctrl.crearListaDefecto(dtLista, nickCliOGenero);
         }
+        
+        JOptionPane.showMessageDialog(this, "Lista creada con éxito", "Crear lista de reproducción", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonSubirImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubirImagenActionPerformed

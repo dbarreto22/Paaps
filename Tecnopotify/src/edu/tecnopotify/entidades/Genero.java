@@ -24,7 +24,9 @@ public class Genero implements Serializable{
 
     @OneToMany
     private Map<String, ListaDefecto> listasReprGenero = new HashMap<String, ListaDefecto>();
-    
+ 
+    @OneToMany
+    private List<Genero> listHijos=null;
   
     @ManyToMany(mappedBy="listGenero")
     private List<Album> listAlbum;

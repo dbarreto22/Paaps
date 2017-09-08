@@ -106,6 +106,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
+    
+    
+    private void consultarListaDeReproduccionJInternalFrame(){
+        consultarClienteJInternalFrame frame = new consultarClienteJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     private void pruebaJInternalFrame() {
         pruebaJInternalFrame frame = new pruebaJInternalFrame();
@@ -152,7 +164,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuConsultarListaReproduccion = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         jMenu12.setText("jMenu12");
@@ -277,13 +289,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem9.setText("Publicar lista");
         menuLista.add(jMenuItem9);
 
-        jMenuItem16.setText("Consultar lista");
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+        jMenuConsultarListaReproduccion.setText("Consultar lista");
+        jMenuConsultarListaReproduccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
+                jMenuConsultarListaReproduccionActionPerformed(evt);
             }
         });
-        menuLista.add(jMenuItem16);
+        menuLista.add(jMenuConsultarListaReproduccion);
 
         jMenu3.add(menuLista);
 
@@ -365,10 +377,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         consultarArtistaJInternalFrame();
     }//GEN-LAST:event_jMenuConsultarArtistaActionPerformed
 
-    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+    private void jMenuConsultarListaReproduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarListaReproduccionActionPerformed
         // TODO add your handling code here:
-        pruebaJInternalFrame();
-    }//GEN-LAST:event_jMenuItem16ActionPerformed
+        consultarListaDeReproduccionJInternalFrame();
+    }//GEN-LAST:event_jMenuConsultarListaReproduccionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -418,11 +430,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuConsultarArtista;
     private javax.swing.JMenuItem jMenuConsultarCliente;
+    private javax.swing.JMenuItem jMenuConsultarListaReproduccion;
     private javax.swing.JMenuItem jMenuCrearAlbum;
     private javax.swing.JMenuItem jMenuCrearArtista;
     private javax.swing.JMenuItem jMenuCrearCliente;
     private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem7;
@@ -434,7 +446,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuLista;
     private javax.swing.JMenu menuUuarios;
     // End of variables declaration//GEN-END:variables
-
+    
+    
     private static class Interfaz {
 
         public Interfaz() {
