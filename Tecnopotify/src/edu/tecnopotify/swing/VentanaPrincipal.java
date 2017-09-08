@@ -4,6 +4,7 @@ import static edu.tecnopotify.swing.AltaGeneroJInternalFrame.xOffset;
 import java.awt.Component;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -97,6 +98,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void consultarClienteJInternalFrame() {
         consultarClienteJInternalFrame frame = new consultarClienteJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void pruebaJInternalFrame() {
+        pruebaJInternalFrame frame = new pruebaJInternalFrame();
         frame.setVisible(true);
         this.Desktop.add(frame);
         try {
@@ -266,6 +278,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuLista.add(jMenuItem9);
 
         jMenuItem16.setText("Consultar lista");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         menuLista.add(jMenuItem16);
 
         jMenu3.add(menuLista);
@@ -345,8 +362,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jMenuConsultarArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsultarArtistaActionPerformed
         // TODO add your handling code here:
-         consultarArtistaJInternalFrame();
+        consultarArtistaJInternalFrame();
     }//GEN-LAST:event_jMenuConsultarArtistaActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        // TODO add your handling code here:
+        pruebaJInternalFrame();
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     /**
      * @param args the command line arguments

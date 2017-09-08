@@ -10,10 +10,12 @@ import edu.tecnopotify.controladores.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import edu.tecnopotify.entidades.Album;
-import edu.tecnopotify.entidades.Genero;
 import java.util.ArrayList;
 import java.util.List;
+import edu.tecnopotify.entidades.Genero;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -36,6 +38,9 @@ public class GeneroJpaController implements Serializable {
         if (genero.getListAlbum() == null) {
             genero.setListAlbum(new ArrayList<Album>());
         }
+        if (genero.getGenerosHijos() == null) {
+            genero.setGenerosHijos(new ArrayList<Genero>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -46,10 +51,20 @@ public class GeneroJpaController implements Serializable {
                 attachedListAlbum.add(listAlbumAlbumToAttach);
             }
             genero.setListAlbum(attachedListAlbum);
+            List<Genero> attachedGenerosHijos = new ArrayList<Genero>();
+            for (Genero generosHijosGeneroToAttach : genero.getGenerosHijos()) {
+                generosHijosGeneroToAttach = em.getReference(generosHijosGeneroToAttach.getClass(), generosHijosGeneroToAttach.getNombre());
+                attachedGenerosHijos.add(generosHijosGeneroToAttach);
+            }
+            genero.setGenerosHijos(attachedGenerosHijos);
             em.persist(genero);
             for (Album listAlbumAlbum : genero.getListAlbum()) {
                 listAlbumAlbum.getListGenero().add(genero);
                 listAlbumAlbum = em.merge(listAlbumAlbum);
+            }
+            for (Genero generosHijosGenero : genero.getGenerosHijos()) {
+                generosHijosGenero.getGenerosHijos().add(genero);
+                generosHijosGenero = em.merge(generosHijosGenero);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -72,6 +87,8 @@ public class GeneroJpaController implements Serializable {
             Genero persistentGenero = em.find(Genero.class, genero.getNombre());
             List<Album> listAlbumOld = persistentGenero.getListAlbum();
             List<Album> listAlbumNew = genero.getListAlbum();
+            List<Genero> generosHijosOld = persistentGenero.getGenerosHijos();
+            List<Genero> generosHijosNew = genero.getGenerosHijos();
             List<Album> attachedListAlbumNew = new ArrayList<Album>();
             for (Album listAlbumNewAlbumToAttach : listAlbumNew) {
                 listAlbumNewAlbumToAttach = em.getReference(listAlbumNewAlbumToAttach.getClass(), listAlbumNewAlbumToAttach.getNombre());
@@ -79,6 +96,13 @@ public class GeneroJpaController implements Serializable {
             }
             listAlbumNew = attachedListAlbumNew;
             genero.setListAlbum(listAlbumNew);
+            List<Genero> attachedGenerosHijosNew = new ArrayList<Genero>();
+            for (Genero generosHijosNewGeneroToAttach : generosHijosNew) {
+                generosHijosNewGeneroToAttach = em.getReference(generosHijosNewGeneroToAttach.getClass(), generosHijosNewGeneroToAttach.getNombre());
+                attachedGenerosHijosNew.add(generosHijosNewGeneroToAttach);
+            }
+            generosHijosNew = attachedGenerosHijosNew;
+            genero.setGenerosHijos(generosHijosNew);
             genero = em.merge(genero);
             for (Album listAlbumOldAlbum : listAlbumOld) {
                 if (!listAlbumNew.contains(listAlbumOldAlbum)) {
@@ -90,6 +114,18 @@ public class GeneroJpaController implements Serializable {
                 if (!listAlbumOld.contains(listAlbumNewAlbum)) {
                     listAlbumNewAlbum.getListGenero().add(genero);
                     listAlbumNewAlbum = em.merge(listAlbumNewAlbum);
+                }
+            }
+            for (Genero generosHijosOldGenero : generosHijosOld) {
+                if (!generosHijosNew.contains(generosHijosOldGenero)) {
+                    generosHijosOldGenero.getGenerosHijos().remove(genero);
+                    generosHijosOldGenero = em.merge(generosHijosOldGenero);
+                }
+            }
+            for (Genero generosHijosNewGenero : generosHijosNew) {
+                if (!generosHijosOld.contains(generosHijosNewGenero)) {
+                    generosHijosNewGenero.getGenerosHijos().add(genero);
+                    generosHijosNewGenero = em.merge(generosHijosNewGenero);
                 }
             }
             em.getTransaction().commit();
@@ -126,6 +162,11 @@ public class GeneroJpaController implements Serializable {
                 listAlbumAlbum.getListGenero().remove(genero);
                 listAlbumAlbum = em.merge(listAlbumAlbum);
             }
+            List<Genero> generosHijos = genero.getGenerosHijos();
+            for (Genero generosHijosGenero : generosHijos) {
+                generosHijosGenero.getGenerosHijos().remove(genero);
+                generosHijosGenero = em.merge(generosHijosGenero);
+            }
             em.remove(genero);
             em.getTransaction().commit();
         } finally {
@@ -146,7 +187,9 @@ public class GeneroJpaController implements Serializable {
     private List<Genero> findGeneroEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from Genero as o");
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Genero.class));
+            Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -169,7 +212,10 @@ public class GeneroJpaController implements Serializable {
     public int getGeneroCount() {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select count(o) from Genero as o");
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Genero> rt = cq.from(Genero.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();

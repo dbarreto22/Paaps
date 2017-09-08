@@ -41,6 +41,10 @@ public class Controlador implements IControlador {
 
     public Controlador() {
     }
+    
+    public EntityManagerFactory getEntityManagerFactory(){
+        return this.fact;
+    }
 
     public void crearCliente(dataUsuario usuario) {
         Usuario U = new Cliente(usuario);
@@ -301,5 +305,14 @@ public class Controlador implements IControlador {
         ArtistaJpaController cliCtrl = new ArtistaJpaController(fact);
         artista = cliCtrl.findArtistaEntities();
         return artista;
+    }
+    
+    public List<Genero> getListGenero(String nombre){
+    List<Genero> genero = null;
+    Genero g = new Genero();
+    GeneroJpaController genCtrl = new GeneroJpaController(fact);
+    g = genCtrl.findGenero(nombre);
+    genero = g.getGenerosHijos();
+    return genero;
     }
 }

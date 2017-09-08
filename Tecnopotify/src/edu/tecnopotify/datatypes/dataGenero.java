@@ -3,6 +3,7 @@ package edu.tecnopotify.datatypes;
 
 import edu.tecnopotify.entidades.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -10,11 +11,12 @@ public class dataGenero{
 
     private String nombre;
     private String padre;
-    public Map<String, ListaDefecto> listasReprGenero = new HashMap<String, ListaDefecto>();
+    public List listasReprGenero;
+    private List<Genero> generosHijos;
     
-    public dataGenero(String nombre) {
+    public dataGenero(String nombre, String Padre) {
         this.nombre = nombre;
-       // this.padre = padre;
+        this.padre = padre;
     }
 
     public dataGenero() {
@@ -36,19 +38,19 @@ public class dataGenero{
         this.padre = padre;
     }
 
-    public Map<String, ListaDefecto> getListasReprGenero() {
+    public List<ListaDefecto> getListasReprGenero() {
         return listasReprGenero;
     }
 
-    public void setListasReprGenero(Map<String, ListaDefecto> listasReprGenero) {
+    public void setListasReprGenero(List<ListaDefecto> listasReprGenero) {
         this.listasReprGenero = listasReprGenero;
     }
-    
-    
 
+    public List<Genero> getGenerosHijos() {
+        return generosHijos;
+    }
 
-    
-    
-    
-    
+    public void setGenerosHijos(List<Genero> generosHijos) {
+        this.generosHijos = generosHijos;
+    }  
 }

@@ -15,11 +15,13 @@ import edu.tecnopotify.entidades.Cliente;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityManagerFactory;
 
 
 public interface IControlador {
     
-  
+    
+    public EntityManagerFactory getEntityManagerFactory();
     public void crearCliente(dataUsuario usuario);
     public void crearArtista(String biografia, String link,dataUsuario usuario);
     public void altaGenero(dataGenero genero);
@@ -46,4 +48,5 @@ public interface IControlador {
     //public Cliente devolverCliente(String nickname);
     public List<Cliente> listarClientes();
     List<Artista> listarArtistas();
+    public List<Genero> getListGenero(String nombre);
 }

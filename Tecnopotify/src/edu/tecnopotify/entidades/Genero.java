@@ -29,19 +29,18 @@ public class Genero implements Serializable{
     @ManyToMany(mappedBy="listGenero")
     private List<Album> listAlbum;
     
+    @OneToMany
+    private List<Genero> generosHijos;
+    
+    
     public Genero(dataGenero genero) {
         this.nombre = genero.getNombre();
-       // this.padre = genero.getPadre();
+        this.padre = genero.getPadre();
     }
 
     public Genero() {
         
     }
-    
-//    
-//     public Long getSerialVersioUID() {
-//        return serialVersionUID;
-//    }
 
     public Map<String, ListaDefecto> getListasReprGenero() {
         return listasReprGenero;
@@ -75,6 +74,15 @@ public class Genero implements Serializable{
     public void setListAlbum(List<Album> aux) {
         this.listAlbum = aux;
     }
+
+    public List<Genero> getGenerosHijos() {
+        return generosHijos;
+    }
+
+    public void setGenerosHijos(List<Genero> generosHijos) {
+        this.generosHijos = generosHijos;
+    }
+    
     
     
 }
