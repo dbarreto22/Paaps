@@ -165,7 +165,11 @@
                   </Properties>
                   <Events>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem16ActionPerformed"/>
+=======
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuConsultarListaReproduccionActionPerformed"/>
+>>>>>>> 3ca9314450864d0fae98a98c9d59010358647875
 =======
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuConsultarListaReproduccionActionPerformed"/>
 >>>>>>> 3ca9314450864d0fae98a98c9d59010358647875
