@@ -132,6 +132,7 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
      DefaultMutableTreeNode selectedNode;
+     String padre;
     Genero g;
     Genero gH;
     List<Genero> genHijos;
@@ -154,6 +155,7 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
                     g.getGenerosHijos().add(gH);
               
                 selectedNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()), selectedNode.getIndex(selectedNode.getLastChild()) + 1);
+                padre= tree.getLastSelectedPathComponent().toString();
             }
         
            // JOptionPane.showMessageDialog(this,e.getMessage(), "Genero", JOptionPane.INFORMATION_MESSAGE);
@@ -178,7 +180,7 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
     }*/
         jTextFieldNombre.setText("");
         jTextPadre.setText("");
-
+     
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
 
