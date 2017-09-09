@@ -307,6 +307,13 @@ public class Controlador implements IControlador {
         return artista;
     }
     
+    public List<Genero> listarGeneros() {
+        List<Genero> g = null;
+        GeneroJpaController gCtrl = new GeneroJpaController(fact);
+        g = gCtrl.findGeneroEntities();
+        return g;
+   }
+    
     public List<Genero> getListGenero(String nombre){
     List<Genero> genero = null;
     Genero g = new Genero();

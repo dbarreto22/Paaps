@@ -56,9 +56,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Consultar artista"/>
                   </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuConsultarArtistaActionPerformed"/>
-                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -159,21 +156,10 @@
                     <Property name="text" type="java.lang.String" value="Publicar lista"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuConsultarListaReproduccion">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Consultar lista"/>
                   </Properties>
-                  <Events>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem16ActionPerformed"/>
-=======
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuConsultarListaReproduccionActionPerformed"/>
->>>>>>> 3ca9314450864d0fae98a98c9d59010358647875
-=======
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuConsultarListaReproduccionActionPerformed"/>
->>>>>>> 3ca9314450864d0fae98a98c9d59010358647875
-                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
