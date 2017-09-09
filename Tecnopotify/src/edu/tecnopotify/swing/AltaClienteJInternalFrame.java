@@ -96,7 +96,6 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
         jLabelFNac = new javax.swing.JLabel();
         jLabelImagen = new javax.swing.JLabel();
         jButtonSImagen = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jComboDia = new javax.swing.JComboBox();
         jComboMes = new javax.swing.JComboBox();
         jComboAnio = new javax.swing.JComboBox();
@@ -165,13 +164,6 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jComboDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboDiaActionPerformed(evt);
@@ -216,9 +208,7 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButtonConfirmar))
+                        .addComponent(jButtonConfirmar)
                         .addGap(47, 47, 47))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
@@ -250,17 +240,11 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jComboDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelImagen)
-                            .addComponent(jButtonSImagen))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(43, 43, 43)))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelImagen)
+                    .addComponent(jButtonSImagen))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar)
                 .addGap(57, 57, 57))
         );
@@ -331,21 +315,12 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "El Cliente se ha creado con éxito", "Registrar Cliente", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here
-        /*       Cliente cli;
-        cli = crl.seleccionarCliente(jTextFieldNick.getText());
-        jTextFieldNombre.setText(cli.getNombre());*/
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jComboDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboDiaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboDiaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonSImagen;
     private javax.swing.JComboBox<String> jComboAnio;
