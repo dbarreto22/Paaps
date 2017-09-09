@@ -38,8 +38,8 @@ public class GeneroJpaController implements Serializable {
         if (genero.getListAlbum() == null) {
             genero.setListAlbum(new ArrayList<Album>());
         }
-        if (genero.getGenerosHijos() == null) {
-            genero.setGenerosHijos(new ArrayList<Genero>());
+        if (genero.getListHijos() == null) {
+            genero.setListHijos(new ArrayList<Genero>());
         }
         EntityManager em = null;
         try {
@@ -52,18 +52,18 @@ public class GeneroJpaController implements Serializable {
             }
             genero.setListAlbum(attachedListAlbum);
             List<Genero> attachedGenerosHijos = new ArrayList<Genero>();
-            for (Genero generosHijosGeneroToAttach : genero.getGenerosHijos()) {
+            for (Genero generosHijosGeneroToAttach : genero.getListHijos()) {
                 generosHijosGeneroToAttach = em.getReference(generosHijosGeneroToAttach.getClass(), generosHijosGeneroToAttach.getNombre());
                 attachedGenerosHijos.add(generosHijosGeneroToAttach);
             }
-            genero.setGenerosHijos(attachedGenerosHijos);
+            genero.setListHijos(attachedGenerosHijos);
             em.persist(genero);
             for (Album listAlbumAlbum : genero.getListAlbum()) {
                 listAlbumAlbum.getListGenero().add(genero);
                 listAlbumAlbum = em.merge(listAlbumAlbum);
             }
-            for (Genero generosHijosGenero : genero.getGenerosHijos()) {
-                generosHijosGenero.getGenerosHijos().add(genero);
+            for (Genero generosHijosGenero : genero.getListHijos()) {
+                generosHijosGenero.getListHijos().add(genero);
                 generosHijosGenero = em.merge(generosHijosGenero);
             }
             em.getTransaction().commit();
@@ -87,8 +87,8 @@ public class GeneroJpaController implements Serializable {
             Genero persistentGenero = em.find(Genero.class, genero.getNombre());
             List<Album> listAlbumOld = persistentGenero.getListAlbum();
             List<Album> listAlbumNew = genero.getListAlbum();
-            List<Genero> generosHijosOld = persistentGenero.getGenerosHijos();
-            List<Genero> generosHijosNew = genero.getGenerosHijos();
+            List<Genero> generosHijosOld = persistentGenero.getListHijos();
+            List<Genero> generosHijosNew = genero.getListHijos();
             List<Album> attachedListAlbumNew = new ArrayList<Album>();
             for (Album listAlbumNewAlbumToAttach : listAlbumNew) {
                 listAlbumNewAlbumToAttach = em.getReference(listAlbumNewAlbumToAttach.getClass(), listAlbumNewAlbumToAttach.getNombre());
@@ -102,7 +102,7 @@ public class GeneroJpaController implements Serializable {
                 attachedGenerosHijosNew.add(generosHijosNewGeneroToAttach);
             }
             generosHijosNew = attachedGenerosHijosNew;
-            genero.setGenerosHijos(generosHijosNew);
+            genero.setListHijos(generosHijosNew);
             genero = em.merge(genero);
             for (Album listAlbumOldAlbum : listAlbumOld) {
                 if (!listAlbumNew.contains(listAlbumOldAlbum)) {
@@ -118,13 +118,13 @@ public class GeneroJpaController implements Serializable {
             }
             for (Genero generosHijosOldGenero : generosHijosOld) {
                 if (!generosHijosNew.contains(generosHijosOldGenero)) {
-                    generosHijosOldGenero.getGenerosHijos().remove(genero);
+                    generosHijosOldGenero.getListHijos().remove(genero);
                     generosHijosOldGenero = em.merge(generosHijosOldGenero);
                 }
             }
             for (Genero generosHijosNewGenero : generosHijosNew) {
                 if (!generosHijosOld.contains(generosHijosNewGenero)) {
-                    generosHijosNewGenero.getGenerosHijos().add(genero);
+                    generosHijosNewGenero.getListHijos().add(genero);
                     generosHijosNewGenero = em.merge(generosHijosNewGenero);
                 }
             }
@@ -162,9 +162,9 @@ public class GeneroJpaController implements Serializable {
                 listAlbumAlbum.getListGenero().remove(genero);
                 listAlbumAlbum = em.merge(listAlbumAlbum);
             }
-            List<Genero> generosHijos = genero.getGenerosHijos();
+            List<Genero> generosHijos = genero.getListHijos();
             for (Genero generosHijosGenero : generosHijos) {
-                generosHijosGenero.getGenerosHijos().remove(genero);
+                generosHijosGenero.getListHijos().remove(genero);
                 generosHijosGenero = em.merge(generosHijosGenero);
             }
             em.remove(genero);

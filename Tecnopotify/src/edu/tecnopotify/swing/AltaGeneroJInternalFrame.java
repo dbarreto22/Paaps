@@ -136,23 +136,25 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
     Genero g;
     Genero gH;
     List<Genero> genHijos;
-    dataGenero genero;
-    dataGenero generoO;
+    dataGenero oDtGenero;
+    dataGenero oDtGeneroPadre;
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
         selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
        
-            if (selectedNode != null) {
+            if (selectedNode != null) {  //Si hay ungenero seleccionado
+                //Creo el nodo con el texto seleccionado
                 selectedNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()), 0);
                 model.reload(selectedNode);
-                genero = new dataGenero(jTextFieldNombre.getText(), jTextPadre.getText());
-                crl.altaGenero(genero);
+                
+                oDtGenero = new dataGenero(jTextFieldNombre.getText(), tree.getLastSelectedPathComponent().toString());
+                crl.altaGenero(oDtGenero);
             } else {
                 if(!jTextPadre.getText().isEmpty()){
-                    generoO = new dataGenero(jTextFieldNombre.getText(), jTextPadre.getText());
+                    oDtGeneroPadre = new dataGenero(jTextFieldNombre.getText(), jTextPadre.getText());
                     g = genCtrl.findGenero(jTextPadre.getText());
-                    gH = new Genero(generoO);
-                    g.getGenerosHijos().add(gH);
+                    gH = new Genero(oDtGeneroPadre);
+                    g.getListHijos().add(gH);
               
                 selectedNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()), selectedNode.getIndex(selectedNode.getLastChild()) + 1);
                 padre= tree.getLastSelectedPathComponent().toString();

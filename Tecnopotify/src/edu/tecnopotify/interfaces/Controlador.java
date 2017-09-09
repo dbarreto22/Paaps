@@ -104,8 +104,8 @@ public class Controlador implements IControlador {
         }
     }
 
-    public void altaGenero(dataGenero genero) {
-        Genero G = new Genero(genero);
+    public void altaGenero(dataGenero oDtGenero) {
+        Genero G = new Genero(oDtGenero);
         GeneroJpaController crlG = new GeneroJpaController(fact);
         try {
             crlG.create(G);
@@ -312,7 +312,7 @@ public class Controlador implements IControlador {
     Genero g = new Genero();
     GeneroJpaController genCtrl = new GeneroJpaController(fact);
     g = genCtrl.findGenero(nombre);
-    genero = g.getGenerosHijos();
+    genero = g.getListHijos();
     return genero;
     }
 }
