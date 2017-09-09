@@ -270,7 +270,7 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonSImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSImagenActionPerformed
         // TODO add your handling code here:
-        jFrameSelectorArchivos.setVisible(true);
+      //  jFrameSelectorArchivos.setVisible(true);
         // https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
     }//GEN-LAST:event_jButtonSImagenActionPerformed
 
@@ -333,9 +333,9 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here
-        Cliente cli;
+        /*       Cliente cli;
         cli = crl.seleccionarCliente(jTextFieldNick.getText());
-        jTextFieldNombre.setText(cli.getNombre());
+        jTextFieldNombre.setText(cli.getNombre());*/
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

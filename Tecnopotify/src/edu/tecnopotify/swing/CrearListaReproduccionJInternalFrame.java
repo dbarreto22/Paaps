@@ -52,19 +52,25 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
 
+        List<Cliente> nickCli = ctrl.listarClientes();
+        Iterator<Cliente> it = nickCli.iterator();
+        List<Genero> generoGral = ctrl.listarGeneros();
+        Iterator<Genero> itG = generoGral.iterator();
+        
+
         model = (DefaultTreeModel) tree.getModel();
         if (jCheckBoxListaDefecto.isSelected()) {
-            this.jCheckBoxListaDefecto.setVisible(true);
-            List<Cliente> nickCli = ctrl.listarClientes();
-            Iterator<Cliente> it = nickCli.iterator();
-            List<Genero> generoGral = ctrl.listarGeneros();
-            
-            Iterator<Genero> itG = generoGral.iterator();
+           // this.jComboNickCli.setVisible(true);
             while (it.hasNext()) {
                 this.jComboNickCli.addItem(it.next().getNickname());
             }
         } else {
-            this.jCheckBoxListaDefecto.setVisible(false);
+            this.jComboGenero.setVisible(true);
+         //   List<Genero> generoPOrN = ctrl.getListGenero(title);
+            while (itG.hasNext()) {
+                this.jComboGenero.addItem(itG.next().getNombre());
+            }
+            
         }
     }
 
@@ -205,13 +211,13 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         // TODO add your handling code here:
         String nombre = jTextFieldNombreLista.getText();
         String nickCliOGenero = jComboNickCli.getSelectedItem().toString();
-        dataListaReproduccion dtLista = new dataListaReproduccion(nombre, "imagen", null);
+        dataListaReproduccion dtLista = new dataListaReproduccion(nombre, path, null);
 
         if (jCheckBoxListaDefecto.isSelected()) {
             //*crear lista en un cliente            
-            ctrl.crearListaParticular(true, nickCliOGenero, dtLista);
+            ctrl.crearListaParticular(true, jComboGenero.getSelectedItem().toString(), dtLista);
         } else {//crear lista por defecto
-            ctrl.crearListaDefecto(dtLista, nickCliOGenero);
+            ctrl.crearListaDefecto(dtLista, jComboGenero.getSelectedItem().toString());
         }
 
         //JOptionPane.showMessageDialog(this, "Lista creada con éxito", "Crear lista de reproducción", JOptionPane.INFORMATION_MESSAGE);
