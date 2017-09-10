@@ -55,6 +55,11 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         model = (DefaultTreeModel) tree.getModel();
         DefaultMutableTreeNode rootNode= (DefaultMutableTreeNode) model.getRoot();
         List<Genero> lstGeneros = crl.listarGeneros();
+        ListIterator<Genero> it=lstGeneros.listIterator();
+        while (it.hasNext()) {
+            System.out.println(it.toString());
+            it.next();
+        }
         iniciarTree(lstGeneros, rootNode);
         model.reload(rootNode);
     }
@@ -154,6 +159,7 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
             rootNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()),0);
             oDtGenero=new dataGenero(jTextFieldNombre.getText(),"");
         }
+        System.out.println("apadre: "+ oDtGenero.getPadre()+ " nombre: "+ oDtGenero.getNombre());
         //persiste el genero ingresado
         crl.altaGenero(oDtGenero);
         model.reload(rootNode);
@@ -168,7 +174,7 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
             //lo asigno en oGenero
             oGenero=lstGeneros.get(0);
             //lo creo como nodo hijo
-            hijo= new DefaultMutableTreeNode(lstGeneros.get(0).getNombre());
+            hijo= new DefaultMutableTreeNode(oGenero.getNombre());
             //lo agrago en el modelo del arbol
             model.insertNodeInto(hijo, padre, model.getChildCount(padre));
             if (!oGenero.getListHijos().isEmpty()) { //Reviso si tiene hijos
