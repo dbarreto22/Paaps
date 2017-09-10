@@ -31,9 +31,6 @@ public class Genero implements Serializable{
     @ManyToMany(mappedBy="listGenero")
     private List<Album> listAlbum;
     
-    @OneToMany
-    private List<Genero> generosHijos;
-    
     
     public Genero(dataGenero genero) {
         this.nombre = genero.getNombre();
@@ -76,15 +73,11 @@ public class Genero implements Serializable{
     public void setListAlbum(List<Album> aux) {
         this.listAlbum = aux;
     }
-
-    public List<Genero> getGenerosHijos() {
-        return generosHijos;
+    public List<Genero> getListHijos() {
+        return listHijos;
     }
 
-    public void setGenerosHijos(List<Genero> generosHijos) {
-        this.generosHijos = generosHijos;
+    public void setListHijos(List<Genero> listHijos) {
+        this.listHijos = listHijos;
     }
-    
-    
-    
 }

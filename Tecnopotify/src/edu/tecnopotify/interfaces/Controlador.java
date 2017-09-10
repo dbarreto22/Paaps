@@ -26,6 +26,7 @@ import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.Favoritos;
 import edu.tecnopotify.entidades.ListaDefecto;
+import static edu.tecnopotify.entidades.ListaDefecto_.genero;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.Temas;
 import java.util.ArrayList;
@@ -101,10 +102,17 @@ public class Controlador implements IControlador {
         }
     }
 
-    public void altaGenero(dataGenero genero) {
-        Genero G = new Genero(genero);
+    public void altaGenero(dataGenero oDtGenero) {
+        Genero oGeneroPadre;
+        Genero G = new Genero(oDtGenero);
         GeneroJpaController crlG = new GeneroJpaController(fact);
         try {
+            if (oDtGenero.getPadre()!=null) {
+                System.out.println("*********hay padre");
+                oGeneroPadre = crlG.findGenero(oDtGenero.getPadre());
+                oGeneroPadre.getListHijos().add(G);
+                crlG.edit(oGeneroPadre);
+            }
             crlG.create(G);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -316,7 +324,8 @@ public class Controlador implements IControlador {
         Genero g = new Genero();
         GeneroJpaController genCtrl = new GeneroJpaController(fact);
         g = genCtrl.findGenero(nombre);
-        genero = g.getGenerosHijos();
+
+        genero = g.getListHijos();
         return genero;
     }
 
@@ -332,5 +341,8 @@ public class Controlador implements IControlador {
         AlbumJpaController crlA = new AlbumJpaController(fact);
         album = crlA.findAlbumEntities();
         return album;
+
+
+
     }
 }
