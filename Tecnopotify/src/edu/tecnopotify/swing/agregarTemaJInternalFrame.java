@@ -167,17 +167,20 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     DefaultMutableTreeNode selectedNode;
     DefaultMutableTreeNode node;
+    List<ListaParticular> lista;
+    List<Temas> temas;
+    ListaReproduccion lr;
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
         node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
         Cliente c =  crl.getCli(jComboUsuario.getSelectedItem().toString());
-        List<ListaParticular> lista = c.getListasReprParticular();
+        lista = c.getListasReprParticular();
         Iterator<ListaParticular> it = lista.iterator();
         while(it.hasNext()){
             node.setUserObject(it.next());
         }
         
-        List<Temas> temas = crl.listarTemas();
+        temas = crl.listarTemas();
         Iterator<Temas> itT = temas.iterator();
         
         while(itT.hasNext()){
@@ -191,20 +194,26 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
         selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-        dataTemas dtTema = new dataTemas();
+        
         if (selectedNode != null) {
             selectedNode.insert(new DefaultMutableTreeNode(jComboTemas.getSelectedItem()), 0);
             model.reload(selectedNode);
+            lr = crl.getlr(selectedNode.toString());
+            Temas Tema = crl.getTema(jComboTemas.getSelectedItem().toString());
+            lr.getListaTemas().add(Tema);                     
         }
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // TODO add your handling code here:
          selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+         
         if (selectedNode != null) {
             DefaultMutableTreeNode parent = (DefaultMutableTreeNode) selectedNode.getParent();
             parent.remove(selectedNode);
-            
+            lr = crl.getlr(selectedNode.toString());
+            Temas Tema = crl.getTema(selectedNode.getChildAfter(parent).toString());
+            lr.getListaTemas().remove(Tema);
             model.reload(parent);
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed

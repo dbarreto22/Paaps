@@ -86,4 +86,8 @@ public interface IControlador {
     public Cliente getCli(String nickname);
 
     public List<Temas> listarTemas();
+    
+    public Temas getTema(String name);
+    
+    public ListaReproduccion getlr(String name);
 }

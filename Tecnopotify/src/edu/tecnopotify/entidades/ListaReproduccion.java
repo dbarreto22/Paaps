@@ -4,6 +4,7 @@ import edu.tecnopotify.datatypes.dataListaReproduccion;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class ListaReproduccion implements Serializable{
    
     private String imagen;
     @ManyToMany
-    private Map<String, Temas> listaTemas = new HashMap<String,Temas>();
+    private List<Temas> listaTemas ;
 
     
     
@@ -54,11 +55,11 @@ public class ListaReproduccion implements Serializable{
         this.imagen = imagen;
     }
 
-    public Map<String, Temas> getListaTemas() {
+    public List<Temas> getListaTemas() {
         return listaTemas;
     }
 
-    public void setListaTemas(Map<String, Temas> listaTemas) {
+    public void setListaTemas(List<Temas> listaTemas) {
         this.listaTemas = listaTemas;
     }
 

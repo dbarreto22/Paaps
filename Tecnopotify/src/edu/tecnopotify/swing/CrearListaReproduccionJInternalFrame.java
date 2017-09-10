@@ -82,6 +82,7 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         jButtonConfirmar = new javax.swing.JButton();
         jTextFieldNombreLista = new javax.swing.JTextField();
         listaParticular = new java.awt.Label();
@@ -96,6 +97,8 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         nickNameC = new java.awt.Label();
         jComboGenero = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setIconifiable(true);
         setMaximizable(true);
@@ -307,6 +310,7 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
     private java.awt.Label Nombre;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonSubirImagen;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBoxListaParticular;
     private javax.swing.JComboBox<String> jComboGenero;
     private javax.swing.JComboBox<String> jComboNickCli;

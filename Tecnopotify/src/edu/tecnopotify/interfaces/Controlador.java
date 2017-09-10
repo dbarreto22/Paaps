@@ -107,16 +107,15 @@ public class Controlador implements IControlador {
         Genero oGeneroPadre;
         Genero G = new Genero(oDtGenero);
         ExtJpaGenero crlG = new ExtJpaGenero(fact);
-        System.out.println("padre: "+ oDtGenero.getPadre()+ " nombre: "+ oDtGenero.getNombre());
+        System.out.println("padre: " + oDtGenero.getPadre() + " nombre: " + oDtGenero.getNombre());
         try {
             if (!"".equals(oDtGenero.getPadre()) && !"Genero".equals(oDtGenero.getPadre())) {
                 System.out.println("*********hay padre");
                 oGeneroPadre = crlG.findGenero(oDtGenero.getPadre());
 //                oGeneroPadre.getListHijos().add(G);
                 System.out.println("Agrega en la lista del padre");
-                crlG.agregarHijo(oGeneroPadre,G);
-            }
-            else{
+                crlG.agregarHijo(oGeneroPadre, G);
+            } else {
                 crlG.create(G);
                 System.out.println("**antes de crear el genero");
 
@@ -157,7 +156,7 @@ public class Controlador implements IControlador {
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
         Temas aux = ctrTema.findTemas(idTema);
         ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(listaR.getNombre());
-        Laux.getListaTemas().put(aux.getNombre(), aux);
+        Laux.getListaTemas().add(aux);
     }
 
     public void quitarTemaLista(String idTema, dataListaReproduccion listaR) {
@@ -165,7 +164,7 @@ public class Controlador implements IControlador {
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
         Temas aux = ctrTema.findTemas(idTema);
         ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(listaR.getNombre());
-        Laux.getListaTemas().remove(aux.getNombre(), Laux);
+        Laux.getListaTemas().remove(aux.getNombre());
     }
 
     public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum) {
@@ -370,6 +369,20 @@ public class Controlador implements IControlador {
         TemasJpaController crlT = new TemasJpaController(fact);
         temas = crlT.findTemasEntities();
         return temas;
+    }
+
+    public Temas getTema(String name) {
+        Temas t = null;
+        TemasJpaController crlT = new TemasJpaController(fact);
+        t = crlT.findTemas(name);
+        return t;
+    }
+
+    public ListaReproduccion getlr(String name) {
+        ListaReproduccion lr = null;
+        ListaReproduccionJpaController crllr = new ListaReproduccionJpaController(fact);
+        lr = crllr.findListaReproduccion(name);
+        return lr;
     }
 
 }
