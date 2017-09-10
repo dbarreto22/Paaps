@@ -107,21 +107,14 @@ public class Controlador implements IControlador {
         Genero oGeneroPadre;
         Genero G = new Genero(oDtGenero);
         ExtJpaGenero crlG = new ExtJpaGenero(fact);
-        System.out.println("padre: " + oDtGenero.getPadre() + " nombre: " + oDtGenero.getNombre());
+        System.out.println("padre: "+ oDtGenero.getPadre()+ " nombre: "+ oDtGenero.getNombre());
         try {
             if (!"".equals(oDtGenero.getPadre())) {//Si no es el genero raiz
                 //Busco el genero padre y agrego el hijo
                 oGeneroPadre = crlG.findGenero(oDtGenero.getPadre());
-
-//                oGeneroPadre.getListHijos().add(G);
-                System.out.println("Agrega en la lista del padre");
-                crlG.agregarHijo(oGeneroPadre, G);
-            } else {
-
                 crlG.agregarHijo(oGeneroPadre,G);
             }
             else{//Si es el genero raiz lo crea en la raiz
-
                 crlG.create(G);
             }
 
