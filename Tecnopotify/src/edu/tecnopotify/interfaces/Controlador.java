@@ -357,13 +357,19 @@ public class Controlador implements IControlador {
         lUsr = crlU.findUsuarioEntities();
         return lUsr;
     }
-    
-    public Usuario getUsr(String nickname){
-        Usuario u = null;
+
+    public Cliente getCli(String nickname) {
         Cliente c = null;
-        Artista a = null;
-        UsuarioJpaController crlU = new UsuarioJpaController(fact);
-        u = crlU.findUsuario(nickname);
-        return u;       
+        ClienteJpaController crlU = new ClienteJpaController(fact);
+        c = crlU.findCliente(nickname);
+        return c;
     }
+
+    public List<Temas> listarTemas() {
+        List<Temas> temas = null;
+        TemasJpaController crlT = new TemasJpaController(fact);
+        temas = crlT.findTemasEntities();
+        return temas;
+    }
+
 }
