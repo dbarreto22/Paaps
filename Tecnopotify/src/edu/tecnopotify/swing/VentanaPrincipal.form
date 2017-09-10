@@ -119,10 +119,13 @@
                     <Property name="text" type="java.lang.String" value="Dejar de seguir"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="GuardarTema">
+                <MenuItem class="javax.swing.JMenuItem" name="menuGuardarFavorito">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Guardar tema/lista/album"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuGuardarFavoritoActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="QuitarTema">
                   <Properties>

@@ -230,11 +230,11 @@ public class Controlador implements IControlador {
         return lista;
     }
 
-    public void eliminarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento) {
+    public void eliminarFavorito(boolean tema, boolean lista, boolean album, long idFav, String idElemento) {
         //eliminar tema/lista/album de los favoritos de un cliente
         //selecciono un favorito y saco el elemento de la lista que corresponda
         FavoritosJpaController fav = new FavoritosJpaController(fact);
-        Favoritos f = fav.findFavoritos(idCliente);
+        Favoritos f = fav.findFavoritos(idFav);
 
         if (tema) {
             TemasJpaController temactrl = new TemasJpaController(fact);
@@ -255,10 +255,15 @@ public class Controlador implements IControlador {
         }
     }
 
-    public void agregarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento) {
+    public void agregarFavorito(boolean tema, boolean lista, boolean album, String idCliente, String idElemento) {
         FavoritosJpaController fav = new FavoritosJpaController(fact);
-        Favoritos f = fav.findFavoritos(idCliente);
-
+        Favoritos f = new Favoritos();
+        fav.create(f);
+        ClienteJpaController clictrl = new ClienteJpaController(fact);
+        Cliente cli = clictrl.findCliente(idCliente);
+        f.setId(Long.MIN_VALUE);
+        f.setCliente(cli);
+        
         if (tema) {
             TemasJpaController temactrl = new TemasJpaController(fact);
             Temas t = temactrl.findTemas(idElemento);

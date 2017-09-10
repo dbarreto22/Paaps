@@ -137,6 +137,12 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
 
         jLabelImagen.setText("Imagen");
 
+        jComboBoxNickname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxNicknameActionPerformed(evt);
+            }
+        });
+
         jLabelMostrarImagen.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jLabelMostrarImagenComponentShown(evt);
@@ -211,12 +217,9 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelImagen)
-                        .addGap(57, 157, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelMostrarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabelImagen)
+                    .addComponent(jLabelMostrarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -251,6 +254,10 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         ImageIcon i = new ImageIcon(this.path);
         this.jLabelMostrarImagen.setIcon(i);
     }//GEN-LAST:event_jLabelMostrarImagenComponentShown
+
+    private void jComboBoxNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNicknameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxNicknameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

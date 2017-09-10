@@ -46,9 +46,9 @@ public interface IControlador {
 
     public Cliente seleccionarCliente(String nickname);
 
-    public void eliminarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento);
+    public void eliminarFavorito(boolean tema, boolean lista, boolean album, long idFav, String idElemento);
 
-    public void agregarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento);
+    public void agregarFavorito(boolean tema, boolean lista, boolean album, String nickCliente, String idElemento);
 
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr);
 
