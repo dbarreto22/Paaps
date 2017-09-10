@@ -80,8 +80,6 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextFieldNombre = new javax.swing.JTextField();
         tree = new javax.swing.JTree();
-        jLabel1 = new javax.swing.JLabel();
-        jTextPadre = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -99,8 +97,6 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Genero");
         tree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
 
-        jLabel1.setText("Si desea ingrese carpeta Padre ");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,17 +108,13 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tree, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(0, 132, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNombre)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                            .addComponent(jTextPadre))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelNombre)
+                        .addGap(108, 108, 108)
+                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addComponent(jButtonAceptar)))
                 .addContainerGap())
         );
@@ -132,16 +124,12 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
                 .addComponent(tree, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextPadre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAceptar))
-                .addGap(22, 22, 22))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -165,7 +153,6 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         crl.altaGenero(oDtGenero);
         model.reload(rootNode);
         jTextFieldNombre.setText("");
-        jTextPadre.setText("");
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void iniciarTree(List<Genero> lstGeneros, DefaultMutableTreeNode padre) {
@@ -189,11 +176,9 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JTextField jTextFieldNombre;
-    private javax.swing.JTextField jTextPadre;
     private javax.swing.JTree tree;
     // End of variables declaration//GEN-END:variables
 }
