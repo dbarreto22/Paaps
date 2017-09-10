@@ -3,6 +3,7 @@ package edu.tecnopotify.interfaces;
 import edu.tecnopotify.controladores.AlbumJpaController;
 import edu.tecnopotify.controladores.ArtistaJpaController;
 import edu.tecnopotify.controladores.ClienteJpaController;
+import edu.tecnopotify.controladores.ExtJpaGenero;
 import edu.tecnopotify.controladores.FavoritosJpaController;
 import edu.tecnopotify.controladores.GeneroJpaController;
 import edu.tecnopotify.controladores.ListaDefectoJpaController;
@@ -105,14 +106,17 @@ public class Controlador implements IControlador {
     public void altaGenero(dataGenero oDtGenero) {
         Genero oGeneroPadre;
         Genero G = new Genero(oDtGenero);
-        GeneroJpaController crlG = new GeneroJpaController(fact);
+        ExtJpaGenero crlG = new ExtJpaGenero(fact);
+        System.out.println("padre: "+ oDtGenero.getPadre()+ " nombre: "+ oDtGenero.getNombre());
         try {
-            if (oDtGenero.getPadre() != null) {
+            if (!"".equals(oDtGenero.getPadre())) {
                 System.out.println("*********hay padre");
                 oGeneroPadre = crlG.findGenero(oDtGenero.getPadre());
                 oGeneroPadre.getListHijos().add(G);
-                crlG.edit(oGeneroPadre);
+                System.out.println("Agrega en la lista del padre");
+                crlG.agregarHijo(oGeneroPadre, G);
             }
+            System.out.println("**antes de crear el genero");
             crlG.create(G);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);

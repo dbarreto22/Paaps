@@ -16,7 +16,7 @@ public class dataGenero{
     
     public dataGenero(String nombre, String Padre) {
         this.nombre = nombre;
-        this.padre = padre;
+        this.padre = Padre;
     }
 
     public dataGenero() {
