@@ -5,6 +5,10 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.ListaParticular;
+import edu.tecnopotify.entidades.ListaReproduccion;
+import edu.tecnopotify.entidades.Temas;
 import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
@@ -12,6 +16,7 @@ import static edu.tecnopotify.swing.consultarArtistaJInternalFrame.xOffset;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -31,6 +36,7 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
     IControlador crl;
+     DefaultTreeModel model;
 
     public agregarTemaJInternalFrame() {
         super("Agregar Tema",
@@ -44,6 +50,7 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
 
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
+        model = (DefaultTreeModel) tree.getModel();
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         List<Usuario> lUsr = crl.listarUsuarios();
@@ -67,6 +74,10 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
         tree = new javax.swing.JTree();
         jButtonConfirmar = new javax.swing.JButton();
         jComboUsuario = new javax.swing.JComboBox();
+        jButtonAgregar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
+        jComboTemas = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
 
         setIconifiable(true);
         setMaximizable(true);
@@ -83,18 +94,34 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarActionPerformed(evt);
+            }
+        });
+
+        jButtonEliminar.setText("Eliminar");
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Temas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jComboUsuario, 0, 310, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(jButtonAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboTemas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -105,8 +132,17 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jButtonConfirmar)
                     .addComponent(jComboUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(jButtonAgregar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEliminar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         pack();
@@ -116,16 +152,41 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
         node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-        Usuario u = crl.getUsr(jComboUsuario.getSelectedItem().toString());
+        Cliente c =  crl.getCli(jComboUsuario.getSelectedItem().toString());
+        List<ListaParticular> lista = c.getListasReprParticular();
+        Iterator<ListaParticular> it = lista.iterator();
+        while(it.hasNext()){
+            node.setUserObject(it.next());
+        }
         
-      
+        List<Temas> temas = crl.listarTemas();
+        Iterator<Temas> itT = temas.iterator();
         
+        while(itT.hasNext()){
+            jComboTemas.addItem(itT.next().toString());
+        }
+        
+        
+     
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        // TODO add your handling code here:
+        selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        if (selectedNode != null) {
+            selectedNode.insert(new DefaultMutableTreeNode(jComboTemas.getSelectedItem()), 0);
+            model.reload(selectedNode);
+        }
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JComboBox<String> jComboTemas;
     private javax.swing.JComboBox<String> jComboUsuario;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree tree;
     // End of variables declaration//GEN-END:variables

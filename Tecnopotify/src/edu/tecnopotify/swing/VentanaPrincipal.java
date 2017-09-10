@@ -151,6 +151,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    public void AgregarTemaJInternalFrame() {
+        AgregarTemaAListaJInternalFrame frame = new AgregarTemaAListaJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -416,6 +427,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void agregarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTemaActionPerformed
         // TODO add your handling code here:
+        AgregarTemaJInternalFrame();
     }//GEN-LAST:event_agregarTemaActionPerformed
 
     private void jMenuConsutlarListaRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsutlarListaRepActionPerformed
