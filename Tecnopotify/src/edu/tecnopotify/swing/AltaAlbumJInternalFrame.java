@@ -26,6 +26,7 @@ import javax.swing.JTree;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
@@ -46,7 +47,8 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
     private String path;//Guarda el link a la imagen
     private JTree tree;
     private DefaultMutableTreeNode rootNode;
-    private DefaultTreeModel treeModel;
+    private DefaultTreeModel model;
+    DefaultMutableTreeNode node;
 
     public AltaAlbumJInternalFrame() {
         super("Alta Album",
@@ -60,15 +62,41 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         //Set the window's location.
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
-        rootNode = new DefaultMutableTreeNode("Genero");
-        treeModel = new DefaultTreeModel(rootNode);
-//      
-        treeGenero();
 
         List<Artista> a = ctrl.listarArtistas();
         Iterator<Artista> it = a.iterator();
         while (it.hasNext()) {
             jComboNombreArtista.addItem(it.next().getNickname());
+        }
+
+        Genero genero = ctrl.buscarGenero("Genero");
+        List<Genero> lstGeneros = genero.getListHijos();
+        iniciarTree(lstGeneros, rootNode);
+        model.reload(rootNode);
+
+        /*List<Genero> generos = ctrl.listarGeneros();
+        Iterator<Genero> itG = generos.iterator();
+        
+        this.iniciarTree(generos, node);*/
+
+    }
+
+    private void iniciarTree(List<Genero> lstGeneros, DefaultMutableTreeNode padre) {
+        Genero oGenero;
+        DefaultMutableTreeNode hijo;
+        if (!lstGeneros.isEmpty()) {//Si mi lista tiene al menos un elemento
+            //lo asigno en oGenero
+            oGenero = lstGeneros.get(0);
+            //lo creo como nodo hijo
+            hijo = new DefaultMutableTreeNode(oGenero.getNombre());
+            //lo agrago en el modelo del arbol
+            model.insertNodeInto(hijo, padre, model.getChildCount(padre));
+            if (!oGenero.getListHijos().isEmpty()) { //Reviso si tiene hijos
+                //llamo a la funcion con la lista de hijos
+                iniciarTree(oGenero.getListHijos(), hijo);
+            }
+            //Sigo con el proximo hermano
+            iniciarTree(lstGeneros.subList(1, lstGeneros.size()), padre);
         }
     }
 
@@ -81,6 +109,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         jButtonAceptar = new javax.swing.JButton();
         jLabelNombre = new javax.swing.JLabel();
         jLabelAñoCreacion = new javax.swing.JLabel();
@@ -90,8 +119,20 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         jLabelNombre1 = new javax.swing.JLabel();
         jTextNombreAlbum = new javax.swing.JTextField();
         jLabelGenero = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jComboNombreArtista = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        treeGenero = new javax.swing.JTree();
+
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setClosable(true);
         setMaximizable(true);
@@ -128,6 +169,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabelGenero.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelGenero.setText("Genero");
 
         jComboNombreArtista.addItemListener(new java.awt.event.ItemListener() {
@@ -141,35 +183,41 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        treeGenero.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(treeGenero);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelNombre)
+                            .addComponent(jLabelImagen)
+                            .addComponent(jLabelAñoCreacion)
+                            .addComponent(jLabelNombre1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextAnioCreado)
+                            .addComponent(jButtonImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextNombreAlbum)
+                            .addComponent(jComboNombreArtista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(4, 4, 4)
                 .addComponent(jButtonAceptar)
-                .addGap(43, 43, 43))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNombre)
-                    .addComponent(jLabelImagen)
-                    .addComponent(jLabelAñoCreacion)
-                    .addComponent(jLabelNombre1)
-                    .addComponent(jLabelGenero))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextAnioCreado)
-                    .addComponent(jButtonImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextNombreAlbum)
-                    .addComponent(jTextField1)
-                    .addComponent(jComboNombreArtista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(83, 83, 83))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre1)
                     .addComponent(jComboNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,13 +233,13 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonImagen)
                     .addComponent(jLabelImagen))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelGenero)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(jButtonAceptar)
-                .addGap(289, 289, 289))
+                .addGap(80, 80, 80)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAceptar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
 
         pack();
@@ -230,12 +278,14 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-
+        node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
         int anio = Integer.parseInt(jTextAnioCreado.getText());
+        Genero g = ctrl.buscarGenero(node.toString());
         dataAlbum odataAlbum = new dataAlbum(jTextNombreAlbum.getText(), anio, path);
         //desplegar nombres de artistas
-        String nickArtista = this.jComboNombreArtista.getSelectedItem().toString();        
+        String nickArtista = this.jComboNombreArtista.getSelectedItem().toString();
         ctrl.crearAlbum(nickArtista, odataAlbum);
+        odataAlbum.getListGeneros().add(g);
 
         this.jTextAnioCreado.setText("");
         //this.jTextNombreArtista.setText("");
@@ -261,7 +311,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
     private void treeGenero() {
 //        treeModel.addTreeModelListener(new MyTreeModelListener());
-        tree = new JTree(treeModel);
+        tree = new JTree(model);
         tree.setEditable(true);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.setShowsRootHandles(true);
@@ -271,36 +321,36 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
     }
 
-    public DefaultMutableTreeNode addObject(Object child) {
-        DefaultMutableTreeNode parentNode = null;
-        TreePath parentPath = tree.getSelectionPath();
-
-        if (parentPath == null) {
-            //There is no selection. Default to the root node.
-            parentNode = rootNode;
-        } else {
-            parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
-        }
-
-        return addObject(parentNode, child, true);
-    }
-
+    /*    public DefaultMutableTreeNode addObject(Object child) {
+    DefaultMutableTreeNode parentNode = null;
+    TreePath parentPath = tree.getSelectionPath();
     
-public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
-            Object child,
-            boolean shouldBeVisible) {
-        DefaultMutableTreeNode childNode
-                = new DefaultMutableTreeNode(child);
-        
-        treeModel.insertNodeInto(childNode, parent,
-                parent.getChildCount());
-
-        //Make sure the user can see the lovely new node.
-        if (shouldBeVisible) {
-            tree.scrollPathToVisible(new TreePath(childNode.getPath()));
-        }
-        return childNode;
+    if (parentPath == null) {
+    //There is no selection. Default to the root node.
+    parentNode = rootNode;
+    } else {
+    parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
     }
+    
+    return addObject(parentNode, child, true);
+    }
+    
+    
+    public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
+    Object child,
+    boolean shouldBeVisible) {
+    DefaultMutableTreeNode childNode
+    = new DefaultMutableTreeNode(child);
+    
+    treeModel.insertNodeInto(childNode, parent,
+    parent.getChildCount());
+    
+    //Make sure the user can see the lovely new node.
+    if (shouldBeVisible) {
+    tree.scrollPathToVisible(new TreePath(childNode.getPath()));
+    }
+    return childNode;
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
@@ -311,8 +361,10 @@ public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelNombre1;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextAnioCreado;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextNombreAlbum;
+    private javax.swing.JTree treeGenero;
     // End of variables declaration//GEN-END:variables
 }

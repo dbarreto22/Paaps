@@ -39,6 +39,7 @@ public class Album implements Serializable {
         this.nombre = album.getNombre();
         this.anioCreado = album.getAnioCreado();
         this.imagenAlbum = album.getImagenAlbum();
+       
     }
 
     public Album() {
