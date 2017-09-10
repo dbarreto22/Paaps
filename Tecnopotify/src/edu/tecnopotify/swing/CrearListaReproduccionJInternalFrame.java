@@ -5,6 +5,7 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.datatypes.dataGenero;
 import edu.tecnopotify.datatypes.dataListaParticular;
 import edu.tecnopotify.datatypes.dataListaReproduccion;
 import edu.tecnopotify.entidades.Artista;
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 /**
@@ -53,19 +55,15 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         initComponents();
 
         model = (DefaultTreeModel) tree.getModel();
-        if (jCheckBoxListaDefecto.isSelected()) {
-            this.jCheckBoxListaDefecto.setVisible(true);
-            List<Cliente> nickCli = ctrl.listarClientes();
-            Iterator<Cliente> it = nickCli.iterator();
-            List<Genero> generoGral = ctrl.listarGeneros();
-            
-            Iterator<Genero> itG = generoGral.iterator();
-            while (it.hasNext()) {
-                this.jComboNickCli.addItem(it.next().getNickname());
-            }
-        } else {
-            this.jCheckBoxListaDefecto.setVisible(false);
+        this.jComboNickCli.setVisible(false);
+        this.nickNameC.setVisible(false);
+
+        List<Genero> generoGral = ctrl.listarGeneros();
+        Iterator<Genero> itG = generoGral.iterator();
+        while (itG.hasNext()) {
+            this.jComboGenero.addItem(itG.next().getNombre());
         }
+
     }
 
     /*   El caso de uso comienza cuando el administrador desea crear
@@ -88,15 +86,16 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         jTextFieldNombreLista = new javax.swing.JTextField();
         listaParticular = new java.awt.Label();
         Nombre = new java.awt.Label();
-        jCheckBoxListaDefecto = new javax.swing.JCheckBox();
-        nombreCliente = new java.awt.Label();
+        jCheckBoxListaParticular = new javax.swing.JCheckBox();
+        Genero = new java.awt.Label();
         jButtonSubirImagen = new javax.swing.JButton();
         jLabelImagen = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tree = new javax.swing.JTree();
         jComboNickCli = new javax.swing.JComboBox();
-        nombreCliente1 = new java.awt.Label();
+        nickNameC = new java.awt.Label();
         jComboGenero = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
 
         setIconifiable(true);
         setResizable(true);
@@ -114,7 +113,18 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
 
         Nombre.setText("Nombre:");
 
-        nombreCliente.setText("Genero :");
+        jCheckBoxListaParticular.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckBoxListaParticularMouseClicked(evt);
+            }
+        });
+        jCheckBoxListaParticular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxListaParticularActionPerformed(evt);
+            }
+        });
+
+        Genero.setText("Genero :");
 
         jButtonSubirImagen.setText("Subir Imagen");
         jButtonSubirImagen.addActionListener(new java.awt.event.ActionListener() {
@@ -129,26 +139,22 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         tree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(tree);
 
-        nombreCliente1.setText("Nickname Cliente:");
+        nickNameC.setText("Nickname Cliente:");
+
+        jLabel1.setText("Seleccionar para guardar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonConfirmar)
-                .addGap(84, 84, 84))
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(listaParticular, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Genero, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelImagen)
-                    .addComponent(nombreCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nickNameC, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(120, 120, 120)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -156,18 +162,32 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBoxListaDefecto)
+                            .addComponent(jCheckBoxListaParticular)
                             .addComponent(jTextFieldNombreLista, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboNickCli, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(416, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(242, 242, 242))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(jButtonConfirmar)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonConfirmar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldNombreLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -177,23 +197,27 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
                                 .addComponent(listaParticular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jCheckBoxListaDefecto)))
-                        .addGap(29, 29, 29)
-                        .addComponent(jComboNickCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nombreCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelImagen)
-                    .addComponent(jButtonSubirImagen))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                                .addComponent(jCheckBoxListaParticular)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(nickNameC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboNickCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Genero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboGenero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelImagen)
+                            .addComponent(jButtonSubirImagen))
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(93, 93, 93))
         );
 
         listaParticular.getAccessibleContext().setAccessibleName("Nombre");
@@ -201,20 +225,30 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    DefaultMutableTreeNode selectedNode;
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
         String nombre = jTextFieldNombreLista.getText();
-        String nickCliOGenero = jComboNickCli.getSelectedItem().toString();
-        dataListaReproduccion dtLista = new dataListaReproduccion(nombre, "imagen", null);
+        dataListaReproduccion dtLista = new dataListaReproduccion(nombre, path, null);
 
-        if (jCheckBoxListaDefecto.isSelected()) {
+        if (jCheckBoxListaParticular.isSelected()) {
             //*crear lista en un cliente            
-            ctrl.crearListaParticular(true, nickCliOGenero, dtLista);
+            ctrl.crearListaParticular(true, jComboNickCli.getSelectedItem().toString(), dtLista);
         } else {//crear lista por defecto
-            ctrl.crearListaDefecto(dtLista, nickCliOGenero);
+            ctrl.crearListaDefecto(dtLista, jComboGenero.getSelectedItem().toString());
         }
 
-        //JOptionPane.showMessageDialog(this, "Lista creada con éxito", "Crear lista de reproducción", JOptionPane.INFORMATION_MESSAGE);
+        selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+
+        if (selectedNode != null ) {
+            selectedNode.insert(new DefaultMutableTreeNode(jTextFieldNombreLista.getText()), 0);
+            model.reload(selectedNode);
+            //JOptionPane.showMessageDialog(this, "Lista creada con éxito", "Crear lista de reproducción", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        jTextFieldNombreLista.setText("");
+        
+      
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonSubirImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubirImagenActionPerformed
@@ -246,20 +280,44 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         }
     }//GEN-LAST:event_jButtonSubirImagenActionPerformed
 
+    private void jCheckBoxListaParticularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxListaParticularActionPerformed
+        // TODO add your handling code here:
+        List<Cliente> nickCli = ctrl.listarClientes();
+        Iterator<Cliente> it = nickCli.iterator();
+        if (jCheckBoxListaParticular.isSelected()) {
+            this.nickNameC.setVisible(true);
+            this.jComboNickCli.setVisible(true);
+            while (it.hasNext()) {
+                this.jComboNickCli.addItem(it.next().getNickname());
+            }
+        }else{
+            jCheckBoxListaParticular.setSelected(false);
+            this.nickNameC.setVisible(false);
+            this.jComboNickCli.setVisible(false);
+            
+        }
+    }//GEN-LAST:event_jCheckBoxListaParticularActionPerformed
+
+    private void jCheckBoxListaParticularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBoxListaParticularMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jCheckBoxListaParticularMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Label Genero;
     private java.awt.Label Nombre;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonSubirImagen;
-    private javax.swing.JCheckBox jCheckBoxListaDefecto;
+    private javax.swing.JCheckBox jCheckBoxListaParticular;
     private javax.swing.JComboBox<String> jComboGenero;
     private javax.swing.JComboBox<String> jComboNickCli;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldNombreLista;
     private java.awt.Label listaParticular;
-    private java.awt.Label nombreCliente;
-    private java.awt.Label nombreCliente1;
+    private java.awt.Label nickNameC;
     private javax.swing.JTree tree;
     // End of variables declaration//GEN-END:variables
 }

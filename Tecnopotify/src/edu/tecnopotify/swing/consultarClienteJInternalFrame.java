@@ -3,6 +3,7 @@ package edu.tecnopotify.swing;
 import edu.tecnopotify.datatypes.dataCliente;
 import edu.tecnopotify.datatypes.dataFecha;
 import edu.tecnopotify.datatypes.dataUsuario;
+import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
@@ -50,8 +51,9 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         List<Cliente> clientes = crl.listarClientes();
-        for (Cliente cli : clientes) {
-            jComboBoxNickname.addItem(cli.getNickname());
+        Iterator<Cliente> it = clientes.iterator();
+        while (it.hasNext()) {
+            jComboBoxNickname.addItem(it.next().getNickname());
         }
 
     }
