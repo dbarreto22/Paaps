@@ -12,6 +12,7 @@ import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.entidades.ListaReproduccion;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.Usuario;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -74,4 +75,12 @@ public interface IControlador {
     public List<Genero> getListGenero(String nombre);
 
     public List<Genero> listarGeneros();
+    
+    public Album buscarAlbum(String nombre);
+    
+    public List<Album> listarAlbum();
+    
+    public List<Usuario> listarUsuarios();
+    
+     public Usuario getUsr(String nickname);
 }

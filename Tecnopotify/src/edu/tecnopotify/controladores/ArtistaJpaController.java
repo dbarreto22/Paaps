@@ -46,13 +46,13 @@ public class ArtistaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Usuario> attachedLstSeguidores = new ArrayList<Usuario>();
+            List<Usuario> attachedLstSeguidores = new ArrayList<Usuario>();
             for (Usuario lstSeguidoresUsuarioToAttach : artista.getLstSeguidores()) {
                 lstSeguidoresUsuarioToAttach = em.getReference(lstSeguidoresUsuarioToAttach.getClass(), lstSeguidoresUsuarioToAttach.getNickname());
                 attachedLstSeguidores.add(lstSeguidoresUsuarioToAttach);
             }
             artista.setLstSeguidores(attachedLstSeguidores);
-            Collection<Usuario> attachedLstSeguidos = new ArrayList<Usuario>();
+            List<Usuario> attachedLstSeguidos = new ArrayList<Usuario>();
             for (Usuario lstSeguidosUsuarioToAttach : artista.getLstSeguidos()) {
                 lstSeguidosUsuarioToAttach = em.getReference(lstSeguidosUsuarioToAttach.getClass(), lstSeguidosUsuarioToAttach.getNickname());
                 attachedLstSeguidos.add(lstSeguidosUsuarioToAttach);
@@ -86,18 +86,18 @@ public class ArtistaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Artista persistentArtista = em.find(Artista.class, artista.getNickname());
-            Collection<Usuario> lstSeguidoresOld = persistentArtista.getLstSeguidores();
-            Collection<Usuario> lstSeguidoresNew = artista.getLstSeguidores();
-            Collection<Usuario> lstSeguidosOld = persistentArtista.getLstSeguidos();
-            Collection<Usuario> lstSeguidosNew = artista.getLstSeguidos();
-            Collection<Usuario> attachedLstSeguidoresNew = new ArrayList<Usuario>();
+            List<Usuario> lstSeguidoresOld = persistentArtista.getLstSeguidores();
+            List<Usuario> lstSeguidoresNew = artista.getLstSeguidores();
+            List<Usuario> lstSeguidosOld = persistentArtista.getLstSeguidos();
+            List<Usuario> lstSeguidosNew = artista.getLstSeguidos();
+            List<Usuario> attachedLstSeguidoresNew = new ArrayList<Usuario>();
             for (Usuario lstSeguidoresNewUsuarioToAttach : lstSeguidoresNew) {
                 lstSeguidoresNewUsuarioToAttach = em.getReference(lstSeguidoresNewUsuarioToAttach.getClass(), lstSeguidoresNewUsuarioToAttach.getNickname());
                 attachedLstSeguidoresNew.add(lstSeguidoresNewUsuarioToAttach);
             }
             lstSeguidoresNew = attachedLstSeguidoresNew;
             artista.setLstSeguidores(lstSeguidoresNew);
-            Collection<Usuario> attachedLstSeguidosNew = new ArrayList<Usuario>();
+            List<Usuario> attachedLstSeguidosNew = new ArrayList<Usuario>();
             for (Usuario lstSeguidosNewUsuarioToAttach : lstSeguidosNew) {
                 lstSeguidosNewUsuarioToAttach = em.getReference(lstSeguidosNewUsuarioToAttach.getClass(), lstSeguidosNewUsuarioToAttach.getNickname());
                 attachedLstSeguidosNew.add(lstSeguidosNewUsuarioToAttach);

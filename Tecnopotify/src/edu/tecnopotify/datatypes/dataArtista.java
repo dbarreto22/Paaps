@@ -13,12 +13,12 @@ public class dataArtista extends dataUsuario{
   
     private String biografia;
     private String link;
-    private Collection<Album> listAlbum;
+    private List<Album> listAlbum;
 
 
     
-    public dataArtista(String biografia, String link, Collection<Album> listAlbum, String nickname,
-            String nombre, String apellido, String mail, dataFecha f_nac, String imagen,Collection<Usuario> lseguidores, Collection<Usuario> lseguidos ) {
+    public dataArtista(String biografia, String link, List<Album> listAlbum, String nickname,
+            String nombre, String apellido, String mail, dataFecha f_nac, String imagen,List<Usuario> lseguidores, List<Usuario> lseguidos ) {
         super(nickname, nombre, apellido, mail, f_nac, imagen,lseguidores,lseguidos);
         this.biografia = biografia;
         this.link = link;
@@ -48,11 +48,11 @@ public class dataArtista extends dataUsuario{
         this.link = link;
     }
 
-    public Collection<Album> getListDiscos() {
+    public List<Album> getListDiscos() {
         return listAlbum;
     }
 
-    public void setListDiscos(Collection<Album> listAlbum) {
+    public void setListDiscos(List<Album> listAlbum) {
         this.listAlbum = listAlbum;
     }
     

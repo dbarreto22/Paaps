@@ -5,6 +5,14 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.entidades.Usuario;
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
+import static edu.tecnopotify.swing.consultarArtistaJInternalFrame.xOffset;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  *
  * @author diego-lucia
@@ -14,15 +22,36 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form agregarTemaJInternalFrame
      */
-    
     /*    El caso de uso comienza cuando el administrador desea agregar
     un nuevo tema a una lista de reproducción. Para ello indica el
     usuario y la lista a la cual se agregará el tema, o sólo el nombre
     de la lista en caso de ser una lista por defecto. Luego, selecciona
     un tema (según sea de una lista propietaria pública, por defecto,
     o de un álbum) y el sistema lo agrega a la lista.*/
+    static int openFrameCount = 0;
+    static final int xOffset = 30, yOffset = 30;
+    IControlador crl;
+
     public agregarTemaJInternalFrame() {
+        super("Agregar Tema",
+                true, //resizable
+                true, //closable
+                true, //maximizable
+                true);//iconifiable
+        //...Create the GUI and put it in the window...
+        //...Then set the window size or call pack...
+        //Set the window's location.
+
+        setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        List<Usuario> lUsr = crl.listarUsuarios();
+        Iterator<Usuario> it = lUsr.iterator();
+        while (it.hasNext()) {
+            jComboUsuario.addItem(it.next().getNickname());
+        }
+
     }
 
     /**
@@ -34,25 +63,70 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tree = new javax.swing.JTree();
+        jButtonConfirmar = new javax.swing.JButton();
+        jComboUsuario = new javax.swing.JComboBox();
+
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        tree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(tree);
+
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 678, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addComponent(jButtonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 401, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonConfirmar)
+                    .addComponent(jComboUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    DefaultMutableTreeNode selectedNode;
+    DefaultMutableTreeNode node;
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        // TODO add your handling code here:
+        node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        Usuario u = crl.getUsr(jComboUsuario.getSelectedItem().toString());
+        
+      
+        
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JComboBox<String> jComboUsuario;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTree tree;
     // End of variables declaration//GEN-END:variables
 }

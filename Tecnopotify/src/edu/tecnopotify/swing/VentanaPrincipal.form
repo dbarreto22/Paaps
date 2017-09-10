@@ -91,10 +91,13 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCrearAlbumActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem15">
+                <MenuItem class="javax.swing.JMenuItem" name="consultarAlbum">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Consultar album"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultarAlbumActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>

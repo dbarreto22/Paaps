@@ -29,7 +29,7 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
     IControlador crl;
     String nick;
     String nombreLista;
-        
+
     public PublicarListaJInternalFrame() {
         super("Publicar Lista Reproduccion",
                 true, //resizable
@@ -44,7 +44,20 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
-        
+        List<Cliente> clientes = crl.listarClientes();
+        Iterator<Cliente> it = clientes.iterator();
+        while (it.hasNext()) {
+            jComboBoxNickname.addItem(it.next().getNickname());
+        }
+        nick = jComboBoxNickname.getSelectedItem().toString();
+        Map<String, ListaParticular> listas = (Map<String, ListaParticular>) crl.seleccionarCliente(nick).listasReprParticular;
+
+       // Iterator<ListaParticular> it = listas.values().iterator();
+        while (it.hasNext()) {
+            jComboBoxNombreListas.addItem(it.next().getNombre());
+        }
+        nombreLista = jComboBoxNombreListas.getSelectedItem().toString();
+
     }
 
     /**
@@ -137,25 +150,14 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonConfirmarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarClienteActionPerformed
         // TODO add your handling code here:
-        List<Cliente> clientes = crl.listarClientes();
-        Iterator<Cliente> it = clientes.iterator();
-        while (it.hasNext()) {
-            jComboBoxNickname.addItem(it.next().getNickname());
-        }
-        nick = jComboBoxNickname.getSelectedItem().toString();        
+
     }//GEN-LAST:event_jButtonConfirmarClienteActionPerformed
 
     private void jButtonConfirmarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarListaActionPerformed
         // TODO add your handling code here:
-        Map<String, ListaParticular> listas = (Map<String, ListaParticular>) crl.seleccionarCliente(nick).listasReprParticular;
-        
-        Iterator<ListaParticular> it = listas.values().iterator();
-        while (it.hasNext()) {
-            jComboBoxNombreListas.addItem(it.next().getNombre());
-        }
-        nombreLista = jComboBoxNombreListas.getSelectedItem().toString();
+
         crl.publicarLista(nick, nombreLista);
-        JOptionPane.showMessageDialog(this, "Lista Publicada con éxito", "Publicar lista de reproducción", JOptionPane.INFORMATION_MESSAGE);        
+        JOptionPane.showMessageDialog(this, "Lista Publicada con éxito", "Publicar lista de reproducción", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonConfirmarListaActionPerformed
 
     private void jComboBoxNombreListasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNombreListasActionPerformed

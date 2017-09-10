@@ -29,9 +29,9 @@ public class Usuario implements Serializable {
     private dataFecha f_nac;
     private String imagen;
     @OneToMany
-    private Collection<Usuario> lstSeguidos;
+    private List<Usuario> lstSeguidos;
 
-    private Collection<Usuario> lstSeguidores;
+    private List<Usuario> lstSeguidores;
 
     public Usuario(dataUsuario usuario) {
         this.nickname = usuario.getNickname();
@@ -96,19 +96,19 @@ public class Usuario implements Serializable {
         this.imagen = imagen;
     }
 
-    public Collection<Usuario> getLstSeguidos() {
+    public List<Usuario> getLstSeguidos() {
         return lstSeguidos;
     }
 
-    public void setLstSeguidos(Collection<Usuario> lstSeguidos) {
+    public void setLstSeguidos(List<Usuario> lstSeguidos) {
         this.lstSeguidos = lstSeguidos;
     }
 
-    public Collection<Usuario> getLstSeguidores() {
+    public List<Usuario> getLstSeguidores() {
         return lstSeguidores;
     }
 
-    public void setLstSeguidores(Collection<Usuario> lstSeguidores) {
+    public void setLstSeguidores(List<Usuario> lstSeguidores) {
         this.lstSeguidores = lstSeguidores;
     }
     

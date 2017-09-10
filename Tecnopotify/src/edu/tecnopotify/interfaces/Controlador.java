@@ -27,6 +27,7 @@ import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.Favoritos;
 import edu.tecnopotify.entidades.ListaDefecto;
+import static edu.tecnopotify.entidades.ListaDefecto_.genero;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.Temas;
 import java.util.ArrayList;
@@ -327,7 +328,38 @@ public class Controlador implements IControlador {
         Genero g = new Genero();
         GeneroJpaController genCtrl = new GeneroJpaController(fact);
         g = genCtrl.findGenero(nombre);
+
         genero = g.getListHijos();
         return genero;
+    }
+
+    public Album buscarAlbum(String nombre) {
+        Album a = null;
+        AlbumJpaController crlA = new AlbumJpaController(fact);
+        a = crlA.findAlbum(nombre);
+        return a;
+    }
+
+    public List<Album> listarAlbum() {
+        List<Album> album = null;
+        AlbumJpaController crlA = new AlbumJpaController(fact);
+        album = crlA.findAlbumEntities();
+        return album;
+    }
+
+    public List<Usuario> listarUsuarios() {
+        List<Usuario> lUsr = null;
+        UsuarioJpaController crlU = new UsuarioJpaController(fact);
+        lUsr = crlU.findUsuarioEntities();
+        return lUsr;
+    }
+    
+    public Usuario getUsr(String nickname){
+        Usuario u = null;
+        Cliente c = null;
+        Artista a = null;
+        UsuarioJpaController crlU = new UsuarioJpaController(fact);
+        u = crlU.findUsuario(nickname);
+        return u;       
     }
 }
