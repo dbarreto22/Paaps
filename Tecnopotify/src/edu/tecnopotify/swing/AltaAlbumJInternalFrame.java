@@ -6,12 +6,15 @@
 package edu.tecnopotify.swing;
 
 import edu.tecnopotify.datatypes.dataAlbum;
+import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.AltaClienteJInternalFrame.openFrameCount;
 import java.beans.PropertyVetoException;
 import java.io.File;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -62,6 +65,11 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 //      
         treeGenero();
 
+        List<Artista> a = ctrl.listarArtistas();
+        Iterator<Artista> it = a.iterator();
+        while (it.hasNext()) {
+            jComboNombreArtista.addItem(it.next().getNickname());
+        }
     }
 
     /**
@@ -77,13 +85,13 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         jLabelNombre = new javax.swing.JLabel();
         jLabelAñoCreacion = new javax.swing.JLabel();
         jLabelImagen = new javax.swing.JLabel();
-        jTextNombreArtista = new javax.swing.JTextField();
         jTextAnioCreado = new javax.swing.JTextField();
         jButtonImagen = new javax.swing.JButton();
         jLabelNombre1 = new javax.swing.JLabel();
-        jTextNombre1 = new javax.swing.JTextField();
+        jTextNombreAlbum = new javax.swing.JTextField();
         jLabelGenero = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jComboNombreArtista = new javax.swing.JComboBox();
 
         setClosable(true);
         setMaximizable(true);
@@ -105,12 +113,6 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
         jLabelImagen.setText("Imagen");
 
-        jTextNombreArtista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextNombreArtistaActionPerformed(evt);
-            }
-        });
-
         jButtonImagen.setText("Subir Imagen");
         jButtonImagen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,13 +122,24 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
         jLabelNombre1.setText("Nombre del Artista");
 
-        jTextNombre1.addActionListener(new java.awt.event.ActionListener() {
+        jTextNombreAlbum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextNombre1ActionPerformed(evt);
+                jTextNombreAlbumActionPerformed(evt);
             }
         });
 
         jLabelGenero.setText("Genero");
+
+        jComboNombreArtista.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboNombreArtistaItemStateChanged(evt);
+            }
+        });
+        jComboNombreArtista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboNombreArtistaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,25 +161,22 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextAnioCreado)
                     .addComponent(jButtonImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextNombreArtista)
-                    .addComponent(jTextNombre1)
-                    .addComponent(jTextField1))
+                    .addComponent(jTextNombreAlbum)
+                    .addComponent(jTextField1)
+                    .addComponent(jComboNombreArtista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(83, 83, 83))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre1)
-                    .addComponent(jTextNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelNombre))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jComboNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNombre)
+                    .addComponent(jTextNombreAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelAñoCreacion)
@@ -213,6 +223,8 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             File archivo = fileChooser.getSelectedFile();
             this.path = archivo.getAbsolutePath();
+        } else {
+            this.path = "";
         }
     }//GEN-LAST:event_jButtonImagenActionPerformed
 
@@ -220,25 +232,32 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
 
         int anio = Integer.parseInt(jTextAnioCreado.getText());
-        dataAlbum odataAlbum = new dataAlbum(jTextNombre1.getText(), anio, path);
-        ctrl.crearAlbum(jTextNombreArtista.getText(), odataAlbum);
+        dataAlbum odataAlbum = new dataAlbum(jTextNombreAlbum.getText(), anio, path);
+        //desplegar nombres de artistas
+        String nickArtista = this.jComboNombreArtista.getSelectedItem().toString();        
+        ctrl.crearAlbum(nickArtista, odataAlbum);
 
         this.jTextAnioCreado.setText("");
-        this.jTextNombreArtista.setText("");
-        this.jTextNombre1.setText("");
+        //this.jTextNombreArtista.setText("");
+        this.jTextNombreAlbum.setText("");
 
         JOptionPane.showMessageDialog(this, "Album creado con éxito", "Crear Album", JOptionPane.INFORMATION_MESSAGE);
 
 
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
-    private void jTextNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombre1ActionPerformed
+    private void jTextNombreAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreAlbumActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextNombre1ActionPerformed
+    }//GEN-LAST:event_jTextNombreAlbumActionPerformed
 
-    private void jTextNombreArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreArtistaActionPerformed
+    private void jComboNombreArtistaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboNombreArtistaItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextNombreArtistaActionPerformed
+    }//GEN-LAST:event_jComboNombreArtistaItemStateChanged
+
+    private void jComboNombreArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboNombreArtistaActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jComboNombreArtistaActionPerformed
 
     private void treeGenero() {
 //        treeModel.addTreeModelListener(new MyTreeModelListener());
@@ -286,6 +305,7 @@ public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonImagen;
+    private javax.swing.JComboBox<String> jComboNombreArtista;
     private javax.swing.JLabel jLabelAñoCreacion;
     private javax.swing.JLabel jLabelGenero;
     private javax.swing.JLabel jLabelImagen;
@@ -293,7 +313,6 @@ public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
     private javax.swing.JLabel jLabelNombre1;
     private javax.swing.JTextField jTextAnioCreado;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextNombre1;
-    private javax.swing.JTextField jTextNombreArtista;
+    private javax.swing.JTextField jTextNombreAlbum;
     // End of variables declaration//GEN-END:variables
 }

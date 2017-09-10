@@ -27,8 +27,8 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
      * Creates new form PublicarListaJInternalFrame
      */
     IControlador crl;
-    String nick;
-    String nombreLista;
+    private String nick;
+    private String nombreLista;
 
     public PublicarListaJInternalFrame() {
         super("Publicar Lista Reproduccion",
