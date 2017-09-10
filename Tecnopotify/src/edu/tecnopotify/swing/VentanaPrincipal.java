@@ -109,7 +109,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     
     private void consultarListaDeReproduccionJInternalFrame(){
-        consultarClienteJInternalFrame frame = new consultarClienteJInternalFrame();
+        ConsultaListaReproduccionJInternalFrame frame = new ConsultaListaReproduccionJInternalFrame();
         frame.setVisible(true);
         this.Desktop.add(frame);
         try {
@@ -130,6 +130,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    public void publicarListaReproduccionJInternalFrame(){
+        PublicarListaJInternalFrame frame = new PublicarListaJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -164,8 +174,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         JMenuCrearListaRep = new javax.swing.JMenuItem();
         agregarTema = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuPublicarLista = new javax.swing.JMenuItem();
+        jMenuConsutlarListaRep = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         jMenu12.setText("jMenu12");
@@ -287,11 +297,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem8.setText("Quitar tema");
         menuLista.add(jMenuItem8);
 
-        jMenuItem9.setText("Publicar lista");
-        menuLista.add(jMenuItem9);
+        jMenuPublicarLista.setText("Publicar lista");
+        jMenuPublicarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuPublicarListaActionPerformed(evt);
+            }
+        });
+        menuLista.add(jMenuPublicarLista);
 
-        jMenuItem16.setText("Consultar lista");
-        menuLista.add(jMenuItem16);
+        jMenuConsutlarListaRep.setText("Consultar Lista");
+        jMenuConsutlarListaRep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsutlarListaRepActionPerformed(evt);
+            }
+        });
+        menuLista.add(jMenuConsutlarListaRep);
 
         jMenu3.add(menuLista);
 
@@ -378,9 +398,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         consultarListaDeReproduccionJInternalFrame();
     }//GEN-LAST:event_jMenuConsultarListaReproduccionActionPerformed
 
+
     private void agregarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTemaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_agregarTemaActionPerformed
+
+    private void jMenuConsutlarListaRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsutlarListaRepActionPerformed
+        // TODO add your handling code here:
+        consultarListaDeReproduccionJInternalFrame();
+    }//GEN-LAST:event_jMenuConsutlarListaRepActionPerformed
+
+    private void jMenuPublicarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuPublicarListaActionPerformed
+        // TODO add your handling code here:
+        publicarListaReproduccionJInternalFrame();
+    }//GEN-LAST:event_jMenuPublicarListaActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -431,15 +463,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuConsultarArtista;
     private javax.swing.JMenuItem jMenuConsultarCliente;
+    private javax.swing.JMenuItem jMenuConsutlarListaRep;
     private javax.swing.JMenuItem jMenuCrearAlbum;
     private javax.swing.JMenuItem jMenuCrearArtista;
     private javax.swing.JMenuItem jMenuCrearCliente;
     private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuPublicarLista;
     private javax.swing.JMenu menuAlbum;
     private javax.swing.JMenu menuFavs;
     private javax.swing.JMenu menuGenero;
