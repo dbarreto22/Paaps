@@ -9,11 +9,11 @@ import java.util.Map;
 
 public class dataCliente extends dataUsuario {
 
-    public Collection<ListaParticular> listasReprParticular;
-    public Collection<Usuario> seguidos;
+    public List<ListaParticular> listasReprParticular;
+    public List<Usuario> seguidos;
 
     public dataCliente(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen,
-            Collection<Usuario> lseguidores, Collection<Usuario> lseguidos) {
+            List<Usuario> lseguidores, List<Usuario> lseguidos) {
         super(nickname, nombre, apellido, mail, f_nac, imagen, lseguidores, lseguidos);
     }
     
@@ -26,23 +26,23 @@ public class dataCliente extends dataUsuario {
         super();
     }
 
-    public Collection<ListaParticular> getLista() {
+    public List<ListaParticular> getLista() {
         return listasReprParticular;
     }
 
-    public Collection<ListaParticular> getListasReprParticular() {
+    public List<ListaParticular> getListasReprParticular() {
         return listasReprParticular;
     }
 
-    public void setListasReprParticular(Collection<ListaParticular> listasReprParticular) {
+    public void setListasReprParticular(List<ListaParticular> listasReprParticular) {
         this.listasReprParticular = listasReprParticular;
     }
 
-    public Collection<Usuario> getSeguidos() {
+    public List<Usuario> getSeguidos() {
         return seguidos;
     }
 
-    public void setSeguidos(Collection<Usuario> seguidos) {
+    public void setSeguidos(List<Usuario> seguidos) {
         this.seguidos = seguidos;
     }
 }

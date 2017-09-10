@@ -107,7 +107,7 @@ public class Controlador implements IControlador {
         Genero G = new Genero(oDtGenero);
         GeneroJpaController crlG = new GeneroJpaController(fact);
         try {
-            if (oDtGenero.getPadre()!=null) {
+            if (oDtGenero.getPadre() != null) {
                 System.out.println("*********hay padre");
                 oGeneroPadre = crlG.findGenero(oDtGenero.getPadre());
                 oGeneroPadre.getListHijos().add(G);
@@ -341,8 +341,21 @@ public class Controlador implements IControlador {
         AlbumJpaController crlA = new AlbumJpaController(fact);
         album = crlA.findAlbumEntities();
         return album;
+    }
 
-
-
+    public List<Usuario> listarUsuarios() {
+        List<Usuario> lUsr = null;
+        UsuarioJpaController crlU = new UsuarioJpaController(fact);
+        lUsr = crlU.findUsuarioEntities();
+        return lUsr;
+    }
+    
+    public Usuario getUsr(String nickname){
+        Usuario u = null;
+        Cliente c = null;
+        Artista a = null;
+        UsuarioJpaController crlU = new UsuarioJpaController(fact);
+        u = crlU.findUsuario(nickname);
+        return u;       
     }
 }

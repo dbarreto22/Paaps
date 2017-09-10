@@ -5,6 +5,7 @@ import edu.tecnopotify.datatypes.dataUsuario;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -12,9 +13,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class Cliente extends Usuario implements Serializable{
     @OneToMany
-    public Collection<ListaParticular> listasReprParticular ;
+    public List<ListaParticular> listasReprParticular ;
     @OneToMany
-    public Collection<Usuario> seguidos;
+    public List<Usuario> seguidos;
 
     public Cliente(dataUsuario usuario) {
         super(usuario);
@@ -24,19 +25,19 @@ public class Cliente extends Usuario implements Serializable{
         super();
     }
 
-    public Collection<ListaParticular> getListasReprParticular() {
+    public List<ListaParticular> getListasReprParticular() {
         return listasReprParticular;
     }
 
-    public void setListasReprParticular(Collection<ListaParticular> listasReprParticular) {
+    public void setListasReprParticular(List<ListaParticular> listasReprParticular) {
         this.listasReprParticular = listasReprParticular;
     }
 
-    public Collection<Usuario> getSeguidos() {
+    public List<Usuario> getSeguidos() {
         return seguidos;
     }
 
-    public void setSeguidos(Collection<Usuario> seguidos) {
+    public void setSeguidos(List<Usuario> seguidos) {
         this.seguidos = seguidos;
     }
 

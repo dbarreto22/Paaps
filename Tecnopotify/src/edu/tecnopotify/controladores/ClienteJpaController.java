@@ -13,10 +13,10 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import edu.tecnopotify.entidades.Usuario;
+import edu.tecnopotify.entidades.ListaParticular;
 import java.util.ArrayList;
 import java.util.Collection;
-import edu.tecnopotify.entidades.ListaParticular;
+import edu.tecnopotify.entidades.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -37,9 +37,6 @@ public class ClienteJpaController implements Serializable {
     }
 
     public void create(Cliente cliente) throws PreexistingEntityException, Exception {
-        if (cliente.getLstSeguidores() == null) {
-            cliente.setLstSeguidores(new ArrayList<Usuario>());
-        }
         if (cliente.getListasReprParticular() == null) {
             cliente.setListasReprParticular(new ArrayList<ListaParticular>());
         }
@@ -50,29 +47,19 @@ public class ClienteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Usuario> attachedLstSeguidores = new ArrayList<Usuario>();
-            for (Usuario lstSeguidoresUsuarioToAttach : cliente.getLstSeguidores()) {
-                lstSeguidoresUsuarioToAttach = em.getReference(lstSeguidoresUsuarioToAttach.getClass(), lstSeguidoresUsuarioToAttach.getNickname());
-                attachedLstSeguidores.add(lstSeguidoresUsuarioToAttach);
-            }
-            cliente.setLstSeguidores(attachedLstSeguidores);
-            Collection<ListaParticular> attachedListasReprParticular = new ArrayList<ListaParticular>();
+            List<ListaParticular> attachedListasReprParticular = new ArrayList<ListaParticular>();
             for (ListaParticular listasReprParticularListaParticularToAttach : cliente.getListasReprParticular()) {
                 listasReprParticularListaParticularToAttach = em.getReference(listasReprParticularListaParticularToAttach.getClass(), listasReprParticularListaParticularToAttach.getNombre());
                 attachedListasReprParticular.add(listasReprParticularListaParticularToAttach);
             }
             cliente.setListasReprParticular(attachedListasReprParticular);
-            Collection<Usuario> attachedLstSeguidos = new ArrayList<Usuario>();
+            List<Usuario> attachedLstSeguidos = new ArrayList<Usuario>();
             for (Usuario lstSeguidosUsuarioToAttach : cliente.getLstSeguidos()) {
                 lstSeguidosUsuarioToAttach = em.getReference(lstSeguidosUsuarioToAttach.getClass(), lstSeguidosUsuarioToAttach.getNickname());
                 attachedLstSeguidos.add(lstSeguidosUsuarioToAttach);
             }
             cliente.setLstSeguidos(attachedLstSeguidos);
             em.persist(cliente);
-            for (Usuario lstSeguidoresUsuario : cliente.getLstSeguidores()) {
-                lstSeguidoresUsuario.getLstSeguidos().add(cliente);
-                lstSeguidoresUsuario = em.merge(lstSeguidoresUsuario);
-            }
             for (ListaParticular listasReprParticularListaParticular : cliente.getListasReprParticular()) {
                 listasReprParticularListaParticular.getCliente().add(cliente);
                 listasReprParticularListaParticular = em.merge(listasReprParticularListaParticular);
@@ -100,27 +87,18 @@ public class ClienteJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Cliente persistentCliente = em.find(Cliente.class, cliente.getNickname());
-            Collection<Usuario> lstSeguidoresOld = persistentCliente.getLstSeguidores();
-            Collection<Usuario> lstSeguidoresNew = cliente.getLstSeguidores();
-            Collection<ListaParticular> listasReprParticularOld = persistentCliente.getListasReprParticular();
-            Collection<ListaParticular> listasReprParticularNew = cliente.getListasReprParticular();
-            Collection<Usuario> lstSeguidosOld = persistentCliente.getLstSeguidos();
-            Collection<Usuario> lstSeguidosNew = cliente.getLstSeguidos();
-            Collection<Usuario> attachedLstSeguidoresNew = new ArrayList<Usuario>();
-            for (Usuario lstSeguidoresNewUsuarioToAttach : lstSeguidoresNew) {
-                lstSeguidoresNewUsuarioToAttach = em.getReference(lstSeguidoresNewUsuarioToAttach.getClass(), lstSeguidoresNewUsuarioToAttach.getNickname());
-                attachedLstSeguidoresNew.add(lstSeguidoresNewUsuarioToAttach);
-            }
-            lstSeguidoresNew = attachedLstSeguidoresNew;
-            cliente.setLstSeguidores(lstSeguidoresNew);
-            Collection<ListaParticular> attachedListasReprParticularNew = new ArrayList<ListaParticular>();
+            List<ListaParticular> listasReprParticularOld = persistentCliente.getListasReprParticular();
+            List<ListaParticular> listasReprParticularNew = cliente.getListasReprParticular();
+            List<Usuario> lstSeguidosOld = persistentCliente.getLstSeguidos();
+            List<Usuario> lstSeguidosNew = cliente.getLstSeguidos();
+            List<ListaParticular> attachedListasReprParticularNew = new ArrayList<ListaParticular>();
             for (ListaParticular listasReprParticularNewListaParticularToAttach : listasReprParticularNew) {
                 listasReprParticularNewListaParticularToAttach = em.getReference(listasReprParticularNewListaParticularToAttach.getClass(), listasReprParticularNewListaParticularToAttach.getNombre());
                 attachedListasReprParticularNew.add(listasReprParticularNewListaParticularToAttach);
             }
             listasReprParticularNew = attachedListasReprParticularNew;
             cliente.setListasReprParticular(listasReprParticularNew);
-            Collection<Usuario> attachedLstSeguidosNew = new ArrayList<Usuario>();
+            List<Usuario> attachedLstSeguidosNew = new ArrayList<Usuario>();
             for (Usuario lstSeguidosNewUsuarioToAttach : lstSeguidosNew) {
                 lstSeguidosNewUsuarioToAttach = em.getReference(lstSeguidosNewUsuarioToAttach.getClass(), lstSeguidosNewUsuarioToAttach.getNickname());
                 attachedLstSeguidosNew.add(lstSeguidosNewUsuarioToAttach);
@@ -128,18 +106,6 @@ public class ClienteJpaController implements Serializable {
             lstSeguidosNew = attachedLstSeguidosNew;
             cliente.setLstSeguidos(lstSeguidosNew);
             cliente = em.merge(cliente);
-            for (Usuario lstSeguidoresOldUsuario : lstSeguidoresOld) {
-                if (!lstSeguidoresNew.contains(lstSeguidoresOldUsuario)) {
-                    lstSeguidoresOldUsuario.getLstSeguidos().remove(cliente);
-                    lstSeguidoresOldUsuario = em.merge(lstSeguidoresOldUsuario);
-                }
-            }
-            for (Usuario lstSeguidoresNewUsuario : lstSeguidoresNew) {
-                if (!lstSeguidoresOld.contains(lstSeguidoresNewUsuario)) {
-                    lstSeguidoresNewUsuario.getLstSeguidos().add(cliente);
-                    lstSeguidoresNewUsuario = em.merge(lstSeguidoresNewUsuario);
-                }
-            }
             for (ListaParticular listasReprParticularOldListaParticular : listasReprParticularOld) {
                 if (!listasReprParticularNew.contains(listasReprParticularOldListaParticular)) {
                     listasReprParticularOldListaParticular.getCliente().remove(cliente);
@@ -193,17 +159,12 @@ public class ClienteJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.", enfe);
             }
-            Collection<Usuario> lstSeguidores = cliente.getLstSeguidores();
-            for (Usuario lstSeguidoresUsuario : lstSeguidores) {
-                lstSeguidoresUsuario.getLstSeguidos().remove(cliente);
-                lstSeguidoresUsuario = em.merge(lstSeguidoresUsuario);
-            }
-            Collection<ListaParticular> listasReprParticular = cliente.getListasReprParticular();
+            List<ListaParticular> listasReprParticular = cliente.getListasReprParticular();
             for (ListaParticular listasReprParticularListaParticular : listasReprParticular) {
                 listasReprParticularListaParticular.getCliente().remove(cliente);
                 listasReprParticularListaParticular = em.merge(listasReprParticularListaParticular);
             }
-            Collection<Usuario> lstSeguidos = cliente.getLstSeguidos();
+            List<Usuario> lstSeguidos = cliente.getLstSeguidos();
             for (Usuario lstSeguidosUsuario : lstSeguidos) {
                 lstSeguidosUsuario.getLstSeguidos().remove(cliente);
                 lstSeguidosUsuario = em.merge(lstSeguidosUsuario);
