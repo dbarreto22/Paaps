@@ -109,15 +109,19 @@ public class Controlador implements IControlador {
         ExtJpaGenero crlG = new ExtJpaGenero(fact);
         System.out.println("padre: "+ oDtGenero.getPadre()+ " nombre: "+ oDtGenero.getNombre());
         try {
-            if (!"".equals(oDtGenero.getPadre())) {
+            if (!"".equals(oDtGenero.getPadre()) && !"Genero".equals(oDtGenero.getPadre())) {
                 System.out.println("*********hay padre");
                 oGeneroPadre = crlG.findGenero(oDtGenero.getPadre());
-                oGeneroPadre.getListHijos().add(G);
+//                oGeneroPadre.getListHijos().add(G);
                 System.out.println("Agrega en la lista del padre");
-                crlG.agregarHijo(oGeneroPadre, G);
+                crlG.agregarHijo(oGeneroPadre,G);
             }
-            System.out.println("**antes de crear el genero");
-            crlG.create(G);
+            else{
+                crlG.create(G);
+                System.out.println("**antes de crear el genero");
+
+            }
+
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -57,8 +57,7 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         List<Genero> lstGeneros = crl.listarGeneros();
         ListIterator<Genero> it=lstGeneros.listIterator();
         while (it.hasNext()) {
-            System.out.println(it.toString());
-            it.next();
+            System.out.println(it.next().getNombre());
         }
         iniciarTree(lstGeneros, rootNode);
         model.reload(rootNode);
@@ -149,20 +148,23 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         dataGenero oDtGenero;
         DefaultMutableTreeNode selectedNode,rootNode;
+        
         selectedNode =  (DefaultMutableTreeNode)(tree.getLastSelectedPathComponent());
         rootNode = (DefaultMutableTreeNode)(DefaultMutableTreeNode) model.getRoot();
         if (selectedNode != null) {  //Si hay un genero padre seleccionado
             //Creo el nodo con el texto ingresado
             selectedNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()), 0);
             oDtGenero = new dataGenero(jTextFieldNombre.getText(), selectedNode.toString());
-        } else {
+            crl.altaGenero(oDtGenero);
+        }
+            /*} else {
             rootNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()),0);
             oDtGenero=new dataGenero(jTextFieldNombre.getText(),"");
-        }
-        System.out.println("apadre: "+ oDtGenero.getPadre()+ " nombre: "+ oDtGenero.getNombre());
+            }*/
+        //System.out.println("apadre: "+ oDtGenero.getPadre()+ " nombre: "+ oDtGenero.getNombre());
         //persiste el genero ingresado
-        crl.altaGenero(oDtGenero);
-        model.reload(rootNode);
+        //crl.altaGenero(oDtGenero);
+        model.reload(selectedNode);
         jTextFieldNombre.setText("");
         jTextPadre.setText("");
     }//GEN-LAST:event_jButtonAceptarActionPerformed
@@ -170,6 +172,10 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
     private void iniciarTree(List<Genero> lstGeneros, DefaultMutableTreeNode padre) {
         Genero oGenero;
         DefaultMutableTreeNode hijo;
+        ListIterator<Genero> it=lstGeneros.listIterator();
+        while (it.hasNext()) {
+            System.out.println(it.next().getNombre());
+        }
         if (!lstGeneros.isEmpty()) {//Si mi lista tiene al menos un elemento
             //lo asigno en oGenero
             oGenero=lstGeneros.get(0);
