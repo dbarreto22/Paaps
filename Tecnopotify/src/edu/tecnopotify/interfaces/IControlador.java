@@ -86,4 +86,7 @@ public interface IControlador {
     public Cliente getCli(String nickname);
 
     public List<Temas> listarTemas();
+
+    public Genero buscarGenero(String nombre);
 }
+

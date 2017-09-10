@@ -50,15 +50,18 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         genCtrl = new GeneroJpaController(crl.getEntityManagerFactory());
+
         //********ARBOL**********
         //Genera el nodo raiz y lo agrega en el arbol
         model = (DefaultTreeModel) tree.getModel();
         DefaultMutableTreeNode rootNode= (DefaultMutableTreeNode) model.getRoot();
-        List<Genero> lstGeneros = crl.listarGeneros();
-        ListIterator<Genero> it=lstGeneros.listIterator();
-        while (it.hasNext()) {
-            System.out.println(it.next().getNombre());
+        if(crl.listarGeneros().isEmpty())//Si no existe ningun genero creo el genero raiz
+        {
+            dataGenero oDataGenero= new dataGenero("Genero","");
+            crl.altaGenero(oDataGenero);
         }
+        Genero genero=crl.buscarGenero("Genero");
+        List<Genero> lstGeneros = genero.getListHijos();
         iniciarTree(lstGeneros, rootNode);
         model.reload(rootNode);
     }
@@ -156,7 +159,7 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
             oDtGenero = new dataGenero(jTextFieldNombre.getText(), selectedNode.toString());
         } else {
             rootNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()),0);
-            oDtGenero=new dataGenero(jTextFieldNombre.getText(),"");
+            oDtGenero=new dataGenero(jTextFieldNombre.getText(),"Genero");
         }
         System.out.println("apadre: "+ oDtGenero.getPadre()+ " nombre: "+ oDtGenero.getNombre());
         //persiste el genero ingresado
@@ -169,10 +172,6 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
     private void iniciarTree(List<Genero> lstGeneros, DefaultMutableTreeNode padre) {
         Genero oGenero;
         DefaultMutableTreeNode hijo;
-        ListIterator<Genero> it=lstGeneros.listIterator();
-        while (it.hasNext()) {
-            System.out.println(it.next().getNombre());
-        }
         if (!lstGeneros.isEmpty()) {//Si mi lista tiene al menos un elemento
             //lo asigno en oGenero
             oGenero=lstGeneros.get(0);
