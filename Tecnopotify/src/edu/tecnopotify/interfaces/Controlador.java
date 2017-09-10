@@ -41,8 +41,8 @@ public class Controlador implements IControlador {
 
     public Controlador() {
     }
-    
-    public EntityManagerFactory getEntityManagerFactory(){
+
+    public EntityManagerFactory getEntityManagerFactory() {
         return this.fact;
     }
 
@@ -56,9 +56,6 @@ public class Controlador implements IControlador {
         }
     }
 
-
-
-    
     public void crearArtista(String biografia, String link,
             dataUsuario usuario) {
         Usuario U = new Artista(biografia, link, usuario);
@@ -105,9 +102,16 @@ public class Controlador implements IControlador {
     }
 
     public void altaGenero(dataGenero oDtGenero) {
+        Genero oGeneroPadre;
         Genero G = new Genero(oDtGenero);
         GeneroJpaController crlG = new GeneroJpaController(fact);
         try {
+            if (oDtGenero.getPadre()!="") {
+                System.out.println("*********hay padre");
+                oGeneroPadre = crlG.findGenero(oDtGenero.getPadre());
+                oGeneroPadre.getListHijos().add(G);
+                crlG.edit(oGeneroPadre);
+            }
             crlG.create(G);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -306,20 +310,20 @@ public class Controlador implements IControlador {
         artista = cliCtrl.findArtistaEntities();
         return artista;
     }
-    
+
     public List<Genero> listarGeneros() {
         List<Genero> g = null;
         GeneroJpaController gCtrl = new GeneroJpaController(fact);
         g = gCtrl.findGeneroEntities();
         return g;
-   }
-    
-    public List<Genero> getListGenero(String nombre){
-    List<Genero> genero = null;
-    Genero g = new Genero();
-    GeneroJpaController genCtrl = new GeneroJpaController(fact);
-    g = genCtrl.findGenero(nombre);
-    genero = g.getListHijos();
-    return genero;
+    }
+
+    public List<Genero> getListGenero(String nombre) {
+        List<Genero> genero = null;
+        Genero g = new Genero();
+        GeneroJpaController genCtrl = new GeneroJpaController(fact);
+        g = genCtrl.findGenero(nombre);
+        genero = g.getListHijos();
+        return genero;
     }
 }
