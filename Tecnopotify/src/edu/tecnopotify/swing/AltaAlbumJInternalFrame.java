@@ -187,10 +187,6 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextNombreArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreArtistaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextNombreArtistaActionPerformed
-
     private void jButtonImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonImagenActionPerformed
         // TODO add your handling code here:
         //https://www.discoduroderoer.es/como-usar-el-componente-jfilechooser-en-una-aplicacion-grafica-en-java/
@@ -239,6 +235,10 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
     private void jTextNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombre1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextNombre1ActionPerformed
+
+    private void jTextNombreArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombreArtistaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNombreArtistaActionPerformed
 
     private void treeGenero() {
 //        treeModel.addTreeModelListener(new MyTreeModelListener());

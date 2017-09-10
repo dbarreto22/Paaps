@@ -5,6 +5,14 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.entidades.Album;
+import edu.tecnopotify.entidades.Temas;
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author diego-lucia
@@ -14,8 +22,19 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form ConsultarAlbumJInternalFrame
      */
+    DefaultTableModel model;
+    IControlador crl;
+
     public ConsultarAlbumJInternalFrame() {
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
         initComponents();
+        
+        List<Album> al = crl.listarAlbum();
+        Iterator<Album> it = al.iterator();
+        while (it.hasNext()) {
+            comboBNombre.addItem(it.next().getNombre());
+        }
     }
 
     /**
@@ -27,10 +46,18 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextFieldIngNom = new javax.swing.JTextField();
         jLabelIngNomb = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        comboBNombre = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableTemas = new javax.swing.JTable();
+        jTextGenero = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextAnioC = new javax.swing.JTextField();
 
+        setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Consultar Album");
@@ -38,6 +65,27 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
         jLabelIngNomb.setText("Ingrese Nombre");
 
         jButton1.setText("Confirmar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Temas");
+
+        jLabel2.setText("Genero");
+
+        jTableTemas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Duracion", "Pos"
+            }
+        ));
+        jScrollPane3.setViewportView(jTableTemas);
+
+        jLabel4.setText("Año Creacion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -45,31 +93,89 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelIngNomb)
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldIngNom, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(33, 33, 33))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelIngNomb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextAnioC, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(comboBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(33, 33, 33))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 125, Short.MAX_VALUE)
+                        .addComponent(jTextGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(266, 266, 266))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldIngNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelIngNomb)
-                    .addComponent(jButton1))
-                .addContainerGap(349, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(comboBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextAnioC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Album al = crl.buscarAlbum(comboBNombre.getSelectedItem().toString());
+        List<Temas> t = al.getListTemas();
+        Iterator<Temas> it = t.iterator();
+        model = (DefaultTableModel) jTableTemas.getModel();
+        jTextAnioC.setText(Integer.valueOf(al.getAnioCreado()).toString());
+        Object rowData[] = new Object[3];
+        while(it.hasNext()){
+            rowData[1] = it.next().getNombre();
+            rowData[2] = it.next().getDuracion();
+            rowData[3] = it.next().getPosicion();
+        }
+        
+        jTextGenero.setText("");
+        
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboBNombre;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelIngNomb;
-    private javax.swing.JTextField jTextFieldIngNom;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableTemas;
+    private javax.swing.JTextField jTextAnioC;
+    private javax.swing.JTextField jTextGenero;
     // End of variables declaration//GEN-END:variables
 }

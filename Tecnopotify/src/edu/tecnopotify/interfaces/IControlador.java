@@ -74,4 +74,8 @@ public interface IControlador {
     public List<Genero> getListGenero(String nombre);
 
     public List<Genero> listarGeneros();
+    
+    public Album buscarAlbum(String nombre);
+    
+    public List<Album> listarAlbum();
 }

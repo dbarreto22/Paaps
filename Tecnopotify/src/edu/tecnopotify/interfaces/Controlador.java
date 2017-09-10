@@ -41,8 +41,8 @@ public class Controlador implements IControlador {
 
     public Controlador() {
     }
-    
-    public EntityManagerFactory getEntityManagerFactory(){
+
+    public EntityManagerFactory getEntityManagerFactory() {
         return this.fact;
     }
 
@@ -56,9 +56,6 @@ public class Controlador implements IControlador {
         }
     }
 
-
-
-    
     public void crearArtista(String biografia, String link,
             dataUsuario usuario) {
         Usuario U = new Artista(biografia, link, usuario);
@@ -306,20 +303,34 @@ public class Controlador implements IControlador {
         artista = cliCtrl.findArtistaEntities();
         return artista;
     }
-    
+
     public List<Genero> listarGeneros() {
         List<Genero> g = null;
         GeneroJpaController gCtrl = new GeneroJpaController(fact);
         g = gCtrl.findGeneroEntities();
         return g;
-   }
-    
-    public List<Genero> getListGenero(String nombre){
-    List<Genero> genero = null;
-    Genero g = new Genero();
-    GeneroJpaController genCtrl = new GeneroJpaController(fact);
-    g = genCtrl.findGenero(nombre);
-    genero = g.getGenerosHijos();
-    return genero;
+    }
+
+    public List<Genero> getListGenero(String nombre) {
+        List<Genero> genero = null;
+        Genero g = new Genero();
+        GeneroJpaController genCtrl = new GeneroJpaController(fact);
+        g = genCtrl.findGenero(nombre);
+        genero = g.getGenerosHijos();
+        return genero;
+    }
+
+    public Album buscarAlbum(String nombre) {
+        Album a = null;
+        AlbumJpaController crlA = new AlbumJpaController(fact);
+        a = crlA.findAlbum(nombre);
+        return a;
+    }
+
+    public List<Album> listarAlbum() {
+        List<Album> album = null;
+        AlbumJpaController crlA = new AlbumJpaController(fact);
+        album = crlA.findAlbumEntities();
+        return album;
     }
 }
