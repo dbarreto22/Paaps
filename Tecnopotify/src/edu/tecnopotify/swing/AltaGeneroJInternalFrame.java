@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
 
 /**
  *
@@ -48,16 +49,14 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
-        model = (DefaultTreeModel) tree.getModel();
         genCtrl = new GeneroJpaController(crl.getEntityManagerFactory());
-     
         //********ARBOL**********
         //Genera el nodo raiz y lo agrega en el arbol
-        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Género");
-        model = new DefaultTreeModel(rootNode);
+        model = (DefaultTreeModel) tree.getModel();
+        DefaultMutableTreeNode rootNode= (DefaultMutableTreeNode) model.getRoot();
         List<Genero> lstGeneros = crl.listarGeneros();
-        iniciarTree(lstGeneros,rootNode);
-        model.reload();
+        iniciarTree(lstGeneros, rootNode);
+        model.reload(rootNode);
     }
 
     /**
@@ -144,28 +143,25 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
         dataGenero oDtGenero;
-        DefaultMutableTreeNode selectedNode;
-        selectedNode = new DefaultMutableTreeNode(tree.getLastSelectedPathComponent());
-        if (tree.getLastSelectedPathComponent() != null) {  //Si hay un genero padre seleccionado
-            System.out.println("*********Hay nodo seleccionado "+tree.getLastSelectedPathComponent().toString());
+        DefaultMutableTreeNode selectedNode,rootNode;
+        selectedNode =  (DefaultMutableTreeNode)(tree.getLastSelectedPathComponent());
+        rootNode = (DefaultMutableTreeNode)(DefaultMutableTreeNode) model.getRoot();
+        if (selectedNode != null) {  //Si hay un genero padre seleccionado
             //Creo el nodo con el texto ingresado
-            model.insertNodeInto(new DefaultMutableTreeNode(jTextFieldNombre.getText()), selectedNode, 0);
-            model.reload(selectedNode);
-            oDtGenero = new dataGenero(jTextFieldNombre.getText(), tree.getLastSelectedPathComponent().toString());
+            selectedNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()), 0);
+            oDtGenero = new dataGenero(jTextFieldNombre.getText(), selectedNode.toString());
         } else {
-            System.out.println("*********No hay nodo seleccionado"+model.getRoot().toString());
-            model.insertNodeInto(new DefaultMutableTreeNode(jTextFieldNombre.getText()), 
-                    (MutableTreeNode) model.getRoot(),
-                    model.getChildCount(model.getRoot())+1);
+            rootNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()),0);
             oDtGenero=new dataGenero(jTextFieldNombre.getText(),"");
         }
         //persiste el genero ingresado
         crl.altaGenero(oDtGenero);
+        model.reload(rootNode);
         jTextFieldNombre.setText("");
         jTextPadre.setText("");
-
     }//GEN-LAST:event_jButtonAceptarActionPerformed
-    private void iniciarTree(List<Genero> lstGeneros, MutableTreeNode padre) {
+
+    private void iniciarTree(List<Genero> lstGeneros, DefaultMutableTreeNode padre) {
         Genero oGenero;
         DefaultMutableTreeNode hijo;
         if (!lstGeneros.isEmpty()) {//Si mi lista tiene al menos un elemento

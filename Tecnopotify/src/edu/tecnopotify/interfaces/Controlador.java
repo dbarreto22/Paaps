@@ -106,7 +106,7 @@ public class Controlador implements IControlador {
         Genero G = new Genero(oDtGenero);
         GeneroJpaController crlG = new GeneroJpaController(fact);
         try {
-            if (oDtGenero.getPadre()!="") {
+            if (oDtGenero.getPadre()!=null) {
                 System.out.println("*********hay padre");
                 oGeneroPadre = crlG.findGenero(oDtGenero.getPadre());
                 oGeneroPadre.getListHijos().add(G);
