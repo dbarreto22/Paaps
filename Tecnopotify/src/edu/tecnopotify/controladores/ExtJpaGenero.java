@@ -30,7 +30,7 @@ public class ExtJpaGenero extends GeneroJpaController{
             List<Genero> attachedGenerosHijos = padre.getListHijos();
             attachedGenerosHijos.add(hijo);
             padre.setListHijos(attachedGenerosHijos);
-            em.persist(padre);
+            em.merge(padre);
             em.getTransaction().commit();
         } catch (Exception e) {
             throw new PreexistingEntityException("Genero " + padre + " no se pudo agregar hijo.", e);
