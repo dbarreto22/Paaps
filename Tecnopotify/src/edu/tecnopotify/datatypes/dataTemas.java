@@ -17,11 +17,10 @@ public class dataTemas{
     public dataTemas() {
     }
 
-    public dataTemas(String nombre, String duracion, int posicion, Map<String, ListaReproduccion> l) {
+    public dataTemas(String nombre, String duracion, int posicion) {
         this.nombre = nombre;
         this.duracion = duracion;
         this.posicion = posicion;
-        this.listaR = l;
     }
 
     public Map<String, ListaReproduccion> getListaR() {

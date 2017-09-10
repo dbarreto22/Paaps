@@ -151,8 +151,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void AgregarTemaJInternalFrame() {
-        AgregarTemaAListaJInternalFrame frame = new AgregarTemaAListaJInternalFrame();
+    public void agregarTemaJInternalFrame() {
+        agregarTemaJInternalFrame frame = new agregarTemaJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void crearTemaJInternalFrame() {
+        crearTemaJInternalFrame frame = new crearTemaJInternalFrame();
         frame.setVisible(true);
         this.Desktop.add(frame);
         try {
@@ -192,9 +203,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         GuardarTema = new javax.swing.JMenuItem();
         QuitarTema = new javax.swing.JMenuItem();
         menuLista = new javax.swing.JMenu();
+        CrearTema = new javax.swing.JMenuItem();
         JMenuCrearListaRep = new javax.swing.JMenuItem();
         agregarTema = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuPublicarLista = new javax.swing.JMenuItem();
         jMenuConsutlarListaRep = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -304,6 +315,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuLista.setText("Lista de reproduccion");
 
+        CrearTema.setText("Crear tema");
+        CrearTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearTemaActionPerformed(evt);
+            }
+        });
+        menuLista.add(CrearTema);
+
         JMenuCrearListaRep.setText("Crear lista rep.");
         JMenuCrearListaRep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,16 +331,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         menuLista.add(JMenuCrearListaRep);
 
-        agregarTema.setText("Agregar tema");
+        agregarTema.setText("Agregar/Quitar tema de Lista de Rep.");
         agregarTema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarTemaActionPerformed(evt);
             }
         });
         menuLista.add(agregarTema);
-
-        jMenuItem8.setText("Quitar tema");
-        menuLista.add(jMenuItem8);
 
         jMenuPublicarLista.setText("Publicar lista");
         jMenuPublicarLista.addActionListener(new java.awt.event.ActionListener() {
@@ -427,7 +443,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void agregarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTemaActionPerformed
         // TODO add your handling code here:
-        AgregarTemaJInternalFrame();
+        agregarTemaJInternalFrame();
     }//GEN-LAST:event_agregarTemaActionPerformed
 
     private void jMenuConsutlarListaRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuConsutlarListaRepActionPerformed
@@ -444,6 +460,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         consultarAlbumJInternalFrame();
     }//GEN-LAST:event_consultarAlbumActionPerformed
+
+    private void CrearTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearTemaActionPerformed
+        // TODO add your handling code here:
+        crearTemaJInternalFrame();
+    }//GEN-LAST:event_CrearTemaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,6 +502,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem CrearTema;
     private javax.swing.JMenuItem DejarSeguir;
     private javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuItem GuardarTema;
@@ -501,7 +523,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuCrearCliente;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuPublicarLista;
     private javax.swing.JMenu menuAlbum;
     private javax.swing.JMenu menuFavs;
