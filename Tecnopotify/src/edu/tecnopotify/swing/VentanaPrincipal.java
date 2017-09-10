@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
  *
  * @author Carlox
  */
-public class VentanaPrincipal extends javax.swing.JFrame {
+    public class VentanaPrincipal extends javax.swing.JFrame {
 
     private Interfaz ctrl;
     private AltaClienteJInternalFrame altaUsuario;
