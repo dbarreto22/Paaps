@@ -160,8 +160,7 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         } else {
             rootNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()),0);
             oDtGenero=new dataGenero(jTextFieldNombre.getText(),"Genero");
-        }
-        System.out.println("apadre: "+ oDtGenero.getPadre()+ " nombre: "+ oDtGenero.getNombre());
+            }
         //persiste el genero ingresado
         crl.altaGenero(oDtGenero);
         model.reload(rootNode);

@@ -136,6 +136,14 @@
                 <Property name="text" type="java.lang.String" value="Lista de reproduccion"/>
               </Properties>
               <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="CrearTema">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Crear tema"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CrearTemaActionPerformed"/>
+                  </Events>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="JMenuCrearListaRep">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Crear lista rep."/>
@@ -146,16 +154,11 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="agregarTema">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Agregar tema"/>
+                    <Property name="text" type="java.lang.String" value="Agregar/Quitar tema de Lista de Rep."/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agregarTemaActionPerformed"/>
                   </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Quitar tema"/>
-                  </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuPublicarLista">
                   <Properties>
