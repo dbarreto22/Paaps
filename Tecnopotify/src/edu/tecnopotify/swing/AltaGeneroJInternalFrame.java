@@ -50,15 +50,18 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         genCtrl = new GeneroJpaController(crl.getEntityManagerFactory());
+
         //********ARBOL**********
         //Genera el nodo raiz y lo agrega en el arbol
         model = (DefaultTreeModel) tree.getModel();
         DefaultMutableTreeNode rootNode= (DefaultMutableTreeNode) model.getRoot();
-        List<Genero> lstGeneros = crl.listarGeneros();
-        ListIterator<Genero> it=lstGeneros.listIterator();
-        while (it.hasNext()) {
-            System.out.println(it.next().getNombre());
+        if(crl.listarGeneros().isEmpty())//Si no existe ningun genero creo el genero raiz
+        {
+            dataGenero oDataGenero= new dataGenero("Genero","");
+            crl.altaGenero(oDataGenero);
         }
+        Genero genero=crl.buscarGenero("Genero");
+        List<Genero> lstGeneros = genero.getListHijos();
         iniciarTree(lstGeneros, rootNode);
         model.reload(rootNode);
     }
@@ -148,23 +151,19 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         dataGenero oDtGenero;
         DefaultMutableTreeNode selectedNode,rootNode;
-        
         selectedNode =  (DefaultMutableTreeNode)(tree.getLastSelectedPathComponent());
         rootNode = (DefaultMutableTreeNode)(DefaultMutableTreeNode) model.getRoot();
         if (selectedNode != null) {  //Si hay un genero padre seleccionado
             //Creo el nodo con el texto ingresado
             selectedNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()), 0);
             oDtGenero = new dataGenero(jTextFieldNombre.getText(), selectedNode.toString());
-            crl.altaGenero(oDtGenero);
-        }
-            /*} else {
+        } else {
             rootNode.insert(new DefaultMutableTreeNode(jTextFieldNombre.getText()),0);
-            oDtGenero=new dataGenero(jTextFieldNombre.getText(),"");
-            }*/
-        //System.out.println("apadre: "+ oDtGenero.getPadre()+ " nombre: "+ oDtGenero.getNombre());
+            oDtGenero=new dataGenero(jTextFieldNombre.getText(),"Genero");
+            }
         //persiste el genero ingresado
-        //crl.altaGenero(oDtGenero);
-        model.reload(selectedNode);
+        crl.altaGenero(oDtGenero);
+        model.reload(rootNode);
         jTextFieldNombre.setText("");
         jTextPadre.setText("");
     }//GEN-LAST:event_jButtonAceptarActionPerformed
@@ -172,10 +171,6 @@ public class AltaGeneroJInternalFrame extends javax.swing.JInternalFrame {
     private void iniciarTree(List<Genero> lstGeneros, DefaultMutableTreeNode padre) {
         Genero oGenero;
         DefaultMutableTreeNode hijo;
-        ListIterator<Genero> it=lstGeneros.listIterator();
-        while (it.hasNext()) {
-            System.out.println(it.next().getNombre());
-        }
         if (!lstGeneros.isEmpty()) {//Si mi lista tiene al menos un elemento
             //lo asigno en oGenero
             oGenero=lstGeneros.get(0);
