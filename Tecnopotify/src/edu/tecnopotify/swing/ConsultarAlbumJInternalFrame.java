@@ -6,6 +6,7 @@
 package edu.tecnopotify.swing;
 
 import edu.tecnopotify.entidades.Album;
+import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.entidades.Temas;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
@@ -53,9 +54,10 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableTemas = new javax.swing.JTable();
-        jTextGenero = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextAnioC = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableGenero = new javax.swing.JTable();
 
         setIconifiable(true);
         setMaximizable(true);
@@ -71,9 +73,9 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Temas");
+        jLabel1.setText("        Temas");
 
-        jLabel2.setText("Genero");
+        jLabel2.setText("        Genero");
 
         jTableTemas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -86,6 +88,16 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(jTableTemas);
 
         jLabel4.setText("Año Creacion");
+
+        jTableGenero.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableGenero);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,19 +117,20 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(comboBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                                 .addComponent(jButton1)
                                 .addGap(33, 33, 33))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(164, 164, 164)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 125, Short.MAX_VALUE)
-                        .addComponent(jTextGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(266, 266, 266))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(163, 163, 163)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,15 +144,15 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextAnioC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(31, 31, 31)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,17 +165,20 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
         Iterator<Temas> it = t.iterator();
         model = (DefaultTableModel) jTableTemas.getModel();
         jTextAnioC.setText(Integer.valueOf(al.getAnioCreado()).toString());
-        Object rowData[] = new Object[3];
+        Object rowDataT[] = new Object[3];
         while(it.hasNext()){
-            rowData[1] = it.next().getNombre();
-            rowData[2] = it.next().getDuracion();
-            rowData[3] = it.next().getPosicion();
+            rowDataT[1] = it.next().getNombre();
+            rowDataT[2] = it.next().getDuracion();
+            rowDataT[3] = it.next().getPosicion();
         }
         
-        jTextGenero.setText("");
+        List<Genero> g = al.getListGenero();
+        Iterator<Genero> itG = g.iterator();
+        Object rowDataG[] = new Object[1];
         
-
-
+        while(itG.hasNext()){
+            rowDataG[1] = itG.next().getNombre();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -173,9 +189,10 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelIngNomb;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableGenero;
     private javax.swing.JTable jTableTemas;
     private javax.swing.JTextField jTextAnioC;
-    private javax.swing.JTextField jTextGenero;
     // End of variables declaration//GEN-END:variables
 }
