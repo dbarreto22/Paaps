@@ -151,15 +151,21 @@
                     <Property name="text" type="java.lang.String" value="Quitar tema"/>
                   </Properties>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuPublicarLista">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Publicar lista"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuPublicarListaActionPerformed"/>
+                  </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuConsutlarListaRep">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Consultar lista"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuConsutlarListaRepActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>

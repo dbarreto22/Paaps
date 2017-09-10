@@ -7,12 +7,15 @@ package edu.tecnopotify.swing;
 
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.Genero;
+import edu.tecnopotify.entidades.ListaDefecto;
+import edu.tecnopotify.entidades.ListaReproduccion;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.consultarArtistaJInternalFrame.openFrameCount;
 import static edu.tecnopotify.swing.consultarArtistaJInternalFrame.yOffset;
 import static edu.tecnopotify.swing.consultarClienteJInternalFrame.xOffset;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -24,9 +27,11 @@ public class ConsultaListaReproduccionJInternalFrame extends javax.swing.JIntern
     static final int xOffset = 30, yOffset = 30;
     private String path;
     IControlador crl;
+    Fabrica fabrica = Fabrica.getInstance();
+    
     
     public ConsultaListaReproduccionJInternalFrame() {
-        super("Consultar Cliente",
+        super("Consultar Lista de Reproducción",
                 true, //resizable
                 true, //closable
                 true, //maximizable
@@ -37,16 +42,16 @@ public class ConsultaListaReproduccionJInternalFrame extends javax.swing.JIntern
         //Set the window's location.
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
-        this.setTitle("Consultar cliente");
-        this.jLabelMostrarImagen.setVisible(true);
-        Fabrica fabrica = Fabrica.getInstance();
+        this.setTitle("Consultar Lista de Reproducción");
         crl = fabrica.getInstancia();
         
+//        jLabelNombreGenero.setVisible(false);
+//        
         if (jCheckBoxListaDefecto.isSelected()) {
             //listar las listas por defecto del genero seleccionado
             List<Genero> generos = crl.mostrarListaGenero();
             for (Genero gen : generos) {
-                jComboBoxNickname.addItem(gen.getNombre());
+                jComboBoxNombreGenero.addItem(gen.getNombre());
             }
             crl.mostrarListaGenero().get(jComboBoxNickname.getSelectedIndex());
         } else {//mostrar las listas del cliente
@@ -54,9 +59,34 @@ public class ConsultaListaReproduccionJInternalFrame extends javax.swing.JIntern
             for (Cliente cli : clientes) {
                 jComboBoxNickname.addItem(cli.getNombre());
             }
-            crl.listarClientes().get(jComboBoxNickname.getSelectedIndex());
+        
         }
-    }
+        /*creo q no sirve para nada, lo dejo por las dudas
+        jComboBoxNickname.removeAll();
+        jComboBoxNombreGenero.removeAll();
+        if (jCheckBoxListaDefecto.isSelected()) {
+            //listar las listas por defecto del genero seleccionado
+            List<Genero> generos = crl.mostrarListaGenero();
+            for (Genero gen : generos) {
+                jComboBoxNombreGenero.addItem(gen.getNombre());
+            }
+            Genero ge = crl.mostrarListaGenero().get(jComboBoxNickname.getSelectedIndex());
+            
+            ge.getListasReprGenero().forEach(jPanelListasRep.add(this));
+          
+        } else {//mostrar las listas del cliente
+            List<Cliente> clientes = crl.listarClientes();
+            for (Cliente cli : clientes) {
+                jComboBoxNickname.addItem(cli.getNombre());
+            }
+            Cliente cl = crl.listarClientes().get(jComboBoxNickname.getSelectedIndex());
+            ListaReproduccion li[] = (ListaReproduccion[]) cl.listasReprParticular.toArray();
+            for (int i = 0; i < li.length; i++){
+                jPanelListasRep.putClientProperty(li[i].getNombre(), li[i]);
+            }
+        }
+        this.jLabelMostrarImagen.setVisible(true);*/
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,29 +103,123 @@ public class ConsultaListaReproduccionJInternalFrame extends javax.swing.JIntern
         jComboBoxNickname = new javax.swing.JComboBox();
         jLabelListaPorDefecto2 = new javax.swing.JLabel();
         jCheckBoxListaDefecto = new javax.swing.JCheckBox();
+        jPanelTemas = new javax.swing.JPanel();
+        jLabelListaPorDefecto3 = new javax.swing.JLabel();
+        jButtonConfirmar = new javax.swing.JButton();
+        jLabelNombreGenero = new javax.swing.JLabel();
+        jComboBoxNombreGenero = new javax.swing.JComboBox();
+        jButtonConfirmarGenero = new javax.swing.JButton();
+        jLabelListaPorDefecto4 = new javax.swing.JLabel();
+        jPanelListasRep = new javax.swing.JPanel();
 
         jLabelListaPorDefecto.setText("Lista por defecto");
 
         jLabelListaPorDefecto1.setText("Imagen");
 
-        jLabelListaPorDefecto2.setText("Nombre");
+        jComboBoxNickname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxNicknameActionPerformed(evt);
+            }
+        });
+
+        jLabelListaPorDefecto2.setText("Nombre del cliente");
+
+        jCheckBoxListaDefecto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxListaDefectoItemStateChanged(evt);
+            }
+        });
+        jCheckBoxListaDefecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxListaDefectoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelTemasLayout = new javax.swing.GroupLayout(jPanelTemas);
+        jPanelTemas.setLayout(jPanelTemasLayout);
+        jPanelTemasLayout.setHorizontalGroup(
+            jPanelTemasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 185, Short.MAX_VALUE)
+        );
+        jPanelTemasLayout.setVerticalGroup(
+            jPanelTemasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 126, Short.MAX_VALUE)
+        );
+
+        jLabelListaPorDefecto3.setText("Temas");
+
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarActionPerformed(evt);
+            }
+        });
+
+        jLabelNombreGenero.setText("Nombre del género");
+
+        jComboBoxNombreGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxNombreGeneroActionPerformed(evt);
+            }
+        });
+
+        jButtonConfirmarGenero.setText("Confirmar");
+        jButtonConfirmarGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarGeneroActionPerformed(evt);
+            }
+        });
+
+        jLabelListaPorDefecto4.setText("Listas");
+
+        javax.swing.GroupLayout jPanelListasRepLayout = new javax.swing.GroupLayout(jPanelListasRep);
+        jPanelListasRep.setLayout(jPanelListasRepLayout);
+        jPanelListasRepLayout.setHorizontalGroup(
+            jPanelListasRepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 161, Short.MAX_VALUE)
+        );
+        jPanelListasRepLayout.setVerticalGroup(
+            jPanelListasRepLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelListaPorDefecto)
-                    .addComponent(jLabelListaPorDefecto1)
-                    .addComponent(jLabelListaPorDefecto2))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelMostrarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBoxListaDefecto, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(144, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelListaPorDefecto)
+                            .addComponent(jLabelListaPorDefecto2)
+                            .addComponent(jLabelListaPorDefecto3)
+                            .addComponent(jLabelNombreGenero)
+                            .addComponent(jLabelListaPorDefecto4))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboBoxNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                .addComponent(jButtonConfirmar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelListaPorDefecto1)
+                                    .addComponent(jComboBoxNombreGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonConfirmarGenero))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanelTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBoxListaDefecto)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanelListasRep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(95, 95, 95)
+                                .addComponent(jLabelMostrarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,27 +228,75 @@ public class ConsultaListaReproduccionJInternalFrame extends javax.swing.JIntern
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelListaPorDefecto)
                     .addComponent(jCheckBoxListaDefecto))
-                .addGap(21, 21, 21)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelListaPorDefecto2))
-                .addGap(104, 104, 104)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelListaPorDefecto2)
+                    .addComponent(jButtonConfirmar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelNombreGenero)
+                    .addComponent(jComboBoxNombreGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonConfirmarGenero))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelListaPorDefecto1)
-                    .addComponent(jLabelMostrarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(156, Short.MAX_VALUE))
+                    .addComponent(jLabelListaPorDefecto4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelMostrarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelListasRep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelListaPorDefecto3))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBoxNicknameActionPerformed(java.awt.event.ActionEvent evt){
+        jLabelNombreGenero.setVisible(true);
+    }
+    
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jCheckBoxListaDefectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxListaDefectoActionPerformed
+        // TODO add your handling code here:
+        //mostrar el género y el panel para elegir el género, ocultar el de cliente
+    }//GEN-LAST:event_jCheckBoxListaDefectoActionPerformed
+
+    private void jComboBoxNombreGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNombreGeneroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxNombreGeneroActionPerformed
+
+    private void jButtonConfirmarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarGeneroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonConfirmarGeneroActionPerformed
+
+    private void jCheckBoxListaDefectoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxListaDefectoItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxListaDefectoItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonConfirmarGenero;
     private javax.swing.JCheckBox jCheckBoxListaDefecto;
     private javax.swing.JComboBox<String> jComboBoxNickname;
+    private javax.swing.JComboBox<String> jComboBoxNombreGenero;
     private javax.swing.JLabel jLabelListaPorDefecto;
     private javax.swing.JLabel jLabelListaPorDefecto1;
     private javax.swing.JLabel jLabelListaPorDefecto2;
+    private javax.swing.JLabel jLabelListaPorDefecto3;
+    private javax.swing.JLabel jLabelListaPorDefecto4;
     private javax.swing.JLabel jLabelMostrarImagen;
+    private javax.swing.JLabel jLabelNombreGenero;
+    private javax.swing.JPanel jPanelListasRep;
+    private javax.swing.JPanel jPanelTemas;
     // End of variables declaration//GEN-END:variables
 }
