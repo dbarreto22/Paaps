@@ -141,6 +141,7 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
 
         jLabelImagen.setText("Imagen");
 
+<<<<<<< HEAD
         jTableSeguidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -151,6 +152,22 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTableSeguidos);
 
+=======
+<<<<<<< HEAD
+        jComboBoxNickname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxNicknameActionPerformed(evt);
+            }
+        });
+
+        jLabelMostrarImagen.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jLabelMostrarImagenComponentShown(evt);
+            }
+        });
+=======
+>>>>>>> 23de3fbb962baa34c4aca42bc419750b1688fc68
+>>>>>>> be323db605725b77c61391a033aee8e0b59f57d3
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,11 +240,25 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
                     .addComponent(jLabelImagen)
                     .addComponent(jimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(131, 131, 131))
+=======
+<<<<<<< HEAD
+                    .addComponent(jLabelImagen)
+                    .addComponent(jLabelMostrarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelImagen)
+                        .addGap(0, 89, Short.MAX_VALUE))
+                    .addComponent(jimagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+>>>>>>> 23de3fbb962baa34c4aca42bc419750b1688fc68
+>>>>>>> be323db605725b77c61391a033aee8e0b59f57d3
         );
 
         pack();
@@ -270,6 +301,17 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
+
+    private void jLabelMostrarImagenComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabelMostrarImagenComponentShown
+        // TODO add your handling code here:
+
+        
+    }//GEN-LAST:event_jLabelMostrarImagenComponentShown
+
+    private void jComboBoxNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNicknameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxNicknameActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

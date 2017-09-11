@@ -73,6 +73,17 @@ import javax.swing.SwingUtilities;
             System.out.println(e.getMessage());
         }
     }
+    
+    private void createFrameAgregarFavorito() {
+        AgregarFavoritoJInternalFrame frame = new AgregarFavoritoJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     private void createFrameCrearListaReproduccion() {
         CrearListaReproduccionJInternalFrame frame = new CrearListaReproduccionJInternalFrame();
@@ -212,7 +223,7 @@ import javax.swing.SwingUtilities;
         menuFavs = new javax.swing.JMenu();
         SeguirUsuario = new javax.swing.JMenuItem();
         DejarSeguir = new javax.swing.JMenuItem();
-        GuardarTema = new javax.swing.JMenuItem();
+        menuGuardarFavorito = new javax.swing.JMenuItem();
         QuitarTema = new javax.swing.JMenuItem();
         menuLista = new javax.swing.JMenu();
         CrearTema = new javax.swing.JMenuItem();
@@ -327,8 +338,13 @@ import javax.swing.SwingUtilities;
         DejarSeguir.setText("Dejar de seguir");
         menuFavs.add(DejarSeguir);
 
-        GuardarTema.setText("Guardar tema/lista/album");
-        menuFavs.add(GuardarTema);
+        menuGuardarFavorito.setText("Guardar tema/lista/album");
+        menuGuardarFavorito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGuardarFavoritoActionPerformed(evt);
+            }
+        });
+        menuFavs.add(menuGuardarFavorito);
 
         QuitarTema.setText("Quitar  tema/lista/album");
         menuFavs.add(QuitarTema);
@@ -488,9 +504,16 @@ import javax.swing.SwingUtilities;
         crearTemaJInternalFrame();
     }//GEN-LAST:event_CrearTemaActionPerformed
 
+<<<<<<< HEAD
+    private void menuGuardarFavoritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarFavoritoActionPerformed
+        // TODO add your handling code here:
+        createFrameAgregarFavorito();
+    }//GEN-LAST:event_menuGuardarFavoritoActionPerformed
+=======
     private void menuFavsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFavsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuFavsActionPerformed
+>>>>>>> 23de3fbb962baa34c4aca42bc419750b1688fc68
 
     /**
      * @param args the command line arguments
@@ -531,7 +554,6 @@ import javax.swing.SwingUtilities;
     private javax.swing.JMenuItem CrearTema;
     private javax.swing.JMenuItem DejarSeguir;
     private javax.swing.JDesktopPane Desktop;
-    private javax.swing.JMenuItem GuardarTema;
     private javax.swing.JMenuItem JMenuCrearListaRep;
     private javax.swing.JMenuItem QuitarTema;
     private javax.swing.JMenuItem SeguirUsuario;
@@ -553,6 +575,7 @@ import javax.swing.SwingUtilities;
     private javax.swing.JMenu menuAlbum;
     private javax.swing.JMenu menuFavs;
     private javax.swing.JMenu menuGenero;
+    private javax.swing.JMenuItem menuGuardarFavorito;
     private javax.swing.JMenu menuLista;
     private javax.swing.JMenu menuUuarios;
     // End of variables declaration//GEN-END:variables
