@@ -246,6 +246,11 @@ import javax.swing.SwingUtilities;
         menuUuarios.add(jMenuConsultarCliente);
 
         jMenuConsultarArtista.setText("Consultar artista");
+        jMenuConsultarArtista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsultarArtistaActionPerformed(evt);
+            }
+        });
         menuUuarios.add(jMenuConsultarArtista);
 
         jMenu3.add(menuUuarios);
