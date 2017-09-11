@@ -5,6 +5,7 @@ import edu.tecnopotify.datatypes.dataFecha;
 import edu.tecnopotify.datatypes.dataUsuario;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import java.beans.PropertyVetoException;
@@ -18,6 +19,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -84,7 +86,8 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         jTextFieldAnio = new javax.swing.JTextField();
         jComboBoxNickname = new javax.swing.JComboBox();
         jimagen = new javax.swing.JLabel();
-        prueba = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableSeguidos = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         jFrameSelectorArchivos.setMinimumSize(new java.awt.Dimension(200, 200));
@@ -138,6 +141,16 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
 
         jLabelImagen.setText("Imagen");
 
+        jTableSeguidos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "NickName", "Nombre", "Mail"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableSeguidos);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,6 +160,9 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 92, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -161,7 +177,7 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                                 .addComponent(jLabelImagen)
                                 .addGap(64, 64, 64)
                                 .addComponent(jimagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap(147, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -175,8 +191,6 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(jTextFieldApellido)
                             .addComponent(jTextFieldMail)
                             .addComponent(jComboBoxNickname, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(prueba, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonConfirmar)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -193,17 +207,11 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre)
                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelApellido)
-                            .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(prueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)))
+                    .addComponent(jLabelApellido)
+                    .addComponent(jTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelMail))
@@ -215,11 +223,11 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelImagen)
-                        .addGap(0, 89, Short.MAX_VALUE))
-                    .addComponent(jimagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jLabelImagen)
+                    .addComponent(jimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(131, 131, 131))
         );
 
         pack();
@@ -248,6 +256,19 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
 
         ImageIcon i = new ImageIcon(cliente.getImagen());
         this.jimagen.setIcon(i);
+        
+        List<Usuario> seguidos = cliente.getLstSeguidos();
+        Iterator<Usuario> it = seguidos.iterator();
+         Object rowDataT[] = new Object[3];
+         DefaultTableModel model = (DefaultTableModel) jTableSeguidos.getModel();
+        while(it.hasNext()){
+            rowDataT[0] = it.next().getNickname();
+            rowDataT[1] = it.next().getNombre();
+            rowDataT[2] = it.next().getMail();
+            model.addRow(rowDataT);          
+        }
+        
+        
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
 
@@ -263,6 +284,8 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelNickName;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableSeguidos;
     private javax.swing.JTextField jTextFieldAnio;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldDia;
@@ -270,6 +293,5 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldMes;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JLabel jimagen;
-    private javax.swing.JTextField prueba;
     // End of variables declaration//GEN-END:variables
 }

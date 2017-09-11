@@ -24,6 +24,7 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
      * Creates new form ConsultarAlbumJInternalFrame
      */
     DefaultTableModel model;
+    DefaultTableModel modelG;
     IControlador crl;
 
     public ConsultarAlbumJInternalFrame() {
@@ -167,17 +168,21 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
         jTextAnioC.setText(Integer.valueOf(al.getAnioCreado()).toString());
         Object rowDataT[] = new Object[3];
         while(it.hasNext()){
-            rowDataT[1] = it.next().getNombre();
-            rowDataT[2] = it.next().getDuracion();
-            rowDataT[3] = it.next().getPosicion();
+            rowDataT[0] = it.next().getNombre();
+            rowDataT[1] = it.next().getDuracion();
+            rowDataT[2] = it.next().getPosicion();
+            model.addRow(rowDataT);
         }
         
         List<Genero> g = al.getListGenero();
         Iterator<Genero> itG = g.iterator();
+        
+        modelG = (DefaultTableModel) jTableGenero.getModel();
         Object rowDataG[] = new Object[1];
         
         while(itG.hasNext()){
-            rowDataG[1] = itG.next().getNombre();
+            rowDataG[0] = itG.next().getNombre();
+            modelG.addRow(rowDataG);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
