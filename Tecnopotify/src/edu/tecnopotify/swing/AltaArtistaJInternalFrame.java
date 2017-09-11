@@ -268,11 +268,11 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
         String biografia = this.jTextPaneBiografia.getText();
         dataFecha fecha = new dataFecha(dia, mes, anio);
         String imagen = this.path;
-        dataUsuario cli = new dataArtista(link, biografia, nickname, nombre, apellido,
+        dataUsuario art = new dataArtista(link, biografia, nickname, nombre, apellido,
                 mail, fecha, imagen);
 
         //A través de mi interfaz registro a un nuevo usuario en mi Sistema
-        crl.crearArtista(biografia, link, cli);
+        crl.crearArtista(biografia, link, art);
         //Limpio el internal Frame
         this.jTextFieldNick.setText("");
         this.jTextFieldNombre.setText("");

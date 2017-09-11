@@ -184,6 +184,18 @@ import javax.swing.SwingUtilities;
         }
     }
 
+        
+    protected void createFrameSeguirUsuario() {
+        SeguirUsuarioJInternalFrame frame = new SeguirUsuarioJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -257,6 +269,11 @@ import javax.swing.SwingUtilities;
         menuUuarios.add(jMenuConsultarCliente);
 
         jMenuConsultarArtista.setText("Consultar artista");
+        jMenuConsultarArtista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuConsultarArtistaActionPerformed(evt);
+            }
+        });
         menuUuarios.add(jMenuConsultarArtista);
 
         jMenu3.add(menuUuarios);
@@ -304,6 +321,11 @@ import javax.swing.SwingUtilities;
         jMenu3.add(menuAlbum);
 
         menuFavs.setText("Favoritos");
+        menuFavs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFavsActionPerformed(evt);
+            }
+        });
 
         SeguirUsuario.setText("Seguir usuario");
         SeguirUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -438,7 +460,7 @@ import javax.swing.SwingUtilities;
 
     private void SeguirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeguirUsuarioActionPerformed
         // TODO add your handling code here:
-
+        createFrameSeguirUsuario();
     }//GEN-LAST:event_SeguirUsuarioActionPerformed
 
     private void JMenuCrearListaRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCrearListaRepActionPerformed
@@ -482,10 +504,16 @@ import javax.swing.SwingUtilities;
         crearTemaJInternalFrame();
     }//GEN-LAST:event_CrearTemaActionPerformed
 
+<<<<<<< HEAD
     private void menuGuardarFavoritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarFavoritoActionPerformed
         // TODO add your handling code here:
         createFrameAgregarFavorito();
     }//GEN-LAST:event_menuGuardarFavoritoActionPerformed
+=======
+    private void menuFavsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFavsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuFavsActionPerformed
+>>>>>>> 23de3fbb962baa34c4aca42bc419750b1688fc68
 
     /**
      * @param args the command line arguments
