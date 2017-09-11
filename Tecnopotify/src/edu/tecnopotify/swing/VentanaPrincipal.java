@@ -504,16 +504,16 @@ import javax.swing.SwingUtilities;
         crearTemaJInternalFrame();
     }//GEN-LAST:event_CrearTemaActionPerformed
 
-<<<<<<< HEAD
+
     private void menuGuardarFavoritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarFavoritoActionPerformed
         // TODO add your handling code here:
         createFrameAgregarFavorito();
     }//GEN-LAST:event_menuGuardarFavoritoActionPerformed
-=======
+
     private void menuFavsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFavsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuFavsActionPerformed
->>>>>>> 23de3fbb962baa34c4aca42bc419750b1688fc68
+
 
     /**
      * @param args the command line arguments
