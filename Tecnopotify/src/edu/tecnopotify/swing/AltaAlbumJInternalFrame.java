@@ -71,7 +71,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
         Genero genero = ctrl.buscarGenero("Genero");
         List<Genero> lstGeneros = genero.getListHijos();
-        iniciarTree(lstGeneros, rootNode);
+        iniciarTree(lstGeneros, (DefaultMutableTreeNode) model.getRoot());
         model.reload(rootNode);
 
         /*List<Genero> generos = ctrl.listarGeneros();
@@ -183,7 +183,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Genero");
         treeGenero.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(treeGenero);
 
