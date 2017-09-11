@@ -74,7 +74,7 @@ import javax.swing.SwingUtilities;
         }
     }
     
-    protected void createFrameAgregarFavorito() {
+    private void createFrameAgregarFavorito() {
         AgregarFavoritoJInternalFrame frame = new AgregarFavoritoJInternalFrame();
         frame.setVisible(true);
         this.Desktop.add(frame);

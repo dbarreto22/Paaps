@@ -139,8 +139,8 @@ temas no se pueden seleccionar de listas privadas.*/
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-        String nombreElemento = jTextFieldNombreElemento.getText();
-        Cliente cliente = crl.seleccionarCliente(jComboBoxCliente.getName());
+        String nombreElemento = jTextFieldNombreElemento.getText().toString();
+        Cliente cliente = crl.seleccionarCliente(jComboBoxCliente.getSelectedItem().toString());
 
         //eliminarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento) 
         if (jComboBoxTemaListaAlbum.toString() == "Tema"){

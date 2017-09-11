@@ -255,9 +255,23 @@ public class Controlador implements IControlador {
     }
 
     public void agregarFavorito(boolean tema, boolean lista, boolean album, String idCliente, String idElemento) {
+//        //Crea un album y lo agrega a su artista
+//        ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
+//        //Busca al artista
+//        Artista oArtista = ctrArtista.findArtista(nickNameArtista);
+//        AlbumJpaController ctrAlbum = new AlbumJpaController(fact);
+//        //Crea el album
+//        Album oAlbum = new Album(dtAlbum);
+//        //Agrega el album a la lista del artista
+//        oArtista.getListAlbum().add(oAlbum);
+//        try {
+//            //Persiste el album y modifica el artista 
+//            ctrArtista.edit(oArtista);
+//            ctrAlbum.create(oAlbum);
+//        } 
         FavoritosJpaController fav = new FavoritosJpaController(fact);
         Favoritos f = new Favoritos();
-        fav.create(f);
+        
         ClienteJpaController clictrl = new ClienteJpaController(fact);
         Cliente cli = clictrl.findCliente(idCliente);
         f.setId(Long.MIN_VALUE);
@@ -280,7 +294,11 @@ public class Controlador implements IControlador {
             Album a = albctrl.findAlbum(idElemento);
             f.getListAlbum().add(a);
         }
-
+        try{
+            fav.create(f);
+        }catch (Exception e) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr) {
