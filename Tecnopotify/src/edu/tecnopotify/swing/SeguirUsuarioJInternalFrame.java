@@ -5,7 +5,7 @@
  */
 package edu.tecnopotify.swing;
 
-import edu.tecnopotify.entidades.Artista;
+
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
@@ -13,7 +13,7 @@ import edu.tecnopotify.interfaces.IControlador;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+
 
 /**
  *
@@ -28,15 +28,17 @@ public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
+        
         List<Cliente> listCliente = crl.listarClientes();
         Iterator<Cliente> it = listCliente.iterator();
         while (it.hasNext()) {
             jComboBoxClientes.addItem(it.next().getNickname());
         }
+        
         List<Usuario> lstUsuarios = crl.listarUsuarios();
         Iterator<Usuario> itUsr = lstUsuarios.iterator();
-        while (it.hasNext()) {
-            jComboBoxClientes.addItem(itUsr.next().getNickname());
+        while (itUsr.hasNext()) {
+            jComboBoxUsuarios.addItem(itUsr.next().getNickname());
         }
     }
 
@@ -124,7 +126,8 @@ public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
         if (jComboBoxClientes.getSelectedItem()!=null && 
                 jComboBoxUsuarios.getSelectedItem()!=null) {
             crl.seguirUsuario(jComboBoxClientes.getSelectedItem().toString(),
-                    jComboBoxUsuarios.getSelectedItem().toString());            
+                    jComboBoxUsuarios.getSelectedItem().toString()); 
+            JOptionPane.showMessageDialog(this,"Operacion realizada","Seguir Usuario", JOptionPane.INFORMATION_MESSAGE);
         }
         else
         {
