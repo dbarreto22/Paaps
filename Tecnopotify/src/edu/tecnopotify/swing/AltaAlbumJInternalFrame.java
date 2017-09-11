@@ -45,7 +45,6 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
     private String path;//Guarda el link a la imagen
-    private JTree tree;
     private DefaultMutableTreeNode rootNode;
     private DefaultTreeModel model;
     DefaultMutableTreeNode node;
@@ -68,7 +67,10 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         while (it.hasNext()) {
             jComboNombreArtista.addItem(it.next().getNickname());
         }
-
+        
+        //********Arbol***************
+        model = (DefaultTreeModel) treeGenero.getModel();
+        rootNode=(DefaultMutableTreeNode) model.getRoot();
         Genero genero = ctrl.buscarGenero("Genero");
         List<Genero> lstGeneros = genero.getListHijos();
         iniciarTree(lstGeneros, rootNode);
@@ -183,7 +185,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Genero");
         treeGenero.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(treeGenero);
 
@@ -278,7 +280,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-        node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        node = (DefaultMutableTreeNode) treeGenero.getLastSelectedPathComponent();
         int anio = Integer.parseInt(jTextAnioCreado.getText());
         Genero g = ctrl.buscarGenero(node.toString());
         dataAlbum odataAlbum = new dataAlbum(jTextNombreAlbum.getText(), anio, path);
@@ -311,13 +313,13 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
     private void treeGenero() {
 //        treeModel.addTreeModelListener(new MyTreeModelListener());
-        tree = new JTree(model);
-        tree.setEditable(true);
-        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        tree.setShowsRootHandles(true);
-        JScrollPane pane = new JScrollPane(tree);
+        treeGenero = new JTree(model);
+        treeGenero.setEditable(true);
+        treeGenero.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        treeGenero.setShowsRootHandles(true);
+        JScrollPane pane = new JScrollPane(treeGenero);
         this.add(pane);
-        pane.setViewportView(tree);
+        pane.setViewportView(treeGenero);
 
     }
 
