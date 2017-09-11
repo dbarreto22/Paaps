@@ -7,6 +7,7 @@ package edu.tecnopotify.swing;
 
 import edu.tecnopotify.datatypes.dataAlbum;
 import edu.tecnopotify.datatypes.dataTemas;
+import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.AltaAlbumJInternalFrame.xOffset;
@@ -23,7 +24,7 @@ public class crearTemaJInternalFrame extends javax.swing.JInternalFrame {
       */
     private Fabrica fab = Fabrica.getInstance();
     private IControlador ctrl = fab.getInstancia();
-    
+    private String artista, album;
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
     public crearTemaJInternalFrame() {
@@ -38,6 +39,22 @@ public class crearTemaJInternalFrame extends javax.swing.JInternalFrame {
         //Set the window's location.
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
+    }
+    
+    public crearTemaJInternalFrame(String artista, String album) {
+        super("Crear Tema",
+                true, //resizable
+                true, //closable
+                true, //maximizable
+                true);//iconifiable
+        //...Create the GUI and put it in the window...
+        //...Then set the window size or call pack...
+
+        //Set the window's location.
+        setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
+        initComponents();
+        this.artista=artista;
+        this.album=album;
     }
 
     /**
@@ -123,15 +140,12 @@ public class crearTemaJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
-        
         int pos = Integer.parseInt(jTextFieldPos.getText());
         dataTemas odatatema = new dataTemas(jTextFieldNom.getText(), jTextFieldDur.getText(),pos);
-        ctrl.altaTema(odatatema);
-
+        ctrl.altaTema(odatatema,this.album);
         this.jTextFieldNom.setText("");
         this.jTextFieldDur.setText("");
         this.jTextFieldPos.setText("");
-
         JOptionPane.showMessageDialog(this, "Tema creado con éxito", "Crear Tema", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 

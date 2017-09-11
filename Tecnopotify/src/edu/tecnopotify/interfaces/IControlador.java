@@ -31,7 +31,7 @@ public interface IControlador {
 
     public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum);
 
-    public void altaTema(dataTemas tema);
+    public void altaTema(dataTemas tema, String album);
     // public void seleccionarLista(String a);
 
     public Collection<ListaReproduccion> consultarListaRep(boolean cliente, String id);

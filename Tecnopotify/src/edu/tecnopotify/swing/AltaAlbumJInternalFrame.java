@@ -6,6 +6,7 @@
 package edu.tecnopotify.swing;
 
 import edu.tecnopotify.datatypes.dataAlbum;
+import edu.tecnopotify.datatypes.dataTemas;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.fabrica.Fabrica;
@@ -61,7 +62,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         //Set the window's location.
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
-
+        jPanel1.setVisible(false);
         List<Artista> a = ctrl.listarArtistas();
         Iterator<Artista> it = a.iterator();
         while (it.hasNext()) {
@@ -124,6 +125,16 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         jComboNombreArtista = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         treeGenero = new javax.swing.JTree();
+        jPanel1 = new javax.swing.JPanel();
+        jTextFieldNombreTema = new javax.swing.JTextField();
+        jTextFieldDuracion = new javax.swing.JTextField();
+        jTextFieldPos = new javax.swing.JTextField();
+        jButtonAddTema = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxTemas = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -189,59 +200,142 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         treeGenero.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(treeGenero);
 
+        jButtonAddTema.setText("Agregar tema");
+        jButtonAddTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddTemaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Temas");
+
+        jLabel4.setText("Posicion");
+
+        jLabel3.setText("Duracion");
+
+        jLabel2.setText("Nombre");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonAddTema)
+                            .addComponent(jLabel1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldNombreTema, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jTextFieldDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldPos, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextFieldNombreTema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldPos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonAddTema)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBoxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabelGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonAceptar)
+                .addGap(24, 24, 24))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelNombre)
                             .addComponent(jLabelImagen)
                             .addComponent(jLabelAñoCreacion)
-                            .addComponent(jLabelNombre1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                            .addComponent(jLabelNombre1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextAnioCreado)
                             .addComponent(jButtonImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextNombreAlbum)
-                            .addComponent(jComboNombreArtista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(4, 4, 4)
-                .addComponent(jButtonAceptar)
-                .addContainerGap())
+                            .addComponent(jComboNombreArtista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(95, 95, 95))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(69, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNombre1)
-                    .addComponent(jComboNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNombre)
-                    .addComponent(jTextNombreAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelAñoCreacion)
-                    .addComponent(jTextAnioCreado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonImagen)
-                    .addComponent(jLabelImagen))
-                .addGap(80, 80, 80)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAceptar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelNombre1)
+                            .addComponent(jComboNombreArtista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelNombre)
+                            .addComponent(jTextNombreAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelAñoCreacion)
+                            .addComponent(jTextAnioCreado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonImagen)
+                            .addComponent(jLabelImagen))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(jButtonAceptar)
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -286,15 +380,10 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         dataAlbum odataAlbum = new dataAlbum(jTextNombreAlbum.getText(), anio, path);
         //desplegar nombres de artistas
         String nickArtista = this.jComboNombreArtista.getSelectedItem().toString();
-        ctrl.crearAlbum(nickArtista, odataAlbum);
         odataAlbum.getListGeneros().add(g);
-
-        this.jTextAnioCreado.setText("");
-        //this.jTextNombreArtista.setText("");
-        this.jTextNombreAlbum.setText("");
-
+        ctrl.crearAlbum(nickArtista, odataAlbum);
+        jPanel1.setVisible(true);
         JOptionPane.showMessageDialog(this, "Album creado con éxito", "Crear Album", JOptionPane.INFORMATION_MESSAGE);
-
 
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
@@ -311,6 +400,22 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jComboNombreArtistaActionPerformed
 
+    private void jButtonAddTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTemaActionPerformed
+        // TODO add your handling code here:
+        dataTemas odatatema=null;
+        String nickArtista = this.jComboNombreArtista.getSelectedItem().toString();
+        if (!jTextFieldNombreTema.getText().isEmpty()) {
+            int pos = Integer.parseInt(jTextFieldPos.getText());
+            odatatema = new dataTemas(jTextFieldNombreTema.getText(),
+            jTextFieldDuracion.getText(),pos);
+            ctrl.altaTema(odatatema,jTextNombreAlbum.getText());
+        }
+        this.jTextFieldNombreTema.setText("");
+        this.jTextFieldDuracion.setText("");
+        this.jTextFieldPos.setText("");
+        jComboBoxTemas.addItem(odatatema.getNombre());
+    }//GEN-LAST:event_jButtonAddTemaActionPerformed
+
     private void treeGenero() {
 //        treeModel.addTreeModelListener(new MyTreeModelListener());
         treeGenero = new JTree(model);
@@ -323,49 +428,29 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
     }
 
-    /*    public DefaultMutableTreeNode addObject(Object child) {
-    DefaultMutableTreeNode parentNode = null;
-    TreePath parentPath = tree.getSelectionPath();
-    
-    if (parentPath == null) {
-    //There is no selection. Default to the root node.
-    parentNode = rootNode;
-    } else {
-    parentNode = (DefaultMutableTreeNode) (parentPath.getLastPathComponent());
-    }
-    
-    return addObject(parentNode, child, true);
-    }
-    
-    
-    public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
-    Object child,
-    boolean shouldBeVisible) {
-    DefaultMutableTreeNode childNode
-    = new DefaultMutableTreeNode(child);
-    
-    treeModel.insertNodeInto(childNode, parent,
-    parent.getChildCount());
-    
-    //Make sure the user can see the lovely new node.
-    if (shouldBeVisible) {
-    tree.scrollPathToVisible(new TreePath(childNode.getPath()));
-    }
-    return childNode;
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
+    private javax.swing.JButton jButtonAddTema;
     private javax.swing.JButton jButtonImagen;
+    private javax.swing.JComboBox<String> jComboBoxTemas;
     private javax.swing.JComboBox<String> jComboNombreArtista;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelAñoCreacion;
     private javax.swing.JLabel jLabelGenero;
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelNombre1;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextAnioCreado;
+    private javax.swing.JTextField jTextFieldDuracion;
+    private javax.swing.JTextField jTextFieldNombreTema;
+    private javax.swing.JTextField jTextFieldPos;
     private javax.swing.JTextField jTextNombreAlbum;
     private javax.swing.JTree treeGenero;
     // End of variables declaration//GEN-END:variables

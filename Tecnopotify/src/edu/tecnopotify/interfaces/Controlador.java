@@ -3,6 +3,7 @@ package edu.tecnopotify.interfaces;
 import edu.tecnopotify.controladores.AlbumJpaController;
 import edu.tecnopotify.controladores.ArtistaJpaController;
 import edu.tecnopotify.controladores.ClienteJpaController;
+import edu.tecnopotify.controladores.ExtJpaAlbum;
 import edu.tecnopotify.controladores.ExtJpaGenero;
 import edu.tecnopotify.controladores.FavoritosJpaController;
 import edu.tecnopotify.controladores.GeneroJpaController;
@@ -69,11 +70,13 @@ public class Controlador implements IControlador {
         }
     }
 
-    public void altaTema(dataTemas tema) {
-        Temas T = new Temas(tema);
-        TemasJpaController crlTema = new TemasJpaController(fact);
+    public void altaTema(dataTemas tema, String album) {
+        ExtJpaAlbum crlAlbum = new ExtJpaAlbum(fact);
+        Temas oTema = new Temas(tema);
+        Album oAlbum = crlAlbum.findAlbum(album);
+        oAlbum.getListTemas().add(oTema);
         try {
-            crlTema.create(T);
+            crlAlbum.agregarTema(oAlbum,oTema);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
