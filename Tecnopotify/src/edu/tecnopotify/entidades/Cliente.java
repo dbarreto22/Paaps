@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Cliente extends Usuario implements Serializable{
@@ -16,6 +17,9 @@ public class Cliente extends Usuario implements Serializable{
     public List<ListaParticular> listasReprParticular ;
     @OneToMany
     public List<Usuario> seguidos;
+    
+    @OneToOne
+    private Favoritos fav;
 
     public Cliente(dataUsuario usuario) {
         super(usuario);
@@ -41,12 +45,12 @@ public class Cliente extends Usuario implements Serializable{
         this.seguidos = seguidos;
     }
 
-    public void add(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Favoritos getFav() {
+        return fav;
     }
 
-    public void remove(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setFav(Favoritos fav) {
+        this.fav = fav;
     }
 
 }

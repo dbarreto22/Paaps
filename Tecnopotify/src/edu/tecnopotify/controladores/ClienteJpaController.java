@@ -13,11 +13,11 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import edu.tecnopotify.entidades.Favoritos;
 import edu.tecnopotify.entidades.ListaParticular;
 import java.util.ArrayList;
-import java.util.Collection;
-import edu.tecnopotify.entidades.Usuario;
 import java.util.List;
+import edu.tecnopotify.entidades.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -47,6 +47,11 @@ public class ClienteJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Favoritos fav = cliente.getFav();
+            if (fav != null) {
+                fav = em.getReference(fav.getClass(), fav.getId());
+                cliente.setFav(fav);
+            }
             List<ListaParticular> attachedListasReprParticular = new ArrayList<ListaParticular>();
             for (ListaParticular listasReprParticularListaParticularToAttach : cliente.getListasReprParticular()) {
                 listasReprParticularListaParticularToAttach = em.getReference(listasReprParticularListaParticularToAttach.getClass(), listasReprParticularListaParticularToAttach.getNombre());
@@ -60,8 +65,17 @@ public class ClienteJpaController implements Serializable {
             }
             cliente.setLstSeguidos(attachedLstSeguidos);
             em.persist(cliente);
+            if (fav != null) {
+                Cliente oldClienteOfFav = fav.getCliente();
+                if (oldClienteOfFav != null) {
+                    oldClienteOfFav.setFav(null);
+                    oldClienteOfFav = em.merge(oldClienteOfFav);
+                }
+                fav.setCliente(cliente);
+                fav = em.merge(fav);
+            }
             for (ListaParticular listasReprParticularListaParticular : cliente.getListasReprParticular()) {
-                listasReprParticularListaParticular.getCliente().add(cliente);
+                listasReprParticularListaParticular.setCliente(cliente);
                 listasReprParticularListaParticular = em.merge(listasReprParticularListaParticular);
             }
             for (Usuario lstSeguidosUsuario : cliente.getLstSeguidos()) {
@@ -87,10 +101,16 @@ public class ClienteJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Cliente persistentCliente = em.find(Cliente.class, cliente.getNickname());
+            Favoritos favOld = persistentCliente.getFav();
+            Favoritos favNew = cliente.getFav();
             List<ListaParticular> listasReprParticularOld = persistentCliente.getListasReprParticular();
             List<ListaParticular> listasReprParticularNew = cliente.getListasReprParticular();
             List<Usuario> lstSeguidosOld = persistentCliente.getLstSeguidos();
             List<Usuario> lstSeguidosNew = cliente.getLstSeguidos();
+            if (favNew != null) {
+                favNew = em.getReference(favNew.getClass(), favNew.getId());
+                cliente.setFav(favNew);
+            }
             List<ListaParticular> attachedListasReprParticularNew = new ArrayList<ListaParticular>();
             for (ListaParticular listasReprParticularNewListaParticularToAttach : listasReprParticularNew) {
                 listasReprParticularNewListaParticularToAttach = em.getReference(listasReprParticularNewListaParticularToAttach.getClass(), listasReprParticularNewListaParticularToAttach.getNombre());
@@ -106,15 +126,28 @@ public class ClienteJpaController implements Serializable {
             lstSeguidosNew = attachedLstSeguidosNew;
             cliente.setLstSeguidos(lstSeguidosNew);
             cliente = em.merge(cliente);
+            if (favOld != null && !favOld.equals(favNew)) {
+                favOld.setCliente(null);
+                favOld = em.merge(favOld);
+            }
+            if (favNew != null && !favNew.equals(favOld)) {
+                Cliente oldClienteOfFav = favNew.getCliente();
+                if (oldClienteOfFav != null) {
+                    oldClienteOfFav.setFav(null);
+                    oldClienteOfFav = em.merge(oldClienteOfFav);
+                }
+                favNew.setCliente(cliente);
+                favNew = em.merge(favNew);
+            }
             for (ListaParticular listasReprParticularOldListaParticular : listasReprParticularOld) {
                 if (!listasReprParticularNew.contains(listasReprParticularOldListaParticular)) {
-                    listasReprParticularOldListaParticular.getCliente().remove(cliente);
+                    listasReprParticularOldListaParticular.setCliente(cliente);
                     listasReprParticularOldListaParticular = em.merge(listasReprParticularOldListaParticular);
                 }
             }
             for (ListaParticular listasReprParticularNewListaParticular : listasReprParticularNew) {
                 if (!listasReprParticularOld.contains(listasReprParticularNewListaParticular)) {
-                    listasReprParticularNewListaParticular.getCliente().add(cliente);
+                    listasReprParticularNewListaParticular.setCliente(cliente);
                     listasReprParticularNewListaParticular = em.merge(listasReprParticularNewListaParticular);
                 }
             }
@@ -159,9 +192,14 @@ public class ClienteJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.", enfe);
             }
+            Favoritos fav = cliente.getFav();
+            if (fav != null) {
+                fav.setCliente(null);
+                fav = em.merge(fav);
+            }
             List<ListaParticular> listasReprParticular = cliente.getListasReprParticular();
             for (ListaParticular listasReprParticularListaParticular : listasReprParticular) {
-                listasReprParticularListaParticular.getCliente().remove(cliente);
+                listasReprParticularListaParticular.setCliente(cliente);
                 listasReprParticularListaParticular = em.merge(listasReprParticularListaParticular);
             }
             List<Usuario> lstSeguidos = cliente.getLstSeguidos();

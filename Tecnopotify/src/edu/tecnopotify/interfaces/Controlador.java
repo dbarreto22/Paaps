@@ -412,5 +412,7 @@ public class Controlador implements IControlador {
         ExtJpaGenero crl = new ExtJpaGenero(fact);
         return crl.findGenero(nombre);
     }
+    
+    
 
 }
