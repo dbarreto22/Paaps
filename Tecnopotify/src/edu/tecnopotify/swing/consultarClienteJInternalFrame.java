@@ -5,6 +5,7 @@ import edu.tecnopotify.datatypes.dataFecha;
 import edu.tecnopotify.datatypes.dataUsuario;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import java.beans.PropertyVetoException;
@@ -18,6 +19,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -47,7 +49,7 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
         this.setTitle("Consultar cliente");
-        this.jLabelMostrarImagen.setVisible(true);
+
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         List<Cliente> clientes = crl.listarClientes();
@@ -83,7 +85,9 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         jTextFieldMes = new javax.swing.JTextField();
         jTextFieldAnio = new javax.swing.JTextField();
         jComboBoxNickname = new javax.swing.JComboBox();
-        jLabelMostrarImagen = new javax.swing.JLabel();
+        jimagen = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableSeguidos = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         jFrameSelectorArchivos.setMinimumSize(new java.awt.Dimension(200, 200));
@@ -137,11 +141,22 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
 
         jLabelImagen.setText("Imagen");
 
-        jLabelMostrarImagen.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jLabelMostrarImagenComponentShown(evt);
+        jComboBoxNickname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxNicknameActionPerformed(evt);
             }
         });
+
+        jTableSeguidos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "NickName", "Nombre", "Mail"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableSeguidos);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,20 +167,23 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 92, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelFNac)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)
+                                .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelImagen)
-                                .addGap(49, 49, 49)
-                                .addComponent(jLabelMostrarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(133, Short.MAX_VALUE))
+                                .addGap(64, 64, 64)
+                                .addComponent(jimagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -181,7 +199,7 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(jComboBoxNickname, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonConfirmar)
-                        .addGap(46, 46, 46))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,12 +229,11 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelImagen)
-                        .addGap(57, 157, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelMostrarImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabelImagen)
+                    .addComponent(jimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(142, 142, 142))
         );
 
         pack();
@@ -243,14 +260,33 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         jTextFieldMes.setText(String.valueOf(m));
         jTextFieldAnio.setText(String.valueOf(a));
 
+        ImageIcon i = new ImageIcon(cliente.getImagen());
+        this.jimagen.setIcon(i);
+        
+        List<Usuario> seguidos = cliente.getLstSeguidos();
+        Iterator<Usuario> it = seguidos.iterator();
+         Object rowDataT[] = new Object[3];
+         DefaultTableModel model = (DefaultTableModel) jTableSeguidos.getModel();
+        while(it.hasNext()){
+            rowDataT[0] = it.next().getNickname();
+            rowDataT[1] = it.next().getNombre();
+            rowDataT[2] = it.next().getMail();
+            model.addRow(rowDataT);          
+        }
+        
+        
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jLabelMostrarImagenComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabelMostrarImagenComponentShown
         // TODO add your handling code here:
 
-        ImageIcon i = new ImageIcon(this.path);
-        this.jLabelMostrarImagen.setIcon(i);
+        
     }//GEN-LAST:event_jLabelMostrarImagenComponentShown
+
+    private void jComboBoxNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNicknameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxNicknameActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -262,15 +298,17 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelFNac;
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelMail;
-    private javax.swing.JLabel jLabelMostrarImagen;
     private javax.swing.JLabel jLabelNickName;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableSeguidos;
     private javax.swing.JTextField jTextFieldAnio;
     private javax.swing.JTextField jTextFieldApellido;
     private javax.swing.JTextField jTextFieldDia;
     private javax.swing.JTextField jTextFieldMail;
     private javax.swing.JTextField jTextFieldMes;
     private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JLabel jimagen;
     // End of variables declaration//GEN-END:variables
 }

@@ -232,11 +232,11 @@ public class Controlador implements IControlador {
         return lista;
     }
 
-    public void eliminarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento) {
+    public void eliminarFavorito(boolean tema, boolean lista, boolean album, long idFav, String idElemento) {
         //eliminar tema/lista/album de los favoritos de un cliente
         //selecciono un favorito y saco el elemento de la lista que corresponda
         FavoritosJpaController fav = new FavoritosJpaController(fact);
-        Favoritos f = fav.findFavoritos(idCliente);
+        Favoritos f = fav.findFavoritos(idFav);
 
         if (tema) {
             TemasJpaController temactrl = new TemasJpaController(fact);
@@ -257,10 +257,29 @@ public class Controlador implements IControlador {
         }
     }
 
-    public void agregarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento) {
+    public void agregarFavorito(boolean tema, boolean lista, boolean album, String idCliente, String idElemento) {
+//        //Crea un album y lo agrega a su artista
+//        ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
+//        //Busca al artista
+//        Artista oArtista = ctrArtista.findArtista(nickNameArtista);
+//        AlbumJpaController ctrAlbum = new AlbumJpaController(fact);
+//        //Crea el album
+//        Album oAlbum = new Album(dtAlbum);
+//        //Agrega el album a la lista del artista
+//        oArtista.getListAlbum().add(oAlbum);
+//        try {
+//            //Persiste el album y modifica el artista 
+//            ctrArtista.edit(oArtista);
+//            ctrAlbum.create(oAlbum);
+//        } 
         FavoritosJpaController fav = new FavoritosJpaController(fact);
-        Favoritos f = fav.findFavoritos(idCliente);
-
+        Favoritos f = new Favoritos();
+        
+        ClienteJpaController clictrl = new ClienteJpaController(fact);
+        Cliente cli = clictrl.findCliente(idCliente);
+        f.setId(Long.MIN_VALUE);
+        f.setCliente(cli);
+        
         if (tema) {
             TemasJpaController temactrl = new TemasJpaController(fact);
             Temas t = temactrl.findTemas(idElemento);
@@ -278,7 +297,11 @@ public class Controlador implements IControlador {
             Album a = albctrl.findAlbum(idElemento);
             f.getListAlbum().add(a);
         }
-
+        try{
+            fav.create(f);
+        }catch (Exception e) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr) {
