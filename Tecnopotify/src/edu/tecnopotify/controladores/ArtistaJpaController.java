@@ -158,12 +158,12 @@ public class ArtistaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The artista with id " + id + " no longer exists.", enfe);
             }
-            Collection<Usuario> lstSeguidores = artista.getLstSeguidores();
+            List<Usuario> lstSeguidores = artista.getLstSeguidores();
             for (Usuario lstSeguidoresUsuario : lstSeguidores) {
                 lstSeguidoresUsuario.getLstSeguidos().remove(artista);
                 lstSeguidoresUsuario = em.merge(lstSeguidoresUsuario);
             }
-            Collection<Usuario> lstSeguidos = artista.getLstSeguidos();
+            List<Usuario> lstSeguidos = artista.getLstSeguidos();
             for (Usuario lstSeguidosUsuario : lstSeguidos) {
                 lstSeguidosUsuario.getLstSeguidos().remove(artista);
                 lstSeguidosUsuario = em.merge(lstSeguidosUsuario);

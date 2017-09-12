@@ -20,6 +20,7 @@ import javax.persistence.Persistence;
 import edu.tecnopotify.controladores.UsuarioJpaController;
 import edu.tecnopotify.datatypes.dataAlbum;
 import edu.tecnopotify.datatypes.dataArtista;
+import edu.tecnopotify.datatypes.dataFecha;
 import edu.tecnopotify.datatypes.dataGenero;
 import edu.tecnopotify.datatypes.dataListaReproduccion;
 import edu.tecnopotify.datatypes.dataTemas;
@@ -412,6 +413,79 @@ public class Controlador implements IControlador {
         ExtJpaGenero crl = new ExtJpaGenero(fact);
         return crl.findGenero(nombre);
     }
+
+    public List<ListaDefecto> listarDefecto() {
+        List<ListaDefecto> ld = null;
+        ListaDefectoJpaController crlld = new ListaDefectoJpaController(fact);
+        ld = crlld.findListaDefectoEntities();
+        return ld;
+    }
+
+   public void cargarDatos(){
+       // String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen
+        dataFecha fecha = new dataFecha(1,1,1980);
+        dataUsuario u1 = new dataUsuario("ji","Julio","Iglesias","ji@tecnopotify.java" ,fecha,""); 
+        dataUsuario u2 = new dataUsuario("ei","Enrique","Iglesias","ei@tecnopotify.java" ,fecha, "");
+        dataUsuario u3 = new dataUsuario("rm","Ricky","Martin","rm@tecnopotify.java" ,fecha, "");
+        dataUsuario u4 = new dataUsuario("er","El","Reja","er@tecnopotify.java" ,fecha, "");
+        crearArtista("axaxaxa", "www.ji.com", u1);
+        crearArtista("sxsxsxx", "www.ei.com", u2);
+        crearArtista("dxdxdxx", "www.rm.com", u3);
+        crearArtista("ffxfxfx", "www.er.com", u4);
+        dataUsuario u5 = new dataUsuario("discoteishon","Carlos","Nuñez","cn@tecnopotify.java" ,fecha,""); 
+        dataUsuario u6 = new dataUsuario("md","Melany","Dolgay","md@tecnopotify.java" ,fecha, "");
+        dataUsuario u7 = new dataUsuario("db","Diego","Barreto","db@tecnopotify.java" ,fecha, "");
+        crearCliente(u5);
+        crearCliente(u6);
+        crearCliente(u7);
+        dataGenero g1 = new dataGenero("Genero", "");
+        dataGenero g2 = new dataGenero("Genero2", "Genero");
+        dataGenero g3 = new dataGenero("Genero3", "Genero");
+        Genero G1 = new Genero(g1);
+        Genero G2 = new Genero(g2);
+        Genero G3 = new Genero(g3);
+        
+        altaGenero(g1);
+        altaGenero(g2);
+        altaGenero(g3);
+        dataAlbum a1 = new dataAlbum("album1", 1990, "");
+        dataAlbum a2 = new dataAlbum("album2", 1991, "");
+        dataAlbum a3 = new dataAlbum("album3", 1992, "");
+        dataAlbum a4 = new dataAlbum("album4", 1993, "");
+        crearAlbum(u1.getNickname(), a1);
+        crearAlbum(u2.getNickname(), a2);
+        crearAlbum(u3.getNickname(), a3);
+        crearAlbum(u4.getNickname(), a4);
+        dataTemas t1 = new dataTemas("tema1", "2:30", 1);
+        dataTemas t2 = new dataTemas("tema2", "2:31", 2);
+        dataTemas t3 = new dataTemas("tema3", "2:32", 3);
+        dataTemas t4 = new dataTemas("tema4", "2:33", 4);
+        dataTemas t5 = new dataTemas("tema5", "2:35", 1);
+        dataTemas t6 = new dataTemas("tema6", "2:36", 2);
+        dataTemas t7 = new dataTemas("tema7", "2:38", 3);
+        dataTemas t8 = new dataTemas("tema8", "2:39", 4);
+        Album A1 = new Album(a1);
+        A1.getListGenero().add(G1);
+        Album A2 = new Album(a2);
+        //A2.getListGenero().add(G2);
+        Album A3 = new Album(a3);
+       // A3.getListGenero().add(G3);
+        Album A4 = new Album(a4);
+       // A4.getListGenero().add(G3);
+
+        altaTema(t1, A1.getNombre());
+        altaTema(t2, A1.getNombre());
+        altaTema(t3, A1.getNombre());
+        altaTema(t4, A1.getNombre());
+        altaTema(t5, A2.getNombre());
+        altaTema(t6, A2.getNombre());
+        altaTema(t7, A3.getNombre());
+        altaTema(t8, A4.getNombre());
+        
+        
+       
+    }
+
     
     
 
