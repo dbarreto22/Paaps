@@ -12,6 +12,7 @@ import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.entidades.ListaReproduccion;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.ListaDefecto;
 import edu.tecnopotify.entidades.Temas;
 import edu.tecnopotify.entidades.Usuario;
 import java.util.Collection;
@@ -93,6 +94,8 @@ public interface IControlador {
     public ListaReproduccion getlr(String name);
 
     public Genero buscarGenero(String nombre);
+    
+    public List<ListaDefecto> listarDefecto();
 
 }
 

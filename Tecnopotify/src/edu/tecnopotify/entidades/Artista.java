@@ -15,7 +15,7 @@ public class Artista extends Usuario implements Serializable {
     private String biografia;
     private String link;
     @OneToMany
-    private Collection<Album> listAlbum;
+    private List<Album> listAlbum;
 
     public Artista(String biografia, String link,
             dataUsuario usuario) {
@@ -49,12 +49,10 @@ public class Artista extends Usuario implements Serializable {
         this.link = link;
     }
 
-    public Collection<Album> getListAlbum() {
+    public List<Album> getListAlbum() {
         return listAlbum;
     }
 
-    public void setListAlbum(Collection<Album> listAlbum) {
-        this.listAlbum = listAlbum;
-    }
+
 
 }

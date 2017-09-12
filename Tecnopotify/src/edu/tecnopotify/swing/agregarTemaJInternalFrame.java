@@ -6,7 +6,10 @@
 package edu.tecnopotify.swing;
 
 import edu.tecnopotify.datatypes.dataTemas;
+import edu.tecnopotify.entidades.Album;
+import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.ListaDefecto;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.ListaReproduccion;
 import edu.tecnopotify.entidades.Temas;
@@ -37,7 +40,7 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
     IControlador crl;
-     DefaultTreeModel model;
+    DefaultTreeModel model;
 
     public agregarTemaJInternalFrame() {
         super("Agregar Tema",
@@ -80,12 +83,22 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
         jComboTemas = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jComboAlbums = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jComboArtistas = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Listas");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("ListaParticular");
+        treeNode1.add(treeNode2);
+        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("ListaPorDefecto");
+        treeNode1.add(treeNode2);
         tree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(tree);
 
@@ -110,11 +123,43 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jComboTemas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboTemasActionPerformed(evt);
+            }
+        });
+
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Temas");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Usuarios");
+
+        jComboAlbums.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboAlbumsActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Albums");
+
+        jComboArtistas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboArtistasActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Artistas");
+
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 0, 17)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Elija Lista a agregar Tema");
+
+        jLabel6.setFont(new java.awt.Font("Ubuntu", 0, 17)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Elija Tema");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,20 +167,26 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboUsuario, javax.swing.GroupLayout.Alignment.TRAILING, 0, 310, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jComboUsuario, 0, 310, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                    .addComponent(jComboArtistas, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboAlbums, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                            .addComponent(jButtonAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                             .addComponent(jButtonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboTemas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboTemas, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -147,86 +198,143 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonConfirmar))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboArtistas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboAlbums, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonAgregar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonEliminar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonEliminar)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     DefaultMutableTreeNode selectedNode;
-    DefaultMutableTreeNode node;
+    DefaultMutableTreeNode nodeLP;
+    DefaultMutableTreeNode nodeLD;
+    DefaultMutableTreeNode nodeRaiz;
     List<ListaParticular> lista;
     List<Temas> temas;
     ListaReproduccion lr;
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
-        node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-        Cliente c =  crl.getCli(jComboUsuario.getSelectedItem().toString());
+        //nodeLP = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+        Cliente c = crl.getCli(jComboUsuario.getSelectedItem().toString());
         lista = c.getListasReprParticular();
         Iterator<ListaParticular> it = lista.iterator();
-        while(it.hasNext()){
-            node.setUserObject(it.next());
+        nodeRaiz = (DefaultMutableTreeNode) model.getRoot();
+        nodeLP = (DefaultMutableTreeNode) model.getChild(nodeRaiz, 1);
+        nodeLD = (DefaultMutableTreeNode) model.getChild(nodeRaiz, 2);
+        List<ListaDefecto> ld = crl.listarDefecto();
+        Iterator<ListaDefecto> itLD = ld.iterator();
+
+        while (it.hasNext()) {
+            nodeLP.setUserObject(it.next().getNombre());
         }
         
+        while (itLD.hasNext()){
+            nodeLD.setUserObject(itLD.next().getNombre());
+        }
+
         temas = crl.listarTemas();
         Iterator<Temas> itT = temas.iterator();
-        
-        while(itT.hasNext()){
+
+        while (itT.hasNext()) {
             jComboTemas.addItem(itT.next().toString());
         }
-        
-        
-     
+
+
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
         selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-        
+
         if (selectedNode != null) {
             selectedNode.insert(new DefaultMutableTreeNode(jComboTemas.getSelectedItem()), 0);
             model.reload(selectedNode);
             lr = crl.getlr(selectedNode.toString());
             Temas Tema = crl.getTema(jComboTemas.getSelectedItem().toString());
-            lr.getListaTemas().add(Tema);                     
+            lr.getListaTemas().add(Tema);
         }
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // TODO add your handling code here:
-         selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-         
+        selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+
         if (selectedNode != null) {
             DefaultMutableTreeNode parent = (DefaultMutableTreeNode) selectedNode.getParent();
             parent.remove(selectedNode);
             lr = crl.getlr(selectedNode.toString());
-            Temas Tema = crl.getTema(selectedNode.getChildAfter(parent).toString());
+            Temas Tema = crl.getTema(jComboTemas.getSelectedItem().toString());
             lr.getListaTemas().remove(Tema);
             model.reload(parent);
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jComboArtistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboArtistasActionPerformed
+        // TODO add your handling code here:
+        List<Artista> art = crl.listarArtistas();
+        Iterator<Artista> it = art.iterator();
+        while(it.hasNext()){
+            jComboArtistas.addItem(it.next().getNombre());
+        }
+        
+    }//GEN-LAST:event_jComboArtistasActionPerformed
+
+    private void jComboAlbumsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAlbumsActionPerformed
+        // TODO add your handling code here:
+        Artista a = crl.seleccionarArtista(jComboArtistas.getSelectedItem().toString());
+        List<Album> album = a.getListAlbum();
+        Iterator<Album> itAl = album.iterator();
+        while(itAl.hasNext()){
+            jComboAlbums.addItem(itAl.next().getNombre());
+        }
+    }//GEN-LAST:event_jComboAlbumsActionPerformed
+
+    private void jComboTemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTemasActionPerformed
+        // TODO add your handling code here:
+        Album al = crl.seleccionarAlbum(jComboAlbums.getSelectedItem().toString());
+        List<Temas> temas = al.getListTemas();
+        Iterator<Temas> itT = temas.iterator();
+        while(itT.hasNext()){
+            jComboArtistas.addItem(itT.next().getNombre());
+        }
+    }//GEN-LAST:event_jComboTemasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JComboBox<String> jComboAlbums;
+    private javax.swing.JComboBox<String> jComboArtistas;
     private javax.swing.JComboBox<String> jComboTemas;
     private javax.swing.JComboBox<String> jComboUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree tree;
     // End of variables declaration//GEN-END:variables
