@@ -219,8 +219,6 @@ import javax.swing.SwingUtilities;
         jMenuCrearAlbum = new javax.swing.JMenuItem();
         consultarAlbum = new javax.swing.JMenuItem();
         menuFavs = new javax.swing.JMenu();
-        SeguirUsuario = new javax.swing.JMenuItem();
-        DejarSeguir = new javax.swing.JMenuItem();
         menuGuardarFavorito = new javax.swing.JMenuItem();
         QuitarTema = new javax.swing.JMenuItem();
         menuLista = new javax.swing.JMenu();
@@ -324,17 +322,6 @@ import javax.swing.SwingUtilities;
                 menuFavsActionPerformed(evt);
             }
         });
-
-        SeguirUsuario.setText("Seguir usuario");
-        SeguirUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SeguirUsuarioActionPerformed(evt);
-            }
-        });
-        menuFavs.add(SeguirUsuario);
-
-        DejarSeguir.setText("Dejar de seguir");
-        menuFavs.add(DejarSeguir);
 
         menuGuardarFavorito.setText("Guardar tema/lista/album");
         menuGuardarFavorito.addActionListener(new java.awt.event.ActionListener() {
@@ -456,11 +443,6 @@ import javax.swing.SwingUtilities;
         createFrameAltaAlbum();
     }//GEN-LAST:event_jMenuCrearAlbumActionPerformed
 
-    private void SeguirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeguirUsuarioActionPerformed
-        // TODO add your handling code here:
-        createFrameSeguirUsuario();
-    }//GEN-LAST:event_SeguirUsuarioActionPerformed
-
     private void JMenuCrearListaRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCrearListaRepActionPerformed
         // TODO add your handling code here:
         createFrameCrearListaReproduccion();
@@ -550,11 +532,9 @@ import javax.swing.SwingUtilities;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem CrearTema;
-    private javax.swing.JMenuItem DejarSeguir;
     private javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuItem JMenuCrearListaRep;
     private javax.swing.JMenuItem QuitarTema;
-    private javax.swing.JMenuItem SeguirUsuario;
     private javax.swing.JMenuItem agregarTema;
     private javax.swing.JMenuItem consultarAlbum;
     private javax.swing.JMenu jMenu12;
