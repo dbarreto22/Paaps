@@ -379,12 +379,18 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         dataAlbum odataAlbum = new dataAlbum(jTextNombreAlbum.getText(), anio, path);
         //desplegar nombres de artistas
         String nickArtista = this.jComboNombreArtista.getSelectedItem().toString();
-        try {
-                odataAlbum.getListGeneros().add(ctrl.buscarGenero(node.toString()));
-                ctrl.crearAlbum(nickArtista, odataAlbum);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        /*        try {
+        if (ctrl.buscarGenero(node.toString())!=null) {
+        System.out.println("Hay genero seleccionado");
         }
+        if (odataAlbum!=null) {
+        System.out.println("Hay album");
+        }
+        odataAlbum.getListGeneros().add(ctrl.buscarGenero(node.toString()));*/
+                ctrl.crearAlbum(nickArtista, odataAlbum);
+                /*        } catch (Exception e) {
+                System.out.println(e.getMessage());
+                }*/
         jPanel1.setVisible(true);
         JOptionPane.showMessageDialog(this, "Album creado con éxito", "Crear Album", JOptionPane.INFORMATION_MESSAGE);
 
