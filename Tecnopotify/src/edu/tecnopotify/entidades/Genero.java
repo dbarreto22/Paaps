@@ -28,7 +28,7 @@ public class Genero implements Serializable{
     @OneToMany
     private List<Genero> listHijos=null;
   
-    @ManyToMany(mappedBy="listGenero")
+    @ManyToMany
     private List<Album> listAlbum;
     
     
