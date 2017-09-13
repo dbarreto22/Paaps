@@ -26,12 +26,15 @@ public class dejarUsuarioJInternalFrame extends javax.swing.JInternalFrame {
     private String nick;
     public dejarUsuarioJInternalFrame() {
         initComponents();
+        this.setFocusable(true);
     }
     
         public dejarUsuarioJInternalFrame(String nickName) {
         initComponents();
+        this.moveToFront();
         nick = nickName;
         Cliente cli  = crl.getCli(nickName);
+        
 
         
         List<Usuario> seguidos = cli.getLstSeguidos();

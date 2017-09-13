@@ -487,7 +487,7 @@ public class Controlador implements IControlador {
         dataTemas t7 = new dataTemas("tema7", "2:38", 3);
         dataTemas t8 = new dataTemas("tema8", "2:39", 4);
         Album A1 = new Album(a1);
-//        A1.getListGenero().add(G1);
+ //       A1.getListGenero().add(G1);
         Album A2 = new Album(a2);
         //A2.getListGenero().add(G2);
         Album A3 = new Album(a3);
