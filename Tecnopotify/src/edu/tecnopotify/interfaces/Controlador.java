@@ -5,6 +5,8 @@ import edu.tecnopotify.controladores.ArtistaJpaController;
 import edu.tecnopotify.controladores.ClienteJpaController;
 import edu.tecnopotify.controladores.ExtJpaAlbum;
 import edu.tecnopotify.controladores.ExtJpaGenero;
+import edu.tecnopotify.controladores.ExtJpaSrtista;
+import edu.tecnopotify.controladores.ExtUsuario;
 import edu.tecnopotify.controladores.FavoritosJpaController;
 import edu.tecnopotify.controladores.GeneroJpaController;
 import edu.tecnopotify.controladores.ListaDefectoJpaController;
@@ -18,6 +20,7 @@ import edu.tecnopotify.entidades.Usuario;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import edu.tecnopotify.controladores.UsuarioJpaController;
+import edu.tecnopotify.controladores.exceptions.PreexistingEntityException;
 import edu.tecnopotify.datatypes.dataAlbum;
 import edu.tecnopotify.datatypes.dataArtista;
 import edu.tecnopotify.datatypes.dataFecha;
@@ -77,7 +80,7 @@ public class Controlador implements IControlador {
         Album oAlbum = crlAlbum.findAlbum(album);
         oAlbum.getListTemas().add(oTema);
         try {
-            crlAlbum.agregarTema(oAlbum,oTema);
+            crlAlbum.agregarTema(oAlbum, oTema);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -169,18 +172,23 @@ public class Controlador implements IControlador {
 
     public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum) {
         //Crea un album y lo agrega a su artista
-        ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
+        ExtJpaSrtista  ctrArtista = new ExtJpaSrtista(fact);
         //Busca al artista
         Artista oArtista = ctrArtista.findArtista(nickNameArtista);
+        if (oArtista!=null)
+        {
+            System.out.println("Hay artista");
+        }
         AlbumJpaController ctrAlbum = new AlbumJpaController(fact);
         //Crea el album
         Album oAlbum = new Album(dtAlbum);
         //Agrega el album a la lista del artista
-        oArtista.getListAlbum().add(oAlbum);
+//        oArtista.getListAlbum().add(oAlbum);
         try {
             //Persiste el album y modifica el artista 
-            ctrArtista.edit(oArtista);
             ctrAlbum.create(oAlbum);
+            ctrArtista.agregarAlbum(oArtista,oAlbum);
+            
         } catch (Exception e) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -233,31 +241,31 @@ public class Controlador implements IControlador {
         return lista;
     }
 
-    public void eliminarFavorito(boolean tema, boolean lista, boolean album, long idFav, String idElemento) {
-        //eliminar tema/lista/album de los favoritos de un cliente
-        //selecciono un favorito y saco el elemento de la lista que corresponda
-        FavoritosJpaController fav = new FavoritosJpaController(fact);
-        Favoritos f = fav.findFavoritos(idFav);
-
-        if (tema) {
-            TemasJpaController temactrl = new TemasJpaController(fact);
-            Temas t = temactrl.findTemas(idElemento);
-            f.getListTemas().remove(t);
-        }
-
-        if (lista) {
-            ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
-            ListaReproduccion l = listactrl.findListaReproduccion(idElemento);
-            f.getListRep().remove(l);
-        }
-
-        if (album) {
-            AlbumJpaController albctrl = new AlbumJpaController(fact);
-            Album a = albctrl.findAlbum(idElemento);
-            f.getListAlbum().remove(a);
-        }
+    public void eliminarFavorito(boolean tema, boolean lista, boolean album, String nickCliente, String idElemento) {
+    //eliminar tema/lista/album de los favoritos de un cliente
+    //selecciono un favorito y saco el elemento de la lista que corresponda
+    /*  FavoritosJpaController fav = new FavoritosJpaController(fact);
+    
+    Favoritos f = fav.findFavoritos(nickCliente);
+    
+    if (tema) {
+    TemasJpaController temactrl = new TemasJpaController(fact);
+    Temas t = temactrl.findTemas(idElemento);
+    f.getListTemas().remove(t);
     }
-
+    
+    if (lista) {
+    ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
+    ListaReproduccion l = listactrl.findListaReproduccion(idElemento);
+    f.getListRep().remove(l);
+    }
+    
+    if (album) {
+    AlbumJpaController albctrl = new AlbumJpaController(fact);
+    Album a = albctrl.findAlbum(idElemento);
+    f.getListAlbum().remove(a);
+    }*/
+    }
     public void agregarFavorito(boolean tema, boolean lista, boolean album, String idCliente, String idElemento) {
 //        //Crea un album y lo agrega a su artista
 //        ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
@@ -275,12 +283,11 @@ public class Controlador implements IControlador {
 //        } 
         FavoritosJpaController fav = new FavoritosJpaController(fact);
         Favoritos f = new Favoritos();
-        
+
         ClienteJpaController clictrl = new ClienteJpaController(fact);
         Cliente cli = clictrl.findCliente(idCliente);
-        f.setId(Long.MIN_VALUE);
         f.setCliente(cli);
-        
+
         if (tema) {
             TemasJpaController temactrl = new TemasJpaController(fact);
             Temas t = temactrl.findTemas(idElemento);
@@ -298,27 +305,40 @@ public class Controlador implements IControlador {
             Album a = albctrl.findAlbum(idElemento);
             f.getListAlbum().add(a);
         }
-        try{
+        try {
             fav.create(f);
-        }catch (Exception e) {
+        } catch (Exception e) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr) {
-        UsuarioJpaController usrCtrl = new UsuarioJpaController(fact);
-        Usuario u = usrCtrl.findUsuario(nickCliente);
-        Usuario v = usrCtrl.findUsuario(nickUsr);
-        u.removeFromSeguidos(v);
-        v.removeFromSeguidores(u);
+        try {
+            UsuarioJpaController usrCtrl = new UsuarioJpaController(fact);
+            ExtUsuario usr = new ExtUsuario(fact);
+            Cliente c = (Cliente) usrCtrl.findUsuario(nickCliente);
+            Usuario u = usrCtrl.findUsuario(nickUsr);
+            c.removeFromSeguidos(u);
+            usr.quitarSeguidor(u,c);
+        } catch (PreexistingEntityException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void seguirUsuario(String nickCliente, String nickUsr) {
-        UsuarioJpaController usrCtrl = new UsuarioJpaController(fact);
-        Usuario u = usrCtrl.findUsuario(nickCliente);
-        Usuario v = usrCtrl.findUsuario(nickUsr);
-        u.addToSeguidos(v);
-        v.addToSeguidores(u);
+
+        try {
+            UsuarioJpaController usrCtrl = new UsuarioJpaController(fact);
+            ExtUsuario usr = new ExtUsuario(fact);
+            Cliente c = (Cliente) usrCtrl.findUsuario(nickCliente);
+            Usuario u = usrCtrl.findUsuario(nickUsr);
+            c.addToSeguidos(u);            
+            usr.agregarSeguidor(u,c);
+        } catch (PreexistingEntityException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
     }
 
     public void publicarLista(String idUsr, String nombreLista) {
@@ -394,7 +414,6 @@ public class Controlador implements IControlador {
         return temas;
     }
 
-
     public Temas getTema(String name) {
         Temas t = null;
         TemasJpaController crlT = new TemasJpaController(fact);
@@ -420,9 +439,11 @@ public class Controlador implements IControlador {
         ld = crlld.findListaDefectoEntities();
         return ld;
     }
+    
 
-   public void cargarDatos(){
-       // String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen
+    
+    public void cargarDatos(){
+       
         dataFecha fecha = new dataFecha(1,1,1980);
         dataUsuario u1 = new dataUsuario("ji","Julio","Iglesias","ji@tecnopotify.java" ,fecha,""); 
         dataUsuario u2 = new dataUsuario("ei","Enrique","Iglesias","ei@tecnopotify.java" ,fecha, "");
@@ -444,7 +465,7 @@ public class Controlador implements IControlador {
         Genero G1 = new Genero(g1);
         Genero G2 = new Genero(g2);
         Genero G3 = new Genero(g3);
-        
+         
         altaGenero(g1);
         altaGenero(g2);
         altaGenero(g3);
@@ -452,6 +473,7 @@ public class Controlador implements IControlador {
         dataAlbum a2 = new dataAlbum("album2", 1991, "");
         dataAlbum a3 = new dataAlbum("album3", 1992, "");
         dataAlbum a4 = new dataAlbum("album4", 1993, "");
+       
         crearAlbum(u1.getNickname(), a1);
         crearAlbum(u2.getNickname(), a2);
         crearAlbum(u3.getNickname(), a3);
@@ -465,7 +487,7 @@ public class Controlador implements IControlador {
         dataTemas t7 = new dataTemas("tema7", "2:38", 3);
         dataTemas t8 = new dataTemas("tema8", "2:39", 4);
         Album A1 = new Album(a1);
-        A1.getListGenero().add(G1);
+//        A1.getListGenero().add(G1);
         Album A2 = new Album(a2);
         //A2.getListGenero().add(G2);
         Album A3 = new Album(a3);
@@ -486,7 +508,5 @@ public class Controlador implements IControlador {
        
     }
 
-    
-    
 
 }

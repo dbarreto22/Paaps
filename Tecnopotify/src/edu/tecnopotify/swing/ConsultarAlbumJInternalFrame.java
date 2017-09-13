@@ -60,6 +60,7 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableGenero = new javax.swing.JTable();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -163,14 +164,14 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         Album al = crl.buscarAlbum(comboBNombre.getSelectedItem().toString());
         List<Temas> t = al.getListTemas();
-        Iterator<Temas> it = t.iterator();
+       
         model = (DefaultTableModel) jTableTemas.getModel();
         jTextAnioC.setText(Integer.valueOf(al.getAnioCreado()).toString());
         Object rowDataT[] = new Object[3];
-        while(it.hasNext()){
-            rowDataT[0] = it.next().getNombre();
-            rowDataT[1] = it.next().getDuracion();
-            rowDataT[2] = it.next().getPosicion();
+        for(int i = 0; i < t.size();i ++){
+            rowDataT[0] = t.get(i).getNombre();
+            rowDataT[1] = t.get(i).getDuracion();
+            rowDataT[2] = t.get(i).getPosicion();
             model.addRow(rowDataT);
         }
         
@@ -178,10 +179,10 @@ public class ConsultarAlbumJInternalFrame extends javax.swing.JInternalFrame {
         Iterator<Genero> itG = g.iterator();
         
         modelG = (DefaultTableModel) jTableGenero.getModel();
-        Object rowDataG[] = new Object[1];
+        Object rowDataG[] = new Object[2];
         
-        while(itG.hasNext()){
-            rowDataG[0] = itG.next().getNombre();
+        for(int j = 0; j < g.size();j ++){
+            rowDataG[0] = g.get(j).getNombre();
             modelG.addRow(rowDataG);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -47,7 +47,7 @@ public interface IControlador {
 
     public Cliente seleccionarCliente(String nickname);
 
-    public void eliminarFavorito(boolean tema, boolean lista, boolean album, long idFav, String idElemento);
+    public void eliminarFavorito(boolean tema, boolean lista, boolean album, String nickCliente, String idElemento);
 
     public void agregarFavorito(boolean tema, boolean lista, boolean album, String nickCliente, String idElemento);
 
@@ -96,6 +96,8 @@ public interface IControlador {
     public Genero buscarGenero(String nombre);
     
     public List<ListaDefecto> listarDefecto();
+    
+    public void cargarDatos();
 
 }
 

@@ -50,7 +50,7 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
             jComboBoxNickname.addItem(it.next().getNickname());
         }
         nick = jComboBoxNickname.getSelectedItem().toString();
-        Map<String, ListaParticular> listas = (Map<String, ListaParticular>) crl.seleccionarCliente(nick).listasReprParticular;
+        List< ListaParticular> listas =  crl.seleccionarCliente(nick).getListasReprParticular();
 
        // Iterator<ListaParticular> it = listas.values().iterator();
         while (it.hasNext()) {

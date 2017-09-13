@@ -15,7 +15,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import edu.tecnopotify.entidades.Usuario;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -36,9 +35,6 @@ public class ArtistaJpaController implements Serializable {
     }
 
     public void create(Artista artista) throws PreexistingEntityException, Exception {
-        if (artista.getLstSeguidores() == null) {
-            artista.setLstSeguidores(new ArrayList<Usuario>());
-        }
         if (artista.getLstSeguidos() == null) {
             artista.setLstSeguidos(new ArrayList<Usuario>());
         }
@@ -46,12 +42,6 @@ public class ArtistaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Usuario> attachedLstSeguidores = new ArrayList<Usuario>();
-            for (Usuario lstSeguidoresUsuarioToAttach : artista.getLstSeguidores()) {
-                lstSeguidoresUsuarioToAttach = em.getReference(lstSeguidoresUsuarioToAttach.getClass(), lstSeguidoresUsuarioToAttach.getNickname());
-                attachedLstSeguidores.add(lstSeguidoresUsuarioToAttach);
-            }
-            artista.setLstSeguidores(attachedLstSeguidores);
             List<Usuario> attachedLstSeguidos = new ArrayList<Usuario>();
             for (Usuario lstSeguidosUsuarioToAttach : artista.getLstSeguidos()) {
                 lstSeguidosUsuarioToAttach = em.getReference(lstSeguidosUsuarioToAttach.getClass(), lstSeguidosUsuarioToAttach.getNickname());
@@ -59,10 +49,6 @@ public class ArtistaJpaController implements Serializable {
             }
             artista.setLstSeguidos(attachedLstSeguidos);
             em.persist(artista);
-            for (Usuario lstSeguidoresUsuario : artista.getLstSeguidores()) {
-                lstSeguidoresUsuario.getLstSeguidos().add(artista);
-                lstSeguidoresUsuario = em.merge(lstSeguidoresUsuario);
-            }
             for (Usuario lstSeguidosUsuario : artista.getLstSeguidos()) {
                 lstSeguidosUsuario.getLstSeguidos().add(artista);
                 lstSeguidosUsuario = em.merge(lstSeguidosUsuario);
@@ -86,17 +72,8 @@ public class ArtistaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Artista persistentArtista = em.find(Artista.class, artista.getNickname());
-            List<Usuario> lstSeguidoresOld = persistentArtista.getLstSeguidores();
-            List<Usuario> lstSeguidoresNew = artista.getLstSeguidores();
             List<Usuario> lstSeguidosOld = persistentArtista.getLstSeguidos();
             List<Usuario> lstSeguidosNew = artista.getLstSeguidos();
-            List<Usuario> attachedLstSeguidoresNew = new ArrayList<Usuario>();
-            for (Usuario lstSeguidoresNewUsuarioToAttach : lstSeguidoresNew) {
-                lstSeguidoresNewUsuarioToAttach = em.getReference(lstSeguidoresNewUsuarioToAttach.getClass(), lstSeguidoresNewUsuarioToAttach.getNickname());
-                attachedLstSeguidoresNew.add(lstSeguidoresNewUsuarioToAttach);
-            }
-            lstSeguidoresNew = attachedLstSeguidoresNew;
-            artista.setLstSeguidores(lstSeguidoresNew);
             List<Usuario> attachedLstSeguidosNew = new ArrayList<Usuario>();
             for (Usuario lstSeguidosNewUsuarioToAttach : lstSeguidosNew) {
                 lstSeguidosNewUsuarioToAttach = em.getReference(lstSeguidosNewUsuarioToAttach.getClass(), lstSeguidosNewUsuarioToAttach.getNickname());
@@ -105,18 +82,6 @@ public class ArtistaJpaController implements Serializable {
             lstSeguidosNew = attachedLstSeguidosNew;
             artista.setLstSeguidos(lstSeguidosNew);
             artista = em.merge(artista);
-            for (Usuario lstSeguidoresOldUsuario : lstSeguidoresOld) {
-                if (!lstSeguidoresNew.contains(lstSeguidoresOldUsuario)) {
-                    lstSeguidoresOldUsuario.getLstSeguidos().remove(artista);
-                    lstSeguidoresOldUsuario = em.merge(lstSeguidoresOldUsuario);
-                }
-            }
-            for (Usuario lstSeguidoresNewUsuario : lstSeguidoresNew) {
-                if (!lstSeguidoresOld.contains(lstSeguidoresNewUsuario)) {
-                    lstSeguidoresNewUsuario.getLstSeguidos().add(artista);
-                    lstSeguidoresNewUsuario = em.merge(lstSeguidoresNewUsuario);
-                }
-            }
             for (Usuario lstSeguidosOldUsuario : lstSeguidosOld) {
                 if (!lstSeguidosNew.contains(lstSeguidosOldUsuario)) {
                     lstSeguidosOldUsuario.getLstSeguidos().remove(artista);
@@ -157,11 +122,6 @@ public class ArtistaJpaController implements Serializable {
                 artista.getNickname();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The artista with id " + id + " no longer exists.", enfe);
-            }
-            List<Usuario> lstSeguidores = artista.getLstSeguidores();
-            for (Usuario lstSeguidoresUsuario : lstSeguidores) {
-                lstSeguidoresUsuario.getLstSeguidos().remove(artista);
-                lstSeguidoresUsuario = em.merge(lstSeguidoresUsuario);
             }
             List<Usuario> lstSeguidos = artista.getLstSeguidos();
             for (Usuario lstSeguidosUsuario : lstSeguidos) {

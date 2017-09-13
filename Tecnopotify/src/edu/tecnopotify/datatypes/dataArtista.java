@@ -19,7 +19,7 @@ public class dataArtista extends dataUsuario{
     
     public dataArtista(String biografia, String link, List<Album> listAlbum, String nickname,
             String nombre, String apellido, String mail, dataFecha f_nac, String imagen,List<Usuario> lseguidores, List<Usuario> lseguidos ) {
-        super(nickname, nombre, apellido, mail, f_nac, imagen,lseguidores,lseguidos);
+        super(nickname, nombre, apellido, mail, f_nac, imagen,lseguidos);
         this.biografia = biografia;
         this.link = link;
         this.listAlbum = listAlbum;

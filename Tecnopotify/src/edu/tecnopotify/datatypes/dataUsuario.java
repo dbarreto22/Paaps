@@ -14,17 +14,16 @@ public class dataUsuario implements Serializable {
     private dataFecha f_nac;
     private String imagen;
     private List<Usuario> lstSeguidos;
-    private List<Usuario> lstSeguidores;
+  
 
     public dataUsuario(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen,
-            List<Usuario> lseguidores, List<Usuario> lseguidos) {
+            List<Usuario> lseguidos) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.f_nac = f_nac;
-        this.imagen = imagen;
-        this.lstSeguidores = lseguidores;
+        this.imagen = imagen;  
         this.lstSeguidos = lseguidos;
     }
 
@@ -35,8 +34,7 @@ public class dataUsuario implements Serializable {
         this.apellido = apellido;
         this.mail = mail;
         this.f_nac = f_nac;
-        this.imagen = imagen;
-        
+        this.imagen = imagen;        
     }
 
     public dataUsuario() {
@@ -98,12 +96,6 @@ public class dataUsuario implements Serializable {
         this.lstSeguidos = lstSeguidos;
     }
 
-    public List<Usuario> getLstSeguidores() {
-        return lstSeguidores;
-    }
 
-    public void setLstSeguidores(List<Usuario> lstSeguidores) {
-        this.lstSeguidores = lstSeguidores;
-    }
 
 }
