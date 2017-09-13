@@ -112,19 +112,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuFavsActionPerformed"/>
               </Events>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="SeguirUsuario">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Seguir usuario"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SeguirUsuarioActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="DejarSeguir">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Dejar de seguir"/>
-                  </Properties>
-                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="menuGuardarFavorito">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Guardar tema/lista/album"/>
