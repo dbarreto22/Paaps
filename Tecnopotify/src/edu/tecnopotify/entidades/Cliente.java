@@ -13,10 +13,10 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Cliente extends Usuario implements Serializable{
-    @OneToMany
-    public List<ListaParticular> listasReprParticular ;
-    @OneToMany
-    public List<Usuario> seguidos;
+    @OneToOne
+    private List<ListaParticular> listasReprParticular ;
+    /* @OneToMany
+    public List<Usuario> seguidos;*/
     
     @OneToOne
     private Favoritos fav;
@@ -37,13 +37,16 @@ public class Cliente extends Usuario implements Serializable{
         this.listasReprParticular = listasReprParticular;
     }
 
-    public List<Usuario> getSeguidos() {
-        return seguidos;
-    }
 
-    public void setSeguidos(List<Usuario> seguidos) {
-        this.seguidos = seguidos;
+
+
+    /*    public List<Usuario> getSeguidos() {
+    return seguidos;
     }
+    
+    public void setSeguidos(List<Usuario> seguidos) {
+    this.seguidos = seguidos;
+    }*/
 
     public Favoritos getFav() {
         return fav;

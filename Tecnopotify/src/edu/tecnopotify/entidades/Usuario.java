@@ -22,16 +22,14 @@ import javax.persistence.OneToMany;
 public class Usuario implements Serializable {
 
     @Id
-    private String nickname;  
-    private String nombre;  
+    private String nickname;
+    private String nombre;
     private String apellido;
     private String mail;
     private dataFecha f_nac;
     private String imagen;
-    @OneToMany
+    @ManyToMany
     private List<Usuario> lstSeguidos;
-
-    private List<Usuario> lstSeguidores;
 
     public Usuario(dataUsuario usuario) {
         this.nickname = usuario.getNickname();
@@ -40,14 +38,13 @@ public class Usuario implements Serializable {
         this.mail = usuario.getMail();
         this.f_nac = usuario.getF_nac();
         this.imagen = usuario.getImagen();
-        this.lstSeguidores = usuario.getLstSeguidores();
+
         this.lstSeguidos = usuario.getLstSeguidos();
     }
 
     public Usuario() {
     }
-    
-    
+
     public String getNickname() {
         return nickname;
     }
@@ -104,29 +101,42 @@ public class Usuario implements Serializable {
         this.lstSeguidos = lstSeguidos;
     }
 
-    public List<Usuario> getLstSeguidores() {
-        return lstSeguidores;
-    }
-
-    public void setLstSeguidores(List<Usuario> lstSeguidores) {
-        this.lstSeguidores = lstSeguidores;
-    }
-    
-        public void addToSeguidos(Usuario usr){
+    public void addToSeguidos(Usuario usr) {
         this.lstSeguidos.add(usr);
     }
-    
-    public void removeFromSeguidos(Usuario usr){
+
+    public void removeFromSeguidos(Usuario usr) {
         this.lstSeguidos.remove(usr);
     }
-    
-    public void addToSeguidores(Usuario usr){
-        this.lstSeguidores.add(usr);
-    }
-    
-    public void removeFromSeguidores(Usuario usr){
-        this.lstSeguidores.remove(usr);
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 53 * hash + (this.nickname != null ? this.nickname.hashCode() : 0);
+        hash = 53 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
+        hash = 53 * hash + (this.apellido != null ? this.apellido.hashCode() : 0);
+        hash = 53 * hash + (this.mail != null ? this.mail.hashCode() : 0);
+        hash = 53 * hash + (this.f_nac != null ? this.f_nac.hashCode() : 0);
+        hash = 53 * hash + (this.imagen != null ? this.imagen.hashCode() : 0);
+        hash = 53 * hash + (this.lstSeguidos != null ? this.lstSeguidos.hashCode() : 0);
+        return hash;
     }
 
-   
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        return true;
+    }
+    
+    
+
 }

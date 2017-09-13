@@ -15,10 +15,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 
-/**
- *
- * @author Carlox
- */
+
 public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
     IControlador crl;
     /**
@@ -72,7 +69,7 @@ public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.setText("Seguir Usuario");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarActionPerformed(evt);
@@ -90,13 +87,10 @@ public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jLabelUsuarios))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBoxUsuarios, 0, 114, Short.MAX_VALUE)
-                    .addComponent(jComboBoxClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(132, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonConfirmar)
-                .addGap(48, 48, 48))
+                    .addComponent(jButtonConfirmar)
+                    .addComponent(jComboBoxClientes, 0, 165, Short.MAX_VALUE)
+                    .addComponent(jComboBoxUsuarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,9 +103,9 @@ public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelUsuarios)
                     .addComponent(jComboBoxUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar)
-                .addGap(21, 21, 21))
+                .addGap(26, 26, 26))
         );
 
         pack();

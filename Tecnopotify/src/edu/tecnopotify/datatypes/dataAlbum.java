@@ -10,12 +10,17 @@ public class dataAlbum {
     private String imagenAlbum;
     private List<Temas> listTemas;
     private List<Genero> listGeneros;
+    private List<dataGenero> listdataGeneros;
 
     public dataAlbum(String nombre, int anioCreado, String imagenAlbum) {
         this.nombre = nombre;
         this.anioCreado = anioCreado;
         this.imagenAlbum = imagenAlbum;
 
+    }
+
+    public dataAlbum() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getNombre() {
@@ -57,6 +62,16 @@ public class dataAlbum {
     public void setListGeneros(List<Genero> listGeneros) {
         this.listGeneros = listGeneros;
     }
+
+    public List<dataGenero> getListdataGeneros() {
+        return listdataGeneros;
+    }
+
+    public void setListdataGeneros(List<dataGenero> listdataGeneros) {
+        this.listdataGeneros = listdataGeneros;
+    }
+    
+    
     
     
 }

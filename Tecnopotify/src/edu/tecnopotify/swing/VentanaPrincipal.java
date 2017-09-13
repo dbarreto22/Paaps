@@ -1,5 +1,7 @@
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.AltaGeneroJInternalFrame.xOffset;
 import java.awt.Component;
 import javax.swing.JDesktopPane;
@@ -16,19 +18,24 @@ import javax.swing.SwingUtilities;
  * @author Carlox
  */
     public class VentanaPrincipal extends javax.swing.JFrame {
-
+        
     private Interfaz ctrl;
     private AltaClienteJInternalFrame altaUsuario;
     private AltaGeneroJInternalFrame alatGenero;
+    private Fabrica fab = Fabrica.getInstance();
+    private IControlador ctr = fab.getInstancia();
+    
     // private JFrame frame = new JFrame();
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
-        initComponents();
+        initComponents();    
+        ctr.cargarDatos();
 
     }
+
 
     protected void createFrameAltaCliente() {
         AltaClienteJInternalFrame frame = new AltaClienteJInternalFrame();
@@ -185,16 +192,7 @@ import javax.swing.SwingUtilities;
     }
 
         
-    protected void createFrameSeguirUsuario() {
-        SeguirUsuarioJInternalFrame frame = new SeguirUsuarioJInternalFrame();
-        frame.setVisible(true);
-        this.Desktop.add(frame);
-        try {
-            frame.setSelected(true);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

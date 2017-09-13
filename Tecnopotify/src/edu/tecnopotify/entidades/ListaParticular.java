@@ -5,13 +5,15 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class ListaParticular extends ListaReproduccion implements Serializable{
     
 
     private boolean esPrivada;
-   
+    
+    @OneToOne
     private Cliente cliente;
 
     public ListaParticular(boolean esPrivada, Cliente cliente, 
