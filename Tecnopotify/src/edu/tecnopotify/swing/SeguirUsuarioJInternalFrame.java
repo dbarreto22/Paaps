@@ -12,6 +12,7 @@ import edu.tecnopotify.interfaces.IControlador;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
+import edu.tecnopotify.swing.consultarClienteJInternalFrame;
 
 public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
 
@@ -24,14 +25,15 @@ public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
 
     public SeguirUsuarioJInternalFrame() {
         initComponents();
-        this.setFocusable(true);
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
 
-    }
+        List<Cliente> listCliente = crl.listarClientes();
+        Iterator<Cliente> it = listCliente.iterator();
+        while (it.hasNext()) {
+            jComboCli.addItem(it.next().getNickname());
+        }
 
-    public SeguirUsuarioJInternalFrame(String nickname) {
-        initComponents();
-        this.moveToFront();
-        nick = nickname;
         List<Usuario> lstUsuarios = crl.listarUsuarios();
         Iterator<Usuario> itUsr = lstUsuarios.iterator();
         while (itUsr.hasNext()) {
@@ -51,6 +53,8 @@ public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
         jLabelUsuarios = new javax.swing.JLabel();
         jComboBoxUsuarios = new javax.swing.JComboBox();
         jButtonConfirmar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jComboCli = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -66,27 +70,36 @@ public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Cliente");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(jLabelUsuarios)
-                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelUsuarios)
+                    .addComponent(jLabel1))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonConfirmar)
-                    .addComponent(jComboBoxUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxUsuarios, 0, 165, Short.MAX_VALUE)
+                    .addComponent(jComboCli, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelUsuarios)
                     .addComponent(jComboBoxUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jButtonConfirmar)
                 .addGap(26, 26, 26))
         );
@@ -96,18 +109,23 @@ public class SeguirUsuarioJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
-        if (jComboBoxUsuarios.getSelectedItem() != null) {
-            crl.seguirUsuario(nick, jComboBoxUsuarios.getSelectedItem().toString());
+        if (jComboCli.getSelectedItem() != null
+                && jComboBoxUsuarios.getSelectedItem() != null) {
+            crl.seguirUsuario(jComboCli.getSelectedItem().toString(),
+                    jComboBoxUsuarios.getSelectedItem().toString());
             JOptionPane.showMessageDialog(this, "Operacion realizada", "Seguir Usuario", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente y un seguidor");
         }
+    
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JComboBox<String> jComboBoxUsuarios;
+    private javax.swing.JComboBox<String> jComboCli;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelUsuarios;
     // End of variables declaration//GEN-END:variables
 }

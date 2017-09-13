@@ -2,6 +2,7 @@ package edu.tecnopotify.entidades;
 
 import edu.tecnopotify.datatypes.dataAlbum;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,6 +40,8 @@ public class Album implements Serializable {
         this.nombre = album.getNombre();
         this.anioCreado = album.getAnioCreado();
         this.imagenAlbum = album.getImagenAlbum();
+        this.listGenero = new ArrayList<Genero>();
+       
        
     }
 
@@ -84,6 +87,33 @@ public class Album implements Serializable {
      public List<Genero> getListGenero() {
         return listGenero;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Album other = (Album) obj;
+        if ((this.nombre == null) ? (other.nombre != null) : !this.nombre.equals(other.nombre)) {
+            return false;
+        }
+        return true;
+    }
+     
+     
     
     
    

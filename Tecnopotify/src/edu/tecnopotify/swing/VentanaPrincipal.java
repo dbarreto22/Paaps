@@ -17,25 +17,23 @@ import javax.swing.SwingUtilities;
  *
  * @author Carlox
  */
-    public class VentanaPrincipal extends javax.swing.JFrame {
-        
+public class VentanaPrincipal extends javax.swing.JFrame {
+
     private Interfaz ctrl;
     private AltaClienteJInternalFrame altaUsuario;
     private AltaGeneroJInternalFrame alatGenero;
     private Fabrica fab = Fabrica.getInstance();
     private IControlador ctr = fab.getInstancia();
-    
-    // private JFrame frame = new JFrame();
 
+    // private JFrame frame = new JFrame();
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
-        initComponents();    
+        initComponents();
         ctr.cargarDatos();
 
     }
-
 
     protected void createFrameAltaCliente() {
         AltaClienteJInternalFrame frame = new AltaClienteJInternalFrame();
@@ -80,7 +78,7 @@ import javax.swing.SwingUtilities;
             System.out.println(e.getMessage());
         }
     }
-    
+
     private void createFrameAgregarFavorito() {
         AgregarFavoritoJInternalFrame frame = new AgregarFavoritoJInternalFrame();
         frame.setVisible(true);
@@ -191,8 +189,27 @@ import javax.swing.SwingUtilities;
         }
     }
 
-        
-    
+    protected void createFrameSeguirUsuario() {
+        SeguirUsuarioJInternalFrame frame = new SeguirUsuarioJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    protected void cratedejarSeguirUsuario() {
+        dejarUsuarioJInternalFrame frame = new dejarUsuarioJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,6 +230,8 @@ import javax.swing.SwingUtilities;
         jMenuCrearArtista = new javax.swing.JMenuItem();
         jMenuConsultarCliente = new javax.swing.JMenuItem();
         jMenuConsultarArtista = new javax.swing.JMenuItem();
+        SeguirUsuario2 = new javax.swing.JMenuItem();
+        DejarSeguir2 = new javax.swing.JMenuItem();
         menuGenero = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         menuAlbum = new javax.swing.JMenu();
@@ -271,6 +290,22 @@ import javax.swing.SwingUtilities;
             }
         });
         menuUuarios.add(jMenuConsultarArtista);
+
+        SeguirUsuario2.setText("Seguir Usuario");
+        SeguirUsuario2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeguirUsuario2ActionPerformed(evt);
+            }
+        });
+        menuUuarios.add(SeguirUsuario2);
+
+        DejarSeguir2.setText("Dejar de Seguir Usuario");
+        DejarSeguir2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DejarSeguir2ActionPerformed(evt);
+            }
+        });
+        menuUuarios.add(DejarSeguir2);
 
         jMenu3.add(menuUuarios);
 
@@ -443,10 +478,11 @@ import javax.swing.SwingUtilities;
         createFrameAltaAlbum();
     }//GEN-LAST:event_jMenuCrearAlbumActionPerformed
 
-    private void SeguirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeguirUsuarioActionPerformed
+    private void SeguirUsuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeguirUsuario2ActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_SeguirUsuarioActionPerformed
+        createFrameSeguirUsuario();
+
+    }//GEN-LAST:event_SeguirUsuario2ActionPerformed
 
 
     private void JMenuCrearListaRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCrearListaRepActionPerformed
@@ -500,47 +536,58 @@ import javax.swing.SwingUtilities;
         // TODO add your handling code here:
     }//GEN-LAST:event_menuFavsActionPerformed
 
+    private void SeguirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+    private void DejarSeguir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DejarSeguir2ActionPerformed
+        // TODO add your handling code here:
+        cratedejarSeguirUsuario();
+    }//GEN-LAST:event_DejarSeguir2ActionPerformed
+
+        /**
+         * @param args the command line arguments
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+        public static void main(String args[]) {
+            /* Set the Nimbus look and feel */
+            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+             */
+            try {
+                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                    if ("Nimbus".equals(info.getName())) {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
                 }
+            } catch (ClassNotFoundException ex) {
+                java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+            //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaPrincipal().setVisible(true);
-            }
-        });
-    }
+            /* Create and display the form */
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new VentanaPrincipal().setVisible(true);
+                }
+            });
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem CrearTema;
+    private javax.swing.JMenuItem DejarSeguir2;
     private javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuItem JMenuCrearListaRep;
     private javax.swing.JMenuItem QuitarTema;
+    private javax.swing.JMenuItem SeguirUsuario2;
     private javax.swing.JMenuItem agregarTema;
     private javax.swing.JMenuItem consultarAlbum;
     private javax.swing.JMenu jMenu12;

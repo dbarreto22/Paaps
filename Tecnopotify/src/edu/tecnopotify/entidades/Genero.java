@@ -80,4 +80,34 @@ public class Genero implements Serializable{
     public void setListHijos(List<Genero> listHijos) {
         this.listHijos = listHijos;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
+        hash = 37 * hash + (this.padre != null ? this.padre.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Genero other = (Genero) obj;
+        if ((this.nombre == null) ? (other.nombre != null) : !this.nombre.equals(other.nombre)) {
+            return false;
+        }
+        if ((this.padre == null) ? (other.padre != null) : !this.padre.equals(other.padre)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

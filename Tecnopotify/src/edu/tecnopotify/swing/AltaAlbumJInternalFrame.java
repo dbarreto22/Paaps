@@ -69,10 +69,10 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         while (it.hasNext()) {
             jComboNombreArtista.addItem(it.next().getNickname());
         }
-        
+
         //********Arbol***************
         model = (DefaultTreeModel) treeGenero.getModel();
-        rootNode=(DefaultMutableTreeNode) model.getRoot();
+        rootNode = (DefaultMutableTreeNode) model.getRoot();
         Genero genero = ctrl.buscarGenero("Genero");
         List<Genero> lstGeneros = genero.getListHijos();
         iniciarTree(lstGeneros, rootNode);
@@ -82,7 +82,6 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         Iterator<Genero> itG = generos.iterator();
         
         this.iniciarTree(generos, node);*/
-
     }
 
     private void iniciarTree(List<Genero> lstGeneros, DefaultMutableTreeNode padre) {
@@ -155,7 +154,7 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(200, 300));
         setVisible(true);
 
-        jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.setText("Crear Album");
         jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAceptarActionPerformed(evt);
@@ -276,10 +275,6 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonAceptar)
-                .addGap(24, 24, 24))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -294,22 +289,23 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextAnioCreado)
-                            .addComponent(jButtonImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                             .addComponent(jTextNombreAlbum)
-                            .addComponent(jComboNombreArtista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboNombreArtista, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonAceptar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(95, 95, 95))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(69, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -331,12 +327,12 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
                         .addComponent(jLabelGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))
+                        .addGap(95, 95, 95))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonAceptar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jButtonAceptar)
-                .addGap(27, 27, 27))
+                        .addGap(68, 68, 68))))
         );
 
         pack();
@@ -379,18 +375,12 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
         dataAlbum odataAlbum = new dataAlbum(jTextNombreAlbum.getText(), anio, path);
         //desplegar nombres de artistas
         String nickArtista = this.jComboNombreArtista.getSelectedItem().toString();
-        /*        try {
-        if (ctrl.buscarGenero(node.toString())!=null) {
-        System.out.println("Hay genero seleccionado");
+        try {
+            odataAlbum.getListGeneros().add(ctrl.buscarGenero(node.toString()));
+            ctrl.crearAlbum(nickArtista, odataAlbum);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        if (odataAlbum!=null) {
-        System.out.println("Hay album");
-        }
-        odataAlbum.getListGeneros().add(ctrl.buscarGenero(node.toString()));*/
-                ctrl.crearAlbum(nickArtista, odataAlbum);
-                /*        } catch (Exception e) {
-                System.out.println(e.getMessage());
-                }*/
         jPanel1.setVisible(true);
         JOptionPane.showMessageDialog(this, "Album creado con éxito", "Crear Album", JOptionPane.INFORMATION_MESSAGE);
 
@@ -411,13 +401,13 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jButtonAddTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddTemaActionPerformed
         // TODO add your handling code here:
-        dataTemas odatatema=null;
+        dataTemas odatatema = null;
         String nickArtista = this.jComboNombreArtista.getSelectedItem().toString();
         if (!jTextFieldNombreTema.getText().isEmpty()) {
             int pos = Integer.parseInt(jTextFieldPos.getText());
             odatatema = new dataTemas(jTextFieldNombreTema.getText(),
-            jTextFieldDuracion.getText(),pos);
-            ctrl.altaTema(odatatema,jTextNombreAlbum.getText());
+                    jTextFieldDuracion.getText(), pos);
+            ctrl.altaTema(odatatema, jTextNombreAlbum.getText());
             jComboBoxTemas.addItem(odatatema.getNombre());
         }
         this.jTextFieldNombreTema.setText("");

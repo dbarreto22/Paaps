@@ -318,7 +318,7 @@ public class Controlador implements IControlador {
             ExtUsuario usr = new ExtUsuario(fact);
             Cliente c = (Cliente) usrCtrl.findUsuario(nickCliente);
             Usuario u = usrCtrl.findUsuario(nickUsr);
-            c.removeFromSeguidos(u);
+            //c.removeFromSeguidos(u);
             usr.quitarSeguidor(u,c);
         } catch (PreexistingEntityException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -333,7 +333,7 @@ public class Controlador implements IControlador {
             ExtUsuario usr = new ExtUsuario(fact);
             Cliente c = (Cliente) usrCtrl.findUsuario(nickCliente);
             Usuario u = usrCtrl.findUsuario(nickUsr);
-            c.addToSeguidos(u);            
+            //c.addToSeguidos(u);            
             usr.agregarSeguidor(u,c);
         } catch (PreexistingEntityException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);

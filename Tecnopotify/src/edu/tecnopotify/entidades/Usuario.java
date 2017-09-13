@@ -111,14 +111,8 @@ public class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + (this.nickname != null ? this.nickname.hashCode() : 0);
-        hash = 53 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
-        hash = 53 * hash + (this.apellido != null ? this.apellido.hashCode() : 0);
-        hash = 53 * hash + (this.mail != null ? this.mail.hashCode() : 0);
-        hash = 53 * hash + (this.f_nac != null ? this.f_nac.hashCode() : 0);
-        hash = 53 * hash + (this.imagen != null ? this.imagen.hashCode() : 0);
-        hash = 53 * hash + (this.lstSeguidos != null ? this.lstSeguidos.hashCode() : 0);
+        int hash = 7;
+        hash = 29 * hash + (this.nickname != null ? this.nickname.hashCode() : 0);
         return hash;
     }
 
@@ -134,8 +128,13 @@ public class Usuario implements Serializable {
             return false;
         }
         final Usuario other = (Usuario) obj;
+        if ((this.nickname == null) ? (other.nickname != null) : !this.nickname.equals(other.nickname)) {
+            return false;
+        }
         return true;
     }
+
+
     
     
 

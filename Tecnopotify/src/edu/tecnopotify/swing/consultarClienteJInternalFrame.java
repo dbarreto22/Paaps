@@ -49,34 +49,11 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
         this.setTitle("Consultar cliente");
-        
 
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         rellenarElCoso();
 
-    }
-
-    protected void createFrameSeguirUsuario(String nick) {
-        SeguirUsuarioJInternalFrame frame = new SeguirUsuarioJInternalFrame(nick);
-        frame.setVisible(true);
-        this.add(frame);
-        try {
-            frame.setSelected(true);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    protected void cratedejarSeguirUsuario(String nick) {
-        dejarUsuarioJInternalFrame frame = new dejarUsuarioJInternalFrame(nick);
-        frame.setVisible(true);
-        this.add(frame);
-        try {
-            frame.setSelected(true);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     /**
@@ -106,9 +83,8 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         jimagen = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSeguidos = new javax.swing.JTable();
-        jButtonSeguir = new javax.swing.JButton();
-        jButtonDejarSeg = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         jFrameSelectorArchivos.setMinimumSize(new java.awt.Dimension(200, 200));
@@ -181,20 +157,6 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTableSeguidos);
 
-        jButtonSeguir.setText("Seguir");
-        jButtonSeguir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSeguirActionPerformed(evt);
-            }
-        });
-
-        jButtonDejarSeg.setText("Dejar de Seguir");
-        jButtonDejarSeg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDejarSegActionPerformed(evt);
-            }
-        });
-
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Seguidores");
         setJMenuBar(jMenuBar1);
@@ -206,24 +168,6 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelFNac)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15)
-                        .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonSeguir, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(151, 151, 151)
-                                .addComponent(jButtonDejarSeg, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(0, 254, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -239,13 +183,27 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                             .addComponent(jComboBoxNickname, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonConfirmar)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62))))))
+                                .addGap(107, 107, 107)
+                                .addComponent(jButtonConfirmar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelFNac)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(70, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(238, 238, 238))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,16 +233,15 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(jLabelFNac)
                     .addComponent(jTextFieldDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextFieldAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSeguir)
-                    .addComponent(jButtonDejarSeg))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
@@ -293,29 +250,40 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFileChooser1ActionPerformed
-    Cliente cliente = null;
+    //Cliente cli = null;
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
 
         //Obtengo datos de los controles Swing
         String nick = jComboBoxNickname.getSelectedItem().toString();
-        cliente = crl.seleccionarCliente(nick);
-        jTextFieldNombre.setText(cliente.getNombre());
-        jTextFieldApellido.setText(cliente.getApellido());
-        jTextFieldMail.setText(cliente.getMail());
-        int d = cliente.getF_nac().getDia();
-        int m = cliente.getF_nac().getMes();
-        int a = cliente.getF_nac().getAnio();
+        Cliente cli = crl.seleccionarCliente(nick);
+        jTextFieldNombre.setText(cli.getNombre());
+        jTextFieldApellido.setText(cli.getApellido());
+        jTextFieldMail.setText(cli.getMail());
+        int d = cli.getF_nac().getDia();
+        int m = cli.getF_nac().getMes();
+        int a = cli.getF_nac().getAnio();
         jTextFieldDia.setText(String.valueOf(d));
         jTextFieldMes.setText(String.valueOf(m));
         jTextFieldAnio.setText(String.valueOf(a));
 
-        ImageIcon i = new ImageIcon(cliente.getImagen());
+        ImageIcon i = new ImageIcon(cli.getImagen());
         this.jimagen.setIcon(i);
-        rellenarelotrocoso();
-        
-        
+
+        List<Usuario> seguidos = cli.getLstSeguidos();
+        Object rowDataT[] = new Object[3];
+        DefaultTableModel model = (DefaultTableModel) jTableSeguidos.getModel();
+
+       if (!seguidos.isEmpty()){
+           
+       for (int j = 0; j < seguidos.size(); j++) {
+            rowDataT[0] = seguidos.get(j).getNickname();
+            rowDataT[1] = seguidos.get(j).getNombre();
+            rowDataT[2] = seguidos.get(j).getMail();
+            model.addRow(rowDataT);
+        }
+       }
 
 
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
@@ -330,23 +298,9 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxNicknameActionPerformed
 
-    private void jButtonSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeguirActionPerformed
-        // TODO add your handling code here:
-        createFrameSeguirUsuario(jComboBoxNickname.getSelectedItem().toString());
-        
-        //rellenarelotrocoso();
-    }//GEN-LAST:event_jButtonSeguirActionPerformed
-
-    private void jButtonDejarSegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDejarSegActionPerformed
-        // TODO add your handling code here:
-        cratedejarSeguirUsuario(jComboBoxNickname.getSelectedItem().toString());
-        this.jTableSeguidos.removeAll();
-        //rellenarelotrocoso();
-    }//GEN-LAST:event_jButtonDejarSegActionPerformed
-
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_formFocusGained
 
     private void rellenarElCoso() {
@@ -358,24 +312,25 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         }
     }
 
-    private void rellenarelotrocoso() {
+    private void rellenarelotrocoso(Cliente cliente) {
         List<Usuario> seguidos = cliente.getLstSeguidos();
         Object rowDataT[] = new Object[3];
         DefaultTableModel model = (DefaultTableModel) jTableSeguidos.getModel();
+
+        // model.fireTableRowsDeleted(seguidos.indexOf(0), seguidos.size());
         for (int j = 0; j < seguidos.size(); j++) {
             rowDataT[0] = seguidos.get(j).getNickname();
             rowDataT[1] = seguidos.get(j).getNombre();
             rowDataT[2] = seguidos.get(j).getMail();
             model.addRow(rowDataT);
         }
-     
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConfirmar;
-    private javax.swing.JButton jButtonDejarSeg;
-    private javax.swing.JButton jButtonSeguir;
     private javax.swing.JComboBox<String> jComboBoxNickname;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JFrame jFrameSelectorArchivos;
     private javax.swing.JLabel jLabel1;

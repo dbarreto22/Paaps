@@ -42,5 +42,32 @@ public class ListaParticular extends ListaReproduccion implements Serializable{
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + (this.cliente != null ? this.cliente.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ListaParticular other = (ListaParticular) obj;
+        if (this.cliente != other.cliente && (this.cliente == null || !this.cliente.equals(other.cliente))) {
+            return false;
+        }
+        return true;
+    }
+    
+    
   
 }

@@ -1,6 +1,7 @@
 package edu.tecnopotify.datatypes;
 
 import edu.tecnopotify.entidades.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class dataAlbum {
@@ -16,6 +17,7 @@ public class dataAlbum {
         this.nombre = nombre;
         this.anioCreado = anioCreado;
         this.imagenAlbum = imagenAlbum;
+        this.listGeneros = new ArrayList<Genero>();                 
 
     }
 

@@ -288,6 +288,7 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
         if (jCheckBoxListaParticular.isSelected()) {
             this.nickNameC.setVisible(true);
             this.jComboNickCli.setVisible(true);
+            this.jComboGenero.setVisible(false);
             while (it.hasNext()) {
                 this.jComboNickCli.addItem(it.next().getNickname());
             }
@@ -295,6 +296,7 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
             jCheckBoxListaParticular.setSelected(false);
             this.nickNameC.setVisible(false);
             this.jComboNickCli.setVisible(false);
+            this.jComboGenero.setVisible(true);
             
         }
     }//GEN-LAST:event_jCheckBoxListaParticularActionPerformed

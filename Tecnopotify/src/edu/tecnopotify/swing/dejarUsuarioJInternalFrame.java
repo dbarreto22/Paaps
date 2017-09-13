@@ -5,45 +5,31 @@
  */
 package edu.tecnopotify.swing;
 
-
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
 
-
-
 public class dejarUsuarioJInternalFrame extends javax.swing.JInternalFrame {
-   
+
     /**
      * Creates new form SeguirUsuarioJInternalFrame
      */
     Fabrica fabrica = Fabrica.getInstance();
-    IControlador  crl = fabrica.getInstancia();
-    private String nick;
+    IControlador crl = fabrica.getInstancia();
+
     public dejarUsuarioJInternalFrame() {
         initComponents();
-        this.setFocusable(true);
-    }
-    
-        public dejarUsuarioJInternalFrame(String nickName) {
-        initComponents();
-        this.moveToFront();
-        nick = nickName;
-        Cliente cli  = crl.getCli(nickName);
-        
-
-        
-        List<Usuario> seguidos = cli.getLstSeguidos();
-        Iterator<Usuario> it = seguidos.iterator();
-        while (it.hasNext()) {
-            jComboBoxSeguidos.addItem(it.next().getNickname());
+        List<Usuario> u = crl.listarUsuarios();
+        Iterator<Usuario> itu = u.iterator();
+        while (itu.hasNext()) {
+            jCombocli.addItem(itu.next().getNickname());
         }
-        
-  
+
     }
 
     /**
@@ -58,6 +44,8 @@ public class dejarUsuarioJInternalFrame extends javax.swing.JInternalFrame {
         jLabelClientes = new javax.swing.JLabel();
         jComboBoxSeguidos = new javax.swing.JComboBox();
         jButtonDejarSeguir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jCombocli = new javax.swing.JComboBox();
 
         setClosable(true);
         setIconifiable(true);
@@ -79,29 +67,49 @@ public class dejarUsuarioJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Usuarios");
+
+        jCombocli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCombocliActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabelClientes)
-                .addGap(56, 56, 56)
-                .addComponent(jComboBoxSeguidos, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(132, Short.MAX_VALUE)
                 .addComponent(jButtonDejarSeguir)
                 .addGap(119, 119, 119))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelClientes)
+                    .addComponent(jLabel1))
+                .addGap(66, 66, 66)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jComboBoxSeguidos, 0, 165, Short.MAX_VALUE)
+                    .addComponent(jCombocli, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelClientes)
-                    .addComponent(jComboBoxSeguidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(23, Short.MAX_VALUE)
+                        .addComponent(jCombocli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelClientes, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jComboBoxSeguidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jButtonDejarSeguir)
                 .addGap(31, 31, 31))
         );
@@ -111,24 +119,45 @@ public class dejarUsuarioJInternalFrame extends javax.swing.JInternalFrame {
 
     private void jComboBoxSeguidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSeguidosActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_jComboBoxSeguidosActionPerformed
 
     private void jButtonDejarSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDejarSeguirActionPerformed
         // TODO add your handling code here:
-        if (jComboBoxSeguidos.getSelectedItem()!=null) {
-            crl.dejarDeSeguirUsuario(nick,jComboBoxSeguidos.getSelectedItem().toString()); 
-            JOptionPane.showMessageDialog(this,"Operacion realizada","Dejar de Seguir Usuario", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else
-        {
+
+        if (jComboBoxSeguidos.getSelectedItem() != null && jCombocli.getSelectedItem() != null) {
+            crl.dejarDeSeguirUsuario(jCombocli.getSelectedItem().toString(), jComboBoxSeguidos.getSelectedItem().toString());
+            JOptionPane.showMessageDialog(this, "Operacion realizada", "Dejar de Seguir Usuario", JOptionPane.INFORMATION_MESSAGE);
+        } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente y un seguidor");
         }
     }//GEN-LAST:event_jButtonDejarSeguirActionPerformed
+
+    private void jCombocliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCombocliActionPerformed
+        // TODO add your handling code here:
+        jComboBoxSeguidos.removeAllItems();
+        if(jCombocli.getSelectedItem() != null){
+            try {
+                Cliente cli = crl.getCli(jCombocli.getSelectedItem().toString());
+                List<Usuario> seguidos = cli.getLstSeguidos();
+                if (!seguidos.isEmpty()) {
+                    Iterator<Usuario> it = seguidos.iterator();
+                    
+                    while (it.hasNext()) {
+                        jComboBoxSeguidos.addItem(it.next().getNickname());
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_jCombocliActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDejarSeguir;
     private javax.swing.JComboBox<String> jComboBoxSeguidos;
+    private javax.swing.JComboBox<String> jCombocli;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelClientes;
     // End of variables declaration//GEN-END:variables
 }
