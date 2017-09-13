@@ -458,7 +458,7 @@ import javax.swing.SwingUtilities;
 
     private void SeguirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeguirUsuarioActionPerformed
         // TODO add your handling code here:
-        createFrameSeguirUsuario();
+       
     }//GEN-LAST:event_SeguirUsuarioActionPerformed
 
     private void JMenuCrearListaRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCrearListaRepActionPerformed

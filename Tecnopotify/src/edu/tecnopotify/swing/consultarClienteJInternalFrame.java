@@ -34,7 +34,7 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
     private String path;
-    IControlador crl;
+    private IControlador crl;
 
     public consultarClienteJInternalFrame() {
         super("Consultar Cliente",
@@ -52,18 +52,25 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
 
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
-        List<Cliente> clientes = crl.listarClientes();
-        Iterator<Cliente> it = clientes.iterator();
-        while (it.hasNext()) {
-            jComboBoxNickname.addItem(it.next().getNickname());
-        }
+        rellenarElCoso();
 
     }
-    
+
     protected void createFrameSeguirUsuario() {
         SeguirUsuarioJInternalFrame frame = new SeguirUsuarioJInternalFrame();
         frame.setVisible(true);
-        this.Desktop.add(frame);
+        this.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    protected void cratedejarSeguirUsuario() {
+        dejarUsuarioJInternalFrame frame = new dejarUsuarioJInternalFrame();
+        frame.setVisible(true);
+        this.add(frame);
         try {
             frame.setSelected(true);
         } catch (Exception e) {
@@ -99,8 +106,8 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         jimagen = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSeguidos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonSeguir = new javax.swing.JButton();
+        jButtonDejarSeg = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
@@ -135,6 +142,11 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         setTitle("Alta Cliente");
         setMinimumSize(new java.awt.Dimension(200, 300));
         setVisible(true);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -171,9 +183,19 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTableSeguidos);
 
-        jButton1.setText("Seguir");
+        jButtonSeguir.setText("Seguir");
+        jButtonSeguir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSeguirActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Dejar de Seguir");
+        jButtonDejarSeg.setText("Dejar de Seguir");
+        jButtonDejarSeg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDejarSegActionPerformed(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Seguidores");
@@ -221,9 +243,9 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonSeguir, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(151, 151, 151)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButtonDejarSeg, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(0, 100, Short.MAX_VALUE))))
         );
@@ -263,8 +285,8 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonSeguir)
+                    .addComponent(jButtonDejarSeg))
                 .addGap(85, 85, 85))
         );
 
@@ -294,37 +316,60 @@ public class consultarClienteJInternalFrame extends javax.swing.JInternalFrame {
 
         ImageIcon i = new ImageIcon(cliente.getImagen());
         this.jimagen.setIcon(i);
-        
+
         List<Usuario> seguidos = cliente.getLstSeguidos();
-  
-         Object rowDataT[] = new Object[3];
-         DefaultTableModel model = (DefaultTableModel) jTableSeguidos.getModel();
-        for(int j = 0; j < seguidos.size() ;j++){
+
+        Object rowDataT[] = new Object[3];
+        DefaultTableModel model = (DefaultTableModel) jTableSeguidos.getModel();
+        for (int j = 0; j < seguidos.size(); j++) {
             rowDataT[0] = seguidos.get(j).getNickname();
             rowDataT[1] = seguidos.get(j).getNombre();
             rowDataT[2] = seguidos.get(j).getMail();
-            model.addRow(rowDataT);          
+            model.addRow(rowDataT);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jLabelMostrarImagenComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabelMostrarImagenComponentShown
         // TODO add your handling code here:
 
-        
+
     }//GEN-LAST:event_jLabelMostrarImagenComponentShown
 
     private void jComboBoxNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNicknameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxNicknameActionPerformed
 
+    private void jButtonSeguirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSeguirActionPerformed
+        // TODO add your handling code here:
+        createFrameSeguirUsuario();
 
+    }//GEN-LAST:event_jButtonSeguirActionPerformed
+
+    private void jButtonDejarSegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDejarSegActionPerformed
+        // TODO add your handling code here:
+        cratedejarSeguirUsuario();
+    }//GEN-LAST:event_jButtonDejarSegActionPerformed
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        // TODO add your handling code here:
+        rellenarElCoso();
+    }//GEN-LAST:event_formFocusGained
+
+    private void rellenarElCoso()
+    {
+        List<Cliente> clientes = crl.listarClientes();
+        Iterator<Cliente> it = clientes.iterator();
+        while (it.hasNext()) {
+            jComboBoxNickname.addItem(it.next().getNickname());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonConfirmar;
+    private javax.swing.JButton jButtonDejarSeg;
+    private javax.swing.JButton jButtonSeguir;
     private javax.swing.JComboBox<String> jComboBoxNickname;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JFrame jFrameSelectorArchivos;
