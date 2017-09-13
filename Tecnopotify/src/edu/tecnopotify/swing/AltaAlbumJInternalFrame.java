@@ -49,7 +49,8 @@ public class AltaAlbumJInternalFrame extends javax.swing.JInternalFrame {
     private DefaultMutableTreeNode rootNode;
     private DefaultTreeModel model;
     DefaultMutableTreeNode node;
-
+    private Genero genero;
+    private 
     public AltaAlbumJInternalFrame() {
         super("Alta Album",
                 true, //resizable
