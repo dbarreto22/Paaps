@@ -269,7 +269,7 @@ public class AltaArtistaJInternalFrame extends javax.swing.JInternalFrame {
         dataFecha fecha = new dataFecha(dia, mes, anio);
         String imagen = this.path;
         dataUsuario art = new dataArtista(link, biografia, nickname, nombre, apellido,
-                mail, fecha, imagen);
+                mail, fecha,"", imagen);
 
         //A través de mi interfaz registro a un nuevo usuario en mi Sistema
         crl.crearArtista(biografia, link, art);

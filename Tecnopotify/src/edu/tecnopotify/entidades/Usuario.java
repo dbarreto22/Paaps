@@ -28,6 +28,7 @@ public class Usuario implements Serializable {
     private String mail;
     private dataFecha f_nac;
     private String imagen;
+    private String contrasenia;
     @ManyToMany
     private List<Usuario> lstSeguidos;
 
@@ -38,7 +39,7 @@ public class Usuario implements Serializable {
         this.mail = usuario.getMail();
         this.f_nac = usuario.getF_nac();
         this.imagen = usuario.getImagen();
-
+        this.contrasenia = usuario.getContrasenia();
         this.lstSeguidos = usuario.getLstSeguidos();
     }
 
@@ -85,6 +86,15 @@ public class Usuario implements Serializable {
         this.f_nac = f_nac;
     }
 
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+    
+
     public String getImagen() {
         return imagen;
     }
@@ -111,8 +121,9 @@ public class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + (this.nickname != null ? this.nickname.hashCode() : 0);
+        int hash = 5;
+        hash = 59 * hash + (this.nickname != null ? this.nickname.hashCode() : 0);
+        hash = 59 * hash + (this.contrasenia != null ? this.contrasenia.hashCode() : 0);
         return hash;
     }
 
@@ -131,11 +142,10 @@ public class Usuario implements Serializable {
         if ((this.nickname == null) ? (other.nickname != null) : !this.nickname.equals(other.nickname)) {
             return false;
         }
+        if ((this.contrasenia == null) ? (other.contrasenia != null) : !this.contrasenia.equals(other.contrasenia)) {
+            return false;
+        }
         return true;
     }
-
-
-    
-    
 
 }

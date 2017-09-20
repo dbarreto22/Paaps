@@ -12,14 +12,14 @@ public class dataCliente extends dataUsuario {
     public List<ListaParticular> listasReprParticular;
     /* public List<Usuario> seguidos;*/
 
-    public dataCliente(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen,
+    public dataCliente(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen,String contrasenia,
             List<Usuario> lseguidores, List<Usuario> lseguidos) {
-        super(nickname, nombre, apellido, mail, f_nac, imagen, lseguidos);
+        super(nickname, nombre, apellido, mail, f_nac, imagen,contrasenia, lseguidos);
     }
     
-    public dataCliente(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen
+    public dataCliente(String nickname, String nombre, String apellido, String mail, dataFecha f_nac,String contrasenia, String imagen
             ) {
-        super(nickname, nombre, apellido, mail, f_nac, imagen);
+        super(nickname, nombre, apellido, mail, f_nac, contrasenia,imagen);
     }
 
     public dataCliente() {

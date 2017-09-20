@@ -13,28 +13,31 @@ public class dataUsuario implements Serializable {
     private String mail;
     private dataFecha f_nac;
     private String imagen;
+    private String contrasenia;
     private List<Usuario> lstSeguidos;
   
 
-    public dataUsuario(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen,
-            List<Usuario> lseguidos) {
+    public dataUsuario(String nickname, String nombre, String apellido, String mail,
+            dataFecha f_nac, String imagen, String contrasenia,List<Usuario> lseguidos) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.f_nac = f_nac;
         this.imagen = imagen;  
+        this.contrasenia=contrasenia;
         this.lstSeguidos = lseguidos;
     }
 
-    public dataUsuario(String nickname, String nombre, String apellido, String mail, dataFecha f_nac, String imagen
-            ) {
+    public dataUsuario(String nickname, String nombre, String apellido, 
+            String mail, dataFecha f_nac, String imagen,String contrasenia) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.f_nac = f_nac;
-        this.imagen = imagen;        
+        this.imagen = imagen; 
+        this.contrasenia=contrasenia;
     }
 
     public dataUsuario() {
@@ -88,6 +91,14 @@ public class dataUsuario implements Serializable {
         this.imagen = imagen;
     }
 
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+    
     public List<Usuario> getLstSeguidos() {
         return lstSeguidos;
     }

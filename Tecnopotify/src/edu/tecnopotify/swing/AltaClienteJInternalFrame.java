@@ -299,7 +299,7 @@ public class AltaClienteJInternalFrame extends javax.swing.JInternalFrame {
         dataFecha fecha = new dataFecha(dia, mes, anio);
         String imagen = this.path;
         dataUsuario cli = new dataCliente(nickname, nombre, apellido,
-                mail, fecha, imagen);
+                mail, fecha,"", imagen);
 
         //A través de mi interfaz registro a un nuevo usuario en mi Sistema
         crl.crearCliente(cli);

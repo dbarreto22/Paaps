@@ -18,16 +18,16 @@ public class dataArtista extends dataUsuario{
 
     
     public dataArtista(String biografia, String link, List<Album> listAlbum, String nickname,
-            String nombre, String apellido, String mail, dataFecha f_nac, String imagen,List<Usuario> lseguidores, List<Usuario> lseguidos ) {
-        super(nickname, nombre, apellido, mail, f_nac, imagen,lseguidos);
+            String nombre, String apellido, String mail, dataFecha f_nac, String imagen,String contrasenia,List<Usuario> lseguidores, List<Usuario> lseguidos ) {
+        super(nickname, nombre, apellido, mail, f_nac, imagen,contrasenia,lseguidos);
         this.biografia = biografia;
         this.link = link;
         this.listAlbum = listAlbum;
     }
 
     public dataArtista(String biografia, String link,String nickname,
-            String nombre, String apellido, String mail, dataFecha f_nac, String imagen) {
-        super(nickname, nombre, apellido, mail, f_nac, imagen);
+            String nombre, String apellido, String mail, dataFecha f_nac,String contrasenia, String imagen) {
+        super(nickname, nombre, apellido, mail, f_nac, imagen,contrasenia);
         this.biografia = biografia;
         this.link = link;
     }

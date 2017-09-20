@@ -9,6 +9,7 @@ import edu.tecnopotify.datatypes.dataTemas;
 import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.entidades.ListaDefecto;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.ListaReproduccion;
@@ -64,6 +65,25 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
         }
 
     }
+
+    /*    private void iniciarTree(List<Temas> lstTemas, DefaultMutableTreeNode padre) {
+    ListaReproduccion oListrep;
+    DefaultMutableTreeNode hijo;
+    if (!lstTemas.isEmpty()) {//Si mi lista tiene al menos un elemento
+    //lo asigno en oGenero
+    oListrep =  lstRep.get(0);
+    //lo creo como nodo hijo
+    hijo = new DefaultMutableTreeNode(oListPart.getNombre());
+    //lo agrago en el modelo del arbol
+    model.insertNodeInto(hijo, padre, model.getChildCount(padre));
+    if (!oListPart.getListaTemas().isEmpty()) { //Reviso si tiene hijos
+    //llamo a la funcion con la lista de hijos
+    iniciarTree(oListPart., hijo);
+    }
+    //Sigo con el proximo hermano
+    iniciarTree(lstGeneros.subList(1, lstGeneros.size()), padre);
+    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -248,8 +268,8 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
         while (it.hasNext()) {
             nodeLP.setUserObject(it.next().getNombre());
         }
-        
-        while (itLD.hasNext()){
+
+        while (itLD.hasNext()) {
             nodeLD.setUserObject(itLD.next().getNombre());
         }
 
@@ -294,10 +314,10 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         List<Artista> art = crl.listarArtistas();
         Iterator<Artista> it = art.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             jComboArtistas.addItem(it.next().getNombre());
         }
-        
+
     }//GEN-LAST:event_jComboArtistasActionPerformed
 
     private void jComboAlbumsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAlbumsActionPerformed
@@ -305,7 +325,7 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
         Artista a = crl.seleccionarArtista(jComboArtistas.getSelectedItem().toString());
         List<Album> album = a.getListAlbum();
         Iterator<Album> itAl = album.iterator();
-        while(itAl.hasNext()){
+        while (itAl.hasNext()) {
             jComboAlbums.addItem(itAl.next().getNombre());
         }
     }//GEN-LAST:event_jComboAlbumsActionPerformed
@@ -315,7 +335,7 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
         Album al = crl.seleccionarAlbum(jComboAlbums.getSelectedItem().toString());
         List<Temas> temas = al.getListTemas();
         Iterator<Temas> itT = temas.iterator();
-        while(itT.hasNext()){
+        while (itT.hasNext()) {
             jComboArtistas.addItem(itT.next().getNombre());
         }
     }//GEN-LAST:event_jComboTemasActionPerformed
