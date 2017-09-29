@@ -276,7 +276,7 @@ public class Controlador implements IControlador {
             TemasJpaController temactrl = new TemasJpaController(fact);
             Temas oTema = temactrl.findTemas(idElemento);//Busco el tema
             try {
-                fav.agregarTemaFav(oTema, oCliente);
+                fav.agregarTemaFav(oTema, oCliente);    //Agrego el tema
             } catch (PreexistingEntityException ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             }

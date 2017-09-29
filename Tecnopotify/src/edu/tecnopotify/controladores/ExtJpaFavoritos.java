@@ -31,14 +31,19 @@ public class ExtJpaFavoritos extends FavoritosJpaController {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            //Creo un objeto favorito y le asigno el del cliente
             Favoritos oFavorito = oCliente.getFav();
-            if(oFavorito==null)
-                oFavorito=new Favoritos();
+            if(oFavorito==null) //Si el cliente no tiene favoritos
+            {
+               oFavorito=new Favoritos();
+               oFavorito.setCliente(oCliente);
+            }
             List<Temas> attachedFavoritos = oFavorito.getListTemas();
-            attachedFavoritos.add(objeto);
+            attachedFavoritos.add(objeto);//Agrego el tema a la lista de favs
             oFavorito.setListTemas(attachedFavoritos);
-            oCliente.setFav(oFavorito);
-            em.merge(oCliente);
+            oFavorito.setCliente(oCliente);
+            oCliente.setFav(oFavorito);//Guardo los favs en el cliente
+            em.merge(oCliente);//Y le hago merge
             em.getTransaction().commit();
         } catch (Exception e) {
             throw new PreexistingEntityException("Cliente " + oCliente.toString() + " da error no se cual.", e);
@@ -58,10 +63,14 @@ public class ExtJpaFavoritos extends FavoritosJpaController {
             em.getTransaction().begin();
             Favoritos oFavorito = oCliente.getFav();
             if(oFavorito==null)
-                oFavorito=new Favoritos();
+            {
+               oFavorito=new Favoritos();
+               oFavorito.setCliente(oCliente);
+            }
             List<Album> attachedFavoritos = oFavorito.getListAlbum();
             attachedFavoritos.add(objeto);
             oFavorito.setListAlbum(attachedFavoritos);
+            oFavorito.setCliente(oCliente);
             oCliente.setFav(oFavorito);
             em.merge(oCliente);
             em.getTransaction().commit();
@@ -83,7 +92,10 @@ public class ExtJpaFavoritos extends FavoritosJpaController {
             em.getTransaction().begin();
             Favoritos oFavorito = oCliente.getFav();
             if(oFavorito==null)
-                oFavorito=new Favoritos();
+            {
+               oFavorito=new Favoritos();
+               oFavorito.setCliente(oCliente);
+            }
             List<ListaReproduccion> attachedFavoritos = oFavorito.getListRep();
             attachedFavoritos.add(objeto);
             oFavorito.setListRep(attachedFavoritos);
