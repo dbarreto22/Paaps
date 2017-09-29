@@ -23,6 +23,8 @@ public class Cliente extends Usuario implements Serializable{
 
     public Cliente(dataUsuario usuario) {
         super(usuario);
+        fav=null;
+        //fav=new Favoritos();//Aca la cague
     }
 
     public Cliente() {

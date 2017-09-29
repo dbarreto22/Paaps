@@ -5,7 +5,10 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.ListaReproduccion;
+import edu.tecnopotify.entidades.Temas;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.AltaClienteJInternalFrame.openFrameCount;
@@ -76,12 +79,25 @@ temas no se pueden seleccionar de listas privadas.*/
         jLabelNickName2 = new javax.swing.JLabel();
         jTextFieldNombreElemento = new javax.swing.JTextField();
         jButtonAceptar = new javax.swing.JButton();
+        jComboBoxElementos = new javax.swing.JComboBox();
 
         jLabelNickName.setText("NickName");
+
+        jComboBoxTemaListaAlbum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTemaListaAlbumActionPerformed(evt);
+            }
+        });
 
         jLabelNickName1.setText("Agregar");
 
         jLabelNickName2.setText("Nombre del elemento");
+
+        jTextFieldNombreElemento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreElementoActionPerformed(evt);
+            }
+        });
 
         jButtonAceptar.setText("Aceptar");
         jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,27 +110,33 @@ temas no se pueden seleccionar de listas privadas.*/
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonAceptar)
-                        .addGap(121, 121, 121))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelNickName2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNombreElemento, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 70, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNickName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelNickName1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(107, 107, 107)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxTemaListaAlbum, 0, 134, Short.MAX_VALUE)
-                            .addComponent(jComboBoxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jTextFieldNombreElemento, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButtonAceptar)
+                                .addGap(115, 115, 115))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabelNickName2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxElementos, 0, 134, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelNickName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelNickName1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(107, 107, 107)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBoxTemaListaAlbum, 0, 134, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(70, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,10 +152,12 @@ temas no se pueden seleccionar de listas privadas.*/
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNickName2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldNombreElemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                    .addComponent(jComboBoxElementos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addComponent(jTextFieldNombreElemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonAceptar)
-                .addGap(107, 107, 107))
+                .addGap(62, 62, 62))
         );
 
         pack();
@@ -157,10 +181,56 @@ temas no se pueden seleccionar de listas privadas.*/
 
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
+    private void jComboBoxTemaListaAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTemaListaAlbumActionPerformed
+        // TODO add your handling code here:
+        if(jComboBoxTemaListaAlbum.getSelectedItem().toString().equals("Tema"))
+        {cargarTemas();}
+        /*   else if(jComboBoxTemaListaAlbum.getSelectedItem().toString().equals("Lista"))
+        {cargarListas();}*/
+        else if(jComboBoxTemaListaAlbum.getSelectedItem().toString().equals("Album"))
+        {cargarAlbum();}
+    }//GEN-LAST:event_jComboBoxTemaListaAlbumActionPerformed
+
+    private void jTextFieldNombreElementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreElementoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreElementoActionPerformed
+ private void cargarTemas()
+ {   Fabrica fabrica = Fabrica.getInstance();
+     crl = fabrica.getInstancia();
+     List<Temas> lista = crl.listarTemas();
+     Iterator<Temas> it = lista.iterator();
+     jComboBoxElementos.removeAllItems();
+     while (it.hasNext()) {
+         jComboBoxElementos.addItem(it.next().getNombre());
+     }
+ }
+ 
+  private void cargarListas()
+ {   Fabrica fabrica = Fabrica.getInstance();
+     crl = fabrica.getInstancia();
+     List<ListaReproduccion> lista = crl.listarListaRepr();
+     Iterator<ListaReproduccion> it = lista.iterator();
+     jComboBoxElementos.removeAllItems();
+     while (it.hasNext()) {
+         jComboBoxElementos.addItem(it.next().getNombre());
+     }
+ }
+  
+    private void cargarAlbum()
+ {   Fabrica fabrica = Fabrica.getInstance();
+     crl = fabrica.getInstancia();
+     List<Album> lista = crl.listarAlbum();
+     Iterator<Album> it = lista.iterator();
+     jComboBoxElementos.removeAllItems();
+     while (it.hasNext()) {
+         jComboBoxElementos.addItem(it.next().getNombre());
+     }
+ }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JComboBox<String> jComboBoxCliente;
+    private javax.swing.JComboBox<String> jComboBoxElementos;
     private javax.swing.JComboBox<String> jComboBoxTemaListaAlbum;
     private javax.swing.JLabel jLabelNickName;
     private javax.swing.JLabel jLabelNickName1;

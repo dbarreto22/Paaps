@@ -28,7 +28,6 @@ public class ExtJpaSrtista extends ArtistaJpaController {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            
             List<Album> attachedGenerosHijos = padre.getListAlbum();
             attachedGenerosHijos.add(hijo);
             padre.setListAlbum(attachedGenerosHijos);

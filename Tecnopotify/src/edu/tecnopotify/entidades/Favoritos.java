@@ -6,6 +6,7 @@
 package edu.tecnopotify.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,13 +42,17 @@ public class Favoritos implements Serializable {
     private List<ListaReproduccion> listRep;
 
     public Favoritos() {
+        this.listTemas = new ArrayList<Temas>();
+        this.listAlbum = new ArrayList<Album>();
+        this.listRep = new ArrayList<ListaReproduccion>();
+
     }
 
-    public Favoritos(Cliente cliente, List<Temas> listTemas, List<Album> listAlbum, List<ListaReproduccion> listRep) {
+    public Favoritos(Cliente cliente) {
         this.cliente = cliente;
-        this.listTemas = listTemas;
-        this.listAlbum = listAlbum;
-        this.listRep = listRep;
+        this.listTemas = new ArrayList<Temas>();
+        this.listAlbum = new ArrayList<Album>();
+        this.listRep = new ArrayList<ListaReproduccion>();
     }
     
     public Long getId() {

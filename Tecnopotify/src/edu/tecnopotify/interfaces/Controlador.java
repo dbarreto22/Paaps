@@ -4,6 +4,7 @@ import edu.tecnopotify.controladores.AlbumJpaController;
 import edu.tecnopotify.controladores.ArtistaJpaController;
 import edu.tecnopotify.controladores.ClienteJpaController;
 import edu.tecnopotify.controladores.ExtJpaAlbum;
+import edu.tecnopotify.controladores.ExtJpaFavoritos;
 import edu.tecnopotify.controladores.ExtJpaGenero;
 import edu.tecnopotify.controladores.ExtJpaSrtista;
 import edu.tecnopotify.controladores.ExtUsuario;
@@ -266,49 +267,39 @@ public class Controlador implements IControlador {
     f.getListAlbum().remove(a);
     }*/
     }
+
     public void agregarFavorito(boolean tema, boolean lista, boolean album, String idCliente, String idElemento) {
-//        //Crea un album y lo agrega a su artista
-//        ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
-//        //Busca al artista
-//        Artista oArtista = ctrArtista.findArtista(nickNameArtista);
-//        AlbumJpaController ctrAlbum = new AlbumJpaController(fact);
-//        //Crea el album
-//        Album oAlbum = new Album(dtAlbum);
-//        //Agrega el album a la lista del artista
-//        oArtista.getListAlbum().add(oAlbum);
-//        try {
-//            //Persiste el album y modifica el artista 
-//            ctrArtista.edit(oArtista);
-//            ctrAlbum.create(oAlbum);
-//        } 
-        FavoritosJpaController fav = new FavoritosJpaController(fact);
-        Favoritos f = new Favoritos();
-
+        ExtJpaFavoritos fav = new ExtJpaFavoritos(fact);
         ClienteJpaController clictrl = new ClienteJpaController(fact);
-        Cliente cli = clictrl.findCliente(idCliente);
-        f.setCliente(cli);
-
-        if (tema) {
+        Cliente oCliente = clictrl.findCliente(idCliente);
+        if (tema) {//Si voy a agregar un tema
             TemasJpaController temactrl = new TemasJpaController(fact);
-            Temas t = temactrl.findTemas(idElemento);
-            f.getListTemas().add(t);
+            Temas oTema = temactrl.findTemas(idElemento);//Busco el tema
+            try {
+                fav.agregarTemaFav(oTema, oCliente);
+            } catch (PreexistingEntityException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         if (lista) {
             ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
-            ListaReproduccion l = listactrl.findListaReproduccion(idElemento);
-            f.getListRep().add(l);
+            ListaReproduccion oLista = listactrl.findListaReproduccion(idElemento);
+            try {
+                fav.agregarListaFav(oLista, oCliente);
+            } catch (PreexistingEntityException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
         if (album) {
             AlbumJpaController albctrl = new AlbumJpaController(fact);
-            Album a = albctrl.findAlbum(idElemento);
-            f.getListAlbum().add(a);
-        }
-        try {
-            fav.create(f);
-        } catch (Exception e) {
-            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, e);
+            Album oAlbum = albctrl.findAlbum(idElemento);
+            try {
+                fav.agregarAlbumFav(oAlbum, oCliente);
+            } catch (PreexistingEntityException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -440,6 +431,12 @@ public class Controlador implements IControlador {
         return ld;
     }
     
+    public List<ListaReproduccion> listarListaRepr()
+    {
+    ListaReproduccionJpaController ctrl = new ListaReproduccionJpaController(fact);
+    return ctrl.findListaReproduccionEntities();
+    }
+    
 
     
     public void cargarDatos(){
@@ -504,6 +501,11 @@ public class Controlador implements IControlador {
         altaTema(t7, A3.getNombre());
         altaTema(t8, A4.getNombre());
         
+        agregarFavorito(true,false,false,"discoteishon","tema1");
+        agregarFavorito(true,false,false,"discoteishon","tema2");
+        agregarFavorito(false,false,true,"discoteishon","album1");
+        agregarFavorito(true,false,false,"md","tema3");
+        agregarFavorito(false,false,true,"db","album3");
         
        
     }

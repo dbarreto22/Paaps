@@ -23,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author diego-lucia
+ * @author Carlox
  */
 public class ClienteJpaController implements Serializable {
 
@@ -55,7 +55,7 @@ public class ClienteJpaController implements Serializable {
             cliente.setListasReprParticular(attachedListasReprParticular);
             Favoritos fav = cliente.getFav();
             if (fav != null) {
-                fav = em.getReference(fav.getClass(), fav.getId());
+                fav = em.getReference(fav.getClass(), fav.getId());  //El error empezo en cliente cuando hago el new favorito
                 cliente.setFav(fav);
             }
             List<Usuario> attachedLstSeguidos = new ArrayList<Usuario>();

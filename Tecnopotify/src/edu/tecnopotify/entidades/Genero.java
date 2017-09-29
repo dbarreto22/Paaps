@@ -2,6 +2,7 @@ package edu.tecnopotify.entidades;
 
 import edu.tecnopotify.datatypes.dataGenero;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,8 @@ public class Genero implements Serializable{
     public Genero(dataGenero genero) {
         this.nombre = genero.getNombre();
         this.padre = genero.getPadre();
+        this.listHijos=new ArrayList<Genero>();
+        this.listAlbum=new ArrayList<Album>();
     }
 
     public Genero() {
