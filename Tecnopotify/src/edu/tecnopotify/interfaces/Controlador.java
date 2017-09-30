@@ -245,27 +245,38 @@ public class Controlador implements IControlador {
     public void eliminarFavorito(boolean tema, boolean lista, boolean album, String nickCliente, String idElemento) {
     //eliminar tema/lista/album de los favoritos de un cliente
     //selecciono un favorito y saco el elemento de la lista que corresponda
-    /*  FavoritosJpaController fav = new FavoritosJpaController(fact);
-    
-    Favoritos f = fav.findFavoritos(nickCliente);
-    
-    if (tema) {
-    TemasJpaController temactrl = new TemasJpaController(fact);
-    Temas t = temactrl.findTemas(idElemento);
-    f.getListTemas().remove(t);
-    }
-    
-    if (lista) {
-    ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
-    ListaReproduccion l = listactrl.findListaReproduccion(idElemento);
-    f.getListRep().remove(l);
-    }
-    
-    if (album) {
-    AlbumJpaController albctrl = new AlbumJpaController(fact);
-    Album a = albctrl.findAlbum(idElemento);
-    f.getListAlbum().remove(a);
-    }*/
+        ExtJpaFavoritos fav = new ExtJpaFavoritos(fact);
+        ClienteJpaController clictrl = new ClienteJpaController(fact);
+        Cliente oCliente = clictrl.findCliente(nickCliente);
+        if (tema) {//Si voy a agregar un tema
+            TemasJpaController temactrl = new TemasJpaController(fact);
+            Temas oTema = temactrl.findTemas(idElemento);//Busco el tema
+            try {
+                fav.quitarTemaFav(oTema, oCliente);    //Agrego el tema
+            } catch (PreexistingEntityException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (lista) {
+            ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
+            ListaReproduccion oLista = listactrl.findListaReproduccion(idElemento);
+            try {
+                fav.quitarListaFav(oLista, oCliente);
+            } catch (PreexistingEntityException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        if (album) {
+            AlbumJpaController albctrl = new AlbumJpaController(fact);
+            Album oAlbum = albctrl.findAlbum(idElemento);
+            try {
+                fav.quitarAlbumFav(oAlbum, oCliente);
+            } catch (PreexistingEntityException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public void agregarFavorito(boolean tema, boolean lista, boolean album, String idCliente, String idElemento) {

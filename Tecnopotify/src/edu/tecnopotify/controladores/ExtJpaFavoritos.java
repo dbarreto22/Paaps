@@ -112,4 +112,79 @@ public class ExtJpaFavoritos extends FavoritosJpaController {
         }
     }
     
+    public void quitarListaFav(ListaReproduccion objeto, Cliente oCliente) throws PreexistingEntityException
+    {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Favoritos oFavorito = oCliente.getFav();
+            if(oFavorito!=null)
+            {
+            List<ListaReproduccion> attachedFavoritos = oFavorito.getListRep();
+            attachedFavoritos.remove(objeto);
+            oFavorito.setListRep(attachedFavoritos);
+            oCliente.setFav(oFavorito);
+            em.merge(oCliente);
+            em.getTransaction().commit();
+            }
+        } catch (Exception e) {
+            throw new PreexistingEntityException("No hay un objeto con ese nombre en" + oCliente.toString(), e);
+        }
+        finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    public void quitarTemaFav(Temas objeto, Cliente oCliente) throws PreexistingEntityException
+    {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Favoritos oFavorito = oCliente.getFav();
+            if(oFavorito!=null)
+            {
+            List<Temas> attachedFavoritos = oFavorito.getListTemas();
+            attachedFavoritos.remove(objeto);
+            oFavorito.setListTemas(attachedFavoritos);
+            oCliente.setFav(oFavorito);
+            em.merge(oCliente);
+            em.getTransaction().commit();
+            }
+        } catch (Exception e) {
+            throw new PreexistingEntityException("No hay un objeto con ese nombre en" + oCliente.toString(), e);
+        }
+        finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    public void quitarAlbumFav(Album objeto, Cliente oCliente) throws PreexistingEntityException
+    {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            Favoritos oFavorito = oCliente.getFav();
+            if(oFavorito!=null)
+            {
+            List<Album> attachedFavoritos = oFavorito.getListAlbum();
+            attachedFavoritos.remove(objeto);
+            oFavorito.setListAlbum(attachedFavoritos);
+            oCliente.setFav(oFavorito);
+            em.merge(oCliente);
+            em.getTransaction().commit();
+            }
+        } catch (Exception e) {
+            throw new PreexistingEntityException("No hay un objeto con ese nombre en" + oCliente.toString(), e);
+        }
+        finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 }
