@@ -14,10 +14,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
- * @author diego-lucia
+ * @author Carlox
  */
 public class ListaReproduccionJpaController implements Serializable {
 
@@ -104,7 +106,9 @@ public class ListaReproduccionJpaController implements Serializable {
     private List<ListaReproduccion> findListaReproduccionEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from ListaReproduccion as o");
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(ListaReproduccion.class));
+            Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -127,7 +131,10 @@ public class ListaReproduccionJpaController implements Serializable {
     public int getListaReproduccionCount() {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select count(o) from ListaReproduccion as o");
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<ListaReproduccion> rt = cq.from(ListaReproduccion.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();

@@ -7,6 +7,7 @@ package edu.tecnopotify.swing;
 
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.ListaParticular;
+import edu.tecnopotify.entidades.ListaReproduccion;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import static edu.tecnopotify.swing.AltaClienteJInternalFrame.openFrameCount;
@@ -27,8 +28,6 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
      * Creates new form PublicarListaJInternalFrame
      */
     IControlador crl;
-    private String nick;
-    private String nombreLista;
 
     public PublicarListaJInternalFrame() {
         super("Publicar Lista Reproduccion",
@@ -44,20 +43,7 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
         initComponents();
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
-        List<Cliente> clientes = crl.listarClientes();
-        Iterator<Cliente> it = clientes.iterator();
-        while (it.hasNext()) {
-            jComboBoxNickname.addItem(it.next().getNickname());
-        }
-        nick = jComboBoxNickname.getSelectedItem().toString();
-        List< ListaParticular> listas =  crl.seleccionarCliente(nick).getListasReprParticular();
-
-       // Iterator<ListaParticular> it = listas.values().iterator();
-        while (it.hasNext()) {
-            jComboBoxNombreListas.addItem(it.next().getNombre());
-        }
-        nombreLista = jComboBoxNombreListas.getSelectedItem().toString();
-
+        cargarComboClientes();
     }
 
     /**
@@ -71,17 +57,16 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
 
         jLabelNickName = new javax.swing.JLabel();
         jComboBoxNickname = new javax.swing.JComboBox();
-        jButtonConfirmarCliente = new javax.swing.JButton();
         jLabelListasRepr = new javax.swing.JLabel();
         jComboBoxNombreListas = new javax.swing.JComboBox();
         jButtonConfirmarLista = new javax.swing.JButton();
+        jTextEstado = new javax.swing.JTextField();
 
         jLabelNickName.setText("NickName");
 
-        jButtonConfirmarCliente.setText("Confirmar");
-        jButtonConfirmarCliente.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxNickname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmarClienteActionPerformed(evt);
+                jComboBoxNicknameActionPerformed(evt);
             }
         });
 
@@ -93,12 +78,14 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jButtonConfirmarLista.setText("Confirmar");
+        jButtonConfirmarLista.setText("Cambiar estado");
         jButtonConfirmarLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarListaActionPerformed(evt);
             }
         });
+
+        jTextEstado.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -109,24 +96,21 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelListasRepr)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelNickName)
                                 .addGap(38, 38, 38)
-                                .addComponent(jComboBoxNickname, 0, 107, Short.MAX_VALUE))
+                                .addComponent(jComboBoxNickname, 0, 90, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jComboBoxNombreListas, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButtonConfirmarCliente)
-                                .addGap(8, 8, 8))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButtonConfirmarLista)
-                                .addContainerGap())))))
+                                .addComponent(jComboBoxNombreListas, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonConfirmarLista)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,43 +118,75 @@ public class PublicarListaJInternalFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNickName)
-                    .addComponent(jComboBoxNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmarCliente))
+                    .addComponent(jComboBoxNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabelListasRepr)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxNombreListas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmarLista))
-                .addContainerGap(168, Short.MAX_VALUE))
+                    .addComponent(jButtonConfirmarLista)
+                    .addComponent(jTextEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonConfirmarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarClienteActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jButtonConfirmarClienteActionPerformed
-
     private void jButtonConfirmarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarListaActionPerformed
         // TODO add your handling code here:
-
-        crl.publicarLista(nick, nombreLista);
+        crl.publicarLista(jComboBoxNickname.getSelectedItem().toString(),
+                jComboBoxNombreListas.getSelectedItem().toString());
         JOptionPane.showMessageDialog(this, "Lista Publicada con éxito", "Publicar lista de reproducción", JOptionPane.INFORMATION_MESSAGE);
+        estadoLista();
     }//GEN-LAST:event_jButtonConfirmarListaActionPerformed
 
     private void jComboBoxNombreListasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNombreListasActionPerformed
         // TODO add your handling code here:
+        estadoLista();
     }//GEN-LAST:event_jComboBoxNombreListasActionPerformed
+
+    private void jComboBoxNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNicknameActionPerformed
+        // TODO add your handling code here:
+        cargarComboListas();
+    }//GEN-LAST:event_jComboBoxNicknameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonConfirmarCliente;
     private javax.swing.JButton jButtonConfirmarLista;
     private javax.swing.JComboBox<String> jComboBoxNickname;
     private javax.swing.JComboBox<String> jComboBoxNombreListas;
     private javax.swing.JLabel jLabelListasRepr;
     private javax.swing.JLabel jLabelNickName;
+    private javax.swing.JTextField jTextEstado;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarComboClientes() {
+        jComboBoxNickname.removeAll();
+        List<Cliente> clientes = crl.listarClientes();
+        Iterator<Cliente> it = clientes.iterator();
+        while (it.hasNext()) {
+            jComboBoxNickname.addItem(it.next().getNickname());
+        }
+    }
+
+    private void cargarComboListas() {
+        String nick;
+        jComboBoxNombreListas.removeAll();
+        nick = jComboBoxNickname.getSelectedItem().toString();
+        List< ListaParticular> listas = crl.seleccionarCliente(nick).getListasReprParticular();
+        Iterator<ListaParticular> it = listas.iterator();
+        while (it.hasNext()) {
+            jComboBoxNombreListas.addItem(it.next().getNombre());
+        }
+    }
+
+    private void estadoLista()
+    {
+        ListaParticular lRepro = (ListaParticular) crl.getlr(jComboBoxNombreListas.getSelectedItem().toString());
+        if (lRepro.isEsPrivada()) {
+            jTextEstado.setText("Privada");
+        } else {
+            jTextEstado.setText("Publica");
+        }        
+    }
 }

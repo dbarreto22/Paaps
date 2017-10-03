@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -29,10 +30,10 @@ public class Favoritos implements Serializable {
     
         
    
-    @ManyToOne
+    @OneToOne
     private Cliente cliente;
    
-    @JoinColumn
+    @ManyToMany
     private List<Temas> listTemas;
    
     @ManyToMany

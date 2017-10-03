@@ -11,6 +11,8 @@ import edu.tecnopotify.entidades.Album;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import edu.tecnopotify.entidades.Genero;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author diego-lucia
+ * @author Carlox
  */
 public class AlbumJpaController implements Serializable {
 
@@ -146,7 +148,9 @@ public class AlbumJpaController implements Serializable {
     private List<Album> findAlbumEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from Album as o");
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Album.class));
+            Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -169,7 +173,10 @@ public class AlbumJpaController implements Serializable {
     public int getAlbumCount() {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select count(o) from Album as o");
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<Album> rt = cq.from(Album.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();

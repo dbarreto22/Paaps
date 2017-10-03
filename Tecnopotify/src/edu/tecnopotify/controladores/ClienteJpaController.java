@@ -55,7 +55,7 @@ public class ClienteJpaController implements Serializable {
             cliente.setListasReprParticular(attachedListasReprParticular);
             Favoritos fav = cliente.getFav();
             if (fav != null) {
-                fav = em.getReference(fav.getClass(), fav.getId());  //El error empezo en cliente cuando hago el new favorito
+                fav = em.getReference(fav.getClass(), fav.getId());
                 cliente.setFav(fav);
             }
             List<Usuario> attachedLstSeguidos = new ArrayList<Usuario>();
