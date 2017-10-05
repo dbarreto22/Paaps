@@ -5,6 +5,8 @@
  */
 package edu.tecnopotify.swing;
 
+import edu.tecnopotify.controladores.ListaReproduccionJpaController;
+import edu.tecnopotify.datatypes.dataGenero;
 import edu.tecnopotify.datatypes.dataTemas;
 import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
@@ -22,6 +24,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 
 /**
  *
@@ -42,6 +45,8 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
     static final int xOffset = 30, yOffset = 30;
     IControlador crl;
     DefaultTreeModel model;
+    DefaultMutableTreeNode listaParticular;
+    DefaultMutableTreeNode listaDefecto;
 
     public agregarTemaJInternalFrame() {
         super("Agregar Tema",
@@ -55,35 +60,19 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
 
         setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
         initComponents();
-        model = (DefaultTreeModel) tree.getModel();
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
-        List<Usuario> lUsr = crl.listarUsuarios();
-        Iterator<Usuario> it = lUsr.iterator();
-        while (it.hasNext()) {
-            jComboUsuario.addItem(it.next().getNickname());
-        }
-
+        model = (DefaultTreeModel) tree.getModel();
+        listaParticular = (DefaultMutableTreeNode) model.getChild(model.getRoot(), 0);
+        listaDefecto = (DefaultMutableTreeNode) model.getChild(model.getRoot(), 1);
+        //********COMBOS*******
+        cargarCombos();
+        //********ARBOL**********
+        //Genera el nodo raiz y lo agrega en el arbol
+        DefaultMutableTreeNode rootNode = (DefaultMutableTreeNode) model.getRoot();
+        iniciarTree(listaParticular, listaDefecto);
+        model.reload(rootNode);
     }
-
-    /*    private void iniciarTree(List<Temas> lstTemas, DefaultMutableTreeNode padre) {
-    ListaReproduccion oListrep;
-    DefaultMutableTreeNode hijo;
-    if (!lstTemas.isEmpty()) {//Si mi lista tiene al menos un elemento
-    //lo asigno en oGenero
-    oListrep =  lstRep.get(0);
-    //lo creo como nodo hijo
-    hijo = new DefaultMutableTreeNode(oListPart.getNombre());
-    //lo agrago en el modelo del arbol
-    model.insertNodeInto(hijo, padre, model.getChildCount(padre));
-    if (!oListPart.getListaTemas().isEmpty()) { //Reviso si tiene hijos
-    //llamo a la funcion con la lista de hijos
-    iniciarTree(oListPart., hijo);
-    }
-    //Sigo con el proximo hermano
-    iniciarTree(lstGeneros.subList(1, lstGeneros.size()), padre);
-    }
-    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,6 +115,12 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarActionPerformed(evt);
+            }
+        });
+
+        jComboUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboUsuarioActionPerformed(evt);
             }
         });
 
@@ -253,92 +248,55 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
     List<ListaParticular> lista;
     List<Temas> temas;
     ListaReproduccion lr;
+
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        // TODO add your handling code here:
-        //nodeLP = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-        Cliente c = crl.getCli(jComboUsuario.getSelectedItem().toString());
-        lista = c.getListasReprParticular();
-        Iterator<ListaParticular> it = lista.iterator();
-        nodeRaiz = (DefaultMutableTreeNode) model.getRoot();
-        nodeLP = (DefaultMutableTreeNode) model.getChild(nodeRaiz, 1);
-        nodeLD = (DefaultMutableTreeNode) model.getChild(nodeRaiz, 2);
-        List<ListaDefecto> ld = crl.listarDefecto();
-        Iterator<ListaDefecto> itLD = ld.iterator();
-
-        while (it.hasNext()) {
-            nodeLP.setUserObject(it.next().getNombre());
-        }
-
-        while (itLD.hasNext()) {
-            nodeLD.setUserObject(itLD.next().getNombre());
-        }
-
-        temas = crl.listarTemas();
-        Iterator<Temas> itT = temas.iterator();
-
-        while (itT.hasNext()) {
-            jComboTemas.addItem(itT.next().toString());
-        }
-
-
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
-
+    
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         // TODO add your handling code here:
         selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-
         if (selectedNode != null) {
             selectedNode.insert(new DefaultMutableTreeNode(jComboTemas.getSelectedItem()), 0);
             model.reload(selectedNode);
             lr = crl.getlr(selectedNode.toString());
-            Temas Tema = crl.getTema(jComboTemas.getSelectedItem().toString());
-            lr.getListaTemas().add(Tema);
+            try {
+                crl.agregarTemaLista(jComboTemas.getSelectedItem().toString(), lr.toDataType());
+            } catch (Exception e) {
+            }
         }
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
         // TODO add your handling code here:
         selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-
         if (selectedNode != null) {
             DefaultMutableTreeNode parent = (DefaultMutableTreeNode) selectedNode.getParent();
             parent.remove(selectedNode);
-            lr = crl.getlr(selectedNode.toString());
-            Temas Tema = crl.getTema(jComboTemas.getSelectedItem().toString());
-            lr.getListaTemas().remove(Tema);
+            lr = crl.getlr(parent.toString());
             model.reload(parent);
+            crl.quitarTemaLista(selectedNode.toString(), lr.toDataType());
         }
     }//GEN-LAST:event_jButtonEliminarActionPerformed
 
     private void jComboArtistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboArtistasActionPerformed
         // TODO add your handling code here:
-        List<Artista> art = crl.listarArtistas();
-        Iterator<Artista> it = art.iterator();
-        while (it.hasNext()) {
-            jComboArtistas.addItem(it.next().getNombre());
-        }
-
+        cargarAlbums();
     }//GEN-LAST:event_jComboArtistasActionPerformed
 
     private void jComboAlbumsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAlbumsActionPerformed
         // TODO add your handling code here:
-        Artista a = crl.seleccionarArtista(jComboArtistas.getSelectedItem().toString());
-        List<Album> album = a.getListAlbum();
-        Iterator<Album> itAl = album.iterator();
-        while (itAl.hasNext()) {
-            jComboAlbums.addItem(itAl.next().getNombre());
-        }
+        cargarTemas();
     }//GEN-LAST:event_jComboAlbumsActionPerformed
 
     private void jComboTemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboTemasActionPerformed
         // TODO add your handling code here:
-        Album al = crl.seleccionarAlbum(jComboAlbums.getSelectedItem().toString());
-        List<Temas> temas = al.getListTemas();
-        Iterator<Temas> itT = temas.iterator();
-        while (itT.hasNext()) {
-            jComboArtistas.addItem(itT.next().getNombre());
-        }
+
     }//GEN-LAST:event_jComboTemasActionPerformed
+
+    private void jComboUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboUsuarioActionPerformed
+        // TODO add your handling code here:
+        iniciarTree(listaParticular, listaDefecto);
+    }//GEN-LAST:event_jComboUsuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -358,4 +316,76 @@ public class agregarTemaJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTree tree;
     // End of variables declaration//GEN-END:variables
+
+    private void iniciarTree(DefaultMutableTreeNode listaParticular, DefaultMutableTreeNode listaDefecto) {
+        listaParticular.removeAllChildren();
+        listaDefecto.removeAllChildren();
+        model.reload((TreeNode) model.getRoot());
+        DefaultMutableTreeNode hijo;
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        Cliente oCliente = crl.getCli(jComboUsuario.getSelectedItem().toString());
+        //Primero cargo las listas por defecto
+        List<ListaDefecto> lstDefecto = crl.listarDefecto();
+        if (!lstDefecto.isEmpty()) {//Si mi lista tiene al menos un elemento
+            for (ListaDefecto listaD : lstDefecto) {  //Cargo las listas por defecto
+                hijo = new DefaultMutableTreeNode(listaD.getNombre());
+                model.insertNodeInto(hijo, listaDefecto, listaDefecto.getChildCount());
+            }
+        }        //Despues cargo las listas del cliente seleccionado
+        List<ListaParticular> lstParticular = oCliente.getListasReprParticular();
+        if (!lstParticular.isEmpty()) {//Si mi lista tiene al menos un elemento
+            for (ListaParticular listaP : lstParticular) {  //Cargo las listas por defecto
+                hijo = new DefaultMutableTreeNode(listaP.getNombre());
+                model.insertNodeInto(hijo, listaParticular, listaParticular.getChildCount());
+            }
+        }
+    }
+
+    private void cargarCombos() {
+    jComboUsuario.removeAllItems();
+    jComboArtistas.removeAllItems();
+    //Clientes**********************
+        List<Cliente> lstCliente = crl.listarClientes();
+        Iterator<Cliente> itCliente = lstCliente.iterator();
+        while (itCliente.hasNext()) {
+            jComboUsuario.addItem(itCliente.next().getNickname());
+        }
+    //Artistas*****************
+        List<Artista> art = crl.listarArtistas();
+        Iterator<Artista> itArtista = art.iterator();
+        while (itArtista.hasNext()) {
+            jComboArtistas.addItem(itArtista.next().getNickname());
+        }
+//        cargarAlbums();
+    }
+    
+    private void cargarTemas()
+    {
+        jComboTemas.removeAllItems();
+        Album al = crl.seleccionarAlbum(jComboAlbums.getSelectedItem().toString());
+        if (al!=null) {
+            List<Temas> temas = al.getListTemas();
+            Iterator<Temas> itT = temas.iterator();
+            while (itT.hasNext()) {
+                jComboTemas.addItem(itT.next().getNombre());
+            }
+        }
+    
+    }
+    
+    private void cargarAlbums()
+    {
+        jComboAlbums.removeAllItems();
+        Artista a = crl.seleccionarArtista(jComboArtistas.getSelectedItem().toString());
+        if (a!=null) {
+            List<Album> album = a.getListAlbum();
+            Iterator<Album> itAl = album.iterator();
+            while (itAl.hasNext()) {
+                jComboAlbums.addItem(itAl.next().getNombre());
+            }
+        }
+//        cargarTemas();
+    }
+    
 }

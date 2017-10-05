@@ -25,6 +25,10 @@ public class Temas implements Serializable {
     private String duracion;
  
     private int posicion;
+
+    private String archivo;
+    
+
     
     @ManyToMany
     public Map<String, ListaReproduccion> listaR = new HashMap<String,ListaReproduccion>();
@@ -46,6 +50,7 @@ public class Temas implements Serializable {
         this.nombre = tema.getNombre();
         this.duracion = tema.getDuracion();
         this.posicion = tema.getPosicion();
+        this.archivo = tema.getArchivo();
     }
 
     public String getNombre() {
@@ -77,6 +82,15 @@ public class Temas implements Serializable {
     }
     */
 
+    public String getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 5;

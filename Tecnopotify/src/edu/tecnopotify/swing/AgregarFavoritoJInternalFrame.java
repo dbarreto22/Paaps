@@ -7,6 +7,7 @@ package edu.tecnopotify.swing;
 
 import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.ListaReproduccion;
 import edu.tecnopotify.entidades.Temas;
 import edu.tecnopotify.fabrica.Fabrica;
@@ -36,7 +37,7 @@ temas no se pueden seleccionar de listas privadas.*/
      * Creates new form AgregarFavoritoJInternalFrame
      */
     private IControlador crl;
-    
+
     public AgregarFavoritoJInternalFrame() {
         super("Agregar Favorito",
                 true, //resizable
@@ -60,7 +61,7 @@ temas no se pueden seleccionar de listas privadas.*/
         jComboBoxTemaListaAlbum.addItem("Tema");
         jComboBoxTemaListaAlbum.addItem("Lista");
         jComboBoxTemaListaAlbum.addItem("Album");
-
+        jPanelCliente.setVisible(false);
     }
 
     /**
@@ -80,6 +81,9 @@ temas no se pueden seleccionar de listas privadas.*/
         jTextFieldNombreElemento = new javax.swing.JTextField();
         jButtonAceptar = new javax.swing.JButton();
         jComboBoxElementos = new javax.swing.JComboBox();
+        jPanelCliente = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxClientes = new javax.swing.JComboBox();
 
         jLabelNickName.setText("NickName");
 
@@ -106,6 +110,34 @@ temas no se pueden seleccionar de listas privadas.*/
             }
         });
 
+        jLabel1.setText("Cliente");
+
+        jComboBoxClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxClientesActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelClienteLayout = new javax.swing.GroupLayout(jPanelCliente);
+        jPanelCliente.setLayout(jPanelClienteLayout);
+        jPanelClienteLayout.setHorizontalGroup(
+            jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelClienteLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanelClienteLayout.setVerticalGroup(
+            jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelClienteLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(jPanelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,29 +146,29 @@ temas no se pueden seleccionar de listas privadas.*/
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jTextFieldNombreElemento, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButtonAceptar)
-                                .addGap(115, 115, 115))))
+                        .addGap(8, 8, 8)
+                        .addComponent(jTextFieldNombreElemento, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabelNickName2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxElementos, 0, 134, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelNickName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabelNickName1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(107, 107, 107)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jComboBoxTemaListaAlbum, 0, 134, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(70, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabelNickName2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jComboBoxElementos, 0, 134, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelNickName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabelNickName1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(107, 107, 107)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jComboBoxTemaListaAlbum, 0, 134, Short.MAX_VALUE)
+                                        .addComponent(jComboBoxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jPanelCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(178, 178, 178)
+                                .addComponent(jButtonAceptar)))
+                        .addGap(24, 24, 24)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,15 +181,17 @@ temas no se pueden seleccionar de listas privadas.*/
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxTemaListaAlbum)
                     .addComponent(jLabelNickName1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNickName2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxElementos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(32, 32, 32)
                 .addComponent(jTextFieldNombreElemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonAceptar)
-                .addGap(62, 62, 62))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -169,11 +203,11 @@ temas no se pueden seleccionar de listas privadas.*/
         Cliente cliente = crl.seleccionarCliente(jComboBoxCliente.getSelectedItem().toString());
 
         //eliminarFavorito(boolean tema, boolean lista, boolean album, long idCliente, String idElemento) 
-        if (jComboBoxTemaListaAlbum.toString() == "Tema"){
+        if (jComboBoxTemaListaAlbum.toString() == "Tema") {
             crl.agregarFavorito(true, false, false, cliente.getNickname(), nombreElemento);
-        } else if (jComboBoxTemaListaAlbum.toString() == "Lista"){
+        } else if (jComboBoxTemaListaAlbum.toString() == "Lista") {
             crl.agregarFavorito(false, true, false, cliente.getNickname(), nombreElemento);
-        } else if (jComboBoxTemaListaAlbum.toString() == "Album"){
+        } else if (jComboBoxTemaListaAlbum.toString() == "Album") {
             crl.agregarFavorito(false, false, true, cliente.getNickname(), nombreElemento);
         }
 
@@ -183,58 +217,87 @@ temas no se pueden seleccionar de listas privadas.*/
 
     private void jComboBoxTemaListaAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTemaListaAlbumActionPerformed
         // TODO add your handling code here:
-        if(jComboBoxTemaListaAlbum.getSelectedItem().toString().equals("Tema"))
-        {cargarTemas();}
-        /*   else if(jComboBoxTemaListaAlbum.getSelectedItem().toString().equals("Lista"))
-        {cargarListas();}*/
-        else if(jComboBoxTemaListaAlbum.getSelectedItem().toString().equals("Album"))
-        {cargarAlbum();}
+        jPanelCliente.setVisible(false);
+        if (jComboBoxTemaListaAlbum.getSelectedItem().toString().equals("Tema")) {
+            cargarTemas();
+        } else if (jComboBoxTemaListaAlbum.getSelectedItem().toString().equals("Lista")) {
+            jPanelCliente.setVisible(true);
+            cargarClientes();
+        } else if (jComboBoxTemaListaAlbum.getSelectedItem().toString().equals("Album")) {
+            cargarAlbum();
+        }
     }//GEN-LAST:event_jComboBoxTemaListaAlbumActionPerformed
 
     private void jTextFieldNombreElementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreElementoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNombreElementoActionPerformed
- private void cargarTemas()
- {   Fabrica fabrica = Fabrica.getInstance();
-     crl = fabrica.getInstancia();
-     List<Temas> lista = crl.listarTemas();
-     Iterator<Temas> it = lista.iterator();
-     jComboBoxElementos.removeAllItems();
-     while (it.hasNext()) {
-         jComboBoxElementos.addItem(it.next().getNombre());
-     }
- }
- 
-  private void cargarListas()
- {   Fabrica fabrica = Fabrica.getInstance();
-     crl = fabrica.getInstancia();
-     List<ListaReproduccion> lista = crl.listarListaRepr();
-     Iterator<ListaReproduccion> it = lista.iterator();
-     jComboBoxElementos.removeAllItems();
-     while (it.hasNext()) {
-         jComboBoxElementos.addItem(it.next().getNombre());
-     }
- }
-  
-    private void cargarAlbum()
- {   Fabrica fabrica = Fabrica.getInstance();
-     crl = fabrica.getInstancia();
-     List<Album> lista = crl.listarAlbum();
-     Iterator<Album> it = lista.iterator();
-     jComboBoxElementos.removeAllItems();
-     while (it.hasNext()) {
-         jComboBoxElementos.addItem(it.next().getNombre());
-     }
- }
+
+    private void jComboBoxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxClientesActionPerformed
+        // Carga el combo de listas con las listas de reproduccion del cliente
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        Cliente oCliente = crl.getCli(jComboBoxClientes.getSelectedItem().toString());
+        cargarListas(oCliente);
+    }//GEN-LAST:event_jComboBoxClientesActionPerformed
+
+    private void cargarTemas() {
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        List<Temas> lista = crl.listarTemas();
+        Iterator<Temas> it = lista.iterator();
+        jComboBoxElementos.removeAllItems();
+        while (it.hasNext()) {
+            jComboBoxElementos.addItem(it.next().getNombre());
+        }
+    }
+
+    private void cargarListas(Cliente oCliente) {
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        if (oCliente.getListasReprParticular() != null) {
+            List<ListaParticular> lista = oCliente.getListasReprParticular();
+            Iterator<ListaParticular> it = lista.iterator();
+            jComboBoxElementos.removeAllItems();
+            while (it.hasNext()) {
+                jComboBoxElementos.addItem(it.next().getNombre());
+            }
+        }
+    }
+
+    private void cargarAlbum() {
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        List<Album> lista = crl.listarAlbum();
+        Iterator<Album> it = lista.iterator();
+        jComboBoxElementos.removeAllItems();
+        while (it.hasNext()) {
+            jComboBoxElementos.addItem(it.next().getNombre());
+        }
+    }
+
+    private void cargarClientes() {
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        List<Cliente> lista = crl.listarClientes();
+        Iterator<Cliente> it = lista.iterator();
+        jComboBoxClientes.removeAllItems();
+        while (it.hasNext()) {
+            jComboBoxClientes.addItem(it.next().getNickname());
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JComboBox<String> jComboBoxCliente;
+    private javax.swing.JComboBox<String> jComboBoxClientes;
     private javax.swing.JComboBox<String> jComboBoxElementos;
     private javax.swing.JComboBox<String> jComboBoxTemaListaAlbum;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelNickName;
     private javax.swing.JLabel jLabelNickName1;
     private javax.swing.JLabel jLabelNickName2;
+    private javax.swing.JPanel jPanelCliente;
     private javax.swing.JTextField jTextFieldNombreElemento;
     // End of variables declaration//GEN-END:variables
 }

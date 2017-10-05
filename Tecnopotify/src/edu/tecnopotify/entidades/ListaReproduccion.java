@@ -88,5 +88,9 @@ public class ListaReproduccion implements Serializable{
         return true;
     }
     
-
+    public dataListaReproduccion toDataType()
+    {
+        dataListaReproduccion retorno=new dataListaReproduccion(this.nombre, this.imagen, this.listaTemas);
+        return retorno;
+    }
 }

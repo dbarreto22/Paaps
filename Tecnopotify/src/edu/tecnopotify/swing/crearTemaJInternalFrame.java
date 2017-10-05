@@ -141,7 +141,7 @@ public class crearTemaJInternalFrame extends javax.swing.JInternalFrame {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
         int pos = Integer.parseInt(jTextFieldPos.getText());
-        dataTemas odatatema = new dataTemas(jTextFieldNom.getText(), jTextFieldDur.getText(),pos);
+        dataTemas odatatema = new dataTemas(jTextFieldNom.getText(), jTextFieldDur.getText(),pos,"");
         ctrl.altaTema(odatatema,this.album);
         this.jTextFieldNom.setText("");
         this.jTextFieldDur.setText("");

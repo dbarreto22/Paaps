@@ -22,6 +22,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import edu.tecnopotify.controladores.UsuarioJpaController;
 import edu.tecnopotify.controladores.exceptions.PreexistingEntityException;
+import edu.tecnopotify.controladores.extJpaCliente;
 import edu.tecnopotify.datatypes.dataAlbum;
 import edu.tecnopotify.datatypes.dataArtista;
 import edu.tecnopotify.datatypes.dataFecha;
@@ -93,7 +94,9 @@ public class Controlador implements IControlador {
         try {
             Genero g = genctrl.findGenero(nombreGenero);
             ListaReproduccion lista = new ListaDefecto(g, listaD);
+            g.getListasReprGenero().put(lista.getNombre(), (ListaDefecto) lista);
             crlListaD.create((ListaDefecto) lista);
+            genctrl.edit(g);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -104,8 +107,11 @@ public class Controlador implements IControlador {
         Cliente cli = seleccionarCliente(nickCliente);
         ListaReproduccion lista = new ListaParticular(privado, cli, listaP);
         ListaParticularJpaController crlListaP = new ListaParticularJpaController(fact);
+        ClienteJpaController cliCtr = new ClienteJpaController(fact);
+        cli.getListasReprParticular().add((ListaParticular) lista);
         try {
             crlListaP.create((ListaParticular) lista);
+            cliCtr.edit(cli);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -161,6 +167,12 @@ public class Controlador implements IControlador {
         Temas aux = ctrTema.findTemas(idTema);
         ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(listaR.getNombre());
         Laux.getListaTemas().add(aux);
+        try {
+            ctrListaReproduccion.edit(Laux);
+        } catch (Exception ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public void quitarTemaLista(String idTema, dataListaReproduccion listaR) {
@@ -168,16 +180,20 @@ public class Controlador implements IControlador {
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
         Temas aux = ctrTema.findTemas(idTema);
         ListaReproduccion Laux = ctrListaReproduccion.findListaReproduccion(listaR.getNombre());
-        Laux.getListaTemas().remove(aux.getNombre());
+        Laux.getListaTemas().remove(aux);
+        try {
+            ctrListaReproduccion.edit(Laux);
+        } catch (Exception ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum) {
         //Crea un album y lo agrega a su artista
-        ExtJpaSrtista  ctrArtista = new ExtJpaSrtista(fact);
+        ExtJpaSrtista ctrArtista = new ExtJpaSrtista(fact);
         //Busca al artista
         Artista oArtista = ctrArtista.findArtista(nickNameArtista);
-        if (oArtista!=null)
-        {
+        if (oArtista != null) {
             System.out.println("Hay artista");
         }
         AlbumJpaController ctrAlbum = new AlbumJpaController(fact);
@@ -188,8 +204,8 @@ public class Controlador implements IControlador {
         try {
             //Persiste el album y modifica el artista 
             ctrAlbum.create(oAlbum);
-            ctrArtista.agregarAlbum(oArtista,oAlbum);
-            
+            ctrArtista.agregarAlbum(oArtista, oAlbum);
+
         } catch (Exception e) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -243,8 +259,8 @@ public class Controlador implements IControlador {
     }
 
     public void eliminarFavorito(boolean tema, boolean lista, boolean album, String nickCliente, String idElemento) {
-    //eliminar tema/lista/album de los favoritos de un cliente
-    //selecciono un favorito y saco el elemento de la lista que corresponda
+        //eliminar tema/lista/album de los favoritos de un cliente
+        //selecciono un favorito y saco el elemento de la lista que corresponda
         ExtJpaFavoritos fav = new ExtJpaFavoritos(fact);
         ClienteJpaController clictrl = new ClienteJpaController(fact);
         Cliente oCliente = clictrl.findCliente(nickCliente);
@@ -281,14 +297,17 @@ public class Controlador implements IControlador {
 
     public void agregarFavorito(boolean tema, boolean lista, boolean album, String idCliente, String idElemento) {
         ExtJpaFavoritos fav = new ExtJpaFavoritos(fact);
-        ClienteJpaController clictrl = new ClienteJpaController(fact);
+        extJpaCliente clictrl = new extJpaCliente(fact);
         Cliente oCliente = clictrl.findCliente(idCliente);
         if (tema) {//Si voy a agregar un tema
             TemasJpaController temactrl = new TemasJpaController(fact);
             Temas oTema = temactrl.findTemas(idElemento);//Busco el tema
             try {
-                fav.agregarTemaFav(oTema, oCliente);    //Agrego el tema
-            } catch (PreexistingEntityException ex) {
+                /*oFavorito.getListTemas().add(oTema);
+                oCliente.setFav(oFavorito);
+                clictrl.edit(oCliente);*/
+                clictrl.agregarTemaFav(oTema, oCliente);    //Agrego el tema
+            } catch (Exception ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -307,8 +326,11 @@ public class Controlador implements IControlador {
             AlbumJpaController albctrl = new AlbumJpaController(fact);
             Album oAlbum = albctrl.findAlbum(idElemento);
             try {
-                fav.agregarAlbumFav(oAlbum, oCliente);
-            } catch (PreexistingEntityException ex) {
+                /*                oFavorito.getListAlbum().add(oAlbum);
+                oCliente.setFav(oFavorito);
+                clictrl.edit(oCliente);*/
+                clictrl.agregarAlbumFav(oAlbum, oCliente);
+            } catch (Exception ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -321,7 +343,7 @@ public class Controlador implements IControlador {
             Cliente c = (Cliente) usrCtrl.findUsuario(nickCliente);
             Usuario u = usrCtrl.findUsuario(nickUsr);
             //c.removeFromSeguidos(u);
-            usr.quitarSeguidor(u,c);
+            usr.quitarSeguidor(u, c);
         } catch (PreexistingEntityException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -336,18 +358,22 @@ public class Controlador implements IControlador {
             Cliente c = (Cliente) usrCtrl.findUsuario(nickCliente);
             Usuario u = usrCtrl.findUsuario(nickUsr);
             //c.addToSeguidos(u);            
-            usr.agregarSeguidor(u,c);
+            usr.agregarSeguidor(u, c);
         } catch (PreexistingEntityException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
+
     }
 
     public void publicarLista(String idUsr, String nombreLista) {
-        ClienteJpaController cliCtrl = new ClienteJpaController(fact);
-        Cliente c = cliCtrl.findCliente(idUsr);
-        ListaParticular li = null; //= c.listasReprParticular.get(nombreLista);
-        li.setEsPrivada(true);
+        ListaParticularJpaController listCtrl = new ListaParticularJpaController(fact);
+        ListaParticular lParticular= listCtrl.findListaParticular(nombreLista);
+        lParticular.setEsPrivada(lParticular.isEsPrivada()==false);
+        try {
+            listCtrl.edit(lParticular);
+        } catch (Exception ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public List<Cliente> listarClientes() {
@@ -441,29 +467,26 @@ public class Controlador implements IControlador {
         ld = crlld.findListaDefectoEntities();
         return ld;
     }
-    
-    public List<ListaReproduccion> listarListaRepr()
-    {
-    ListaReproduccionJpaController ctrl = new ListaReproduccionJpaController(fact);
-    return ctrl.findListaReproduccionEntities();
-    }
-    
 
-    
-    public void cargarDatos(){
-       
-        dataFecha fecha = new dataFecha(1,1,1980);
-        dataUsuario u1 = new dataUsuario("ji","Julio","Iglesias","ji@tecnopotify.java" ,fecha,"",""); 
-        dataUsuario u2 = new dataUsuario("ei","Enrique","Iglesias","ei@tecnopotify.java" ,fecha, "","");
-        dataUsuario u3 = new dataUsuario("rm","Ricky","Martin","rm@tecnopotify.java" ,fecha, "","");
-        dataUsuario u4 = new dataUsuario("er","El","Reja","er@tecnopotify.java" ,fecha, "","");
+    public List<ListaReproduccion> listarListaRepr() {
+        ListaReproduccionJpaController ctrl = new ListaReproduccionJpaController(fact);
+        return ctrl.findListaReproduccionEntities();
+    }
+
+    public void cargarDatos() {
+
+        dataFecha fecha = new dataFecha(1, 1, 1980);
+        dataUsuario u1 = new dataUsuario("ji", "Julio", "Iglesias", "ji@tecnopotify.java", fecha, "", "");
+        dataUsuario u2 = new dataUsuario("ei", "Enrique", "Iglesias", "ei@tecnopotify.java", fecha, "", "");
+        dataUsuario u3 = new dataUsuario("rm", "Ricky", "Martin", "rm@tecnopotify.java", fecha, "", "");
+        dataUsuario u4 = new dataUsuario("er", "El", "Reja", "er@tecnopotify.java", fecha, "", "");
         crearArtista("axaxaxa", "www.ji.com", u1);
         crearArtista("sxsxsxx", "www.ei.com", u2);
         crearArtista("dxdxdxx", "www.rm.com", u3);
         crearArtista("ffxfxfx", "www.er.com", u4);
-        dataUsuario u5 = new dataUsuario("discoteishon","Carlos","Nuñez","cn@tecnopotify.java" ,fecha,"",""); 
-        dataUsuario u6 = new dataUsuario("md","Melany","Dolgay","md@tecnopotify.java" ,fecha, "","");
-        dataUsuario u7 = new dataUsuario("db","Diego","Barreto","db@tecnopotify.java" ,fecha, "","");
+        dataUsuario u5 = new dataUsuario("discoteishon", "Carlos", "Nuñez", "cn@tecnopotify.java", fecha, "", "");
+        dataUsuario u6 = new dataUsuario("md", "Melany", "Dolgay", "md@tecnopotify.java", fecha, "", "");
+        dataUsuario u7 = new dataUsuario("db", "Diego", "Barreto", "db@tecnopotify.java", fecha, "", "");
         crearCliente(u5);
         crearCliente(u6);
         crearCliente(u7);
@@ -473,7 +496,7 @@ public class Controlador implements IControlador {
         Genero G1 = new Genero(g1);
         Genero G2 = new Genero(g2);
         Genero G3 = new Genero(g3);
-         
+
         altaGenero(g1);
         altaGenero(g2);
         altaGenero(g3);
@@ -481,27 +504,27 @@ public class Controlador implements IControlador {
         dataAlbum a2 = new dataAlbum("album2", 1991, "");
         dataAlbum a3 = new dataAlbum("album3", 1992, "");
         dataAlbum a4 = new dataAlbum("album4", 1993, "");
-       
+
         crearAlbum(u1.getNickname(), a1);
         crearAlbum(u2.getNickname(), a2);
         crearAlbum(u3.getNickname(), a3);
         crearAlbum(u4.getNickname(), a4);
-        dataTemas t1 = new dataTemas("tema1", "2:30", 1);
-        dataTemas t2 = new dataTemas("tema2", "2:31", 2);
-        dataTemas t3 = new dataTemas("tema3", "2:32", 3);
-        dataTemas t4 = new dataTemas("tema4", "2:33", 4);
-        dataTemas t5 = new dataTemas("tema5", "2:35", 1);
-        dataTemas t6 = new dataTemas("tema6", "2:36", 2);
-        dataTemas t7 = new dataTemas("tema7", "2:38", 3);
-        dataTemas t8 = new dataTemas("tema8", "2:39", 4);
+        dataTemas t1 = new dataTemas("tema1", "2:30", 1,"www.youtube.com");
+        dataTemas t2 = new dataTemas("tema2", "2:31", 2,"www.youtube.com");
+        dataTemas t3 = new dataTemas("tema3", "2:32", 3,"www.youtube.com");
+        dataTemas t4 = new dataTemas("tema4", "2:33", 4,"www.youtube.com");
+        dataTemas t5 = new dataTemas("tema5", "2:35", 1,"www.youtube.com");
+        dataTemas t6 = new dataTemas("tema6", "2:36", 2,"www.youtube.com");
+        dataTemas t7 = new dataTemas("tema7", "2:38", 3,"www.youtube.com");
+        dataTemas t8 = new dataTemas("tema8", "2:39", 4,"www.youtube.com");
         Album A1 = new Album(a1);
- //       A1.getListGenero().add(G1);
+        //       A1.getListGenero().add(G1);
         Album A2 = new Album(a2);
         //A2.getListGenero().add(G2);
         Album A3 = new Album(a3);
-       // A3.getListGenero().add(G3);
+        // A3.getListGenero().add(G3);
         Album A4 = new Album(a4);
-       // A4.getListGenero().add(G3);
+        // A4.getListGenero().add(G3);
 
         altaTema(t1, A1.getNombre());
         altaTema(t2, A1.getNombre());
@@ -511,15 +534,16 @@ public class Controlador implements IControlador {
         altaTema(t6, A2.getNombre());
         altaTema(t7, A3.getNombre());
         altaTema(t8, A4.getNombre());
-        
-        agregarFavorito(true,false,false,"discoteishon","tema1");
-        agregarFavorito(true,false,false,"discoteishon","tema2");
-        agregarFavorito(false,false,true,"discoteishon","album1");
-        agregarFavorito(true,false,false,"md","tema3");
-        agregarFavorito(false,false,true,"db","album3");
-        
-       
-    }
 
+        agregarFavorito(true, false, false, "discoteishon", "tema2");
+        agregarFavorito(true, false, false, "discoteishon", "tema3");
+        agregarFavorito(true, false, false, "discoteishon", "tema2");
+        agregarFavorito(false, false, true, "discoteishon", "album1");
+        agregarFavorito(false, false, true, "db", "album3");
+        
+        agregarFavorito(true, false, false, "md", "tema3");
+ 
+
+    }
 
 }

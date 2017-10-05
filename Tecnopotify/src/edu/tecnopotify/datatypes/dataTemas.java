@@ -12,15 +12,18 @@ public class dataTemas{
     private String nombre;
     private String duracion;
     private int posicion;
+    private String archivo;
+    
     private Map<String, ListaReproduccion> listaR = new HashMap<String,ListaReproduccion>();
 
     public dataTemas() {
     }
 
-    public dataTemas(String nombre, String duracion, int posicion) {
+    public dataTemas(String nombre, String duracion, int posicion, String archivo) {
         this.nombre = nombre;
         this.duracion = duracion;
         this.posicion = posicion;
+        this.archivo = archivo;
     }
 
     public Map<String, ListaReproduccion> getListaR() {
@@ -53,6 +56,14 @@ public class dataTemas{
 
     public void setPosicion(int posicion) {
         this.posicion = posicion;
+    }
+
+    public String getArchivo() {
+        return archivo;
+    }
+
+    public void setArchivo(String archivo) {
+        this.archivo = archivo;
     }
     
 }
