@@ -106,6 +106,15 @@ public class dataUsuario implements Serializable {
     public void setLstSeguidos(List<Usuario> lstSeguidos) {
         this.lstSeguidos = lstSeguidos;
     }
+    
+        @Override
+    public String toString() {
+        return "Usuario{" + "Nickname=" + nickname
+                +"\n"+ ", Nombre Completo=" + nombre + " "
+                + apellido +"\n"+ " Mail=" + mail + "\n"
+                + " Fecha Nacimiento=" + f_nac.getDia() + "/" + f_nac.getMes()+"/"+ f_nac.getAnio()
+                + '}';
+    }
 
 
 

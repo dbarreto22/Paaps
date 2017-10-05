@@ -139,4 +139,15 @@ public class Usuario implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" + "Nickname=" + nickname
+                +"\n"+ ", Nombre Completo=" + nombre + " "
+                + apellido +"\n"+ " Mail=" + mail + "\n"
+                + " Fecha Nacimiento=" + f_nac.getDia() + "/" + f_nac.getMes()+"/"+ f_nac.getAnio()
+                + '}';
+    }
+    
+    
+
 }

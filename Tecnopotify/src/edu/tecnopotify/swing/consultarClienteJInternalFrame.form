@@ -186,7 +186,22 @@
                           <Component id="jTextFieldDia" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldMes" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+<<<<<<< HEAD
+=======
+                  </Group>
+                  <Component id="jimagen" min="-2" pref="112" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jTextFieldAnio" min="-2" max="-2" attributes="0"/>
+>>>>>>> 059841fedc6643e9f267e381130999eb318fcc93
                       <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelFNac" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldDia" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldMes" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
