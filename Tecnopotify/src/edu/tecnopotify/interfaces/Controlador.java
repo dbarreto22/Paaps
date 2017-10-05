@@ -305,7 +305,7 @@ public class Controlador implements IControlador {
             try {
                 /*oFavorito.getListTemas().add(oTema);
                 oCliente.setFav(oFavorito);
-                clictrl.edit(oCliente);*/
+                clictrl.edit(oCliente);//*/
                 clictrl.agregarTemaFav(oTema, oCliente);    //Agrego el tema
             } catch (Exception ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
