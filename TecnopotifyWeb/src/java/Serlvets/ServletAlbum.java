@@ -5,6 +5,8 @@
  */
 package Serlvets;
 
+import edu.tecnopotify.datatypes.dataAlbum;
+import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.fabrica.Fabrica;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,30 +46,14 @@ public class ServletAlbum extends HttpServlet {
           iCtrl=fabrica.getInstancia();
           String comando = request.getParameter("comando");
           if(comando != null && comando.equals("altaAlbum")) {
-              /* String idAlbum = request.getParameter("idAlbum");
-              Persona p = icp.GetPersonaPorId(Integer.parseInt(id));
-              request.setAttribute("persona", id);
-              request.setAttribute("persona_objeto", p);
+              String idAlbum = request.getParameter("idAlbum");
+              int anio = Integer.parseInt(request.getParameter("anio"));
+              String path = request.getParameter("path");
+              String usr= request.getParameter("usr");
+              dataAlbum oDtAlbum= new dataAlbum(idAlbum,anio,path);
               despachador = request.getRequestDispatcher("personas/ver-perfil.jsp");
-              despachador.forward(request, response);)
-              {
-              */
+              despachador.forward(request, response);
           }
-          
-
-
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletAlbum</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletAlbum at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
