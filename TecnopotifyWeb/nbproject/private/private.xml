@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/web/MostrarUsuarios.jsp</file>
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/src/java/Serlvets/ServletUsr.java</file>
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/src/java/Serlvets/ServletAlbum.java</file>
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/web/paginaPpal.html</file>
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/src/java/Jsp/ver-perfil.jsp</file>
+=======
+            <file>file:/home/diego-lucia/Escritorio/Paaps/TecnopotifyWeb/web/AltaCliente.jsp</file>
+>>>>>>> 02570f154a37396e6036c1cb279eeac4be88a576
         </group>
     </open-files>
 </project-private>

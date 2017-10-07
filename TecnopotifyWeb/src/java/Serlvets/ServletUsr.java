@@ -5,11 +5,13 @@
  */
 package Serlvets;
 
+import edu.tecnopotify.datatypes.dataCliente;
 import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +19,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 //@WebServlet(name = "ServletUsr", urlPatterns = { "/usuarios/*" })
 public class ServletUsr extends HttpServlet {
@@ -40,10 +41,22 @@ public class ServletUsr extends HttpServlet {
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         crl.cargarDatos();
-        List<Usuario> usuarios = crl.listarUsuarios();
-        request.setAttribute("usuarios", usuarios);
-        RequestDispatcher dispachador = request.getRequestDispatcher("/MostrarUsuarios.jsp");
-        dispachador.forward(request, response);
+        String comando = request.getParameter("comando");
+        
+        if (comando != null && comando.equals("altaCliente")) {
+            //Procesar el formulario
+            dataCliente cli = new dataCliente();
+            String nickName = request.getParameter("nickname");
+            String nombre = request.getParameter("nombre");
+
+            /* crl.AgregarPersona(nombre);
+            
+            request.setAttribute("personaCreada", nombre);
+            
+            Collection<Persona> personas = icp.GetPersonas();
+            request.setAttribute("personas", personas);*/
+            request.getRequestDispatcher("personas/MostrarPersonas.jsp").forward(request, response);
+        }
 
         /* try (PrintWriter out = response.getWriter()) {
         /* TODO output your page here. You may use following sample code.
@@ -64,7 +77,6 @@ public class ServletUsr extends HttpServlet {
         
         }*/
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
