@@ -33,6 +33,8 @@ public class Temas implements Serializable {
     @ManyToMany
     public Map<String, ListaReproduccion> listaR = new HashMap<String,ListaReproduccion>();
     
+    @ManyToMany(mappedBy = "listTemas")
+    private List<Favoritos> listFavoritos;
     
 
     public Map<String, ListaReproduccion> getListaR() {

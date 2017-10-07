@@ -3,20 +3,11 @@ package edu.tecnopotify.entidades;
 import edu.tecnopotify.datatypes.dataUsuario;
 import edu.tecnopotify.datatypes.dataFecha;
 
-import java.awt.Image;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable {
