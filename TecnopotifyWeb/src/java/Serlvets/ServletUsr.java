@@ -60,7 +60,7 @@ public class ServletUsr extends HttpServlet {
             int anio = request.getIntHeader("anio");
             dataFecha fecha = new dataFecha(dia, mes, anio);
             String contrasenia = request.getParameter("contrasenia");
-            String imagen = request.getParameter("imagen");
+            String imagen = "";
             dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail, fecha, contrasenia, imagen);
             crl.crearCliente(cli);
         }
@@ -75,7 +75,7 @@ public class ServletUsr extends HttpServlet {
             int anio = request.getIntHeader("anio");
             dataFecha fecha = new dataFecha(dia, mes, anio);
             String contrasenia = request.getParameter("contrasenia");
-            String imagen = request.getParameter("imagen");
+            String imagen = "";
             String biografia = request.getParameter("biografia");
             String link = request.getParameter("link");
             dataUsuario art = new dataArtista(biografia, link, nickName, nombre, apellido, mail, fecha, contrasenia, imagen);

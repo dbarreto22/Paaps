@@ -1,4 +1,10 @@
+<%-- 
+    Document   : ppal
+    Created on : 09/10/2017, 08:43:01 PM
+    Author     : diego-lucia
+--%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -58,7 +64,7 @@
                             <a href="#" class="Opciones" data-toggle="dropdown"
                                role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="<%= request.getContextPath()%> /AltaCliente.jsp">Crear Cliente</a></li>
+                                <li><a href="<%= request.getContextPath()%>/AltaCliente.jsp">Crear Cliente</a></li>
                                 <li><a href="#">Albums</a></li>
                                 <li><a href="#">Opcion3</a></li>
                                 <li><a href="#">Opcion4</a></li>
@@ -108,3 +114,4 @@
         crossorigin="anonymous"></script>
     </body>
 </html>
+

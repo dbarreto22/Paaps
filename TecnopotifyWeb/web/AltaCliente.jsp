@@ -24,7 +24,7 @@
         <form action="<%= request.getContextPath()%>/altaCliente"  METHOD = "post" onsubmit="return validarDatos()">
             <input type="hidden"  name="comando" value="altaCliente" />
             <div class="container">
-            Nombre:
+            Nickname:
             <input type="text" name=" nickname" /><br>
             Contraseña:
             <input type="password" name="contrasenia" /> <br>
