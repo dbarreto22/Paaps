@@ -26,6 +26,10 @@
                     <file>${file.reference.h2-2017-06-10.zip}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+                <library dirs="200">
+                    <file>${libs.beans-binding.classpath}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
@@ -45,5 +49,9 @@
                 <id>jar</id>
             </reference>
         </references>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>Iniciar</word>
+            <word>sesión</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>
