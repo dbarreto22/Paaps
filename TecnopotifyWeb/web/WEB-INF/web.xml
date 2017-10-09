@@ -6,7 +6,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsr</servlet-name>
-        <url-pattern>/usuarios/*</url-pattern>
+        <url-pattern>/usuarios</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
