@@ -34,6 +34,13 @@ video {
   display: inline-block;
   vertical-align: baseline;
 }
+
+@media (min-width: 768px){
+    alineacion {
+        padding-left: 100px;
+    }
+}
+
 audio:not([controls]) {
   display: none;
   height: 0;
@@ -1588,10 +1595,16 @@ pre code {
   margin-left: auto;
 }
 @media (min-width: 768px) {
+<<<<<<< HEAD
   .container {
       padding-left: 200px;
     width: 750px;
   }
+=======
+    .container {
+        width: 750px;
+}
+>>>>>>> e0c1c5cd0f8ea5554ee47e68f22572e83f8aceaa
 }
 @media (min-width: 992px) {
   .container {

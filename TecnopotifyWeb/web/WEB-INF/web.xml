@@ -10,7 +10,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsr</servlet-name>
-        <url-pattern>/usuarios/*</url-pattern>
+        <url-pattern>/usuarios</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>

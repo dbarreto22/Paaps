@@ -5,13 +5,19 @@
  */
 package Serlvets;
 
+import edu.tecnopotify.datatypes.dataArtista;
 import edu.tecnopotify.datatypes.dataCliente;
+import edu.tecnopotify.datatypes.dataFecha;
+import edu.tecnopotify.datatypes.dataUsuario;
+import edu.tecnopotify.entidades.Artista;
+import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,21 +48,79 @@ public class ServletUsr extends HttpServlet {
         crl = fabrica.getInstancia();
         crl.cargarDatos();
         String comando = request.getParameter("comando");
-        
+
         if (comando != null && comando.equals("altaCliente")) {
-            //Procesar el formulario
-            dataCliente cli = new dataCliente();
+            //Procesar el formulario  
             String nickName = request.getParameter("nickname");
             String nombre = request.getParameter("nombre");
-
-            /* crl.AgregarPersona(nombre);
-            
-            request.setAttribute("personaCreada", nombre);
-            
-            Collection<Persona> personas = icp.GetPersonas();
-            request.setAttribute("personas", personas);*/
-            request.getRequestDispatcher("personas/MostrarPersonas.jsp").forward(request, response);
+            String apellido = request.getParameter("apellido");
+            String mail = request.getParameter("mail");
+            int dia = request.getIntHeader("dia");
+            int mes = request.getIntHeader("mes");
+            int anio = request.getIntHeader("anio");
+            dataFecha fecha = new dataFecha(dia, mes, anio);
+            String contrasenia = request.getParameter("contrasenia");
+            String imagen = request.getParameter("imagen");
+            dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail, fecha, contrasenia, imagen);
+            crl.crearCliente(cli);
         }
+        if (comando != null && comando.equals("altaArtista")) {
+            //Procesar el formulario  
+            String nickName = request.getParameter("nickname");
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String mail = request.getParameter("mail");
+            int dia = request.getIntHeader("dia");
+            int mes = request.getIntHeader("mes");
+            int anio = request.getIntHeader("anio");
+            dataFecha fecha = new dataFecha(dia, mes, anio);
+            String contrasenia = request.getParameter("contrasenia");
+            String imagen = request.getParameter("imagen");
+            String biografia = request.getParameter("biografia");
+            String link = request.getParameter("link");
+            dataUsuario art = new dataArtista(biografia, link, nickName, nombre, apellido, mail, fecha, contrasenia, imagen);
+            crl.crearArtista(biografia, link, art);
+        }
+
+        if (comando != null && comando.equals("mostrarCliente")) {
+            //Procesar el formulario 
+            List<Cliente> clientes = crl.listarClientes();
+            Iterator<Cliente> it = clientes.iterator();
+            while (it.hasNext()) {
+                request.setAttribute("combo", it.next().getNickname());
+            }
+            String nickName = request.getParameter("combo");
+            Cliente cli = crl.getCli(nickName);
+            request.setAttribute("nombre", cli.getNombre());
+            request.setAttribute("apellido", cli.getApellido());
+            request.setAttribute("mail", cli.getMail());
+            request.setAttribute("dia", cli.getF_nac().getDia());
+            request.setAttribute("mes", cli.getF_nac().getMes());
+            request.setAttribute("anio", cli.getF_nac().getAnio());
+            request.setAttribute("imagen", cli.getImagen());
+        }
+
+        if (comando != null && comando.equals("mostrarArtista")) {
+            //Procesar el formulario 
+            List<Artista> artistas = crl.listarArtistas();
+            Iterator<Artista> it = artistas.iterator();
+            while (it.hasNext()) {
+                request.setAttribute("combo", it.next().getNickname());
+            }
+            String nickName = request.getParameter("combo");
+            Artista art = crl.seleccionarArtista(nickName);
+            request.setAttribute("nombre", art.getNombre());
+            request.setAttribute("apellido", art.getApellido());
+            request.setAttribute("mail", art.getMail());
+            request.setAttribute("dia", art.getF_nac().getDia());
+            request.setAttribute("mes", art.getF_nac().getMes());
+            request.setAttribute("anio", art.getF_nac().getAnio());
+            request.setAttribute("imagen", art.getImagen());
+            request.setAttribute("biografia", art.getBiografia());
+            request.setAttribute("link", art.getLink());
+
+        }
+
 
         /* try (PrintWriter out = response.getWriter()) {
         /* TODO output your page here. You may use following sample code.
