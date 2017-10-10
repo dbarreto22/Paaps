@@ -16,6 +16,7 @@ import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -49,7 +50,7 @@ public class ServletUsr extends HttpServlet {
         crl.cargarDatos();
         String comando = request.getParameter("comando");
 
-        if (comando != null && comando.equals("altaCliente")) {
+        if (comando != null && comando.equals("AltaCliente")) {
             //Procesar el formulario  
             String nickName = request.getParameter("nickname");
             String nombre = request.getParameter("nombre");
@@ -86,10 +87,12 @@ public class ServletUsr extends HttpServlet {
             //Procesar el formulario 
             List<Cliente> clientes = crl.listarClientes();
             Iterator<Cliente> it = clientes.iterator();
+            ArrayList<String> options = new ArrayList<>();
             while (it.hasNext()) {
-                request.setAttribute("combo", it.next().getNickname());
+                options.add(it.next().getNickname());
             }
-            String nickName = request.getParameter("combo");
+            request.setAttribute("combo", options);
+            String nickName = request.getParameter("seleccion");
             Cliente cli = crl.getCli(nickName);
             request.setAttribute("nombre", cli.getNombre());
             request.setAttribute("apellido", cli.getApellido());

@@ -4,6 +4,8 @@
     Author     : diego-lucia
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,28 +22,38 @@
         <form action="<%= request.getContextPath()%>/mostrarArtista">
             <input type="hidden"  name="comando" value="mostrarArtista" />
             <div class="container">
-            <select>
-            Elija Nickname: <br>
-            <input type="combobox" name="combo" /><br>
-            </select>
-            <input type="submit" value="Enviar" />
-            Nombre:
-            <input type="text" name="nombre" /> <br>
-            Apellido:
-            <input type="text" name="apellido" /> <br>
-            Fecha de Nacimiento:<br>
-            Dia 
-            <input type="number" name="dia" />
-            Mes
-            <input type="number" name="mes" />
-            Año
-            <input type="number" name="anio" /> <br>
-            Imagen:
-            <input type="button" name="imagen" /> <br>
-            Biografia:
-            <input type="text" name="biografia" /> <br>
-            Link:
-            <input type="text" name="link" /> <br>
+                Elija Nickname: <br>
+                <select name="seleccion">
+                    <%
+                        ArrayList<String> op = (ArrayList<String>) request.getAttribute("combo");
+                        Iterator<String> it = op.iterator();
+                        while (it.hasNext()) {
+//                            out.print("<option value =\"" + o + "\"</option>");
+                    %>
+                    <option  value ="<%= it.next() %>"></option>          
+                    <%
+                        }
+                    %>
+                    <input type="combobox" name="combo" /><br>
+                </select>
+                <input type="submit" value="Enviar" />
+                Nombre:
+                <input type="text" name="nombre" /> <br>
+                Apellido:
+                <input type="text" name="apellido" /> <br>
+                Fecha de Nacimiento:<br>
+                Dia 
+                <input type="number" name="dia" />
+                Mes
+                <input type="number" name="mes" />
+                Año
+                <input type="number" name="anio" /> <br>
+                Imagen:
+                <input type="button" name="imagen" /> <br>
+                Biografia:
+                <input type="text" name="biografia" /> <br>
+                Link:
+                <input type="text" name="link" /> <br>
             </div>
         </form> 
 

@@ -21,31 +21,31 @@
 
         <h1>Alta Cliente</h1>
 
-        <form action="<%= request.getContextPath()%>/altaCliente"  METHOD = "post" onsubmit="return validarDatos()">
-            <input type="hidden"  name="comando" value="altaCliente" />
+        <form action="<%= request.getContextPath()%>/AltaCliente"  METHOD = "post" onsubmit="return validarDatos()">
+            <input type="hidden"  name="comando" value="AltaCliente" />
             <div class="container">
-            Nickname:
-            <input type="text" name=" nickname" /><br>
-            Contraseña:
-            <input type="password" name="contrasenia" /> <br>
-            Ingrese Contraseña nuevamente:
-            <input type="password" name="validarContrasenia" /> <br>
-            Ingrese Nombre:
-            <input type="text" name="nombre" /> <br>
-            Ingrese Apellido:
-            <input type="text" name="apellido" /> <br>
-            Ingrese Fecha de Nacimiento:<br>
-            Dia 
-            <input type="number" name="dia" />
-            Mes
-            <input type="number" name="mes" />
-            Año
-            <input type="number" name="anio" /> <br>
-            Elija Imagen:
-            <input type="button" name="imagen" /> <br>
-            
-            <input type="submit" value="Enviar" />
-            </<div>
+                Nickname:
+                <input type="text" name=" nickname" id="nickname" /><br />
+                Contraseña:
+                <input type="password" name="contrasenia" id ="contrasenia"/> <br />
+                Ingrese Contraseña nuevamente:
+                <input type="password" name="validarContrasenia" id = "validarContrasenia"/> <br />
+                Ingrese Nombre:
+                <input type="text" name="nombre" /> <br />
+                Ingrese Apellido:
+                <input type="text" name="apellido" /> <br />
+                Ingrese Fecha de Nacimiento:<br />
+                Dia 
+                <input type="number" name="dia" />
+                Mes
+                <input type="number" name="mes" />
+                Año
+                <input type="number" name="anio" /> <br />
+                Elija Imagen:
+                <input type="button" name="imagen" /> <br />
+
+                <input type="submit" value="Enviar" />
+            </div>
         </form> 
 
 
