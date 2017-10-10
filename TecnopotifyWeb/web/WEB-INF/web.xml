@@ -23,6 +23,5 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>ppal.jsp</welcome-file>
-        <welcome-file>paginaPpal.html</welcome-file>
     </welcome-file-list>
 </web-app>

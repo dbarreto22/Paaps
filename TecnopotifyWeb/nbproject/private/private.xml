@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/diego-lucia/Escritorio/Paaps/TecnopotifyWeb/web/altaArtista.jsp</file>
-            <file>file:/home/diego-lucia/Escritorio/Paaps/TecnopotifyWeb/web/AltaCliente.jsp</file>
-            <file>file:/home/diego-lucia/Escritorio/Paaps/TecnopotifyWeb/src/java/Serlvets/ServletUsr.java</file>
-            <file>file:/home/diego-lucia/Escritorio/Paaps/TecnopotifyWeb/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/menan/Projects/Paaps/TecnopotifyWeb/web/bower_components/bootstrap/dist/css/bootstrap-theme.min.css</file>
+            <file>file:/C:/Users/menan/Projects/Paaps/TecnopotifyWeb/src/java/Serlvets/ServletLogin.java</file>
+            <file>file:/C:/Users/menan/Projects/Paaps/TecnopotifyWeb/web/bower_components/bootstrap/dist/css/bootstrap-theme.css</file>
+            <file>file:/C:/Users/menan/Projects/Paaps/TecnopotifyWeb/web/bower_components/bootstrap/dist/css/bootstrap.css</file>
+            <file>file:/C:/Users/menan/Projects/Paaps/TecnopotifyWeb/web/templates/header.jsp</file>
+            <file>file:/C:/Users/menan/Projects/Paaps/TecnopotifyWeb/src/java/Serlvets/ServletAlbum.java</file>
+            <file>file:/C:/Users/menan/Projects/Paaps/TecnopotifyWeb/web/login.jsp</file>
+            <file>file:/C:/Users/menan/Projects/Paaps/TecnopotifyWeb/web/bower_components/bootstrap/dist/css/bootstrap-theme.min.css.map</file>
         </group>
     </open-files>
 </project-private>

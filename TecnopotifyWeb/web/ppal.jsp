@@ -76,9 +76,7 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-<!--                        <li><a href="../navbar/">Default</a></li>-->
-                        <li><a href="./registrarusuario/">Registrar usuario</a></li>
-                        <li><a href="./autenticar/">Iniciar sesión</a></li>
+                        <li><a href="<%= request.getContextPath()%>/login.jsp">Iniciar sesión</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
