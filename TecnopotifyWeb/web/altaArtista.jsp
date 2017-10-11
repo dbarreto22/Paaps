@@ -22,11 +22,11 @@
             <input type="hidden"  name="comando" value="altaArtista" />
             <div class="container">
             Nickname:
-            <input type="text" name=" nickname" /><br>
+            <input type="text" name="nickname" id ="nickname"/><br>
             Contraseña:
-            <input type="password" name="contrasenia" /> <br>
+            <input type="password" name="contrasenia" id="contrasenia" /> <br>
             Ingrese Contraseña nuevamente:
-            <input type="password" name="validarContrasenia" /> <br>
+            <input type="password" name="validarContrasenia" id ="validarContrasenia" /> <br>
             Ingrese Nombre:
             <input type="text" name="nombre" /> <br>
             Ingrese Apellido:

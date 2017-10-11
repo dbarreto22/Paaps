@@ -38,7 +38,7 @@
             esCorrecto = false;
         }
 
-        if (contrasenia !== valcontrasenia) {
+        if (contrasenia != valcontrasenia) {
             alert("Contraseña incorrecta, Ingrese nuevamente");
             esCorrecto = false;
         }
