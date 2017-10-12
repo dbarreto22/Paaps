@@ -99,6 +99,8 @@ public interface IControlador {
     public List<ListaReproduccion> listarListaRepr();
     
     public void cargarDatos();
+    
+    public Usuario getUsuario(String nickname);
 
 }
 

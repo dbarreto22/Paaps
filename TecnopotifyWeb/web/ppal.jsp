@@ -8,108 +8,41 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link:forward page="/paginaPpal.html"/>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head 
-        content must come *after* these tags -->
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="icon" href="../../favicon.ico">
+    <link:forward page="/paginaPpal.html"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head 
+    content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-        <title>Tecnopotify.com</title>
+    <title>Tecnopotify.com</title>
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
-              crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+          crossorigin="anonymous">
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
-              integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-              crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
 
 
-        <style>
-            body {
-                min-height: 2000px;
-                padding-top: 70px;
-            }
-        </style>
+    <style>
+        body {
+            min-height: 2000px;
+            padding-top: 70px;
+        }
+    </style>
 
-        <!-- Custom styles for this template -->
-        <link href="navbar-fixed-top.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="navbar-fixed-top.css" rel="stylesheet">
     <body>
 
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
-                            data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Tecnopotify</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#usuarios">Usuarios</a></li>
-                        <li><a href="#listas">Listas</a></li>
-                        <li class="Opciones">
-                            <a href="#" class="Opciones" data-toggle="dropdown"
-                               role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<%= request.getContextPath()%>/AltaCliente.jsp">Crear Cliente</a></li>
-                                <li><a href="#">Albums</a></li>
-                                <li><a href="#">Opcion3</a></li>
-                                <li><a href="#">Opcion4</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                        <li class="Album">
-                            <a href="#" class="Album" data-toggle="dropdown"
-                               role="button" aria-haspopup="true" aria-expanded="false">Album <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<%= request.getContextPath()%>/cboArtistas">Crear album</a></li>
-                                <li><a href="#">Opcion3</a></li>
-                                <li><a href="#">Opcion4</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <!--                        <li><a href="../navbar/">Default</a></li>-->
-                        <li><a href="./registrarusuario/">Registrar usuario</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <%
-                            String user = (String) session.getAttribute("user");
-                            if ((user != null) && !user.isEmpty()) {
-                        %>
-                        <li><a href="/">Bienvenido <%= user%>!</a></li>
-                        <li><a href="<%= request.getContextPath()%>/autenticar?comando=logout">LogOut</a></li>
-                            <%
-                            } else {
-                            %>
-                        <li><a href="<%= request.getContextPath()%>/login.jsp">Login</a></li>
-                        <%
-                            }
-                        %>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>
+         <jsp:include page="/templates/header.jsp"/> 
 
         <div class="container">
 

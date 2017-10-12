@@ -172,7 +172,7 @@ public class Controlador implements IControlador {
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     public void quitarTemaLista(String idTema, dataListaReproduccion listaR) {
@@ -367,8 +367,8 @@ public class Controlador implements IControlador {
 
     public void publicarLista(String idUsr, String nombreLista) {
         ListaParticularJpaController listCtrl = new ListaParticularJpaController(fact);
-        ListaParticular lParticular= listCtrl.findListaParticular(nombreLista);
-        lParticular.setEsPrivada(lParticular.isEsPrivada()==false);
+        ListaParticular lParticular = listCtrl.findListaParticular(nombreLista);
+        lParticular.setEsPrivada(lParticular.isEsPrivada() == false);
         try {
             listCtrl.edit(lParticular);
         } catch (Exception ex) {
@@ -435,6 +435,13 @@ public class Controlador implements IControlador {
         return c;
     }
 
+    public Usuario getUsuario(String nickname) {
+        Usuario c = null;
+        UsuarioJpaController crlU = new UsuarioJpaController(fact);
+        c = crlU.findUsuario(nickname);
+        return c;
+    }
+
     public List<Temas> listarTemas() {
         List<Temas> temas = null;
         TemasJpaController crlT = new TemasJpaController(fact);
@@ -476,17 +483,17 @@ public class Controlador implements IControlador {
     public void cargarDatos() {
 
         dataFecha fecha = new dataFecha(1, 1, 1980);
-        dataUsuario u1 = new dataUsuario("ji", "Julio", "Iglesias", "ji@tecnopotify.java", fecha, "", "julio");
-        dataUsuario u2 = new dataUsuario("ei", "Enrique", "Iglesias", "ei@tecnopotify.java", fecha, "", "enrique");
-        dataUsuario u3 = new dataUsuario("rm", "Ricky", "Martin", "rm@tecnopotify.java", fecha, "", "ricky");
-        dataUsuario u4 = new dataUsuario("er", "El", "Reja", "er@tecnopotify.java", fecha, "", "turro");
+        dataUsuario u1 = new dataUsuario("ji", "Julio", "Iglesias", "ji@tecnopotify.java", fecha, "", "ji");
+        dataUsuario u2 = new dataUsuario("ei", "Enrique", "Iglesias", "ei@tecnopotify.java", fecha, "", "ei");
+        dataUsuario u3 = new dataUsuario("rm", "Ricky", "Martin", "rm@tecnopotify.java", fecha, "", "rm");
+        dataUsuario u4 = new dataUsuario("er", "El", "Reja", "er@tecnopotify.java", fecha, "", "er");
         crearArtista("axaxaxa", "www.ji.com", u1);
         crearArtista("sxsxsxx", "www.ei.com", u2);
         crearArtista("dxdxdxx", "www.rm.com", u3);
         crearArtista("ffxfxfx", "www.er.com", u4);
-        dataUsuario u5 = new dataUsuario("discoteishon", "Carlos", "Nuñez", "cn@tecnopotify.java", fecha, "", "carlitos");
-        dataUsuario u6 = new dataUsuario("md", "Melany", "Dolgay", "md@tecnopotify.java", fecha, "", "melany");
-        dataUsuario u7 = new dataUsuario("db", "Diego", "Barreto", "db@tecnopotify.java", fecha, "", "diego");
+        dataUsuario u5 = new dataUsuario("discoteishon", "Carlos", "Nuñez", "cn@tecnopotify.java", fecha, "", "discoteishon");
+        dataUsuario u6 = new dataUsuario("md", "Melany", "Dolgay", "md@tecnopotify.java", fecha, "", "md");
+        dataUsuario u7 = new dataUsuario("db", "Diego", "Barreto", "db@tecnopotify.java", fecha, "", "db");
         crearCliente(u5);
         crearCliente(u6);
         crearCliente(u7);
@@ -509,14 +516,14 @@ public class Controlador implements IControlador {
         crearAlbum(u2.getNickname(), a2);
         crearAlbum(u3.getNickname(), a3);
         crearAlbum(u4.getNickname(), a4);
-        dataTemas t1 = new dataTemas("tema1", "2:30", 1,"www.youtube.com");
-        dataTemas t2 = new dataTemas("tema2", "2:31", 2,"www.youtube.com");
-        dataTemas t3 = new dataTemas("tema3", "2:32", 3,"www.youtube.com");
-        dataTemas t4 = new dataTemas("tema4", "2:33", 4,"www.youtube.com");
-        dataTemas t5 = new dataTemas("tema5", "2:35", 1,"www.youtube.com");
-        dataTemas t6 = new dataTemas("tema6", "2:36", 2,"www.youtube.com");
-        dataTemas t7 = new dataTemas("tema7", "2:38", 3,"www.youtube.com");
-        dataTemas t8 = new dataTemas("tema8", "2:39", 4,"www.youtube.com");
+        dataTemas t1 = new dataTemas("tema1", "2:30", 1, "www.youtube.com");
+        dataTemas t2 = new dataTemas("tema2", "2:31", 2, "www.youtube.com");
+        dataTemas t3 = new dataTemas("tema3", "2:32", 3, "www.youtube.com");
+        dataTemas t4 = new dataTemas("tema4", "2:33", 4, "www.youtube.com");
+        dataTemas t5 = new dataTemas("tema5", "2:35", 1, "www.youtube.com");
+        dataTemas t6 = new dataTemas("tema6", "2:36", 2, "www.youtube.com");
+        dataTemas t7 = new dataTemas("tema7", "2:38", 3, "www.youtube.com");
+        dataTemas t8 = new dataTemas("tema8", "2:39", 4, "www.youtube.com");
         Album A1 = new Album(a1);
         //       A1.getListGenero().add(G1);
         Album A2 = new Album(a2);
@@ -540,9 +547,8 @@ public class Controlador implements IControlador {
         agregarFavorito(true, false, false, "discoteishon", "tema2");
         agregarFavorito(false, false, true, "discoteishon", "album1");
         agregarFavorito(false, false, true, "db", "album3");
-        
+
         agregarFavorito(true, false, false, "md", "tema3");
- 
 
     }
 
