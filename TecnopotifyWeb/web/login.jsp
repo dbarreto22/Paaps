@@ -11,7 +11,7 @@
         <jsp:include page="/templates/header.jsp" />
         <div class="container">
             <form class="form-signin" method="POST"
-                  action="Tecnopotify/autenticar">
+                  action="/autenticar">
                 <h2 class="form-signin-heading">Iniciar sesión</h2>
              
 

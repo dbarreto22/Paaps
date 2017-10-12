@@ -5,30 +5,26 @@
  */
 package Serlvets;
 
-import edu.tecnopotify.datatypes.dataAlbum;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import edu.tecnopotify.interfaces.IControlador;
-import javax.servlet.RequestDispatcher;
 
 /**
  *
  * @author Carlox
  */
+@WebServlet(name = "ComboArtistas", urlPatterns = {"/ComboArtistas"})
+public class ComboArtistas extends HttpServlet {
 
-
-@WebServlet(name = "ServletAlbum", urlPatterns = {"/ServletAlbum"})
-public class ServletAlbum extends HttpServlet {
-
-    private IControlador iCtrl;
-    private Fabrica fabrica;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,21 +37,16 @@ public class ServletAlbum extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
           RequestDispatcher despachador;
-          fabrica=Fabrica.getInstance();
-          iCtrl=fabrica.getInstancia();
-          String comando = request.getParameter("comando");
-          if(comando != null && comando.equals("altaAlbum")) {
-              String idAlbum = request.getParameter("idAlbum");
-              int anio = Integer.parseInt(request.getParameter("anio"));
-              String path = request.getParameter("path");
-              String usr= request.getParameter("usr");
-              dataAlbum oDtAlbum= new dataAlbum(idAlbum,anio,path);
-              iCtrl.crearAlbum(usr, oDtAlbum);
-              
-              despachador = request.getRequestDispatcher("/paginaPpal.html");//Deber{ia llamar a la pagina que agrega los temas al album
-              despachador.forward(request, response);
-          }
+          Fabrica fabrica=Fabrica.getInstance();
+          IControlador iCtrl=fabrica.getInstancia();
+          iCtrl.cargarDatos();
+          List<Artista> lstArtista = iCtrl.listarArtistas();
+          request.setAttribute("lstArtista", lstArtista);
+          despachador = request.getRequestDispatcher("Album/AltaAlbum.jsp");//
+          despachador.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
