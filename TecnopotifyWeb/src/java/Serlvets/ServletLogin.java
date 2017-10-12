@@ -5,8 +5,11 @@
  */
 package Serlvets;
 
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,12 +30,16 @@ public class ServletLogin extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    private IControlador crl;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String comando = request.getParameter("comando");
-        
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        crl.cargarDatos();
+        String comando = (String) request.getParameter("comando");
+        out.print(comando + "in servletLogin");
         if((comando != null)&&(comando.equals("login"))){
             //obtener parametros y autenticar
             String user = request.getParameter("user");

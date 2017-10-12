@@ -76,7 +76,19 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="<%= request.getContextPath()%>/login.jsp">Iniciar sesión</a></li>
+                        <%
+                            String user = (String) session.getAttribute("user");
+                            if ((user != null) && !user.isEmpty()) {
+                        %>
+                        <li><a href="/">Bienvenido <%= user%>!</a></li>
+                        <li><a href="<%= request.getContextPath()%>/autenticar?comando=logout">LogOut</a></li>
+                            <%
+                            } else {
+                            %>
+                        <li><a href="<%= request.getContextPath()%>/login.jsp">Login</a></li>
+                        <%
+                            }
+                        %>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

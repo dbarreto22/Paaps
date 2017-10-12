@@ -17,8 +17,7 @@ public class dataCliente extends dataUsuario {
         super(nickname, nombre, apellido, mail, f_nac, imagen,contrasenia, lseguidos);
     }
     
-    public dataCliente(String nickname, String nombre, String apellido, String mail, dataFecha f_nac,String contrasenia, String imagen
-            ) {
+    public dataCliente(String nickname, String nombre, String apellido, String mail, dataFecha f_nac,String contrasenia, String imagen) {
         super(nickname, nombre, apellido, mail, f_nac, contrasenia,imagen);
     }
 

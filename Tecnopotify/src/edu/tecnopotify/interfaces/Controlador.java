@@ -476,17 +476,17 @@ public class Controlador implements IControlador {
     public void cargarDatos() {
 
         dataFecha fecha = new dataFecha(1, 1, 1980);
-        dataUsuario u1 = new dataUsuario("ji", "Julio", "Iglesias", "ji@tecnopotify.java", fecha, "", "");
-        dataUsuario u2 = new dataUsuario("ei", "Enrique", "Iglesias", "ei@tecnopotify.java", fecha, "", "");
-        dataUsuario u3 = new dataUsuario("rm", "Ricky", "Martin", "rm@tecnopotify.java", fecha, "", "");
-        dataUsuario u4 = new dataUsuario("er", "El", "Reja", "er@tecnopotify.java", fecha, "", "");
+        dataUsuario u1 = new dataUsuario("ji", "Julio", "Iglesias", "ji@tecnopotify.java", fecha, "", "julio");
+        dataUsuario u2 = new dataUsuario("ei", "Enrique", "Iglesias", "ei@tecnopotify.java", fecha, "", "enrique");
+        dataUsuario u3 = new dataUsuario("rm", "Ricky", "Martin", "rm@tecnopotify.java", fecha, "", "ricky");
+        dataUsuario u4 = new dataUsuario("er", "El", "Reja", "er@tecnopotify.java", fecha, "", "turro");
         crearArtista("axaxaxa", "www.ji.com", u1);
         crearArtista("sxsxsxx", "www.ei.com", u2);
         crearArtista("dxdxdxx", "www.rm.com", u3);
         crearArtista("ffxfxfx", "www.er.com", u4);
-        dataUsuario u5 = new dataUsuario("discoteishon", "Carlos", "Nuñez", "cn@tecnopotify.java", fecha, "", "");
-        dataUsuario u6 = new dataUsuario("md", "Melany", "Dolgay", "md@tecnopotify.java", fecha, "", "");
-        dataUsuario u7 = new dataUsuario("db", "Diego", "Barreto", "db@tecnopotify.java", fecha, "", "");
+        dataUsuario u5 = new dataUsuario("discoteishon", "Carlos", "Nuñez", "cn@tecnopotify.java", fecha, "", "carlitos");
+        dataUsuario u6 = new dataUsuario("md", "Melany", "Dolgay", "md@tecnopotify.java", fecha, "", "melany");
+        dataUsuario u7 = new dataUsuario("db", "Diego", "Barreto", "db@tecnopotify.java", fecha, "", "diego");
         crearCliente(u5);
         crearCliente(u6);
         crearCliente(u7);

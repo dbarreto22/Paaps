@@ -28,20 +28,12 @@
                 <Property name="text" type="java.lang.String" value="Usuarios"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuCrearCliente">
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuAltaPerfil">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Crear Cliente"/>
+                    <Property name="text" type="java.lang.String" value="Alta Perfil"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCrearClienteActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuCrearArtista">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Crear Artista"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCrearArtistaActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuAltaPerfilActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuConsultarCliente">
@@ -89,33 +81,6 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCrearGeneroActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
-            <Menu class="javax.swing.JMenu" name="menuAlbum">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Albums"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuAlbumMouseClicked"/>
-              </Events>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuCrearAlbum">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Crear album"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuCrearAlbumMouseClicked"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuCrearAlbumActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="consultarAlbum">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Consultar album"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consultarAlbumActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>

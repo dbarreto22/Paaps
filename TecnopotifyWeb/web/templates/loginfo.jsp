@@ -4,7 +4,8 @@
 
 <%
     String user = (String) session.getAttribute("user");
-    if ((user != null) && !user.isEmpty()) {
+    if ((user != null) && !user.isEmpty()) 
+            {
 %>
         <li><a href="#">Bienvenido <%= user %>!</a></li>
         <li><a href="<%= request.getContextPath() %>/autenticar?comando=logout">LogOut</a></li>

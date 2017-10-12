@@ -47,7 +47,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     protected void createFrameAltaArtista() {
-        AltaArtistaJInternalFrame frame = new AltaArtistaJInternalFrame();
+        AltaPerfilJInternalFrame frame = new AltaPerfilJInternalFrame();
         frame.setVisible(true);
         this.Desktop.add(frame);
         try {
@@ -226,17 +226,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuUuarios = new javax.swing.JMenu();
-        jMenuCrearCliente = new javax.swing.JMenuItem();
-        jMenuCrearArtista = new javax.swing.JMenuItem();
+        jMenuAltaPerfil = new javax.swing.JMenuItem();
         jMenuConsultarCliente = new javax.swing.JMenuItem();
         jMenuConsultarArtista = new javax.swing.JMenuItem();
         SeguirUsuario2 = new javax.swing.JMenuItem();
         DejarSeguir2 = new javax.swing.JMenuItem();
         menuGenero = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        menuAlbum = new javax.swing.JMenu();
-        jMenuCrearAlbum = new javax.swing.JMenuItem();
-        consultarAlbum = new javax.swing.JMenuItem();
         menuFavs = new javax.swing.JMenu();
         menuGuardarFavorito = new javax.swing.JMenuItem();
         QuitarTema = new javax.swing.JMenuItem();
@@ -259,21 +255,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuUuarios.setText("Usuarios");
 
-        jMenuCrearCliente.setText("Crear Cliente");
-        jMenuCrearCliente.addActionListener(new java.awt.event.ActionListener() {
+        jMenuAltaPerfil.setText("Alta Perfil");
+        jMenuAltaPerfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCrearClienteActionPerformed(evt);
+                jMenuAltaPerfilActionPerformed(evt);
             }
         });
-        menuUuarios.add(jMenuCrearCliente);
-
-        jMenuCrearArtista.setText("Crear Artista");
-        jMenuCrearArtista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCrearArtistaActionPerformed(evt);
-            }
-        });
-        menuUuarios.add(jMenuCrearArtista);
+        menuUuarios.add(jMenuAltaPerfil);
 
         jMenuConsultarCliente.setText("Consultar cliente");
         jMenuConsultarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -320,36 +308,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuGenero.add(jMenuItem4);
 
         jMenu3.add(menuGenero);
-
-        menuAlbum.setText("Albums");
-        menuAlbum.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuAlbumMouseClicked(evt);
-            }
-        });
-
-        jMenuCrearAlbum.setText("Crear album");
-        jMenuCrearAlbum.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuCrearAlbumMouseClicked(evt);
-            }
-        });
-        jMenuCrearAlbum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCrearAlbumActionPerformed(evt);
-            }
-        });
-        menuAlbum.add(jMenuCrearAlbum);
-
-        consultarAlbum.setText("Consultar album");
-        consultarAlbum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultarAlbumActionPerformed(evt);
-            }
-        });
-        menuAlbum.add(consultarAlbum);
-
-        jMenu3.add(menuAlbum);
 
         menuFavs.setText("Favoritos");
         menuFavs.addActionListener(new java.awt.event.ActionListener() {
@@ -449,34 +407,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuConsultarClienteActionPerformed
 
-    private void menuAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAlbumMouseClicked
-
-    }//GEN-LAST:event_menuAlbumMouseClicked
-
-    private void jMenuCrearAlbumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuCrearAlbumMouseClicked
-        //Muestra el panel de altas y lo prepara para el alta de usuarios
-
-    }//GEN-LAST:event_jMenuCrearAlbumMouseClicked
-
-    private void jMenuCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCrearClienteActionPerformed
-        // TODO add your handling code here:
-        createFrameAltaCliente();
-    }//GEN-LAST:event_jMenuCrearClienteActionPerformed
-
     private void jCrearGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCrearGeneroActionPerformed
         // TODO add your handling code here:
         createFrameAltaGenero();
     }//GEN-LAST:event_jCrearGeneroActionPerformed
 
-    private void jMenuCrearArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCrearArtistaActionPerformed
+    private void jMenuAltaPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltaPerfilActionPerformed
         // TODO add your handling code here:
         createFrameAltaArtista();
-    }//GEN-LAST:event_jMenuCrearArtistaActionPerformed
-
-    private void jMenuCrearAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCrearAlbumActionPerformed
-        // TODO add your handling code here:
-        createFrameAltaAlbum();
-    }//GEN-LAST:event_jMenuCrearAlbumActionPerformed
+    }//GEN-LAST:event_jMenuAltaPerfilActionPerformed
 
     private void SeguirUsuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeguirUsuario2ActionPerformed
         // TODO add your handling code here:
@@ -515,11 +454,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         publicarListaReproduccionJInternalFrame();
     }//GEN-LAST:event_jMenuPublicarListaActionPerformed
-
-    private void consultarAlbumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarAlbumActionPerformed
-        // TODO add your handling code here:
-        consultarAlbumJInternalFrame();
-    }//GEN-LAST:event_consultarAlbumActionPerformed
 
     private void CrearTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearTemaActionPerformed
         // TODO add your handling code here:
@@ -589,21 +523,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem QuitarTema;
     private javax.swing.JMenuItem SeguirUsuario2;
     private javax.swing.JMenuItem agregarTema;
-    private javax.swing.JMenuItem consultarAlbum;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuItem jMenuAltaPerfil;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuConsultarArtista;
     private javax.swing.JMenuItem jMenuConsultarCliente;
     private javax.swing.JMenuItem jMenuConsutlarListaRep;
-    private javax.swing.JMenuItem jMenuCrearAlbum;
-    private javax.swing.JMenuItem jMenuCrearArtista;
-    private javax.swing.JMenuItem jMenuCrearCliente;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuPublicarLista;
-    private javax.swing.JMenu menuAlbum;
     private javax.swing.JMenu menuFavs;
     private javax.swing.JMenu menuGenero;
     private javax.swing.JMenuItem menuGuardarFavorito;
