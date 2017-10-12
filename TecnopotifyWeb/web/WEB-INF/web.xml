@@ -8,6 +8,14 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>Serlvets.ServletLogin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ComboUsuarios</servlet-name>
+        <servlet-class>Serlvets.ComboArtistas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAutenticar</servlet-name>
+        <servlet-class>Serlvets.ServletAutenticacion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsr</servlet-name>
         <url-pattern>/usuarios</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComboUsuarios</servlet-name>
+        <url-pattern>/cboArtistas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletAutenticar</servlet-name>
+        <url-pattern>/autenticar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

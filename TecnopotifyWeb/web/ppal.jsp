@@ -74,6 +74,23 @@
                                 <li><a href="#">One more separated link</a></li>
                             </ul>
                         </li>
+                        <li class="Album">
+                            <a href="#" class="Album" data-toggle="dropdown"
+                               role="button" aria-haspopup="true" aria-expanded="false">Album <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<%= request.getContextPath()%>/cboArtistas">Crear album</a></li>
+                                <li><a href="#">Opcion3</a></li>
+                                <li><a href="#">Opcion4</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Nav header</li>
+                                <li><a href="#">Separated link</a></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!--                        <li><a href="../navbar/">Default</a></li>-->
+                        <li><a href="./registrarusuario/">Registrar usuario</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <%
