@@ -20,6 +20,9 @@ public class Cliente extends Usuario implements Serializable{
     
     @OneToOne
     private Favoritos fav;
+    
+    @OneToOne
+    private Suscripcion suscripcion;
 
     public Cliente(dataUsuario usuario) {
         super(usuario);
