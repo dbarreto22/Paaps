@@ -33,7 +33,6 @@ tipo de suscripción contratada (semanal, mensual o anual).
     
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
-    private String path;
     private IControlador crl;
     
     public SuscripcionJInternalFrame() {
@@ -153,7 +152,7 @@ tipo de suscripción contratada (semanal, mensual o anual).
         String nick = this.jComboBoxNickname.getSelectedItem().toString();
         String suscrip = this.jComboBoxEstadoSuscripcion.getSelectedItem().toString();
         
-        crl.modificarSuscripcion(nick, suscrip);
+        this.crl.modificarSuscripcion(nick, suscrip);
        
         JOptionPane.showMessageDialog(this, "Suscripción con éxito", "Modificar Suscripción", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonCambiarEstadoSuscActionPerformed

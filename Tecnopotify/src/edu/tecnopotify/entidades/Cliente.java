@@ -27,6 +27,7 @@ public class Cliente extends Usuario implements Serializable{
     public Cliente(dataUsuario usuario) {
         super(usuario);
         fav=null;
+        this.suscripcion = null;
         //fav=new Favoritos();//Aca la cague
     }
 
@@ -35,6 +36,7 @@ public class Cliente extends Usuario implements Serializable{
     }
     
     public void setSuscripcion(String tipoSuscrip) {
+        this.suscripcion = new Suscripcion();
         this.suscripcion.setStatus(tipoSuscrip);
     }
 
@@ -45,9 +47,6 @@ public class Cliente extends Usuario implements Serializable{
     public void setListasReprParticular(List<ListaParticular> listasReprParticular) {
         this.listasReprParticular = listasReprParticular;
     }
-
-
-
 
     /*    public List<Usuario> getSeguidos() {
     return seguidos;
