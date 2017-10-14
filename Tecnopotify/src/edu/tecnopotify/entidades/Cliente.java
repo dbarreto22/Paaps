@@ -33,6 +33,10 @@ public class Cliente extends Usuario implements Serializable{
     public Cliente() {
         super();
     }
+    
+    public void setSuscripcion(String tipoSuscrip) {
+        this.suscripcion.setStatus(tipoSuscrip);
+    }
 
     public List<ListaParticular> getListasReprParticular() {
         return listasReprParticular;

@@ -143,6 +143,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }   
+    private void modificarSuscripcionJInternalFrame() {
+        SuscripcionJInternalFrame frame = new SuscripcionJInternalFrame();
+        frame.setVisible(true);
+        this.Desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void publicarListaReproduccionJInternalFrame() {
@@ -231,6 +241,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuConsultarArtista = new javax.swing.JMenuItem();
         SeguirUsuario2 = new javax.swing.JMenuItem();
         DejarSeguir2 = new javax.swing.JMenuItem();
+        jMenuModificarSuscripcion = new javax.swing.JMenuItem();
         menuGenero = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         menuFavs = new javax.swing.JMenu();
@@ -294,6 +305,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         menuUuarios.add(DejarSeguir2);
+
+        jMenuModificarSuscripcion.setText("Modificar suscripción");
+        jMenuModificarSuscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuModificarSuscripcionActionPerformed(evt);
+            }
+        });
+        menuUuarios.add(jMenuModificarSuscripcion);
 
         jMenu3.add(menuUuarios);
 
@@ -480,6 +499,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cratedejarSeguirUsuario();
     }//GEN-LAST:event_DejarSeguir2ActionPerformed
 
+    private void jMenuModificarSuscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuModificarSuscripcionActionPerformed
+        // TODO add your handling code here:
+        modificarSuscripcionJInternalFrame();
+    }//GEN-LAST:event_jMenuModificarSuscripcionActionPerformed
+
         /**
          * @param args the command line arguments
          */
@@ -533,6 +557,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuConsutlarListaRep;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuModificarSuscripcion;
     private javax.swing.JMenuItem jMenuPublicarLista;
     private javax.swing.JMenu menuFavs;
     private javax.swing.JMenu menuGenero;

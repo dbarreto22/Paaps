@@ -75,6 +75,11 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void modificarSuscripcion(String nickname, String estadoSuscripcion){
+        Cliente cli= seleccionarCliente(nickname);
+        cli.setSuscripcion(estadoSuscripcion);
+    }
 
     public void altaTema(dataTemas tema, String album) {
         ExtJpaAlbum crlAlbum = new ExtJpaAlbum(fact);

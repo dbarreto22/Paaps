@@ -26,11 +26,11 @@ renovar la suscripción en el momento de su vencimiento.
 @Entity
 public class Suscripcion implements Serializable {
 
-    private enum estado {
+    public enum estado {
         PENDIENTE, VENCIDA, VIGENTE, CANCELADA
     }  
     
-    private enum pago {
+    public enum pago {
         SUSCRIPCION_PENDIENTE, SEMANAL, MENSUAL, ANUAL
     }
     @Id
@@ -77,8 +77,16 @@ public class Suscripcion implements Serializable {
         this.f_vence = f_vence;
     }
 
-    public void setStatus(estado status) {
-        this.status = status;
+    public void setStatus(String est) {
+        if (est.equals("PENDIENTE")){
+            status = estado.PENDIENTE;
+        } else if (est.equals("VENCIDA")){
+            status = estado.VENCIDA;
+        } else if (est.equals("VIGENTE")){
+            status = estado.VIGENTE;
+        } else if (est.equals("CANCELADA")){
+            status = estado.CANCELADA;
+        }
     }
 
     public pago getCuota() {
