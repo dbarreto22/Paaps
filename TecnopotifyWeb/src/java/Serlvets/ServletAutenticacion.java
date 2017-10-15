@@ -40,19 +40,23 @@ public class ServletAutenticacion extends HttpServlet {
         crl.cargarDatos();
 
         String comando = request.getParameter("comando");
-
+        Usuario usr;
         if ((comando != null) && (comando.equals("login"))) {
             //obtener parametros y autenticar
             String user = request.getParameter("user");
             String pass = request.getParameter("pass");
+            String a = "@";
             
-           Usuario usr = crl.getUsuario(user);
-
-            System.out.println("Intentando loguear con " + user + " y el pass " + pass);
+            
+            if(user.contains(a)){
+                usr = crl.buscarUsrMail(user);
+            }else{
+                 usr = crl.getUsuario(user);
+            }
 
             //consultar a la logica
             if (pass.equals(usr.getContrasenia())) {
-                request.getSession().setAttribute("user", usr.getNombre());
+                request.getSession().setAttribute("user", usr.getNickname());
                 request.getRequestDispatcher("/ppal.jsp").forward(request, response);
             } else {
                 request.setAttribute("error", "Usuario o contraseña incorrecto.");

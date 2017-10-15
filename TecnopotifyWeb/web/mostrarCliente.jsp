@@ -4,6 +4,13 @@
     Author     : diego-lucia
 --%>
 
+<%@page import="edu.tecnopotify.entidades.Artista"%>
+<%@page import="java.awt.PageAttributes.MediaType"%>
+<%@page import="edu.tecnopotify.entidades.Cliente"%>
+<%@page import="java.lang.String"%>
+<%@page import="edu.tecnopotify.fabrica.Fabrica"%>
+<%@page import="edu.tecnopotify.interfaces.IControlador"%>
+<%@page import="edu.tecnopotify.entidades.Usuario"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,49 +23,54 @@
     </head>
     <body>
         <jsp:include page="/templates/header.jsp" />
+        <div class="container">
+            <h1>Datos Cliente</h1>
+        </div>
 
-        <h1>Datos Cliente</h1>
 
-        <form action="<%= request.getContextPath()%>/mostrarArtista">
-            <input type="hidden"  name="comando" value="mostrarArtista" />
+        <%-- <input type="hidden"  name="comando" value="mostrarCliente.jsp" />--%>
+        <div class="container">
+            <%
+                IControlador crl;
+                Fabrica fabrica = Fabrica.getInstance();
+                crl = fabrica.getInstancia();
+                String nick = (String) request.getSession().getAttribute("user");
+                //String nick = (String) session.getAttribute("user");
+                Usuario usr = crl.getUsuario(nick);
+                String nombre = usr.getNombre();
+                String apellido = usr.getApellido();
+                int dia = usr.getF_nac().getDia();
+                int mes = usr.getF_nac().getMes();
+                int anio = usr.getF_nac().getAnio();
+                String mail = usr.getMail();
+               
+
+            %>
             <div class="container">
-                Elija Nickname: <br>
-                <select name="seleccion">
-                    <%
-                        ArrayList<String> op = (ArrayList<String>) request.getAttribute("combo");
-                        Iterator<String> it = op.iterator();
-                        while (it.hasNext()) {
-//                            out.print("<option value =\"" + o + "\"</option>");
-                    %>
-                    <option  value ="<%= it.next() %>"></option>          
-                    <%
-                        }
-                    %>
-                    <input type="combobox" name="combo" /><br>
-                </select>
-                <input type="submit" value="Enviar" />
-                Nombre:
-                <input type="text" name="nombre" /> <br>
-                Apellido:
-                <input type="text" name="apellido" /> <br>
-                Fecha de Nacimiento:<br>
-                Dia 
-                <input type="number" name="dia" />
-                Mes
-                <input type="number" name="mes" />
-                Año
-                <input type="number" name="anio" /> <br>
-                Imagen:
-                <input type="button" name="imagen" /> <br>
-                Biografia:
-                <input type="text" name="biografia" /> <br>
-                Link:
-                <input type="text" name="link" /> <br>
+
+                <h3>Nombre: </h3>
+                <input type="text"  value =<%= nombre%> /> <br/>
+                <h3>Apellido: </h3>
+                <input type="text" name="apellido" value =<%= apellido%> /> <br/>
+                <h3>Fecha de Nacimiento: </h3> <br/>
+                <input type="text" name="dia" value =<%= dia%> />
+                /
+                <input type="text" name="mes" value =<%= mes%> />
+                /
+                <input type="text" name="anio" value =<%= anio%> /> <br/>
+                <h3>Mail:</h3>
+                <input type="text" name="mail" value =<%= mail%> /> <br/>
+                <h3>Imagen:</h3>
+                <div class="container" style="margin-top: 60px">
+                    <img 
+                        src="<%= request.getContextPath() + "/imagenes/" + request.getAttribute("imagen")%>" />
+
+                </div> 
             </div>
-        </form> 
 
 
 
-        <jsp:include page="/templates/scripts.jsp" />
+
+            <jsp:include page="/templates/scripts.jsp" />
     </body>
 </html>

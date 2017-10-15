@@ -10,20 +10,29 @@ import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.Temas;
 import edu.tecnopotify.entidades.Usuario;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 /**
  *
  * @author diego-lucia
  */
-public class ExtUsuario extends UsuarioJpaController{
-    
+public class ExtUsuario extends UsuarioJpaController {
+
     public ExtUsuario(EntityManagerFactory emf) {
         super(emf);
     }
-    public void agregarSeguidor(Usuario usr, Cliente cli) throws PreexistingEntityException{
+
+    public void agregarSeguidor(Usuario usr, Cliente cli) throws PreexistingEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -34,17 +43,16 @@ public class ExtUsuario extends UsuarioJpaController{
             em.merge(cli);
             em.getTransaction().commit();
         } catch (Exception e) {
-            throw new PreexistingEntityException("seguidor " + usr.getNombre() + cli.getNombre()  + " no se pudo agregar hijo.", e);
-            
-        }
-        finally {
+            throw new PreexistingEntityException("seguidor " + usr.getNombre() + cli.getNombre() + " no se pudo agregar hijo.", e);
+
+        } finally {
             if (em != null) {
                 em.close();
             }
         }
-    }   
-    
-        public void quitarSeguidor(Usuario usr, Cliente cli) throws PreexistingEntityException{
+    }
+
+    public void quitarSeguidor(Usuario usr, Cliente cli) throws PreexistingEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -55,14 +63,40 @@ public class ExtUsuario extends UsuarioJpaController{
             em.merge(cli);
             em.getTransaction().commit();
         } catch (Exception e) {
-            throw new PreexistingEntityException("seguidor " + usr.getNombre() + cli.getNombre()  + " no se pudo agregar hijo.", e);
-            
-        }
-        finally {
+            throw new PreexistingEntityException("seguidor " + usr.getNombre() + cli.getNombre() + " no se pudo agregar hijo.", e);
+
+        } finally {
             if (em != null) {
                 em.close();
             }
         }
-    } 
-    
+    }
+
+    public Usuario buscarUsrMail(String mail) throws PreexistingEntityException, SQLException {
+        EntityManager em = null;
+        em = getEntityManager();
+        Usuario usr = null;
+        ResultSet resultado;
+        // String id = "SELECT NICKNAME FROM PUBLIC.USUARIO "  + "where mail = "+"' mail'"+",";
+        try {
+            Query q = em.createNamedQuery("usuario.mail");
+            q.setParameter("mail", mail);
+            usr = (Usuario) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+        return usr;
+
+    }
+
+    private Usuario queryForEmployee(String mail) {
+        System.out.println("QUERY FOR " + mail);
+        EntityManager em = null;
+        em = getEntityManager();
+        Query query =em.createQuery("Select nickname from public.usuario u  where a.name = :name");
+        query.setParameter("mail", mail);
+        Usuario u = (Usuario) query.getSingleResult();
+        System.out.println("Result : " + u.getMail());
+        return u;
+    }
 }
