@@ -16,6 +16,10 @@
         <servlet-name>ServletAutenticar</servlet-name>
         <servlet-class>Serlvets.ServletAutenticacion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletSeguirUsuario</servlet-name>
+        <servlet-class>Serlvets.ServletSeguirUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsr</servlet-name>
         <url-pattern>/usuarios</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ServletAutenticar</servlet-name>
         <url-pattern>/autenticar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletSeguirUsuario</servlet-name>
+        <url-pattern>/ServletSeguirUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

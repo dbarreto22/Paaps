@@ -61,6 +61,7 @@ public class Controlador implements IControlador {
         Cliente cli = new Cliente(usuario);
         Suscripcion sus = new Suscripcion();
         cli.setSuscripcion(sus);   
+        //sus.setSuscripto(cli);
         SuscripcionJpaController1 suscrl = new SuscripcionJpaController1(fact);
         suscrl.create(sus);
         ClienteJpaController ctrCl = new ClienteJpaController(fact);
