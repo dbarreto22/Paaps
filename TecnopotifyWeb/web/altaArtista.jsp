@@ -18,7 +18,7 @@
             <h1>Alta Artista</h1>
         </DIV>
 
-        <form action="<%= request.getContextPath()%>/altaArtista"  METHOD = "post" onsubmit="return validarDatos()">
+        <form action="<%= request.getContextPath()%>/altaArtista.jsp" METHOD = "post" onsubmit="return validarDatos()" enctype = "multipart/form-data">
             <input type="hidden"  name="comando" value="altaArtista" />
             <div class="container">
             Nickname:
@@ -38,8 +38,17 @@
             <input type="number" name="mes" />
             Año
             <input type="number" name="anio" /> <br>
-            Elija Imagen:
-            <input type="button" name="imagen" /> <br>
+           <div class="form-group">
+                        <label for="imgFile" class="col-sm-2 control-label">Imagen</label>
+                        <div class="col-sm-10">
+                            <input type="file" id="imgFile" name="fimg" accept="image/*" />
+                            <p class="help-block">Subir cualquier tipo de imagenes.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                        </div>
+                    </div>
             Ingrese Biografia:
             <input type="text" name="biografia" /> <br>
             Ingrese Link:

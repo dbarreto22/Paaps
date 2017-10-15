@@ -39,6 +39,7 @@ import static edu.tecnopotify.entidades.ListaDefecto_.genero;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.Suscripcion;
 import edu.tecnopotify.entidades.Temas;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -509,6 +510,24 @@ public class Controlador implements IControlador {
         return ctrl.findListaReproduccionEntities();
     }
 
+    public Usuario buscarUsrMail(String mail) {
+        String nick = null;
+        Usuario c = null;
+        Usuario aux;
+        List<Usuario> usuarios = listarUsuarios();
+        Iterator<Usuario> it = usuarios.iterator();
+        while(it.hasNext()){
+            c = it.next();
+            if(c.getMail().equals(mail)){
+                nick= c.getNickname();
+            }
+        }
+        
+        return aux = this.getUsuario(nick);
+    }
+
+
+
     public void cargarDatos() {
 
         dataFecha fecha = new dataFecha(1, 1, 1980);
@@ -532,6 +551,8 @@ public class Controlador implements IControlador {
         Genero G1 = new Genero(g1);
         Genero G2 = new Genero(g2);
         Genero G3 = new Genero(g3);
+        
+        
 
         altaGenero(g1);
         altaGenero(g2);

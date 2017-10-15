@@ -15,9 +15,9 @@
                 <h2 class="form-signin-heading">Iniciar sesión</h2>
              
 
-                <label for="fuser" class="sr-only">Usuario</label>
+                <label for="fuser" class="sr-only">NickName</label>
                 <input type="text" id="fuser" class="form-control" 
-                       placeholder="Usuario" required autofocus name="user">
+                       placeholder="NickName o Email" required autofocus name="user">
                 <label for="fpass" class="sr-only">Contraseña</label>
                 <input type="password" id="fpass" class="form-control" 
                        placeholder="Contraseña" required name="pass">

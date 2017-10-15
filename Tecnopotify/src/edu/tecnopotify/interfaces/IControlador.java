@@ -103,6 +103,8 @@ public interface IControlador {
     public void cargarDatos();
     
     public Usuario getUsuario(String nickname);
+    
+    public Usuario buscarUsrMail(String mail);
 
 }
 

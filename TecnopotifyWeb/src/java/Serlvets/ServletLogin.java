@@ -5,6 +5,9 @@
  */
 package Serlvets;
 
+import edu.tecnopotify.entidades.Usuario;
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -26,34 +29,37 @@ public class ServletLogin extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     *
+     *
      */
+    private IControlador crl;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+
         String comando = request.getParameter("comando");
-        
-        if((comando != null)&&(comando.equals("login"))){
+
+        if ((comando != null) && (comando.equals("login"))) {
             //obtener parametros y autenticar
             String user = request.getParameter("user");
-            String pass = request.getParameter("pass"); 
-            
-            System.out.println("Intentando loguear con " + user + " y el pass " + pass );
-            
+            String pass = request.getParameter("pass");
+            Usuario usr = crl.getUsuario(user);
+
             //consultar a la logica
-            if(user.equals(pass)){
-                request.getSession().setAttribute("user", user);
+            if (pass.equals(usr.getContrasenia())) {
+                request.getSession().setAttribute("user", usr.getNickname());
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
-            }else{
+            } else {
                 request.setAttribute("error", "Usuario o contraseña incorrecto.");
                 request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
-        }
-        else if ((comando != null)&&(comando.equals("logout"))){
+        } else if ((comando != null) && (comando.equals("logout"))) {
             request.getSession().invalidate();
             request.getRequestDispatcher("/").forward(request, response);
-        }
-        else{
+        } else {
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
