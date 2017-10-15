@@ -370,7 +370,10 @@ public class Controlador implements IControlador {
             Usuario u = usrCtrl.findUsuario(nickUsr);
             //c.removeFromSeguidos(u);
             usr.quitarSeguidor(u, c);
+            usrCtrl.edit(c);
         } catch (PreexistingEntityException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
 

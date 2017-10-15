@@ -38,7 +38,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletSeguirUsuario</servlet-name>
-        <url-pattern>/ServletSeguirUsuario</url-pattern>
+        <url-pattern>/seguirUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -13,7 +13,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<%= request.getContextPath()%>">Home</a></li>
+                <li><a href="<%= request.getContextPath()%>">Home</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -21,8 +21,7 @@
                         <li><a href="<%= request.getContextPath()%>/altaArtista.jsp">Crear Artista</a></li>
                         <li><a href="<%= request.getContextPath()%>/mostrarCliente.jsp">Mostrar datos de Cliente</a></li>
                         <li><a href="<%= request.getContextPath()%>/mostrarArtista.jsp">Mostrar datos de Artista</a></li>
-                        <li><a href="<%= request.getContextPath()%>/seguirUsuario.jsp">Seguir Usuario</a></li>
-                        <li><a href="<%= request.getContextPath()%>/dejarDeSeguirUsuario.jsp">Dejar de Seguir Usuario</a></li>
+                        <li><a href="<%= request.getContextPath()%>/seguirUsuario.jsp">Seguir/Dejar de seguir Usuario</a></li>
                     </ul>
                 </li>
                 <li class="Album">
