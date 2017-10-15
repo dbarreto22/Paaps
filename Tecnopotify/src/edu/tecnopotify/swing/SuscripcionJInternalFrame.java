@@ -48,6 +48,7 @@ tipo de suscripción contratada (semanal, mensual o anual).
         initComponents();
 
         rellenarElCoso();
+        
         this.jComboBoxEstadoSuscripcion.addItem("PENDIENTE");
         this.jComboBoxEstadoSuscripcion.addItem("VENCIDA");
         this.jComboBoxEstadoSuscripcion.addItem("VIGENTE");
@@ -153,7 +154,7 @@ tipo de suscripción contratada (semanal, mensual o anual).
         String suscrip = this.jComboBoxEstadoSuscripcion.getSelectedItem().toString();
         
         this.crl.modificarSuscripcion(nick, suscrip);
-       
+        
         JOptionPane.showMessageDialog(this, "Suscripción con éxito", "Modificar Suscripción", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonCambiarEstadoSuscActionPerformed
 

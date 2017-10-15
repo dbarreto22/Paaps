@@ -13,6 +13,7 @@ import edu.tecnopotify.controladores.GeneroJpaController;
 import edu.tecnopotify.controladores.ListaDefectoJpaController;
 import edu.tecnopotify.controladores.ListaParticularJpaController;
 import edu.tecnopotify.controladores.ListaReproduccionJpaController;
+import edu.tecnopotify.controladores.SuscripcionJpaController1;
 import edu.tecnopotify.controladores.TemasJpaController;
 import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.entidades.ListaReproduccion;
@@ -36,6 +37,7 @@ import edu.tecnopotify.entidades.Favoritos;
 import edu.tecnopotify.entidades.ListaDefecto;
 import static edu.tecnopotify.entidades.ListaDefecto_.genero;
 import edu.tecnopotify.entidades.ListaParticular;
+import edu.tecnopotify.entidades.Suscripcion;
 import edu.tecnopotify.entidades.Temas;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,10 +58,14 @@ public class Controlador implements IControlador {
     }
 
     public void crearCliente(dataUsuario usuario) {
-        Usuario U = new Cliente(usuario);
+        Cliente cli = new Cliente(usuario);
+        Suscripcion sus = new Suscripcion();
+        cli.setSuscripcion(sus);   
+        SuscripcionJpaController1 suscrl = new SuscripcionJpaController1(fact);
+        suscrl.create(sus);
         ClienteJpaController ctrCl = new ClienteJpaController(fact);
         try {
-            ctrCl.create((Cliente) U);
+            ctrCl.create(cli);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,8 +83,22 @@ public class Controlador implements IControlador {
     }
     
     public void modificarSuscripcion(String nickname, String estadoSuscripcion){
-        Cliente cli= seleccionarCliente(nickname);
-        cli.setSuscripcion(estadoSuscripcion);
+        //Cliente cli= seleccionarCliente(nickname);
+        SuscripcionJpaController1 suscrl= new SuscripcionJpaController1(fact);
+        ClienteJpaController ctrCl = new ClienteJpaController(fact); 
+        Cliente c = ctrCl.findCliente(nickname);
+        Suscripcion sus = c.getSuscripcion();
+        sus.setStatus(estadoSuscripcion);
+        try {
+            suscrl.edit(sus);
+        } catch (Exception ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ctrCl.edit(c);
+        } catch (Exception ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void altaTema(dataTemas tema, String album) {
