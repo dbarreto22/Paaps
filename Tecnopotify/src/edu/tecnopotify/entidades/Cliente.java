@@ -1,5 +1,6 @@
 package edu.tecnopotify.entidades;
 
+import edu.tecnopotify.controladores.SuscripcionJpaController1;
 import edu.tecnopotify.datatypes.dataCliente;
 import edu.tecnopotify.datatypes.dataUsuario;
 import java.io.Serializable;
@@ -20,15 +21,28 @@ public class Cliente extends Usuario implements Serializable{
     
     @OneToOne
     private Favoritos fav;
+    
+    @OneToOne
+    private Suscripcion suscripcion;
 
     public Cliente(dataUsuario usuario) {
         super(usuario);
         fav=null;
+        suscripcion = null;
+//this.suscripcion = new Suscripcion();
         //fav=new Favoritos();//Aca la cague
     }
 
     public Cliente() {
         super();
+    }
+    
+    public void setSuscripcion(Suscripcion susc) {
+        this.suscripcion = susc;
+    }
+    
+    public Suscripcion getSuscripcion(){
+        return this.suscripcion;
     }
 
     public List<ListaParticular> getListasReprParticular() {
@@ -38,9 +52,6 @@ public class Cliente extends Usuario implements Serializable{
     public void setListasReprParticular(List<ListaParticular> listasReprParticular) {
         this.listasReprParticular = listasReprParticular;
     }
-
-
-
 
     /*    public List<Usuario> getSeguidos() {
     return seguidos;

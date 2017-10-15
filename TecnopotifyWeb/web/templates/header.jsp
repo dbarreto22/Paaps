@@ -21,6 +21,8 @@
                         <li><a href="<%= request.getContextPath()%>/altaArtista.jsp">Crear Artista</a></li>
                         <li><a href="<%= request.getContextPath()%>/mostrarCliente.jsp">Mostrar datos de Cliente</a></li>
                         <li><a href="<%= request.getContextPath()%>/mostrarArtista.jsp">Mostrar datos de Artista</a></li>
+                        <li><a href="<%= request.getContextPath()%>/seguirUsuario.jsp">Seguir Usuario</a></li>
+                        <li><a href="<%= request.getContextPath()%>/dejarDeSeguirUsuario.jsp">Dejar de Seguir Usuario</a></li>
                     </ul>
                 </li>
                 <li class="Album">

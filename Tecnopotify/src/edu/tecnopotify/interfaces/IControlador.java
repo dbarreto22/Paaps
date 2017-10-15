@@ -30,6 +30,8 @@ public interface IControlador {
 
     public void altaGenero(dataGenero genero);
 
+    public void modificarSuscripcion(String nickname, String estadoSuscripcion);
+            
     public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum);
 
     public void altaTema(dataTemas tema, String album);
