@@ -48,6 +48,7 @@ public class ServletSeguirUsuario extends HttpServlet {
                 crl.seguirUsuario(nickUsr, usrSeguido);
             }
         }
+        request.getRequestDispatcher("/ppal.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
