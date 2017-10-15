@@ -49,11 +49,7 @@
             <!-- Main component for a primary marketing message or call to action -->
             <div class="jumbotron">
                 <h1>Tecnopotify</h1>
-                <h3><p>Bienvenidos a la Aplicacion creada por Carlos, Melany y Diego.</p></h3>
-                <p>To see the difference between static and fixed top navbars, just scroll.</p>
-                <p>
-                    <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-                </p>
+                <h3><p>Bienvenidos a la Aplicacion creada por Carlos, Melany y Diego <br/>para la tarea de Programación de Aplicaciones.</p></h3>
             </div>
 
         </div> <!-- /container -->

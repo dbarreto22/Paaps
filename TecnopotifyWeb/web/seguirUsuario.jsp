@@ -12,18 +12,17 @@
         <title>Seguir Usuario</title>
     </head>
     <body>
-        <form action="<%= request.getContextPath()%>/seguirUsuario?comando=seguirUsuario"
-          method="post" enctype = "multipart/form-data">
         <div class ="container">
-            <label for="male"><%=request.getSession().getAttribute("user")%></label> <br>
-            <input type="hidden"  name="usr" 
-                   value="<%=request.getSession().getAttribute("user")%>" />
-            <input type="hidden"  name="comando" value="seguirUsuario" />
-            <input type="text" name="usrASeguir" /><br>
-            <input type="submit" value="Enviar" />
-            <input>
+            <form action="<%= request.getContextPath()%>/seguirUsuario?comando=seguirUsuario"
+                  method="post" enctype = "multipart/form-data">
+                <label for="male"><%=request.getSession().getAttribute("user")%></label> <br>
+                <input type="hidden"  name="usr" 
+                       value="<%=request.getSession().getAttribute("user")%>" />
+                <input type="checkbox" name="Dejar de seguir" value="Si"/>Dejar de seguir usuario?<br/>
+                <input type="hidden"  name="comando" value="seguirUsuario" />
+                <input type="text" name="usrASeguir" /><br>
+                <input type="submit" value="Enviar" />
+            </form>
         </div>
-    </form>
-        
     </body>
 </html>
