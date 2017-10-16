@@ -14,11 +14,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <jsp:include page="/pages/templates/css.jsp" />        
+        <jsp:include page="templates/csss.jsp" />        
     </head>
     <body>
 
-        <jsp:include page="/pages/templates/header.jsp" />
+        <jsp:include page="templates/header.jsp" />
 
         <div class="container" style="margin-top: 60px">
 
@@ -26,7 +26,7 @@
                 src="<%= request.getContextPath() + "/imagenes/" + request.getAttribute("imagen") %>" />
 
         </div> <!-- /container -->
-        <jsp:include page="/pages/templates/script.jsp" />
+        <jsp:include page="templates/script.jsp" />
     </body>
 </html>
 

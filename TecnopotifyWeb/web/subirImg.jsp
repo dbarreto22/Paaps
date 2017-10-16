@@ -9,16 +9,16 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <jsp:include page="/pages/templates/css.jsp" />        
+        <jsp:include page="templates/csss.jsp" />        
     </head>
     <body>
 
-        <jsp:include page="/pages/templates/header.jsp" />
+        <jsp:include page="templates/header.jsp" />
 
         <div class="container" style="margin-top: 60px">
 
             <form class="form-horizontal" 
-                  action="<%= request.getContextPath() %>/imagenes"  
+                  action="<%= request.getContextPath() %>/imagenes?nickName=<%= request.getAttribute("nickName") %>"  
                   method = "post" enctype = "multipart/form-data">  
                 <div class="form-group">
                     <label for="imgFile" class="col-sm-2 control-label">Imagen</label>
@@ -37,7 +37,7 @@
             </form>
 
         </div> <!-- /container -->
-        <jsp:include page="/pages/templates/script.jsp" />
+        <jsp:include page="templates/scripts.jsp" />
     </body>
 </html>
 

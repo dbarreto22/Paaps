@@ -535,7 +535,18 @@ public Artista seleccionarArtistaPorNombre(String name) {
                 retorno=artista;
         }
         return retorno;
+        
+        
     }
+
+public void setImageCli(Cliente cli){
+    ClienteJpaController ctrCli = new ClienteJpaController(fact);
+        try {
+            ctrCli.edit(cli);
+        } catch (Exception ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+}
 
     public void cargarDatos() {
 

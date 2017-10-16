@@ -18,7 +18,7 @@
             <h1>Alta Artista</h1>
         </DIV>
 
-        <form action="<%= request.getContextPath()%>/altaArtista.jsp" METHOD = "post" onsubmit="return validarDatos()" enctype = "multipart/form-data">
+        <form action="<%= request.getContextPath()%>/usuarios" METHOD = "post" onsubmit="return validarDatos()" enctype = "multipart/form-data">
             <input type="hidden"  name="comando" value="altaArtista" />
             <div class="container">
             Nickname:

@@ -5,6 +5,9 @@
  */
 package Serlvets;
 
+import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,6 +17,7 @@ import java.net.URLDecoder;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.RequestDispatcher;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -33,6 +37,7 @@ public class Servletimagenes extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private ServletFileUpload uploader = null;
     private String fileDirStr = null;
+    private IControlador crl;
 
     @Override
     public void init() throws ServletException {
@@ -102,27 +107,34 @@ public class Servletimagenes extends HttpServlet {
         }
 
         response.setContentType("text/html");
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        Cliente cli = crl.getCli((String) request.getParameter("nickName"));
 
         try {
-            List<FileItem> fileItemsList = uploader.parseRequest(request);
+            List<FileItem> fileItemsList;
+            fileItemsList = uploader.parseRequest(request);
             Iterator<FileItem> fileItemsIterator = fileItemsList.iterator();
             while (fileItemsIterator.hasNext()) {
-                System.out.println("Archivo::");
+              //  System.out.println("Archivo::");
                 FileItem fileItem = fileItemsIterator.next();
-                System.out.println("\tNombre=" + fileItem.getFieldName());
+                /*     System.out.println("\tNombre=" + fileItem.getFieldName());
                 System.out.println("\tNombre archivo=" + fileItem.getName());
                 System.out.println("\ttipo=" + fileItem.getContentType());
-                System.out.println("\tTamanio=" + fileItem.getSize());
+                System.out.println("\tTamanio=" + fileItem.getSize());*/
                 request.setAttribute("imagen", fileItem.getName());
 
                 File file = new File(fileDirStr + File.separator + fileItem.getName());
-                System.out.println("Absolute Path at server=" + file.getAbsolutePath());
+                //System.out.println("Absolute Path at server=" + file.getAbsolutePath());
                 fileItem.write(file);
+                cli.setImagen(file.getAbsolutePath());
+                crl.setImageCli(cli);
             }
         } catch (Exception e) {
             System.out.println("Error!");
         }
-        request.getRequestDispatcher("pages/mostrarImg.jsp").forward(request, response);
+        RequestDispatcher despachador = request.getRequestDispatcher("/ppal.jsp");
+            despachador.forward(request, response);
     }
 
 }

@@ -71,52 +71,27 @@ public class ServletUsr extends HttpServlet {
 
         if (comando != null && comando.equals("AltaCliente")) {
 
-            if (!ServletFileUpload.isMultipartContent(request)) {
-                throw new ServletException("Content type is not multipart/form-data");
-            }
+            // request.getRequestDispatcher("pages/mostrarImg.jsp").forward(request, response);
+            //Procesar el formulario  
+            String nickName = request.getParameter("nickname");
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String mail = request.getParameter("mail");
+            int dia = request.getIntHeader("dia");
+            int mes = request.getIntHeader("mes");
+            int anio = request.getIntHeader("anio");
+            dataFecha fecha = new dataFecha(dia, mes, anio);
+            String contrasenia = request.getParameter("contrasenia");
+            // String img = request.getParameter("fimg");
 
-            response.setContentType("text/html");
+            dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail,
+                    fecha, contrasenia, "");
 
-            try {
-                List<FileItem> fileItemsList = uploader.parseRequest((RequestContext) request);
-                Iterator<FileItem> fileItemsIterator = fileItemsList.iterator();
-                while (fileItemsIterator.hasNext()) {
-                    // System.out.println("Archivo::");
-                    FileItem fileItem = fileItemsIterator.next();
-                    /* System.out.println("\tNombre=" + fileItem.getFieldName());
-                System.out.println("\tNombre archivo=" + fileItem.getName());
-                System.out.println("\ttipo=" + fileItem.getContentType());
-                System.out.println("\tTamanio=" + fileItem.getSize());
-                request.setAttribute("imagen", fileItem.getName());*/
+            crl.crearCliente(cli);
+            System.out.println("Servlet Usuario");
+            RequestDispatcher despachador = request.getRequestDispatcher("/ppal.jsp");
+            despachador.forward(request, response);
 
-                    File file = new File(fileDirStr + File.separator + fileItem.getName());
-                    // System.out.println("Absolute Path at server=" + file.getAbsolutePath());
-                    fileItem.write(file);
-
-                }
-
-                // request.getRequestDispatcher("pages/mostrarImg.jsp").forward(request, response);
-                //Procesar el formulario  
-                String nickName = request.getParameter("nickname");
-                String nombre = request.getParameter("nombre");
-                String apellido = request.getParameter("apellido");
-                String mail = request.getParameter("mail");
-                int dia = request.getIntHeader("dia");
-                int mes = request.getIntHeader("mes");
-                int anio = request.getIntHeader("anio");
-                dataFecha fecha = new dataFecha(dia, mes, anio);
-                String contrasenia = request.getParameter("contrasenia");
-                // String img = request.getParameter("fimg");
-
-                dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail,
-                        fecha, contrasenia, "");
-
-                crl.crearCliente(cli);
-                System.out.println("Servlet Usuario");
-
-            } catch (Exception e) {
-                System.out.println("Error!");
-            }
         }
 
         if (comando != null && comando.equals("altaArtista")) {
@@ -268,10 +243,10 @@ public class ServletUsr extends HttpServlet {
             while (fileItemsIterator.hasNext()) {
                 //System.out.println("Archivo::");
                 FileItem fileItem = fileItemsIterator.next();
-                /*  System.out.println("\tNombre=" + fileItem.getFieldName());
+                  System.out.println("\tNombre=" + fileItem.getFieldName());
             System.out.println("\tNombre archivo=" + fileItem.getName());
             System.out.println("\ttipo=" + fileItem.getContentType());
-            System.out.println("\tTamanio=" + fileItem.getSize());*/
+            System.out.println("\tTamanio=" + fileItem.getSize());
                 request.setAttribute("imagen", fileItem.getName());
 
                 File file = new File(fileDirStr + File.separator + fileItem.getName());
@@ -301,6 +276,35 @@ public class ServletUsr extends HttpServlet {
             dataUsuario art = new dataArtista(biografia, link, nickName, nombre, apellido, mail, fecha, contrasenia, imagen);
             crl.crearArtista(biografia, link, art);
         }
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+    
+
+        if (comando != null && comando.equals("AltaCliente")) {
+
+            // request.getRequestDispatcher("pages/mostrarImg.jsp").forward(request, response);
+            //Procesar el formulario  
+            String nickName = request.getParameter("nickname");
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String mail = request.getParameter("mail");
+            int dia = request.getIntHeader("dia");
+            int mes = request.getIntHeader("mes");
+            int anio = request.getIntHeader("anio");
+            dataFecha fecha = new dataFecha(dia, mes, anio);
+            String contrasenia = request.getParameter("contrasenia");
+            // String img = request.getParameter("fimg");
+
+            dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail,
+                    fecha, contrasenia, "");
+
+            crl.crearCliente(cli);
+            System.out.println("Servlet Usuario");
+            RequestDispatcher despachador = request.getRequestDispatcher("/ppal.jsp");
+            despachador.forward(request, response);
+
+        }
+        
 
     }
 

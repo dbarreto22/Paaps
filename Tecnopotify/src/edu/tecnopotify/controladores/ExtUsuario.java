@@ -86,17 +86,7 @@ public class ExtUsuario extends UsuarioJpaController {
             em.close();
         }
         return usr;
-
     }
 
-    private Usuario queryForEmployee(String mail) {
-        System.out.println("QUERY FOR " + mail);
-        EntityManager em = null;
-        em = getEntityManager();
-        Query query =em.createQuery("Select nickname from public.usuario u  where a.name = :name");
-        query.setParameter("mail", mail);
-        Usuario u = (Usuario) query.getSingleResult();
-        System.out.println("Result : " + u.getMail());
-        return u;
-    }
+
 }

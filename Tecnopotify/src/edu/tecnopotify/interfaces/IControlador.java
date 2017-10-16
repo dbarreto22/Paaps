@@ -107,5 +107,7 @@ public interface IControlador {
     public Usuario getUsuario(String nickname);
     
     public Usuario buscarUsrMail(String mail);
+    
+    public void setImageCli(Cliente cli);
 }
 

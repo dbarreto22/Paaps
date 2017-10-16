@@ -20,6 +20,14 @@
         <servlet-name>ServletSeguirUsuario</servlet-name>
         <servlet-class>Serlvets.ServletSeguirUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletCliente</servlet-name>
+        <servlet-class>Serlvets.ServletCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletImagenes</servlet-name>
+        <servlet-class>Serlvets.Servletimagenes</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsr</servlet-name>
         <url-pattern>/usuarios</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>ServletSeguirUsuario</servlet-name>
         <url-pattern>/seguirUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCliente</servlet-name>
+        <url-pattern>/cliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletImagenes</servlet-name>
+        <url-pattern>/imagenes</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
