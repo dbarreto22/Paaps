@@ -5,6 +5,9 @@
  */
 package Serlvets;
 
+import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.Suscripcion;
+import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
@@ -37,15 +40,22 @@ public class ServletSeguirUsuario extends HttpServlet {
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         String comando = request.getParameter("comando");
-
-        if (comando != null && comando.equals("seguirUsuario")){
-            String nickUsr = request.getParameter("user");
-            String usrSeguido = request.getParameter("usrASeguir");
-            boolean dejarSeguir = (!"Si".equals(request.getParameter("Dejar de seguir")));
-            if (dejarSeguir) {
-                crl.dejarDeSeguirUsuario(nickUsr, usrSeguido);
-            } else {
-                crl.seguirUsuario(nickUsr, usrSeguido);
+        String nickUsr = (String) request.getSession().getAttribute("user");
+        
+        Suscripcion suscr = new Suscripcion();
+        suscr.setStatus("VIGENTE");
+        Usuario cl = crl.getUsuario(nickUsr);
+        if ((Cliente) cl != null) {
+            Cliente cliente = (Cliente) cl;
+            cliente.setSuscripcion(suscr);
+            if (comando != null && comando.equals("seguirUsuario") && (cliente.getSuscripcion().status == suscr.getStatus())) {
+                String usrSeguido = request.getParameter("usrASeguir");
+                boolean dejarSeguir = (!"Si".equals(request.getParameter("Dejar de seguir").toString()));
+                if (dejarSeguir) {
+                    crl.dejarDeSeguirUsuario(nickUsr, usrSeguido);
+                } else {
+                    crl.seguirUsuario(nickUsr, usrSeguido);
+                }
             }
         }
         request.getRequestDispatcher("/ppal.jsp").forward(request, response);
