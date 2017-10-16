@@ -47,6 +47,8 @@ public interface IControlador {
 
     public Artista seleccionarArtista(String nombreArtista);//
 
+    public Artista seleccionarArtistaPorNombre(String name);
+
     public Cliente seleccionarCliente(String nickname);
 
     public void eliminarFavorito(boolean tema, boolean lista, boolean album, String nickCliente, String idElemento);
@@ -105,6 +107,5 @@ public interface IControlador {
     public Usuario getUsuario(String nickname);
     
     public Usuario buscarUsrMail(String mail);
-
 }
 

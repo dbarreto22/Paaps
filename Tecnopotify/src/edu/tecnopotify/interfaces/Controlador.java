@@ -526,7 +526,16 @@ public class Controlador implements IControlador {
         return aux = this.getUsuario(nick);
     }
 
-
+public Artista seleccionarArtistaPorNombre(String name) {
+        ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
+        List<Artista> aux = ctrArtista.findArtistaEntities();
+        Artista retorno=null;
+        for(Artista artista : aux){
+            if(artista.getNombre().equals(name))
+                retorno=artista;
+        }
+        return retorno;
+    }
 
     public void cargarDatos() {
 
