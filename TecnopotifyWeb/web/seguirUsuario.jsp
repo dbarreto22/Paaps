@@ -13,11 +13,14 @@
     </head>
     <body>
         <div class ="container">
+            <input type="hidden"  name="usr" 
+                       value="<%=request.getSession().getAttribute("user")%>" />
+            <!-- Para seguir usuarios el cliente debe tener una suscripción vigente. -->
+            <h2>Seguir o dejar de seguir usuario</h2>
             <form action="<%= request.getContextPath()%>/seguirUsuario?comando=seguirUsuario"
                   method="post" enctype = "multipart/form-data">
-                <label for="male"><%=request.getSession().getAttribute("user")%></label> <br>
-                <input type="hidden"  name="usr" 
-                       value="<%=request.getSession().getAttribute("user")%>" />
+                <label for="male">Usuario en línea: <%=request.getSession().getAttribute("user")%></label> <br>
+                
                 <input type="checkbox" name="Dejar de seguir" value="Si"/>Dejar de seguir usuario?<br/>
                 <input type="hidden"  name="comando" value="seguirUsuario" />
                 <input type="text" name="usrASeguir" /><br>
