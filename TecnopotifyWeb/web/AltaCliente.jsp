@@ -22,8 +22,8 @@
             <h1>Alta Cliente</h1>
         </div>
 
-        <form action="/Tecnopotify/cliente?comando=altaCliente" method = "post" 
-             onsubmit="return validarDatos()" >
+        <form action="/Tecnopotify/usuarios?comando=altaCliente" method = "post" 
+              onsubmit="return validarDatos()" >
             <input type="hidden"  name="comando" value="AltaCliente" />
             <div class="container">
                 <label>Nickname: </label>
@@ -38,15 +38,17 @@
                 <input type="text" name="apellido" /> <br />
                 Ingrese Fecha de Nacimiento:<br />
                 Dia 
-                <input type="number" name="dia" />
+                <input type="number" name="dia" min="0" max ="30" />
                 Mes
-                <input type="number" name="mes" />
+                <input type="month" name="mes" />
                 Año
-                <input type="number" name="anio" /> <br />  
+                <input type="number" name="anio"  min="1920" max ="2007"/> <br />  
+                Mail
+                <input type ="email" name ="mail " /> <br/>
                 <input type="submit" value="Enviar" />
             </div>
         </form> 
-            
+
 
         <jsp:include page="/templates/scripts.jsp" />
     </body>

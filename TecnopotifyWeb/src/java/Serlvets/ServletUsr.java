@@ -69,49 +69,6 @@ public class ServletUsr extends HttpServlet {
         crl.cargarDatos();
         String comando = request.getParameter("comando");
 
-        if (comando != null && comando.equals("AltaCliente")) {
-
-            // request.getRequestDispatcher("pages/mostrarImg.jsp").forward(request, response);
-            //Procesar el formulario  
-            String nickName = request.getParameter("nickname");
-            String nombre = request.getParameter("nombre");
-            String apellido = request.getParameter("apellido");
-            String mail = request.getParameter("mail");
-            int dia = request.getIntHeader("dia");
-            int mes = request.getIntHeader("mes");
-            int anio = request.getIntHeader("anio");
-            dataFecha fecha = new dataFecha(dia, mes, anio);
-            String contrasenia = request.getParameter("contrasenia");
-            // String img = request.getParameter("fimg");
-
-            dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail,
-                    fecha, contrasenia, "");
-
-            crl.crearCliente(cli);
-            System.out.println("Servlet Usuario");
-            RequestDispatcher despachador = request.getRequestDispatcher("/ppal.jsp");
-            despachador.forward(request, response);
-
-        }
-
-        if (comando != null && comando.equals("altaArtista")) {
-            //Procesar el formulario  
-            String nickName = request.getParameter("nickname");
-            String nombre = request.getParameter("nombre");
-            String apellido = request.getParameter("apellido");
-            String mail = request.getParameter("mail");
-            int dia = request.getIntHeader("dia");
-            int mes = request.getIntHeader("mes");
-            int anio = request.getIntHeader("anio");
-            dataFecha fecha = new dataFecha(dia, mes, anio);
-            String contrasenia = request.getParameter("contrasenia");
-            String imagen = "";
-            String biografia = request.getParameter("biografia");
-            String link = request.getParameter("link");
-            dataUsuario art = new dataArtista(biografia, link, nickName, nombre, apellido, mail, fecha, contrasenia, imagen);
-            crl.crearArtista(biografia, link, art);
-        }
-
         String nick = (String) request.getSession().getAttribute("user");
         Usuario usr = crl.getUsuario(nick);
 
@@ -230,35 +187,37 @@ public class ServletUsr extends HttpServlet {
         System.out.println("Archivo descargado correctamente");*/
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (!ServletFileUpload.isMultipartContent(request)) {
-            throw new ServletException("Content type is not multipart/form-data");
-        }
 
         response.setContentType("text/html");
 
-        try {
-            List<FileItem> fileItemsList = uploader.parseRequest((RequestContext) request);
-            Iterator<FileItem> fileItemsIterator = fileItemsList.iterator();
-            while (fileItemsIterator.hasNext()) {
-                //System.out.println("Archivo::");
-                FileItem fileItem = fileItemsIterator.next();
-                  System.out.println("\tNombre=" + fileItem.getFieldName());
-            System.out.println("\tNombre archivo=" + fileItem.getName());
-            System.out.println("\ttipo=" + fileItem.getContentType());
-            System.out.println("\tTamanio=" + fileItem.getSize());
-                request.setAttribute("imagen", fileItem.getName());
 
-                File file = new File(fileDirStr + File.separator + fileItem.getName());
-                System.out.println("Absolute Path at server=" + file.getAbsolutePath());
-                fileItem.write(file);
-            }
-        } catch (Exception e) {
-            System.out.println("Error!");
-        }
-        request.getRequestDispatcher("pages/mostrarImg.jsp").forward(request, response);
         String comando = request.getParameter("comando");
 
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        if (comando != null && comando.equals("altaCliente")) {          
+           //Procesar el formulario  
+            String nickName = request.getParameter("nickname");
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String mail = request.getParameter("mail");
+            int dia = request.getIntHeader("dia");
+            int mes = request.getIntHeader("mes");
+            int anio = request.getIntHeader("anio");
+            dataFecha fecha = new dataFecha(dia, mes, anio);
+            String contrasenia = request.getParameter("contrasenia");
+            dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail,
+                    fecha, contrasenia, "");
+
+            crl.crearCliente(cli);
+            request.setAttribute("nickName",nickName);
+            
+            RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
+            despachador.forward(request, response);
+        }
+        
         if (comando != null && comando.equals("altaArtista")) {
             //Procesar el formulario  
             String nickName = request.getParameter("nickname");
@@ -275,46 +234,29 @@ public class ServletUsr extends HttpServlet {
             String link = request.getParameter("link");
             dataUsuario art = new dataArtista(biografia, link, nickName, nombre, apellido, mail, fecha, contrasenia, imagen);
             crl.crearArtista(biografia, link, art);
-        }
-        Fabrica fabrica = Fabrica.getInstance();
-        crl = fabrica.getInstancia();
-    
-
-        if (comando != null && comando.equals("AltaCliente")) {
-
-            // request.getRequestDispatcher("pages/mostrarImg.jsp").forward(request, response);
-            //Procesar el formulario  
-            String nickName = request.getParameter("nickname");
-            String nombre = request.getParameter("nombre");
-            String apellido = request.getParameter("apellido");
-            String mail = request.getParameter("mail");
-            int dia = request.getIntHeader("dia");
-            int mes = request.getIntHeader("mes");
-            int anio = request.getIntHeader("anio");
-            dataFecha fecha = new dataFecha(dia, mes, anio);
-            String contrasenia = request.getParameter("contrasenia");
-            // String img = request.getParameter("fimg");
-
-            dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail,
-                    fecha, contrasenia, "");
-
-            crl.crearCliente(cli);
-            System.out.println("Servlet Usuario");
-            RequestDispatcher despachador = request.getRequestDispatcher("/ppal.jsp");
+            String altaArt = "altaArt";
+            
+            request.setAttribute("id",nickName);
+            request.setAttribute("comando", altaArt);
+            
+            RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
             despachador.forward(request, response);
-
+            
         }
-        
 
+        
+            
     }
+    
 
     /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
-    /*    @Override
+    @Override
     public String getServletInfo() {
-    return "Short description";
-    }// </editor-fold>*/
+        return "Short description";
+    }// </editor-fold>
+
 }

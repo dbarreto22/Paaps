@@ -5,6 +5,7 @@
  */
 package Serlvets;
 
+import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
@@ -66,8 +67,8 @@ public class Servletimagenes extends HttpServlet {
 //        Files.copy(file.toPath(), response.getOutputStream());
 //    }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String fileName = 
-                URLDecoder.decode(request.getPathInfo().substring(1), "UTF-8");
+        String fileName
+                = URLDecoder.decode(request.getPathInfo().substring(1), "UTF-8");
         System.out.println("filename:" + fileName);
 
 //        String fileName = request.getParameter("fileName");
@@ -82,11 +83,11 @@ public class Servletimagenes extends HttpServlet {
         ServletContext ctx = getServletContext();
         InputStream fis = new FileInputStream(file);
         String mimeType = ctx.getMimeType(file.getAbsolutePath());
-        
-        response.setContentType(mimeType != null ? mimeType : 
-                "application/octet-stream");
+
+        response.setContentType(mimeType != null ? mimeType
+                : "application/octet-stream");
         response.setContentLength((int) file.length());
-        response.setHeader("Content-Disposition", 
+        response.setHeader("Content-Disposition",
                 "attachment; filename=\"" + fileName + "\"");
 
         ServletOutputStream os = response.getOutputStream();
@@ -101,22 +102,20 @@ public class Servletimagenes extends HttpServlet {
         System.out.println("Archivo descargado correctamente");
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (!ServletFileUpload.isMultipartContent(request)) {
             throw new ServletException("Content type is not multipart/form-data");
         }
 
         response.setContentType("text/html");
-        Fabrica fabrica = Fabrica.getInstance();
-        crl = fabrica.getInstancia();
-        Cliente cli = crl.getCli((String) request.getParameter("nickName"));
 
         try {
             List<FileItem> fileItemsList;
             fileItemsList = uploader.parseRequest(request);
             Iterator<FileItem> fileItemsIterator = fileItemsList.iterator();
             while (fileItemsIterator.hasNext()) {
-              //  System.out.println("Archivo::");
+                //  System.out.println("Archivo::");
                 FileItem fileItem = fileItemsIterator.next();
                 /*     System.out.println("\tNombre=" + fileItem.getFieldName());
                 System.out.println("\tNombre archivo=" + fileItem.getName());
@@ -127,14 +126,25 @@ public class Servletimagenes extends HttpServlet {
                 File file = new File(fileDirStr + File.separator + fileItem.getName());
                 //System.out.println("Absolute Path at server=" + file.getAbsolutePath());
                 fileItem.write(file);
+                Fabrica fabrica = Fabrica.getInstance();
+                crl = fabrica.getInstancia();
+                String comando = (String) request.getAttribute("comando");
+                if(comando.equals("altaCli")){
+                Cliente cli = crl.getCli((String) request.getParameter("id"));
                 cli.setImagen(file.getAbsolutePath());
                 crl.setImageCli(cli);
+                }else if(comando.equals("altaArt")){
+                    Artista art = crl.seleccionarArtista((String) request.getParameter("id"));
+        
+                art.setImagen(file.getAbsolutePath());
+                crl.setImageArt(art); 
+                }
             }
         } catch (Exception e) {
             System.out.println("Error!");
         }
         RequestDispatcher despachador = request.getRequestDispatcher("/ppal.jsp");
-            despachador.forward(request, response);
+        despachador.forward(request, response);
     }
 
 }

@@ -109,5 +109,7 @@ public interface IControlador {
     public Usuario buscarUsrMail(String mail);
     
     public void setImageCli(Cliente cli);
+    
+    public void setImageArt(Artista art);
 }
 

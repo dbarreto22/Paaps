@@ -61,7 +61,7 @@ public class Controlador implements IControlador {
     public void crearCliente(dataUsuario usuario) {
         Cliente cli = new Cliente(usuario);
         Suscripcion sus = new Suscripcion();
-        cli.setSuscripcion(sus);   
+        cli.setSuscripcion(sus);
         //sus.setSuscripto(cli);
         SuscripcionJpaController1 suscrl = new SuscripcionJpaController1(fact);
         suscrl.create(sus);
@@ -83,11 +83,11 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void modificarSuscripcion(String nickname, String estadoSuscripcion){
+
+    public void modificarSuscripcion(String nickname, String estadoSuscripcion) {
         //Cliente cli= seleccionarCliente(nickname);
-        SuscripcionJpaController1 suscrl= new SuscripcionJpaController1(fact);
-        ClienteJpaController ctrCl = new ClienteJpaController(fact); 
+        SuscripcionJpaController1 suscrl = new SuscripcionJpaController1(fact);
+        ClienteJpaController ctrCl = new ClienteJpaController(fact);
         Cliente c = ctrCl.findCliente(nickname);
         Suscripcion sus = c.getSuscripcion();
         sus.setStatus(estadoSuscripcion);
@@ -516,37 +516,46 @@ public class Controlador implements IControlador {
         Usuario aux;
         List<Usuario> usuarios = listarUsuarios();
         Iterator<Usuario> it = usuarios.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             c = it.next();
-            if(c.getMail().equals(mail)){
-                nick= c.getNickname();
+            if (c.getMail().equals(mail)) {
+                nick = c.getNickname();
             }
         }
-        
+
         return aux = this.getUsuario(nick);
     }
 
-public Artista seleccionarArtistaPorNombre(String name) {
+    public Artista seleccionarArtistaPorNombre(String name) {
         ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
         List<Artista> aux = ctrArtista.findArtistaEntities();
-        Artista retorno=null;
-        for(Artista artista : aux){
-            if(artista.getNombre().equals(name))
-                retorno=artista;
+        Artista retorno = null;
+        for (Artista artista : aux) {
+            if (artista.getNombre().equals(name)) {
+                retorno = artista;
+            }
         }
         return retorno;
-        
-        
+
     }
 
-public void setImageCli(Cliente cli){
-    ClienteJpaController ctrCli = new ClienteJpaController(fact);
+    public void setImageCli(Cliente cli) {
+        ClienteJpaController ctrCli = new ClienteJpaController(fact);
         try {
             ctrCli.edit(cli);
         } catch (Exception ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
-}
+    }
+
+    public void setImageArt(Artista art) {
+        ArtistaJpaController ctrCli = new ArtistaJpaController(fact);
+        try {
+            ctrCli.edit(art);
+        } catch (Exception ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void cargarDatos() {
 
@@ -571,8 +580,6 @@ public void setImageCli(Cliente cli){
         Genero G1 = new Genero(g1);
         Genero G2 = new Genero(g2);
         Genero G3 = new Genero(g3);
-        
-        
 
         altaGenero(g1);
         altaGenero(g2);
