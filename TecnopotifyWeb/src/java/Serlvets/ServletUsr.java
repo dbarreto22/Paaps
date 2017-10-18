@@ -9,8 +9,13 @@ import edu.tecnopotify.datatypes.dataArtista;
 import edu.tecnopotify.datatypes.dataCliente;
 import edu.tecnopotify.datatypes.dataFecha;
 import edu.tecnopotify.datatypes.dataUsuario;
+import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.Favoritos;
+import edu.tecnopotify.entidades.ListaParticular;
+import edu.tecnopotify.entidades.ListaReproduccion;
+import edu.tecnopotify.entidades.Temas;
 import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
@@ -192,13 +197,12 @@ public class ServletUsr extends HttpServlet {
 
         response.setContentType("text/html");
 
-
         String comando = request.getParameter("comando");
 
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
-        if (comando != null && comando.equals("altaCliente")) {          
-           //Procesar el formulario  
+        if (comando != null && comando.equals("altaCliente")) {
+            //Procesar el formulario  
             String nickName = request.getParameter("nickname");
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
@@ -212,13 +216,11 @@ public class ServletUsr extends HttpServlet {
                     fecha, contrasenia, "");
 
             crl.crearCliente(cli);
-            request.setAttribute("nickName",nickName);
-            
+            request.setAttribute("nickName", nickName);
+
             RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
             despachador.forward(request, response);
-        }
-        
-        if (comando != null && comando.equals("altaArtista")) {
+        } else if (comando != null && comando.equals("altaArtista")) {
             //Procesar el formulario  
             String nickName = request.getParameter("nickname");
             String nombre = request.getParameter("nombre");
@@ -235,19 +237,60 @@ public class ServletUsr extends HttpServlet {
             dataUsuario art = new dataArtista(biografia, link, nickName, nombre, apellido, mail, fecha, contrasenia, imagen);
             crl.crearArtista(biografia, link, art);
             String altaArt = "altaArt";
-            
-            request.setAttribute("id",nickName);
+
+            request.setAttribute("id", nickName);
             request.setAttribute("comando", altaArt);
-            
+
             RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
             despachador.forward(request, response);
-            
+        } else {
+
+            String nick = (String) request.getSession().getAttribute("user");
+            Usuario usr = crl.getUsuario(nick);
+            if (usr.getClass().equals("Cliente")) {
+                Cliente cli = crl.getCli(nick);
+
+                request.setAttribute("nombre", cli.getNombre());
+                request.setAttribute("apellido", cli.getApellido());
+                request.setAttribute("mail", cli.getMail());
+                request.setAttribute("dia", cli.getF_nac().getDia());
+                request.setAttribute("mes", cli.getF_nac().getMes());
+                request.setAttribute("anio", cli.getF_nac().getAnio());
+                request.setAttribute("mail", cli.getMail());
+                request.setAttribute("suscrpcion", cli.getSuscripcion().getStatus());
+                String nickFav;
+                List<Temas> temas = cli.getFav().getListTemas();
+                List<Album> albums = cli.getFav().getListAlbum();
+                List<ListaReproduccion> listRfav = cli.getFav().getListRep();
+                List<ListaParticular> listRpropia = cli.getListasReprParticular();
+                List<Usuario> listSeguidos = cli.getLstSeguidos();
+                Iterator it = temas.iterator();
+                
+                request.setAttribute("temas", temas);
+                request.setAttribute("albums", albums);
+                request.setAttribute("listR", listRfav);
+                request.setAttribute("listRpropia", listRpropia);
+                request.setAttribute("seguidos", listSeguidos);
+                
+
+                
+                RequestDispatcher despachador = request.getRequestDispatcher("/mostrarCliente.jsp");
+                despachador.forward(request, response);
+
+            }else if(usr.getClass().equals("Artista")) {
+                Artista art = crl.seleccionarArtista(nick);
+                request.setAttribute("nombre", art.getNombre());
+                request.setAttribute("apellido", art.getApellido());
+                request.setAttribute("mail", art.getMail());
+                request.setAttribute("dia", art.getF_nac().getDia());
+                request.setAttribute("mes", art.getF_nac().getMes());
+                request.setAttribute("anio", art.getF_nac().getAnio());
+                
+            }
+
         }
 
-        
-            
     }
-    
 
     /**
      * Returns a short description of the servlet.
