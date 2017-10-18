@@ -19,8 +19,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="<%= request.getContextPath()%>/AltaCliente.jsp">Crear Cliente</a></li>
                         <li><a href="<%= request.getContextPath()%>/altaArtista.jsp">Crear Artista</a></li>
-                        <li><a href="<%= request.getContextPath()%>/mostrarCliente.jsp">Mostrar datos de Cliente</a></li>
-                        <li><a href="<%= request.getContextPath()%>/mostrarArtista.jsp">Mostrar datos de Artista</a></li>
+                        <li><a href="<%= request.getContextPath()%>/usuarios?comando=datos">Mostrar datos</a></li>                
                         <li><a href="<%= request.getContextPath()%>/seguirUsuario.jsp">Seguir/Dejar de seguir Usuario</a></li>
                     </ul>
                 </li>

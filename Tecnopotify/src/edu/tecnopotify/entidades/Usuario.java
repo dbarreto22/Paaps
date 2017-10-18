@@ -4,6 +4,7 @@ import edu.tecnopotify.datatypes.dataUsuario;
 import edu.tecnopotify.datatypes.dataFecha;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-
 
 public class Usuario implements Serializable {
 
@@ -36,7 +36,7 @@ public class Usuario implements Serializable {
         this.f_nac = usuario.getF_nac();
         this.imagen = usuario.getImagen();
         this.contrasenia = usuario.getContrasenia();
-        this.lstSeguidos = usuario.getLstSeguidos();
+        this.lstSeguidos = new ArrayList<Usuario>();
     }
 
     public Usuario() {
@@ -89,7 +89,6 @@ public class Usuario implements Serializable {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-    
 
     public String getImagen() {
         return imagen;
@@ -147,12 +146,10 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "Usuario{" + "Nickname=" + nickname
-                +"\n"+ ", Nombre Completo=" + nombre + " "
-                + apellido +"\n"+ " Mail=" + mail + "\n"
-                + " Fecha Nacimiento=" + f_nac.getDia() + "/" + f_nac.getMes()+"/"+ f_nac.getAnio()
+                + "\n" + ", Nombre Completo=" + nombre + " "
+                + apellido + "\n" + " Mail=" + mail + "\n"
+                + " Fecha Nacimiento=" + f_nac.getDia() + "/" + f_nac.getMes() + "/" + f_nac.getAnio()
                 + '}';
     }
-    
-    
 
 }

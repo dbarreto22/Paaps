@@ -59,79 +59,98 @@ public class ServletUsr extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private IControlador crl;
+    Fabrica fabrica = Fabrica.getInstance();
+    IControlador crl = fabrica.getInstancia();
     private static final long serialVersionUID = 1L;
     private ServletFileUpload uploader = null;
     private String fileDirStr = null;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, org.apache.tomcat.util.http.fileupload.FileUploadException {
-        init();
 
         response.setContentType("text/html;charset=UTF-8");
-        Fabrica fabrica = Fabrica.getInstance();
-        crl = fabrica.getInstancia();
+       
         crl.cargarDatos();
         String comando = request.getParameter("comando");
 
-        String nick = (String) request.getSession().getAttribute("user");
-        Usuario usr = crl.getUsuario(nick);
+        if (comando == null) {
 
-        if (usr.equals(crl.getCli(nick)) && comando != null && comando.equals("mostrarCliente")) {
-            //Procesar el formulario 
+            String nick = (String) request.getSession().getAttribute("user");
+            Usuario usr = crl.getUsuario(nick);
+            if (usr.getClass().equals("Cliente")) {
+                Cliente cli = crl.getCli(nick);
 
-            request.setAttribute("nombre", usr.getNombre());
-            /*request.setAttribute("apellido", usr.getApellido());
-                    request.setAttribute("mail", usr.getMail());
-                    request.setAttribute("dia", usr.getF_nac().getDia());
-                    request.setAttribute("mes", usr.getF_nac().getMes());
-                    request.setAttribute("anio", usr.getF_nac().getAnio());*/
-            RequestDispatcher despachador = request.getRequestDispatcher("/mostrarCliente.jsp");
-            despachador.forward(request, response);
+                request.setAttribute("nombre", cli.getNombre());
+                request.setAttribute("apellido", cli.getApellido());
+                request.setAttribute("mail", cli.getMail());
+                request.setAttribute("dia", cli.getF_nac().getDia());
+                request.setAttribute("mes", cli.getF_nac().getMes());
+                request.setAttribute("anio", cli.getF_nac().getAnio());
+                request.setAttribute("mail", cli.getMail());
+                request.setAttribute("imagen", cli.getImagen());
+                request.setAttribute("suscrpcion", cli.getSuscripcion().getStatus());
+                String nickFav;
+                List<Temas> temas = cli.getFav().getListTemas();
+                List<Album> albums = cli.getFav().getListAlbum();
+                List<ListaReproduccion> listRfav = cli.getFav().getListRep();
+                List<ListaParticular> listRpropia = cli.getListasReprParticular();
+                List<Usuario> listSeguidos = cli.getLstSeguidos();
 
-        } else if (comando != null && comando.equals("mostrarArtista")) {
-            //Procesar el formulario 
-            List<Artista> artistas = crl.listarArtistas();
-            Iterator<Artista> it = artistas.iterator();
-            while (it.hasNext()) {
-                request.setAttribute("combo", it.next().getNickname());
+                List<String> nickTemas = new ArrayList();
+                Iterator<Temas> itTemas = temas.iterator();
+                while (itTemas.hasNext()) {
+                    nickTemas.add(itTemas.next().getNombre());
+                }
+
+                List<String> nickAlbums = new ArrayList();
+                Iterator<Album> itA = albums.iterator();
+                while (itA.hasNext()) {
+                    nickAlbums.add(itA.next().getNombre());
+                }
+
+                List<String> nickListRepFav = new ArrayList();
+                Iterator<ListaReproduccion> itR = listRfav.iterator();
+                while (itR.hasNext()) {
+                    nickListRepFav.add(itR.next().getNombre());
+                }
+
+                List<String> nickListRepProp = new ArrayList();
+                Iterator<ListaParticular> itRprop = listRpropia.iterator();
+                while (itRprop.hasNext()) {
+                    nickListRepProp.add(itRprop.next().getNombre());
+                }
+
+                List<String> nickSeguidos = new ArrayList();
+                Iterator<Usuario> itC = listSeguidos.iterator();
+                while (itC.hasNext()) {
+                    nickSeguidos.add(itC.next().getNombre());
+                }
+
+                request.setAttribute("temas", nickTemas);
+                request.setAttribute("albums", nickAlbums);
+                request.setAttribute("listRFav", nickListRepFav);
+                request.setAttribute("listRpropia", nickListRepProp);
+                request.setAttribute("seguidos", nickSeguidos);
+
+                RequestDispatcher despachador = request.getRequestDispatcher("/mostrarCliente.jsp");
+                despachador.forward(request, response);
+
+            } else if (usr.getClass().equals("Artista")) {
+                Artista art = crl.seleccionarArtista(nick);
+                request.setAttribute("nombre", art.getNombre());
+                request.setAttribute("apellido", art.getApellido());
+                request.setAttribute("mail", art.getMail());
+                request.setAttribute("dia", art.getF_nac().getDia());
+                request.setAttribute("mes", art.getF_nac().getMes());
+                request.setAttribute("anio", art.getF_nac().getAnio());
+
             }
-            String nickName = request.getParameter("combo");
-            Artista art = crl.seleccionarArtista(nickName);
-            request.setAttribute("nombre", art.getNombre());
-            request.setAttribute("apellido", art.getApellido());
-            request.setAttribute("mail", art.getMail());
-            request.setAttribute("dia", art.getF_nac().getDia());
-            request.setAttribute("mes", art.getF_nac().getMes());
-            request.setAttribute("anio", art.getF_nac().getAnio());
-            request.setAttribute("imagen", art.getImagen());
-            request.setAttribute("biografia", art.getBiografia());
-            request.setAttribute("link", art.getLink());
 
         }
 
-
-        /* try (PrintWriter out = response.getWriter()) {
-        /* TODO output your page here. You may use following sample code.
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Servlet prueba</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>Servlet prueba at " + request.getContextPath() + "</h1>");
-        out.println("<ol>");
-        for (Usuario usuario : usuarios) {
-        System.out.println("<li>" + usuario.getNombre() + "</li>");
-        }
-        out.println("</ol>");
-        out.println("</body>");
-        out.println("</html>");
-        
-        }*/
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -140,21 +159,6 @@ public class ServletUsr extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    public void init() throws ServletException {
-        String rootPath = System.getProperty("user.home");
-        String relativePath = "ServletUsr-servlet";
-        fileDirStr = rootPath + File.separator + relativePath;
-        File filesDir = new File(fileDirStr);
-        if (!filesDir.exists()) {
-            filesDir.mkdirs();
-        }
-
-        DiskFileItemFactory fileFactory = new DiskFileItemFactory();
-        fileFactory.setRepository(filesDir);
-        this.uploader = new ServletFileUpload(fileFactory);
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -190,6 +194,80 @@ public class ServletUsr extends HttpServlet {
         os.close();
         fis.close();
         System.out.println("Archivo descargado correctamente");*/
+        String comando = request.getParameter("comando");
+        if (comando != null && comando.equals("datos")) {
+
+            String nick = (String) request.getSession().getAttribute("user");
+            Usuario usr = crl.getUsuario(nick);
+            if (usr.getClass().getName().contains("Cliente")) {
+                Cliente cli = crl.getCli(nick);
+
+                request.setAttribute("nombre", cli.getNombre());
+                request.setAttribute("apellido", cli.getApellido());
+                request.setAttribute("mail", cli.getMail());
+                request.setAttribute("dia", cli.getF_nac().getDia());
+                request.setAttribute("mes", cli.getF_nac().getMes());
+                request.setAttribute("anio", cli.getF_nac().getAnio());
+                request.setAttribute("mail", cli.getMail());
+                request.setAttribute("imagen", cli.getImagen());
+                request.setAttribute("suscripcion", cli.getSuscripcion().getStatus());
+                String nickFav;
+                List<Temas> temas = cli.getFav().getListTemas();
+                List<Album> albums = cli.getFav().getListAlbum();
+                List<ListaReproduccion> listRfav = cli.getFav().getListRep();
+                List<ListaParticular> listRpropia = cli.getListasReprParticular();
+                List<Usuario> listSeguidos = cli.getLstSeguidos();
+
+                List<String> nickTemas = new ArrayList();
+                Iterator<Temas> itTemas = temas.iterator();
+                while (itTemas.hasNext()) {
+                    nickTemas.add(itTemas.next().getNombre());
+                }
+
+                List<String> nickAlbums = new ArrayList();
+                Iterator<Album> itA = albums.iterator();
+                while (itA.hasNext()) {
+                    nickAlbums.add(itA.next().getNombre());
+                }
+
+                List<String> nickListRepFav = new ArrayList();
+                Iterator<ListaReproduccion> itR = listRfav.iterator();
+                while (itR.hasNext()) {
+                    nickListRepFav.add(itR.next().getNombre());
+                }
+
+                List<String> nickListRepProp = new ArrayList();
+                Iterator<ListaParticular> itRprop = listRpropia.iterator();
+                while (itRprop.hasNext()) {
+                    nickListRepProp.add(itRprop.next().getNombre());
+                }
+
+                List<String> nickSeguidos = new ArrayList();
+                Iterator<Usuario> itC = listSeguidos.iterator();
+                while (itC.hasNext()) {
+                    nickSeguidos.add(itC.next().getNombre());
+                }
+
+                request.setAttribute("temas", nickTemas);
+                request.setAttribute("albums", nickAlbums);
+                request.setAttribute("listRFav", nickListRepFav);
+                request.setAttribute("listRpropia", nickListRepProp);
+                request.setAttribute("seguidos", nickSeguidos);
+
+                RequestDispatcher despachador = request.getRequestDispatcher("/mostrarCliente.jsp");
+                despachador.forward(request, response);
+
+            } else if (usr.getClass().equals("Artista")) {
+                Artista art = crl.seleccionarArtista(nick);
+                request.setAttribute("nombre", art.getNombre());
+                request.setAttribute("apellido", art.getApellido());
+                request.setAttribute("mail", art.getMail());
+                request.setAttribute("dia", art.getF_nac().getDia());
+                request.setAttribute("mes", art.getF_nac().getMes());
+                request.setAttribute("anio", art.getF_nac().getAnio());
+
+            }
+        }
     }
 
     @Override
@@ -213,10 +291,12 @@ public class ServletUsr extends HttpServlet {
             dataFecha fecha = new dataFecha(dia, mes, anio);
             String contrasenia = request.getParameter("contrasenia");
             dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail,
-                    fecha, contrasenia, "");
+                    fecha, "", contrasenia);
 
             crl.crearCliente(cli);
-            request.setAttribute("nickName", nickName);
+
+            request.setAttribute("id", nickName);
+            request.setAttribute("comando", "altaCli");
 
             RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
             despachador.forward(request, response);
@@ -234,7 +314,7 @@ public class ServletUsr extends HttpServlet {
             String imagen = "";
             String biografia = request.getParameter("biografia");
             String link = request.getParameter("link");
-            dataUsuario art = new dataArtista(biografia, link, nickName, nombre, apellido, mail, fecha, contrasenia, imagen);
+            dataUsuario art = new dataArtista(biografia, link, nickName, nombre, apellido, mail, fecha, imagen, contrasenia);
             crl.crearArtista(biografia, link, art);
             String altaArt = "altaArt";
 
@@ -243,51 +323,6 @@ public class ServletUsr extends HttpServlet {
 
             RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
             despachador.forward(request, response);
-        } else {
-
-            String nick = (String) request.getSession().getAttribute("user");
-            Usuario usr = crl.getUsuario(nick);
-            if (usr.getClass().equals("Cliente")) {
-                Cliente cli = crl.getCli(nick);
-
-                request.setAttribute("nombre", cli.getNombre());
-                request.setAttribute("apellido", cli.getApellido());
-                request.setAttribute("mail", cli.getMail());
-                request.setAttribute("dia", cli.getF_nac().getDia());
-                request.setAttribute("mes", cli.getF_nac().getMes());
-                request.setAttribute("anio", cli.getF_nac().getAnio());
-                request.setAttribute("mail", cli.getMail());
-                request.setAttribute("suscrpcion", cli.getSuscripcion().getStatus());
-                String nickFav;
-                List<Temas> temas = cli.getFav().getListTemas();
-                List<Album> albums = cli.getFav().getListAlbum();
-                List<ListaReproduccion> listRfav = cli.getFav().getListRep();
-                List<ListaParticular> listRpropia = cli.getListasReprParticular();
-                List<Usuario> listSeguidos = cli.getLstSeguidos();
-                Iterator it = temas.iterator();
-                
-                request.setAttribute("temas", temas);
-                request.setAttribute("albums", albums);
-                request.setAttribute("listR", listRfav);
-                request.setAttribute("listRpropia", listRpropia);
-                request.setAttribute("seguidos", listSeguidos);
-                
-
-                
-                RequestDispatcher despachador = request.getRequestDispatcher("/mostrarCliente.jsp");
-                despachador.forward(request, response);
-
-            }else if(usr.getClass().equals("Artista")) {
-                Artista art = crl.seleccionarArtista(nick);
-                request.setAttribute("nombre", art.getNombre());
-                request.setAttribute("apellido", art.getApellido());
-                request.setAttribute("mail", art.getMail());
-                request.setAttribute("dia", art.getF_nac().getDia());
-                request.setAttribute("mes", art.getF_nac().getMes());
-                request.setAttribute("anio", art.getF_nac().getAnio());
-                
-            }
-
         }
 
     }

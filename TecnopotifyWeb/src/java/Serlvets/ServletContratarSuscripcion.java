@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author menan
  */
-public class ServletSeguirUsuario extends HttpServlet {
+public class ServletContratarSuscripcion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,34 +33,26 @@ public class ServletSeguirUsuario extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private IControlador crl;
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
+        
         String comando = request.getParameter("comando");
         String nickUsr = (String) request.getSession().getAttribute("user");
         
         Suscripcion suscr = new Suscripcion();
-        suscr.setStatus("VIGENTE");
-        
+        suscr.setStatus("PENDIENTE");
         Usuario cl = crl.getUsuario(nickUsr);
-        if ((Cliente) cl != null) {
-            Cliente cliente = (Cliente) cl;
-            if (comando != null && comando.equals("seguirUsuario") && (cliente.getSuscripcion().status == suscr.getStatus())) {
-                String usrSeguido = request.getParameter("usrASeguir");
-                boolean dejarSeguir = (!"Si".equals(request.getParameter("Dejar de seguir").toString()));
-                if (dejarSeguir) {
-                    crl.dejarDeSeguirUsuario(nickUsr, usrSeguido);
-                } else {
-                    crl.seguirUsuario(nickUsr, usrSeguido);
-                }
-            }
+        Cliente cli = (Cliente) cl;
+        
+        if (comando != null && comando.equals("seguirUsuario") && (cli.getSuscripcion().status == suscr.getStatus())){
+            
         }
-        request.getRequestDispatcher("/ppal.jsp").forward(request, response);
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

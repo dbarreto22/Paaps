@@ -18,7 +18,11 @@
         <div class="container" style="margin-top: 60px">
 
             <form class="form-horizontal" 
+<<<<<<< HEAD
+                  action="<%= request.getContextPath() %>/imagenes?id=<%= request.getAttribute("id") %>&comando=<%=request.getAttribute("comando") %>"  
+=======
                   action="<%= request.getContextPath() %>/imagenes?id=<%= request.getAttribute("id") %>&comando=<%=request.getAttribute("comando")%>"  
+>>>>>>> 13a0fbd039a1a14b46b73e24a5bae17d7ce8a2fd
                   method = "post" enctype = "multipart/form-data">  
                 <div class="form-group">
                     <label for="imgFile" class="col-sm-2 control-label">Imagen</label>
