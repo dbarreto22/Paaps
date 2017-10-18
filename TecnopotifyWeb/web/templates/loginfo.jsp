@@ -1,3 +1,5 @@
+<%@page import="edu.tecnopotify.entidades.Suscripcion.estado"%>
+<%@page import="edu.tecnopotify.entidades.Cliente"%>
 <%@page import="edu.tecnopotify.entidades.Usuario"%>
 <%@page import="edu.tecnopotify.fabrica.Fabrica"%>
 <%@page import="edu.tecnopotify.interfaces.IControlador"%>
@@ -14,8 +16,31 @@
 
     if ((user != null) && !user.isEmpty()) {
 %>
-<li><a href="#">Bienvenido <%= user %>!</a></li>
-<li><a href="<%= request.getContextPath()%>/autenticar?comando=logout">LogOut</a></li>
+<li><a href="#">Bienvenido <%= user%>!</a></li>
+<%
+    Cliente cli = crl.seleccionarCliente(user);
+    if (cli.getSuscripcion().status == estado.PENDIENTE) {
+%>
+<li>Solicitud pendiente<br/><ui><a href="../contratarSuscripcion.jsp">Contratar suscripción</a></ui></li>
+<%
+    }
+    if (cli.getSuscripcion().status == estado.VIGENTE) {
+%>
+<li>Solicitud vigente</li>
+<%
+    }
+    if (cli.getSuscripcion().status == estado.CANCELADA) {
+%>
+<li>Solicitud cancelada<br/><ui><a href="../contratarSuscripcion.jsp">Contratar suscripción</a></ui></li>
+<%
+    }
+    if (cli.getSuscripcion().status == estado.VENCIDA) {
+%>
+<li>Solicitud vencida<br/><ui><a href="../contratarSuscripcion.jsp">Contratar suscripción</a></ui></li>
+<%
+    }
+%>
+<li><a href="<%= request.getContextPath()%>/autenticar?comando=logout">LogOut</a></li><br/>
     <%
     } else {
     %>

@@ -4,6 +4,7 @@ import edu.tecnopotify.datatypes.dataUsuario;
 import edu.tecnopotify.datatypes.dataFecha;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class Usuario implements Serializable {
         this.f_nac = usuario.getF_nac();
         this.imagen = usuario.getImagen();
         this.contrasenia = usuario.getContrasenia();
-        this.lstSeguidos = usuario.getLstSeguidos();
+        this.lstSeguidos = new ArrayList<Usuario>();
     }
 
     public Usuario() {

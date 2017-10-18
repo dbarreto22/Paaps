@@ -352,11 +352,13 @@ cancelar el alta.*/
                         mail, fecha, imagen, contra1);
                 crl.crearCliente(cli);
                 JOptionPane.showMessageDialog(this, "El Cliente se ha creado con éxito", "Registrar Cliente", JOptionPane.INFORMATION_MESSAGE);
+                this.setVisible(false);
             }
             noEntro = false;
         } 
         if (noEntro){
             JOptionPane.showMessageDialog(this, "El usuario no se ha podido crear, revise los datos", "Registrar Cliente", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
         }
         
 
