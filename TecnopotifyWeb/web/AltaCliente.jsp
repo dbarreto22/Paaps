@@ -44,7 +44,7 @@
                 Año
                 <input type="number" name="anio"  min="1920" max ="2007"/> <br />  
                 Mail
-                <input type ="email" name ="mail " /> <br/>
+                <input type ="email" name ="mail" /> <br/>
                 <input type="submit" value="Enviar" />
             </div>
         </form> 

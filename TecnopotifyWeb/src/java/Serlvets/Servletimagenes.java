@@ -128,16 +128,16 @@ public class Servletimagenes extends HttpServlet {
                 fileItem.write(file);
                 Fabrica fabrica = Fabrica.getInstance();
                 crl = fabrica.getInstancia();
-                String comando = (String) request.getAttribute("comando");
-                if(comando.equals("altaCli")){
-                Cliente cli = crl.getCli((String) request.getParameter("id"));
-                cli.setImagen(file.getAbsolutePath());
-                crl.setImageCli(cli);
-                }else if(comando.equals("altaArt")){
+                String comando = request.getParameter("comando");
+                if (comando.equals("altaCli")) {
+                    Cliente cli = crl.getCli((String) request.getParameter("id"));
+                    cli.setImagen(file.getAbsolutePath());
+                    crl.setImageCli(cli);
+                } else if (comando.equals("altaArt")) {
                     Artista art = crl.seleccionarArtista((String) request.getParameter("id"));
-        
-                art.setImagen(file.getAbsolutePath());
-                crl.setImageArt(art); 
+
+                    art.setImagen(file.getAbsolutePath());
+                    crl.setImageArt(art);
                 }
             }
         } catch (Exception e) {

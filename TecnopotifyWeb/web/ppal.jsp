@@ -4,6 +4,8 @@
     Author     : diego-lucia
 --%>
 
+<%@page import="edu.tecnopotify.interfaces.IControlador"%>
+<%@page import="edu.tecnopotify.fabrica.Fabrica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +42,11 @@
 
     <!-- Custom styles for this template -->
     <link href="navbar-fixed-top.css" rel="stylesheet">
+    <%
+        Fabrica fabrica = Fabrica.getInstance();
+        IControlador crl = fabrica.getInstancia();
+        crl.cargarDatos();
+        %>
     <body>
 
          <jsp:include page="/templates/header.jsp"/> 

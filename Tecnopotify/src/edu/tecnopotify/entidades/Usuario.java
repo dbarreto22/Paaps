@@ -14,7 +14,6 @@ import javax.persistence.NamedQuery;
 
 @Entity
 
-
 public class Usuario implements Serializable {
 
     @Id
@@ -89,7 +88,6 @@ public class Usuario implements Serializable {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-    
 
     public String getImagen() {
         return imagen;
@@ -147,12 +145,10 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "Usuario{" + "Nickname=" + nickname
-                +"\n"+ ", Nombre Completo=" + nombre + " "
-                + apellido +"\n"+ " Mail=" + mail + "\n"
-                + " Fecha Nacimiento=" + f_nac.getDia() + "/" + f_nac.getMes()+"/"+ f_nac.getAnio()
+                + "\n" + ", Nombre Completo=" + nombre + " "
+                + apellido + "\n" + " Mail=" + mail + "\n"
+                + " Fecha Nacimiento=" + f_nac.getDia() + "/" + f_nac.getMes() + "/" + f_nac.getAnio()
                 + '}';
     }
-    
-    
 
 }

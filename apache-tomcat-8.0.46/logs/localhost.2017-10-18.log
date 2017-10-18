@@ -1,0 +1,615 @@
+18-Oct-2017 00:25:10.917 GRAVE [http-nio-8080-exec-371] org.apache.catalina.core.ApplicationDispatcher.invoke El Servlet.service() para servlet jsp lanzó una excepción
+ org.apache.jasper.JasperException: No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Ha tenido lugar un error en la línea: 84 en el archivo jsp: /mostrarCliente.jsp
+The method print(boolean) in the type JspWriter is not applicable for the arguments (void)
+81:                 <table>
+82:                     <% while (itA.hasNext()) {%>
+83:                     <tr>
+84:                         <td><a href="<%= request.getContextPath()%>/mostrarAlbum.jsp" <%=request.setAttribute("idAlbum",itA.next())%>  >itA.next()</a></td>                                    
+85:                     </tr>
+86:                     <%}%>
+87:                 </table> <br/>
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:457)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:363)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:338)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:325)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:586)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:716)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:466)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:391)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:318)
+	at Serlvets.ServletUsr.doGet(ServletUsr.java:258)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:504)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1132)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+18-Oct-2017 00:25:10.920 GRAVE [http-nio-8080-exec-371] org.apache.catalina.core.StandardWrapperValve.invoke El Servlet.service() para el servlet [ServletUsr] en el contexto con ruta [/Tecnopotify] lanzó la excepción [No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Ha tenido lugar un error en la línea: 84 en el archivo jsp: /mostrarCliente.jsp
+The method print(boolean) in the type JspWriter is not applicable for the arguments (void)
+81:                 <table>
+82:                     <% while (itA.hasNext()) {%>
+83:                     <tr>
+84:                         <td><a href="<%= request.getContextPath()%>/mostrarAlbum.jsp" <%=request.setAttribute("idAlbum",itA.next())%>  >itA.next()</a></td>                                    
+85:                     </tr>
+86:                     <%}%>
+87:                 </table> <br/>
+
+
+Stacktrace:] con causa raíz
+ org.apache.jasper.JasperException: No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Ha tenido lugar un error en la línea: 84 en el archivo jsp: /mostrarCliente.jsp
+The method print(boolean) in the type JspWriter is not applicable for the arguments (void)
+81:                 <table>
+82:                     <% while (itA.hasNext()) {%>
+83:                     <tr>
+84:                         <td><a href="<%= request.getContextPath()%>/mostrarAlbum.jsp" <%=request.setAttribute("idAlbum",itA.next())%>  >itA.next()</a></td>                                    
+85:                     </tr>
+86:                     <%}%>
+87:                 </table> <br/>
+
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:457)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:363)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:338)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:325)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:586)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:716)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:466)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:391)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:318)
+	at Serlvets.ServletUsr.doGet(ServletUsr.java:258)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:504)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1132)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+18-Oct-2017 00:35:34.057 GRAVE [http-nio-8080-exec-377] org.apache.catalina.core.ApplicationDispatcher.invoke El Servlet.service() para servlet jsp lanzó una excepción
+ org.apache.jasper.JasperException: No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:457)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:363)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:338)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:325)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:586)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:716)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:466)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:391)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:318)
+	at Serlvets.ServletUsr.doGet(ServletUsr.java:258)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:504)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1132)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+18-Oct-2017 00:35:34.057 GRAVE [http-nio-8080-exec-377] org.apache.catalina.core.StandardWrapperValve.invoke El Servlet.service() para el servlet [ServletUsr] en el contexto con ruta [/Tecnopotify] lanzó la excepción [No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Stacktrace:] con causa raíz
+ org.apache.jasper.JasperException: No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:457)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:363)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:338)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:325)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:586)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:716)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:466)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:391)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:318)
+	at Serlvets.ServletUsr.doGet(ServletUsr.java:258)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:504)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1132)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+18-Oct-2017 00:41:10.175 GRAVE [http-nio-8080-exec-390] org.apache.catalina.core.ApplicationDispatcher.invoke El Servlet.service() para servlet jsp lanzó una excepción
+ org.apache.jasper.JasperException: No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:457)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:363)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:338)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:325)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:586)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:716)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:466)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:391)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:318)
+	at Serlvets.ServletUsr.doGet(ServletUsr.java:258)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:504)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1132)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+18-Oct-2017 00:41:10.177 GRAVE [http-nio-8080-exec-390] org.apache.catalina.core.StandardWrapperValve.invoke El Servlet.service() para el servlet [ServletUsr] en el contexto con ruta [/Tecnopotify] lanzó la excepción [No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Stacktrace:] con causa raíz
+ org.apache.jasper.JasperException: No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:457)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:363)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:338)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:325)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:586)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:716)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:466)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:391)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:318)
+	at Serlvets.ServletUsr.doGet(ServletUsr.java:258)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:504)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1132)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+18-Oct-2017 00:43:19.048 GRAVE [http-nio-8080-exec-396] org.apache.catalina.core.ApplicationDispatcher.invoke El Servlet.service() para servlet jsp lanzó una excepción
+ org.apache.jasper.JasperException: No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:457)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:363)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:338)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:325)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:586)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:716)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:466)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:391)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:318)
+	at Serlvets.ServletUsr.doGet(ServletUsr.java:258)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:504)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1132)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+18-Oct-2017 00:43:19.084 GRAVE [http-nio-8080-exec-396] org.apache.catalina.core.StandardWrapperValve.invoke El Servlet.service() para el servlet [ServletUsr] en el contexto con ruta [/Tecnopotify] lanzó la excepción [No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Stacktrace:] con causa raíz
+ org.apache.jasper.JasperException: No se puede compilar la clase para JSP: 
+
+Ha tenido lugar un error en la línea: [14] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import com.sun.corba.se.spi.presentation.rmi.StubAdapter.request cannot be resolved
+
+Ha tenido lugar un error en la línea: [15] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on token "(", . expected
+
+Ha tenido lugar un error en la línea: [16] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+The import String cannot be resolved
+
+Ha tenido lugar un error en la línea: [17] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+Syntax error on tokens, Name expected instead
+
+Ha tenido lugar un error en la línea: [56] en el fichero java generado: [/home/diego-lucia/Escritorio/Paaps/apache-tomcat-8.0.46/work/Catalina/localhost/Tecnopotify/org/apache/jsp/mostrarCliente_jsp.java]
+String literal is not properly closed by a double-quote
+
+Stacktrace:
+	at org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:102)
+	at org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:198)
+	at org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:457)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:363)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:338)
+	at org.apache.jasper.compiler.Compiler.compile(Compiler.java:325)
+	at org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:586)
+	at org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:363)
+	at org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:396)
+	at org.apache.jasper.servlet.JspServlet.service(JspServlet.java:340)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:716)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:466)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:391)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:318)
+	at Serlvets.ServletUsr.doGet(ServletUsr.java:258)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:622)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:729)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:94)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:504)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:620)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:502)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1132)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:684)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1539)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1495)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+18-Oct-2017 00:47:45.014 INFORMACIÓN [localhost-startStop-3] org.apache.catalina.core.ApplicationContext.log SessionListener: contextDestroyed()
+18-Oct-2017 00:47:45.014 INFORMACIÓN [localhost-startStop-3] org.apache.catalina.core.ApplicationContext.log ContextListener: contextDestroyed()

@@ -4,6 +4,11 @@
     Author     : diego-lucia
 --%>
 
+<%@page import="com.sun.corba.se.spi.presentation.rmi.StubAdapter.request
+        (Object, String, 
+        boolean)"%>
+<%@page import="edu.tecnopotify.entidades.Temas"%>
+<%@page import="java.util.List"%>
 <%@page import="edu.tecnopotify.entidades.Artista"%>
 <%@page import="java.awt.PageAttributes.MediaType"%>
 <%@page import="edu.tecnopotify.entidades.Cliente"%>
@@ -30,42 +35,89 @@
 
         <%-- <input type="hidden"  name="comando" value="mostrarCliente.jsp" />--%>
         <div class="container">
-            <%
-                IControlador crl;
-                Fabrica fabrica = Fabrica.getInstance();
-                crl = fabrica.getInstancia();
-                String nick = (String) request.getSession().getAttribute("user");
-                //String nick = (String) session.getAttribute("user");
-                Usuario usr = crl.getUsuario(nick);
-                String nombre = usr.getNombre();
-                String apellido = usr.getApellido();
-                int dia = usr.getF_nac().getDia();
-                int mes = usr.getF_nac().getMes();
-                int anio = usr.getF_nac().getAnio();
-                String mail = usr.getMail();
-               
 
-            %>
             <div class="container">
 
                 <h3>Nombre: </h3>
-                <input type="text"  value =<%= nombre%> /> <br/>
+                <input type="text"  value =<%= request.getAttribute("nombre")%> /> <br/>
                 <h3>Apellido: </h3>
-                <input type="text" name="apellido" value =<%= apellido%> /> <br/>
+                <input type="text" value =<%= request.getAttribute("apellido")%> /> <br/>
                 <h3>Fecha de Nacimiento: </h3> <br/>
-                <input type="text" name="dia" value =<%= dia%> />
+                <input type="text"  value =<%= request.getAttribute("dia")%> />
                 /
-                <input type="text" name="mes" value =<%= mes%> />
+                <input type="month"  value =<%= request.getAttribute("mes")%> />
                 /
-                <input type="text" name="anio" value =<%= anio%> /> <br/>
+                <input type="text"  value =<%= request.getAttribute("anio")%> /> <br/>
                 <h3>Mail:</h3>
-                <input type="text" name="mail" value =<%= mail%> /> <br/>
+                <input type="text"  value =<%= request.getAttribute("mail")%> /> <br/>
                 <h3>Imagen:</h3>
                 <div class="container" style="margin-top: 60px">
-                    <img 
-                        src="<%= request.getContextPath() + "/imagenes/" + request.getAttribute("imagen")%>" />
-
+                    <img src="<%= request.getAttribute("imagen")%>" />
                 </div> 
+                <h3>Tipo de Suscripcion:</h3>
+                <input type="text"  value =<%= request.getAttribute("suscripcion")%> /> <br/>
+
+                <% List<String> temas = (ArrayList) request.getAttribute("temas");
+                    Iterator<String> itT = temas.iterator();
+                    List<String> albums = (ArrayList) request.getAttribute("albums");
+                    Iterator<String> itA = albums.iterator();
+                    List<String> listRepFav = (ArrayList) request.getAttribute("listRFav");
+                    Iterator<String> itRepFav = listRepFav.iterator();
+                    List<String> listRepProp = (ArrayList) request.getAttribute("listRpropia");
+                    Iterator<String> itRepProp = listRepProp.iterator();
+                    List<String> listseg = (ArrayList) request.getAttribute("seguidos");
+                    Iterator<String> itSeg = listseg.iterator();
+                %>      
+                <h3>Temas Favoritos:</h3>   
+                <table>
+                    <% while (itT.hasNext()) {%>
+                    <tr>
+                        <td><%= itT.next() %></td>                        
+                    </tr>
+                    <%}%>
+                </table> <br/>
+
+                <h3>Albums Favoritos:</h3>   
+                <table>
+                    <% while (itA.hasNext()) {%>
+                    <tr>
+                        <td><a href= "<%= request.getContextPath()%>/mostrarAlbum.jsp">itA.next()</a></td>                                    
+                    </tr>
+                    <%}%>
+                </table> <br/>
+
+                <h3>Lista Reproduccion Favoritos:</h3>   
+                <table>
+                    <% while (itRepFav.hasNext()) {%>
+                    <tr>
+                        <td><%= itRepFav.next()%></td>                        
+                    </tr>
+                    <%}%>
+                </table> <br/>
+                
+                 <h3>Lista Reproduccion Propia:</h3>   
+                <table>
+                    <% while (itRepProp.hasNext()) {%>
+                    <tr>
+                        <td><%= itRepProp.next()  %></td>                        
+                    </tr>
+                    <%}%>
+                </table> <br/>
+                
+                 <h3>Lista de Seguidos:</h3>   
+                <table>
+                    <% while (itSeg.hasNext()) {%>
+                    <tr>
+                        <td><%= itSeg.next() %></td>                        
+                    </tr>
+                    <%}%>
+                </table> <br/>
+
+
+
+
+
+
             </div>
 
 
