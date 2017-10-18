@@ -111,27 +111,41 @@ public class Servletimagenes extends HttpServlet {
                 Fabrica fabrica = Fabrica.getInstance();
                 crl = fabrica.getInstancia();
                 String comando = request.getParameter("comando");
-                    switch (comando) {
-                        case "altaCli":
-                            Cliente cli = crl.getCli((String) request.getParameter("id"));
-                            cli.setImagen(file.getAbsolutePath());
-                            crl.setImageCli(cli);
-                            break;
-                        case "altaArt":
-                            Artista art = crl.seleccionarArtista((String) request.getParameter("id"));
-                            art.setImagen(file.getAbsolutePath());
-                            crl.setImageArt(art);
-                            break;
-                        case "altaAlbum":
-                            Album album = crl.seleccionarAlbum((String) request.getParameter("id"));
-                            album.setImagenAlbum(file.getAbsolutePath());
-                            crl.setImage(album);
-                            break;
-                        default:
-                            break;
-
-                    }
-                }           
+                RequestDispatcher despachador=null;
+                Album album=null;
+                switch (comando) {
+                    case "altaCli":
+                        Cliente cli = crl.getCli((String) request.getParameter("id"));
+                        cli.setImagen(file.getAbsolutePath());
+                        crl.setImageCli(cli);
+                        break;
+                    case "altaArt":
+                        Artista art = crl.seleccionarArtista((String) request.getParameter("id"));
+                        art.setImagen(file.getAbsolutePath());
+                        crl.setImageArt(art);
+                        break;
+                    case "altaAlbum":
+                        album = crl.seleccionarAlbum((String) request.getParameter("id"));
+                        album.setImagenAlbum(file.getAbsolutePath());
+                        crl.setImage(album);
+                        request.setAttribute("id", album.getNombre());
+                        request.setAttribute("comando", "altaTema");
+                        despachador = request.getRequestDispatcher("/Temas/altaTemas.jsp");
+                        despachador.forward(request, response);
+                        break;
+                    case "altaTema":
+                        album = crl.seleccionarAlbum((String) request.getParameter("id"));
+                        album.setImagenAlbum(file.getAbsolutePath());
+                        crl.setImage(album);
+                        request.setAttribute("id", album.getNombre());
+                        request.setAttribute("comando", "altaTema");
+                        despachador = request.getRequestDispatcher("/Temas/altaTemas.jsp");
+                        despachador.forward(request, response);
+                        break;
+                    default:
+                        break;
+                }
+            }
         } catch (Exception e) {
             System.out.println("Error!");
         }

@@ -44,10 +44,10 @@ public class ServletSeguirUsuario extends HttpServlet {
         
         Suscripcion suscr = new Suscripcion();
         suscr.setStatus("VIGENTE");
+        
         Usuario cl = crl.getUsuario(nickUsr);
         if ((Cliente) cl != null) {
             Cliente cliente = (Cliente) cl;
-            cliente.setSuscripcion(suscr);
             if (comando != null && comando.equals("seguirUsuario") && (cliente.getSuscripcion().status == suscr.getStatus())) {
                 String usrSeguido = request.getParameter("usrASeguir");
                 boolean dejarSeguir = (!"Si".equals(request.getParameter("Dejar de seguir").toString()));
