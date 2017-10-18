@@ -344,12 +344,12 @@ cancelar el alta.*/
                 String link = this.jTextFieldLink.getText();
                 String biografia = this.jTextPaneBiografia.getText();
                 dataUsuario art = new dataArtista(link, biografia, nickname, nombre, apellido,
-                        mail, fecha, contra1, imagen);
+                        mail, fecha, imagen, contra1);
                 crl.crearArtista(biografia, link, art);
                 JOptionPane.showMessageDialog(this, "El Artista se ha creado con éxito", "Registrar Artista", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 dataUsuario cli = new dataCliente(nickname, nombre, apellido,
-                        mail, fecha, contra1, imagen);
+                        mail, fecha, imagen, contra1);
                 crl.crearCliente(cli);
                 JOptionPane.showMessageDialog(this, "El Cliente se ha creado con éxito", "Registrar Cliente", JOptionPane.INFORMATION_MESSAGE);
             }

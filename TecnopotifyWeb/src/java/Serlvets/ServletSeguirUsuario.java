@@ -42,19 +42,21 @@ public class ServletSeguirUsuario extends HttpServlet {
         String comando = request.getParameter("comando");
         String nickUsr = (String) request.getSession().getAttribute("user");
         
-        Suscripcion suscr = new Suscripcion();
-        suscr.setStatus("VIGENTE");
-        Usuario cl = crl.getUsuario(nickUsr);
-        if ((Cliente) cl != null) {
-            Cliente cliente = (Cliente) cl;
-            cliente.setSuscripcion(suscr);
-            if (comando != null && comando.equals("seguirUsuario") && (cliente.getSuscripcion().status == suscr.getStatus())) {
-                String usrSeguido = request.getParameter("usrASeguir");
-                boolean dejarSeguir = (!"Si".equals(request.getParameter("Dejar de seguir").toString()));
-                if (dejarSeguir) {
-                    crl.dejarDeSeguirUsuario(nickUsr, usrSeguido);
-                } else {
-                    crl.seguirUsuario(nickUsr, usrSeguido);
+        if (nickUsr != null) {
+            Suscripcion suscr = new Suscripcion();
+            suscr.setStatus("VIGENTE");
+            Usuario cl = crl.getUsuario(nickUsr);
+            if ((Cliente) cl != null) {
+                Cliente cliente = (Cliente) cl;
+                cliente.setSuscripcion(suscr);
+                if (comando != null && comando.equals("seguirUsuario") && (cliente.getSuscripcion().status == suscr.getStatus())) {
+                    String usrSeguido = request.getParameter("usrASeguir");
+                    boolean dejarSeguir = (!"Si".equals(request.getParameter("Dejar de seguir").toString()));
+                    if (dejarSeguir) {
+                        crl.dejarDeSeguirUsuario(nickUsr, usrSeguido);
+                    } else {
+                        crl.seguirUsuario(nickUsr, usrSeguido);
+                    }
                 }
             }
         }
