@@ -28,7 +28,7 @@
                             <a href="#" class="Album" data-toggle="dropdown"
                                role="button" aria-haspopup="true" aria-expanded="false">Album <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="<%= request.getContextPath()%>Album/AltaAlbum.jsp">Crear album</a></li>
+                                <li><a href="<%= request.getContextPath()%>/Album/AltaAlbum.jsp">Crear album</a></li>
                                 <li><a href="#">Opcion3</a></li>
                                 <li><a href="#">Opcion4</a></li>
                         
