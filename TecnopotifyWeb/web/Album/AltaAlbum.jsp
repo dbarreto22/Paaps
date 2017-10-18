@@ -22,7 +22,7 @@
     <h1> Alta album </h1>
     <jsp:include page="/templates/header.jsp" />
     <form action="<%= request.getContextPath()%>/Album"
-          method="get">
+          method="post">
         <div class ="container">
             Artista:
             <label for="male"><%=request.getSession().getAttribute("user")%></label> <br>
@@ -33,35 +33,8 @@
             <input type="text" name="nombreAlbum" /><br>
             Año: <br>
             <input type="number" name="anio" /> <br>
-            Ingrese una imagen: <br> <br>
-            <div class="form-group">
-                <label for="imgFile" class="col-sm-2 control-label">Imagen</label>
-                <div class="col-sm-10">
-                    <input type="file" 
-                           id="imgFile" name="fimg" 
-                           accept="image/*" />
-                    <p class="help-block">Subir cualquier tipo de imagenes.</p>
-                </div>
-            </div>
             <input type="submit" value="Enviar" />
             <input>
         </div>
-    </form> <%--<form class="form-horizontal" 
-              action="<%= request.getContextPath() %>/imagenes"  
-              method = "post" enctype = "multipart/form-data">  
-            <div class="form-group">
-                <label for="imgFile" class="col-sm-2 control-label">Imagen</label>
-                <div class="col-sm-10">
-                    <input type="file" 
-                           id="imgFile" name="fimg" 
-                           accept="image/*" />
-                    <p class="help-block">Subir cualquier tipo de imagenes.</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Enviar</button>
-                </div>
-            </div>
-        </form>--%>
+    </form> 
 </html>

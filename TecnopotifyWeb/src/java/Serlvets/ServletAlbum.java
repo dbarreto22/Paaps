@@ -30,11 +30,13 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 @WebServlet(name = "ServletAlbum", urlPatterns = {"/ServletAlbum"})
 public class ServletAlbum extends HttpServlet {
+
     private IControlador iCtrl;
     private Fabrica fabrica;
     private static final long serialVersionUID = 1L;
     private ServletFileUpload uploader = null;
     private String fileDirStr = null;
+
     @Override
     public void init() throws ServletException {
         String rootPath = System.getProperty("user.home");
@@ -50,6 +52,7 @@ public class ServletAlbum extends HttpServlet {
         fabrica = Fabrica.getInstance();
         iCtrl = fabrica.getInstancia();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -72,22 +75,7 @@ public class ServletAlbum extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher despachador;
-        fabrica = Fabrica.getInstance();
-        iCtrl = fabrica.getInstancia();
-        String path = "";
-        String comando = request.getParameter("comando");
-        if (comando != null && comando.equals("altaAlbum")) {
-            Artista artista;
-            String idAlbum = request.getParameter("nombreAlbum");
-            int anio = Integer.parseInt(request.getParameter("anio"));
-            String usr = request.getParameter("usr");
-            dataAlbum oDtAlbum = new dataAlbum(idAlbum, anio, path);
-            artista=iCtrl.seleccionarArtistaPorNombre(usr);
-            iCtrl.crearAlbum(artista.getNickname(), oDtAlbum);
-            despachador = request.getRequestDispatcher("/Temas/altaTema.jsp");//Deber{ia llamar a la pagina que agrega los temas al album
-            despachador.forward(request, response);
-        }
+
     }
 
     /**
@@ -101,29 +89,23 @@ public class ServletAlbum extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (!ServletFileUpload.isMultipartContent(request)) {
-            throw new ServletException("Content type is not multipart/form-data");
-        }
         response.setContentType("text/html");
-        try {
-            List<FileItem> fileItemsList = uploader.parseRequest(request);
-            Iterator<FileItem> fileItemsIterator = fileItemsList.iterator();
-            while (fileItemsIterator.hasNext()) {
-                System.out.println("Archivo::");
-                FileItem fileItem = fileItemsIterator.next();
-                System.out.println("\tNombre=" + fileItem.getFieldName());
-                System.out.println("\tNombre archivo=" + fileItem.getName());
-                System.out.println("\ttipo=" + fileItem.getContentType());
-                System.out.println("\tTamanio=" + fileItem.getSize());
-                request.setAttribute("imagen", fileItem.getName());
-                File file = new File(fileDirStr + File.separator + fileItem.getName());
-                System.out.println("Absolute Path at server=" + file.getAbsolutePath());
-                fileItem.write(file);
-            }
-        } catch (Exception e) {
-            System.out.println("Error!");
+        fabrica = Fabrica.getInstance();
+        iCtrl = fabrica.getInstancia();
+        String comando= request.getParameter("comando");
+        String path = "";
+        if (comando != null && comando.equals("altaAlbum")) {
+            Artista artista;
+            String idAlbum = request.getParameter("nombreAlbum");
+            int anio = Integer.parseInt(request.getParameter("anio"));
+            String usr = request.getParameter("usr");
+            dataAlbum oDtAlbum = new dataAlbum(idAlbum, anio, path);
+            artista = iCtrl.seleccionarArtista(usr);
+            iCtrl.crearAlbum(artista.getNickname(), oDtAlbum);
+            request.setAttribute("comando", comando);
+            request.setAttribute("id", idAlbum);
         }
-        request.getRequestDispatcher("/mostrarImg.jsp").forward(request, response);
+        request.getRequestDispatcher("/subirImg.jsp").forward(request, response);
     }
 
     /**

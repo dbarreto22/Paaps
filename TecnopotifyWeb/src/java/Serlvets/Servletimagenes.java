@@ -5,6 +5,7 @@
  */
 package Serlvets;
 
+import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.fabrica.Fabrica;
@@ -55,23 +56,11 @@ public class Servletimagenes extends HttpServlet {
         this.uploader = new ServletFileUpload(fileFactory);
     }
 
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//        throws ServletException, IOException
-//    {
-//        String filename = URLDecoder.decode(request.getPathInfo().substring(1), "UTF-8");
-//        File file = new File("/path/to/files", filename);
-//        response.setHeader("Content-Type", getServletContext().getMimeType(filename));
-//        response.setHeader("Content-Length", String.valueOf(file.length()));
-//        response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
-//        Files.copy(file.toPath(), response.getOutputStream());
-//    }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String fileName
                 = URLDecoder.decode(request.getPathInfo().substring(1), "UTF-8");
         System.out.println("filename:" + fileName);
 
-//        String fileName = request.getParameter("fileName");
         if (fileName == null || fileName.equals("")) {
             throw new ServletException("Debe cargar una Imagen");
         }
@@ -115,31 +104,34 @@ public class Servletimagenes extends HttpServlet {
             fileItemsList = uploader.parseRequest(request);
             Iterator<FileItem> fileItemsIterator = fileItemsList.iterator();
             while (fileItemsIterator.hasNext()) {
-                //  System.out.println("Archivo::");
                 FileItem fileItem = fileItemsIterator.next();
-                /*     System.out.println("\tNombre=" + fileItem.getFieldName());
-                System.out.println("\tNombre archivo=" + fileItem.getName());
-                System.out.println("\ttipo=" + fileItem.getContentType());
-                System.out.println("\tTamanio=" + fileItem.getSize());*/
                 request.setAttribute("imagen", fileItem.getName());
-
                 File file = new File(fileDirStr + File.separator + fileItem.getName());
-                //System.out.println("Absolute Path at server=" + file.getAbsolutePath());
                 fileItem.write(file);
                 Fabrica fabrica = Fabrica.getInstance();
                 crl = fabrica.getInstancia();
                 String comando = request.getParameter("comando");
-                if (comando.equals("altaCli")) {
-                    Cliente cli = crl.getCli((String) request.getParameter("id"));
-                    cli.setImagen(file.getAbsolutePath());
-                    crl.setImageCli(cli);
-                } else if (comando.equals("altaArt")) {
-                    Artista art = crl.seleccionarArtista((String) request.getParameter("id"));
+                    switch (comando) {
+                        case "altaCli":
+                            Cliente cli = crl.getCli((String) request.getParameter("id"));
+                            cli.setImagen(file.getAbsolutePath());
+                            crl.setImageCli(cli);
+                            break;
+                        case "altaArt":
+                            Artista art = crl.seleccionarArtista((String) request.getParameter("id"));
+                            art.setImagen(file.getAbsolutePath());
+                            crl.setImageArt(art);
+                            break;
+                        case "altaAlbum":
+                            Album album = crl.seleccionarAlbum((String) request.getParameter("id"));
+                            album.setImagenAlbum(file.getAbsolutePath());
+                            crl.setImage(album);
+                            break;
+                        default:
+                            break;
 
-                    art.setImagen(file.getAbsolutePath());
-                    crl.setImageArt(art);
-                }
-            }
+                    }
+                }           
         } catch (Exception e) {
             System.out.println("Error!");
         }
