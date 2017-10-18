@@ -111,5 +111,7 @@ public interface IControlador {
     public void setImageCli(Cliente cli);
     
     public void setImageArt(Artista art);
+
+    public void setImage(Album aux);
 }
 

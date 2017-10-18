@@ -556,6 +556,15 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void setImage(Album aux) {
+        AlbumJpaController ctr = new AlbumJpaController(fact);
+        try {
+            ctr.edit(aux);
+        } catch (Exception ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }    
 
     public void cargarDatos() {
 
