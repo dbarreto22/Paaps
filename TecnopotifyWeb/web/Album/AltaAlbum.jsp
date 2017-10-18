@@ -22,7 +22,7 @@
     <h1> Alta album </h1>
     <jsp:include page="/templates/header.jsp" />
     <form action="<%= request.getContextPath()%>/Album"
-          method="get">
+          method="post">
         <div class ="container">
             Artista:
             <label for="male"><%=request.getSession().getAttribute("user")%></label> <br>
