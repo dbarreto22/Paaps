@@ -111,6 +111,8 @@ public class Servletimagenes extends HttpServlet {
                 Fabrica fabrica = Fabrica.getInstance();
                 crl = fabrica.getInstancia();
                 String comando = request.getParameter("comando");
+                RequestDispatcher despachador=null;
+                Album album=null;
                 switch (comando) {
                     case "altaCli":
                         Cliente cli = crl.getCli((String) request.getParameter("id"));
@@ -123,9 +125,22 @@ public class Servletimagenes extends HttpServlet {
                         crl.setImageArt(art);
                         break;
                     case "altaAlbum":
-                        Album album = crl.seleccionarAlbum((String) request.getParameter("id"));
+                        album = crl.seleccionarAlbum((String) request.getParameter("id"));
                         album.setImagenAlbum(file.getAbsolutePath());
                         crl.setImage(album);
+                        request.setAttribute("id", album.getNombre());
+                        request.setAttribute("comando", "altaTema");
+                        despachador = request.getRequestDispatcher("/Temas/altaTemas.jsp");
+                        despachador.forward(request, response);
+                        break;
+                    case "altaTema":
+                        album = crl.seleccionarAlbum((String) request.getParameter("id"));
+                        album.setImagenAlbum(file.getAbsolutePath());
+                        crl.setImage(album);
+                        request.setAttribute("id", album.getNombre());
+                        request.setAttribute("comando", "altaTema");
+                        despachador = request.getRequestDispatcher("/Temas/altaTemas.jsp");
+                        despachador.forward(request, response);
                         break;
                     default:
                         break;
