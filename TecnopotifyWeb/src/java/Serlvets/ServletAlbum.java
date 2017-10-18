@@ -92,7 +92,7 @@ public class ServletAlbum extends HttpServlet {
         response.setContentType("text/html");
         fabrica = Fabrica.getInstance();
         iCtrl = fabrica.getInstancia();
-        String comando= (String)request.getAttribute("comando");
+        String comando= request.getParameter("comando");
         String path = "";
         if (comando != null && comando.equals("altaAlbum")) {
             Artista artista;
@@ -100,12 +100,12 @@ public class ServletAlbum extends HttpServlet {
             int anio = Integer.parseInt(request.getParameter("anio"));
             String usr = request.getParameter("usr");
             dataAlbum oDtAlbum = new dataAlbum(idAlbum, anio, path);
-            artista = iCtrl.seleccionarArtistaPorNombre(usr);
+            artista = iCtrl.seleccionarArtista(usr);
             iCtrl.crearAlbum(artista.getNickname(), oDtAlbum);
             request.setAttribute("comando", comando);
             request.setAttribute("id", idAlbum);
         }
-        request.getRequestDispatcher("/Imagenes").forward(request, response);
+        request.getRequestDispatcher("/subirImg.jsp").forward(request, response);
     }
 
     /**

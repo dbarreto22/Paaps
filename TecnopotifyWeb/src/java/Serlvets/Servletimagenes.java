@@ -110,19 +110,25 @@ public class Servletimagenes extends HttpServlet {
                 fileItem.write(file);
                 Fabrica fabrica = Fabrica.getInstance();
                 crl = fabrica.getInstancia();
-                String comando = (String) request.getAttribute("comando");
-                if (comando.equals("altaCli")) {
-                    Cliente cli = crl.getCli((String) request.getParameter("id"));
-                    cli.setImagen(file.getAbsolutePath());
-                    crl.setImageCli(cli);
-                } else if (comando.equals("altaArt")) {
-                    Artista art = crl.seleccionarArtista((String) request.getParameter("id"));
-                    art.setImagen(file.getAbsolutePath());
-                    crl.setImageArt(art);
-                }else if (comando.equals("altaAlbum")) {
-                    Album album = crl.seleccionarAlbum((String) request.getParameter("id"));
-                    album.setImagenAlbum(file.getAbsolutePath());
-                    crl.setImage(album);
+                String comando = request.getParameter("comando");
+                switch (comando) {
+                    case "altaCli":
+                        Cliente cli = crl.getCli((String) request.getParameter("id"));
+                        cli.setImagen(file.getAbsolutePath());
+                        crl.setImageCli(cli);
+                        break;
+                    case "altaArt":
+                        Artista art = crl.seleccionarArtista((String) request.getParameter("id"));
+                        art.setImagen(file.getAbsolutePath());
+                        crl.setImageArt(art);
+                        break;
+                    case "altaAlbum":
+                        Album album = crl.seleccionarAlbum((String) request.getParameter("id"));
+                        album.setImagenAlbum(file.getAbsolutePath());
+                        crl.setImage(album);
+                        break;
+                    default:
+                        break;
                 }
             }
         } catch (Exception e) {
