@@ -579,7 +579,7 @@ public class Controlador implements IControlador {
         crearArtista("ffxfxfx", "www.er.com", u4);
         dataUsuario u5 = new dataUsuario("discoteishon", "Carlos", "Nuñez", "cn@tecnopotify.java", fecha, "", "discoteishon");
         dataUsuario u6 = new dataUsuario("md", "Melany", "Dolgay", "md@tecnopotify.java", fecha, "", "md");
-        dataUsuario u7 = new dataUsuario("db", "Diego", "Barreto", "db@tecnopotify.java", fecha, "", "db");
+        dataUsuario u7 = new dataUsuario("db", "Diego", "Barreto", "db@tecnopotify.java", fecha, "/home/diego-lucia/Imágenes/Modelo.png", "db");
         crearCliente(u5);
         crearCliente(u6);
         crearCliente(u7);
