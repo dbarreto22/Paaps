@@ -37,6 +37,17 @@
         <div class="container">
 
             <div class="container">
+                <% List<String> temas = (ArrayList) request.getAttribute("temas");
+                    Iterator<String> itT = temas.iterator();
+                    List<String> albums = (ArrayList) request.getAttribute("albums");
+                    Iterator<String> itA = albums.iterator();
+                    List<String> listRepFav = (ArrayList) request.getAttribute("listRFav");
+                    Iterator<String> itRepFav = listRepFav.iterator();
+                    List<String> listRepProp = (ArrayList) request.getAttribute("listRpropia");
+                    Iterator<String> itRepProp = listRepProp.iterator();
+                    List<String> listseg = (ArrayList) request.getAttribute("seguidos");
+                    Iterator<String> itSeg = listseg.iterator();
+                %>  
 
                 <h3>Nombre: </h3>
                 <input type="text"  value =<%= request.getAttribute("nombre")%> /> <br/>
@@ -57,22 +68,12 @@
                 <h3>Tipo de Suscripcion:</h3>
                 <input type="text"  value =<%= request.getAttribute("suscripcion")%> /> <br/>
 
-                <% List<String> temas = (ArrayList) request.getAttribute("temas");
-                    Iterator<String> itT = temas.iterator();
-                    List<String> albums = (ArrayList) request.getAttribute("albums");
-                    Iterator<String> itA = albums.iterator();
-                    List<String> listRepFav = (ArrayList) request.getAttribute("listRFav");
-                    Iterator<String> itRepFav = listRepFav.iterator();
-                    List<String> listRepProp = (ArrayList) request.getAttribute("listRpropia");
-                    Iterator<String> itRepProp = listRepProp.iterator();
-                    List<String> listseg = (ArrayList) request.getAttribute("seguidos");
-                    Iterator<String> itSeg = listseg.iterator();
-                %>      
+
                 <h3>Temas Favoritos:</h3>   
                 <table>
                     <% while (itT.hasNext()) {%>
                     <tr>
-                        <td><%= itT.next() %></td>                        
+                        <td><%= itT.next()%></td>                        
                     </tr>
                     <%}%>
                 </table> <br/>
@@ -94,28 +95,24 @@
                     </tr>
                     <%}%>
                 </table> <br/>
-                
-                 <h3>Lista Reproduccion Propia:</h3>   
+
+                <h3>Lista Reproduccion Propia:</h3>   
                 <table>
                     <% while (itRepProp.hasNext()) {%>
                     <tr>
-                        <td><%= itRepProp.next()  %></td>                        
+                        <td><%= itRepProp.next()%></td>                        
                     </tr>
                     <%}%>
                 </table> <br/>
-                
-                 <h3>Lista de Seguidos:</h3>   
+
+                <h3>Lista de Seguidos:</h3>   
                 <table>
                     <% while (itSeg.hasNext()) {%>
                     <tr>
-                        <td><%= itSeg.next() %></td>                        
+                        <td><%= itSeg.next()%></td>                        
                     </tr>
                     <%}%>
                 </table> <br/>
-
-
-
-
 
 
             </div>
