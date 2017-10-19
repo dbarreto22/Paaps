@@ -84,7 +84,7 @@ public class ServletTema extends HttpServlet {
             request.setAttribute("id", idAlbum);
             request.setAttribute("idAlbum",idAlbum);
         }
-        request.getRequestDispatcher("/subirImg.jsp").forward(request, response);
+        request.getRequestDispatcher("/Temas/subirTema.jsp").forward(request, response);
 
     }
 
