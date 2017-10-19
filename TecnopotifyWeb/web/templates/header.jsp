@@ -37,7 +37,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
             
-                <jsp:include page="/templates/loginfo.jsp"/>        
+                <%-- <jsp:include page="/templates/loginfo.jsp"/>    --%>    
 
             </ul>
         </div><!--/.nav-collapse -->
