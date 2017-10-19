@@ -21,52 +21,28 @@
 
         <h1>Datos Artista</h1>
 
-        <%
-            IControlador crl;
-            Fabrica fabrica = Fabrica.getInstance();
-            crl = fabrica.getInstancia();
-            String nick = (String) request.getSession().getAttribute("user");
-            //String nick = (String) session.getAttribute("user");
-            Artista usr = crl.seleccionarArtista(nick);
-            String nombre = usr.getNombre();
-            String apellido = usr.getApellido();
-            int dia = usr.getF_nac().getDia();
-            int mes = usr.getF_nac().getMes();
-            int anio = usr.getF_nac().getAnio();
-            String mail = usr.getMail();
-            String link = usr.getLink();
-            String biografia = usr.getBiografia();
+        <form   method = "post" >
+            <input type="hidden"  name="comando" value="mostrarArtista" />
+            <div class="container">
+                <h4>Nombre: </h4>
+                <input type="text"  value =<%= request.getAttribute("nombre")%> /> <br/>
+                <h4>Apellido </h4>
+                <input type="text"  value =<%= request.getAttribute("apellido")%> /> <br/>
+                <h4>Mail: </h4>
+                <input type="text"  value =<%= request.getAttribute("mail")%> /> <br/>
+                <h4>Biografia: </h4>
+                <input type="text"  value =<%= request.getAttribute("biografia")%> /> <br/>
+                <h4>Link: </h4>
+                <input type="text"  value =<%= request.getAttribute("link")%> /> <br/>
+                
+                
+                <h4>Imagen: </h4>
+                <img type="text"  src="<%= request.getAttribute("imagen")%>" /> <br/>
 
-        %>
 
-
-        <input type="hidden"  name="comando" value="mostrarCliente" />
-        <div class="container">
-            <h3>Nombre: </h3>
-            <input type="text"  value =<%= nombre%> /> <br/>
-            <h3>Apellido: </h3>
-            <input type="text" name="apellido" value =<%= apellido%> /> <br/>
-            <h3>Fecha de Nacimiento: </h3> <br/>
-            <input type="text" name="dia" value =<%= dia%> />
-            /
-            <input type="text" name="mes" value =<%= mes%> />
-            /
-            <input type="text" name="anio" value =<%= anio%> /> <br/>
-            <h3> Mail:</h3>
-            <input type="text" name="mail" value =<%= mail%> /> <br/>
-            <h3> Link:</h3>
-            <input type="text" name="mail" value =<%= link%> /> <br/>
-            <h3> Biografia:</h3>
-            <input type="text" name="mail" value =<%= biografia%> /> <br/>
-            <h3>Imagen:</h3>
-          <div class="container" style="margin-top: 60px">
-                    <img 
-                        src="<%= request.getContextPath() + "/imagenes/" + request.getAttribute("imagen")%>" />
-                </div>  
+            </div>
+        </form> 
         </div>
-
-
-
 
         <jsp:include page="/templates/scripts.jsp" />
     </body>

@@ -37,7 +37,7 @@ public class ServletAutenticacion extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
-        crl.cargarDatos();
+
 
         String comando = request.getParameter("comando");
         Usuario usr;
