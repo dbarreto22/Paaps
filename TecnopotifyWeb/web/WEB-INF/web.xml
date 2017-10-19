@@ -32,6 +32,10 @@
         <servlet-name>ServletAlbum</servlet-name>
         <servlet-class>Serlvets.ServletAlbum</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletTemas</servlet-name>
+        <servlet-class>Serlvets.ServletTema</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsr</servlet-name>
         <url-pattern>/usuarios</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ServletAlbum</servlet-name>
         <url-pattern>/Album</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletTemas</servlet-name>
+        <url-pattern>/Temas</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

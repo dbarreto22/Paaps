@@ -14,7 +14,7 @@
     String user = (String) session.getAttribute("user");
    
 
-    if ((user != null) && !user.isEmpty()) {
+    if ((user != null) && !user.isEmpty() && user.getClass().getName().contains("Cliente")) {
 %>
 <li><a href="#">Bienvenido <%= user%>!</a></li>
 <%

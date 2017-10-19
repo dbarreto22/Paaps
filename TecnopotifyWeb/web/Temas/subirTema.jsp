@@ -10,11 +10,11 @@
      <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <jsp:include page="templates/csss.jsp" />        
+        <jsp:include page="<%= request.getContextPath() %>/templates/csss.jsp" />        
     </head>
     <body>
 
-        <jsp:include page="templates/header.jsp" />
+        <jsp:include page="<%= request.getContextPath() %>/templates/header.jsp" />
 
         <div class="container" style="margin-top: 60px">
 
@@ -38,6 +38,6 @@
             </form>
 
         </div> <!-- /container -->
-        <jsp:include page="templates/scripts.jsp" />
+        <jsp:include page="<%= request.getContextPath() %>/templates/scripts.jsp" />
     </body>
 </html>

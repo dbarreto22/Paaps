@@ -130,7 +130,7 @@ public class Servletimagenes extends HttpServlet {
                         crl.setImage(album);
                         request.setAttribute("id", album.getNombre());
                         request.setAttribute("comando", "altaTema");
-                        despachador = request.getRequestDispatcher("/Temas/altaTemas.jsp");
+                        despachador = request.getRequestDispatcher("/Temas/altaTema.jsp");
                         despachador.forward(request, response);
                         break;
                     case "altaTema":
@@ -139,7 +139,7 @@ public class Servletimagenes extends HttpServlet {
                         crl.setImage(album);
                         request.setAttribute("id", album.getNombre());
                         request.setAttribute("comando", "altaTema");
-                        despachador = request.getRequestDispatcher("/Temas/altaTemas.jsp");
+                        despachador = request.getRequestDispatcher("/Temas/altaTema.jsp");
                         despachador.forward(request, response);
                         break;
                     default:
