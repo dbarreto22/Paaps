@@ -49,7 +49,7 @@ public class ServletAutenticacion extends HttpServlet {
             
             
             if(user.contains(a)){
-                usr = crl.buscarUsrMail(user);
+            usr = crl.buscarUsrMail(user);
             }else{
                  usr = crl.getUsuario(user);
             }
