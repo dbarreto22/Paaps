@@ -45,7 +45,11 @@ public class ServletAutenticacion extends HttpServlet {
             String user = request.getParameter("user");
             String pass = request.getParameter("pass");
             String a = "@";
-
+            if(user.contains(a)){
+            usr = crl.buscarUsrMail(user);
+            }else{
+                 usr = crl.getUsuario(user);
+            }
             try {
                 if (user.contains(a)) {
                     usr = crl.buscarUsrMail(user);

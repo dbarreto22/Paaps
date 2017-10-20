@@ -33,7 +33,9 @@
                 <h4>Mail: </h4>
                 <input type="text"  value =<%= request.getAttribute("mail")%> /> <br/>
                 <h4>Imagen: </h4>
-                <img type="text"  src="<%= request.getAttribute("imagen")%>" /> <br/>
+                <div class="container" style="margin-top: 60px">
+                <img   src="<%= request.getContextPath() + "/imagenes/" + request.getAttribute("imagen") %>" /> <br/>
+                </div> 
 
 
             </div>
