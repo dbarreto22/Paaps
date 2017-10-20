@@ -11,42 +11,43 @@
     IControlador crl;
     Fabrica fabrica = Fabrica.getInstance();
     crl = fabrica.getInstancia();
-    
-    String user = (String) session.getAttribute("user");
-    String comando ="mostrarCliente";
-    
-%> 
 
-<li><a href="<%= request.getContextPath()%>/usuarios?comando=<%=comando%>">Bienvenido <%= user %>!</a></li>
-<li><a href="<%= request.getContextPath() %>/autenticar?comando=logout">LogOut</a></li>
+    String user = (String) session.getAttribute("user");
+    String comando = "mostrarCliente";
+
+%> 
+<% if (user != null) {%>
+    <li><a href="<%= request.getContextPath()%>/usuarios?comando=<%=comando%>">Bienvenido <%= user%>!</a></li>
+    <li><a href="<%= request.getContextPath()%>/autenticar?comando=logout">LogOut</a></li>
+<%}%>
 
 <%    if ((user != null) && !user.isEmpty() && user.getClass().getName().contains("Cliente")) {
-    Cliente cli = crl.seleccionarCliente(user);
-    if (cli.getSuscripcion().status == estado.PENDIENTE) {
+        Cliente cli = crl.seleccionarCliente(user);
+        if (cli.getSuscripcion().status == estado.PENDIENTE) {
 %>
 <li>Solicitud pendiente<br/><ui><a href="/contratarSuscripcion.jsp">Contratar suscripción</a></ui></li>
-<%
-    }
-    if (cli.getSuscripcion().status == estado.VIGENTE) {
-%>
-<li>Solicitud vigente</li>
-<%
-    }
-    if (cli.getSuscripcion().status == estado.CANCELADA) {
-%>
-<li>Solicitud cancelada<br/><ui><a href="/contratarSuscripcion.jsp">Contratar suscripción</a></ui></li>
-<%
-    }
-    if (cli.getSuscripcion().status == estado.VENCIDA) {
-%>
-<li>Solicitud vencida<br/><ui><a href="/contratarSuscripcion.jsp">Contratar suscripción</a></ui></li>
-<%
-    }
-%>
-
     <%
-    } else {
+        }
+        if (cli.getSuscripcion().status == estado.VIGENTE) {
     %>
+<li>Solicitud vigente</li>
+    <%
+        }
+        if (cli.getSuscripcion().status == estado.CANCELADA) {
+    %>
+<li>Solicitud cancelada<br/><ui><a href="/contratarSuscripcion.jsp">Contratar suscripción</a></ui></li>
+    <%
+        }
+        if (cli.getSuscripcion().status == estado.VENCIDA) {
+    %>
+<li>Solicitud vencida<br/><ui><a href="/contratarSuscripcion.jsp">Contratar suscripción</a></ui></li>
+    <%
+        }
+    %>
+
+<%
+} else {
+%>
 <li><a href="<%= request.getContextPath()%>/login.jsp">Login</a></li>
     <%
         }
