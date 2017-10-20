@@ -45,7 +45,7 @@
     <%
         Fabrica fabrica = Fabrica.getInstance();
         IControlador crl = fabrica.getInstancia();
-//        crl.cargarDatos();
+        crl.cargarDatos();
         %>
     <body>
 

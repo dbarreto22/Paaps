@@ -113,5 +113,7 @@ public interface IControlador {
     public void setImageArt(Artista art);
 
     public void setImage(Album aux);
+    
+    public void setTema(Temas aux);
 }
 

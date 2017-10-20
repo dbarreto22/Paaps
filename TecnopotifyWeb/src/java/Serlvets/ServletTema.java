@@ -81,7 +81,7 @@ public class ServletTema extends HttpServlet {
             dataTemas oDtTema = new dataTemas(tema, duracion, pos, path);
             iCtrl.altaTema(oDtTema, idAlbum);
             request.setAttribute("comando", comando);
-            request.setAttribute("id", idAlbum);
+            request.setAttribute("id", tema);
             request.setAttribute("idAlbum",idAlbum);
         }
         request.getRequestDispatcher("/Temas/subirTema.jsp").forward(request, response);

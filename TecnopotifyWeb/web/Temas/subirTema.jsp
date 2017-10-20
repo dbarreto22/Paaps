@@ -10,24 +10,24 @@
      <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <jsp:include page="<%= request.getContextPath() %>/templates/csss.jsp" />        
+        <jsp:include page="../templates/csss.jsp" />        
     </head>
     <body>
 
-        <jsp:include page="<%= request.getContextPath() %>/templates/header.jsp" />
+        <jsp:include page="../templates/header.jsp" />
 
         <div class="container" style="margin-top: 60px">
 
             <form class="form-horizontal" 
-                  action="<%= request.getContextPath() %>/imagenes?id=<%= request.getAttribute("id") %>&comando=<%=request.getAttribute("comando")%>"  
+                  action="<%= request.getContextPath() %>/imagenes?id=<%= request.getAttribute("id") %>&comando=<%=request.getAttribute("comando")%>&idAlbum=<%= request.getAttribute("idAlbum") %>"  
                   method = "post" enctype = "multipart/form-data">  
                 <div class="form-group">
-                    <label for="audioFile" class="col-sm-2 control-label">Imagen</label>
+                    <label for="audioFile" class="col-sm-2 control-label">Audio</label>
                     <div class="col-sm-10">
                         <input type="file" 
                            id="audioFile" name="faudio1" 
                             accept="audio/*" />
-                        <p class="help-block">Subir cualquier tipo de imagenes.</p>
+                        <p class="help-block">Subir cualquier tipo de audio.</p>
                     </div>
                 </div>
                 <div class="form-group">
@@ -38,6 +38,6 @@
             </form>
 
         </div> <!-- /container -->
-        <jsp:include page="<%= request.getContextPath() %>/templates/scripts.jsp" />
+        <jsp:include page="../templates/scripts.jsp" />
     </body>
 </html>

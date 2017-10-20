@@ -3,32 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-            <file>file:/home/diego-lucia/Escritorio/Paaps/TecnopotifyWeb/src/java/Serlvets/Servletimagenes.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/web/templates/header.jsp</file>
->>>>>>> 13f5bcdd0fd06ff2250b46822ee0ef9f4b57f480
-            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/src/java/Serlvets/ServletAlbum.java</file>
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/web/subirImg.jsp</file>
-            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/web/Temas/altaTema.jsp</file>
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/src/java/Serlvets/Servletimagenes.java</file>
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/src/java/Serlvets/ServletTema.java</file>
-<<<<<<< HEAD
             <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/web/Temas/subirTema.jsp</file>
-=======
-            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/web/Album/AltaAlbum.jsp</file>
-=======
->>>>>>> dccd9fb86a276507750b2bda0abe874d90636ec0
-            <file>file:/home/diego-lucia/Escritorio/Paaps/TecnopotifyWeb/src/java/Serlvets/ServletAutenticacion.java</file>
-            <file>file:/home/diego-lucia/Escritorio/Paaps/TecnopotifyWeb/web/mostrarCliente.jsp</file>
-            <file>file:/home/diego-lucia/Escritorio/Paaps/TecnopotifyWeb/src/java/Serlvets/ServletUsr.java</file>
-            <file>file:/home/diego-lucia/Escritorio/Paaps/TecnopotifyWeb/web/templates/header.jsp</file>
->>>>>>> 5740796d98c74c88b8c5eb001cf83c37df987f6c
->>>>>>> 13f5bcdd0fd06ff2250b46822ee0ef9f4b57f480
+            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/web/login.jsp</file>
+            <file>file:/C:/Users/Carlox/Documents/GitHub/Paaps/TecnopotifyWeb/src/java/Serlvets/ServletAutenticacion.java</file>
         </group>
     </open-files>
 </project-private>

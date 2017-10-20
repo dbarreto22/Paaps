@@ -8,6 +8,7 @@ package Serlvets;
 import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.Temas;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import java.io.File;
@@ -134,10 +135,11 @@ public class Servletimagenes extends HttpServlet {
                         despachador.forward(request, response);
                         break;
                     case "altaTema":
-                        album = crl.seleccionarAlbum((String) request.getParameter("id"));
-                        album.setImagenAlbum(file.getAbsolutePath());
-                        crl.setImage(album);
-                        request.setAttribute("id", album.getNombre());
+                        Temas tema = crl.getTema(request.getParameter("id"));
+                        String idAlbum = (String) request.getAttribute("idAlbum");
+                        tema.setArchivo(file.getAbsolutePath());
+                        crl.setTema(tema);
+                        request.setAttribute("id", idAlbum);
                         request.setAttribute("comando", "altaTema");
                         despachador = request.getRequestDispatcher("/Temas/altaTema.jsp");
                         despachador.forward(request, response);

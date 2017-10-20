@@ -566,6 +566,14 @@ public class Controlador implements IControlador {
         }
     }    
 
+    public void setTema(Temas aux) {
+        TemasJpaController ctr = new TemasJpaController(fact);
+        try {
+            ctr.edit(aux);
+        } catch (Exception ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }  
     public void cargarDatos() {
 
         dataFecha fecha = new dataFecha(1, 1, 1980);

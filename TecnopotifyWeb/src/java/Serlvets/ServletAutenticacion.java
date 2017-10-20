@@ -38,29 +38,31 @@ public class ServletAutenticacion extends HttpServlet {
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
 
-
         String comando = request.getParameter("comando");
-        Usuario usr;
+        Usuario usr = null;
         if ((comando != null) && (comando.equals("login"))) {
             //obtener parametros y autenticar
             String user = request.getParameter("user");
             String pass = request.getParameter("pass");
             String a = "@";
-            
-            
-            if(user.contains(a)){
-                usr = crl.buscarUsrMail(user);
-            }else{
-                 usr = crl.getUsuario(user);
-            }
 
-            //consultar a la logica
-            if (pass.equals(usr.getContrasenia())) {
-                request.getSession().setAttribute("user", usr.getNickname());
+            try {
+                if (user.contains(a)) {
+                    usr = crl.buscarUsrMail(user);
+                } else {
+                    usr = crl.getUsuario(user);
+                }
+                //consultar a la logica
+                if (pass.equals(usr.getContrasenia())) {
+                    request.getSession().setAttribute("user", usr.getNickname());
+                    request.getRequestDispatcher("/ppal.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("error", "Usuario o contraseña incorrecto.");
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
+                }
+            } catch (Exception e) {
+                System.out.println("Error, no se encuentra el usuario");
                 request.getRequestDispatcher("/ppal.jsp").forward(request, response);
-            } else {
-                request.setAttribute("error", "Usuario o contraseña incorrecto.");
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
             }
         } else if ((comando != null) && (comando.equals("logout"))) {
             request.getSession().invalidate();

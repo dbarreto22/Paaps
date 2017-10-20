@@ -16,15 +16,15 @@
             <div class="container">
             <form action="<%= request.getContextPath()%>/Temas"  METHOD = "post" onsubmit="return validarDatos()">
                 <div class ="container">
-             <label for="male"><%=request.getSession().getAttribute("id")%></label> <br>
-                    <input type="hidden" name="id" value="<%=request.getSession().getAttribute("id")%>">
-                    <input type="hidden" name="comando" value="<%=request.getSession().getAttribute("comando")%>">
+             <label for="male"><%=request.getAttribute("id")%></label> <br>
+                    <input type="hidden" name="id" value="<%=request.getAttribute("id")%>">
+                    <input type="hidden" name="comando" value="<%=request.getAttribute("comando")%>">
                    Posicion:
-                    <input type="number" name=" pos" />
+                    <input type="number" name="pos" />
                     Nombre Tema: 
-                    <input type="text" name=" nombreTema" />
+                    <input type="text" name="nombreTema" />
                     Duración:
-                    <input type="number" name=" duracion" /> <br>
+                    <input type="number" name="duracion" /> <br>
                    <input type="submit" value="enviar" />
                 </div> 
             </form>
