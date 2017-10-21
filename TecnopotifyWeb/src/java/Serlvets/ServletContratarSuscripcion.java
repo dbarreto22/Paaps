@@ -40,6 +40,7 @@ public class ServletContratarSuscripcion extends HttpServlet {
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         
+        //Solo se puede entrar con suscripcion pendiente o vencida, son los únicos estados que permiten pasar a una suscripción vigente
         String comando = request.getParameter("comando");
         String nickUsr = (String) request.getSession().getAttribute("user");
         
@@ -47,10 +48,12 @@ public class ServletContratarSuscripcion extends HttpServlet {
         suscr.setStatus("PENDIENTE");
         Usuario cl = crl.getUsuario(nickUsr);
         Cliente cli = (Cliente) cl;
-        
-        if (comando != null && comando.equals("seguirUsuario") && (cli.getSuscripcion().status == suscr.getStatus())){
-            
+        String suscrContratar = request.getParameter("tipoSus");
+                
+        if (comando != null && comando.equals("contratarSuscripcion")){
+            crl.modificarSuscripcion(nickUsr, suscrContratar, ""); ///tomar el pago y pasarlo como parámetro NO OLVIDARRRRRRRRRRRR
         }
+        request.getRequestDispatcher("/ppal.jsp").forward(request, response);
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

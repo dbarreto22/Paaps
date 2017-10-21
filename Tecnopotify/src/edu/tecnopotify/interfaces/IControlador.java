@@ -30,7 +30,9 @@ public interface IControlador {
 
     public void altaGenero(dataGenero genero);
 
-    public void modificarSuscripcion(String nickname, String estadoSuscripcion);
+    public String obtenerEstadoSuscripcion(String nickCliente);
+
+    public void modificarSuscripcion(String nickname, String estadoSuscripcion, String pago);
             
     public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum);
 

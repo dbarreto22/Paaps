@@ -36,11 +36,14 @@
                 public enum pago 
                 SUSCRIPCION_PENDIENTE, SEMANAL, MENSUAL, ANUAL
                 -->
-                <label>SEMANAL</label>
-                <label>MENSUAL</label>
-                <label>ANUAL</label>
-
-                <input type="submit" value="Enviar" />
+                <select name="tipoSus" class="container">
+                    <option value="semanal">SEMANAL -- $70</option>
+                    <option value="mensual">MENSUAL -- $280</option>
+                    <option value="anual">ANUAL -- $3000</option>
+                </select>
+                <input type="hidden"  name="comando" value="contratarSuscripcion">
+                 <button class="btn btn-lg btn-primary btn-block" 
+                        type="submit">Enviar</button>
             </form>
             <%
             } else {

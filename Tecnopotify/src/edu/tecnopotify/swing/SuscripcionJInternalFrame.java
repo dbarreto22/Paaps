@@ -46,13 +46,20 @@ tipo de suscripción contratada (semanal, mensual o anual).
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
         initComponents();
+        
+        this.jComboBoxPago.setVisible(false);
+        this.jTextFieldPago.setVisible(false);
 
         rellenarElCoso();
-        
+        //tengo q ver estado de suscripción del primer cliente y cargar el combo según eso
         this.jComboBoxEstadoSuscripcion.addItem("PENDIENTE");
-        this.jComboBoxEstadoSuscripcion.addItem("VENCIDA");
+        //this.jComboBoxEstadoSuscripcion.addItem("VENCIDA");
         this.jComboBoxEstadoSuscripcion.addItem("VIGENTE");
         this.jComboBoxEstadoSuscripcion.addItem("CANCELADA");
+        
+        this.jComboBoxPago.addItem("SEMANAL");
+        this.jComboBoxPago.addItem("MENSUAL");
+        this.jComboBoxPago.addItem("ANUAL");
        
     }
 
@@ -78,6 +85,10 @@ tipo de suscripción contratada (semanal, mensual o anual).
         jLabelCliente1 = new javax.swing.JLabel();
         jComboBoxEstadoSuscripcion = new javax.swing.JComboBox();
         jButtonCambiarEstadoSusc = new javax.swing.JButton();
+        jLabelCliente2 = new javax.swing.JLabel();
+        jTextFieldSuscripcionActual = new javax.swing.JTextField();
+        jTextFieldPago = new javax.swing.JTextField();
+        jComboBoxPago = new javax.swing.JComboBox();
 
         jLabelCliente.setText("Cliente");
 
@@ -87,7 +98,7 @@ tipo de suscripción contratada (semanal, mensual o anual).
             }
         });
 
-        jLabelCliente1.setText("Suscripción");
+        jLabelCliente1.setText("Suscripción nueva:");
 
         jComboBoxEstadoSuscripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +113,16 @@ tipo de suscripción contratada (semanal, mensual o anual).
             }
         });
 
+        jLabelCliente2.setText("Suscripción actual:");
+
+        jTextFieldPago.setText("Pago:");
+
+        jComboBoxPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPagoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,14 +132,20 @@ tipo de suscripción contratada (semanal, mensual o anual).
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jComboBoxNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButtonCambiarEstadoSusc)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabelCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBoxEstadoSuscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(66, 66, 66)
+                        .addComponent(jComboBoxNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCliente1)
+                            .addComponent(jLabelCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxPago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTextFieldSuscripcionActual)
+                                .addComponent(jButtonCambiarEstadoSusc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBoxEstadoSuscripcion, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,13 +155,21 @@ tipo de suscripción contratada (semanal, mensual o anual).
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldSuscripcionActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxEstadoSuscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addComponent(jButtonCambiarEstadoSusc)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,28 +177,68 @@ tipo de suscripción contratada (semanal, mensual o anual).
 
     private void jComboBoxNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNicknameActionPerformed
         // TODO add your handling code here:
+        String nick = this.jComboBoxNickname.getSelectedItem().toString();
+        String estado = crl.obtenerEstadoSuscripcion(nick);
+        this.jTextFieldSuscripcionActual.setText(estado);
+
+        //tomo los estados posibles para la suscripción a partir del estado actual
+        if (estado.equals("PENDIENTE")) {
+            this.jComboBoxEstadoSuscripcion.removeItem("VENCIDA");
+        }
+        if (estado.equals("VIGENTE")) {
+            this.jComboBoxEstadoSuscripcion.removeItem("PENDIENTE");
+            this.jComboBoxEstadoSuscripcion.removeItem("CANCELADA");
+            this.jComboBoxEstadoSuscripcion.addItem("VENCIDA");
+        }
+        if (estado.equals("VENCIDA")) {
+            this.jComboBoxEstadoSuscripcion.removeItem("PENDIENTE");
+        }
+        if (estado.equals("CANCELADA")) {
+            this.jComboBoxEstadoSuscripcion.removeItem("VENCIDA");
+            this.jComboBoxEstadoSuscripcion.removeItem("VIGENTE");
+        }
+
     }//GEN-LAST:event_jComboBoxNicknameActionPerformed
 
     private void jComboBoxEstadoSuscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEstadoSuscripcionActionPerformed
         // TODO add your handling code here:
+        String suscrip = this.jComboBoxEstadoSuscripcion.getSelectedItem().toString();
+
+        if (suscrip.equals("VIGENTE")) {
+            //si la suscripción se va a cambiar a pendiente se considera la forma de pago
+            this.jComboBoxPago.setVisible(true);
+            this.jTextFieldPago.setVisible(true);
+        } else {
+            this.jComboBoxPago.setVisible(false);
+            this.jTextFieldPago.setVisible(false);
+        }
     }//GEN-LAST:event_jComboBoxEstadoSuscripcionActionPerformed
 
     private void jButtonCambiarEstadoSuscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCambiarEstadoSuscActionPerformed
         // TODO add your handling code here:
         String nick = this.jComboBoxNickname.getSelectedItem().toString();
         String suscrip = this.jComboBoxEstadoSuscripcion.getSelectedItem().toString();
-        
-        this.crl.modificarSuscripcion(nick, suscrip);
+        String pago = this.jComboBoxPago.getSelectedItem().toString();
+        this.crl.modificarSuscripcion(nick, suscrip, pago);
         
         JOptionPane.showMessageDialog(this, "Suscripción con éxito", "Modificar Suscripción", JOptionPane.INFORMATION_MESSAGE);
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonCambiarEstadoSuscActionPerformed
+
+    private void jComboBoxPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPagoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPagoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCambiarEstadoSusc;
     private javax.swing.JComboBox<String> jComboBoxEstadoSuscripcion;
     private javax.swing.JComboBox<String> jComboBoxNickname;
+    private javax.swing.JComboBox<String> jComboBoxPago;
     private javax.swing.JLabel jLabelCliente;
     private javax.swing.JLabel jLabelCliente1;
+    private javax.swing.JLabel jLabelCliente2;
+    private javax.swing.JTextField jTextFieldPago;
+    private javax.swing.JTextField jTextFieldSuscripcionActual;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,15 +24,23 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabelCliente" min="-2" pref="57" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="jComboBoxNickname" min="-2" pref="161" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                      <Component id="jComboBoxNickname" min="-2" pref="123" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="jButtonCambiarEstadoSusc" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="jLabelCliente1" min="-2" pref="79" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBoxEstadoSuscripcion" min="-2" pref="161" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelCliente1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelCliente2" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="jTextFieldPago" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jComboBoxPago" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jTextFieldSuscripcionActual" max="32767" attributes="0"/>
+                              <Component id="jButtonCambiarEstadoSusc" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jComboBoxEstadoSuscripcion" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -48,14 +56,24 @@
                   <Component id="jLabelCliente" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="jComboBoxNickname" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelCliente2" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="jTextFieldSuscripcionActual" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelCliente1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   <Component id="jComboBoxEstadoSuscripcion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jTextFieldPago" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBoxPago" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Component id="jButtonCambiarEstadoSusc" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="75" max="32767" attributes="0"/>
+              <EmptySpace pref="79" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,7 +100,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelCliente1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Suscripci&#xf3;n"/>
+        <Property name="text" type="java.lang.String" value="Suscripci&#xf3;n nueva:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxEstadoSuscripcion">
@@ -106,6 +124,32 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCambiarEstadoSuscActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelCliente2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Suscripci&#xf3;n actual:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldSuscripcionActual">
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldPago">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pago:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxPago">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxPagoActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox()"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

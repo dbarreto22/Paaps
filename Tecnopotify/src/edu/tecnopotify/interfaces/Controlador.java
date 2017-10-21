@@ -38,6 +38,13 @@ import edu.tecnopotify.entidades.ListaDefecto;
 import static edu.tecnopotify.entidades.ListaDefecto_.genero;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.Suscripcion;
+import static edu.tecnopotify.entidades.Suscripcion.estado.CANCELADA;
+import static edu.tecnopotify.entidades.Suscripcion.estado.PENDIENTE;
+import static edu.tecnopotify.entidades.Suscripcion.estado.VENCIDA;
+import static edu.tecnopotify.entidades.Suscripcion.estado.VIGENTE;
+import static edu.tecnopotify.entidades.Suscripcion.pago.ANUAL;
+import static edu.tecnopotify.entidades.Suscripcion.pago.MENSUAL;
+import static edu.tecnopotify.entidades.Suscripcion.pago.SEMANAL;
 import edu.tecnopotify.entidades.Temas;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -83,14 +90,63 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public String obtenerEstadoSuscripcion(String nickCliente){
+        Cliente cliS = this.seleccionarCliente(nickCliente);
+        String retorno = null;
+        if (cliS.getSuscripcion().status == PENDIENTE){
+            retorno = "PENDIENTE";
+        } 
+        if (cliS.getSuscripcion().status == VIGENTE){
+            retorno = "VIGENTE";
+        } 
+        if (cliS.getSuscripcion().status == VENCIDA){
+            retorno = "VENCIDA";
+        } 
+        if (cliS.getSuscripcion().status == CANCELADA){
+            retorno = "CANCELADA";
+        }
+        
+        return retorno;
+    }
 
-    public void modificarSuscripcion(String nickname, String estadoSuscripcion) {
+    @Override
+    public void modificarSuscripcion(String nickname, String estadoSuscripcion, String pago) {
         //Cliente cli= seleccionarCliente(nickname);
         SuscripcionJpaController1 suscrl = new SuscripcionJpaController1(fact);
         ClienteJpaController ctrCl = new ClienteJpaController(fact);
         Cliente c = ctrCl.findCliente(nickname);
         Suscripcion sus = c.getSuscripcion();
-        sus.setStatus(estadoSuscripcion);
+        boolean modificacionValida = false;
+        
+        if (sus.status == PENDIENTE && (estadoSuscripcion.equals("VIGENTE") || estadoSuscripcion.equals("CANCELADA"))){
+            modificacionValida = true;
+        }
+        if (sus.status == VIGENTE && (estadoSuscripcion.equals("VENCIDA"))){
+            modificacionValida = true;
+        }
+        if (sus.status == VENCIDA && (estadoSuscripcion.equals("VIGENTE") || estadoSuscripcion.equals("CANCELADA"))) {
+            modificacionValida = true;
+        }     
+        if (sus.status == CANCELADA && (estadoSuscripcion.equals("PENDIENTE"))) {
+            modificacionValida = true;
+        } 
+        if (modificacionValida) {
+            sus.setStatus(estadoSuscripcion);
+        }
+        
+        //Si la suscripción pasa a vigente se setea el modo de pago
+        if (estadoSuscripcion.equals("VIGENTE")){
+            if (pago.equals("SEMANAL")){
+                sus.cuota = SEMANAL;
+            } else if (pago.equals("MENSUAL")){
+                sus.cuota = MENSUAL;
+            } else if (pago.equals("ANUAL")){
+                sus.cuota = ANUAL;
+            }
+        }
+        
+        //persistiendo gente
         try {
             suscrl.edit(sus);
         } catch (Exception ex) {
