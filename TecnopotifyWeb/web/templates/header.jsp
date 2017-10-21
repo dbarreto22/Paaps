@@ -22,6 +22,7 @@
                         <% String comando ="mostrarCliente"; %>
                         <li><a href="<%= request.getContextPath()%>/usuarios?comando=<%=comando%>"  >Mostrar datos</a></li>                
                         <li><a href="<%= request.getContextPath()%>/seguirUsuario.jsp">Seguir/Dejar de seguir Usuario</a></li>
+                        <li><a href="<%= request.getContextPath()%>/contratarSuscripcion.jsp">Contratar Suscripción</a></li>
                     </ul>
                 </li>
                 <li class="Album">

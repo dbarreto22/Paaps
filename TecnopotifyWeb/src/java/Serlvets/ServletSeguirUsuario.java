@@ -7,6 +7,7 @@ package Serlvets;
 
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.Suscripcion;
+import static edu.tecnopotify.entidades.Suscripcion_.status;
 import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
@@ -42,6 +43,7 @@ public class ServletSeguirUsuario extends HttpServlet {
         String comando = request.getParameter("comando");
         String nickUsr = (String) request.getSession().getAttribute("user");
         
+        //Suscripción creada para comparar estados
         Suscripcion suscr = new Suscripcion();
         suscr.setStatus("VIGENTE");
         
