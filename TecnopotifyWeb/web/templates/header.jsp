@@ -19,26 +19,29 @@
                     <ul class="dropdown-menu">
                         <li><a href="<%= request.getContextPath()%>/AltaCliente.jsp">Crear Cliente</a></li>
                         <li><a href="<%= request.getContextPath()%>/altaArtista.jsp">Crear Artista</a></li>
-                        <% String comando ="mostrarCliente"; %>
+                            <% String comando = "mostrarCliente"; %>
+                            <% if(request.getSession().getAttribute("user") != null) {%>
                         <li><a href="<%= request.getContextPath()%>/usuarios?comando=<%=comando%>"  >Mostrar datos</a></li>                
                         <li><a href="<%= request.getContextPath()%>/seguirUsuario.jsp">Seguir/Dejar de seguir Usuario</a></li>
                         <li><a href="<%= request.getContextPath()%>/contratarSuscripcion.jsp">Contratar Suscripción</a></li>
+                        <%}%>
                     </ul>
                 </li>
                 <li class="Album">
-                            <a href="#" class="Album" data-toggle="dropdown"
-                               role="button" aria-haspopup="true" aria-expanded="false">Album <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="<%= request.getContextPath()%>/Album/AltaAlbum.jsp">Crear album</a></li>
-                                <li><a href="#">Opcion3</a></li>
-                                <li><a href="#">Opcion4</a></li>
-                        
-                            </ul>
-                        </li>
+                    <a href="#" class="Album" data-toggle="dropdown"
+                       role="button" aria-haspopup="true" aria-expanded="false">Album <span class="caret"></span></a>
+                        <% if(request.getSession().getAttribute("user") != null ) {%>
+                     <ul class="dropdown-menu">
+                        <li><a href="<%= request.getContextPath()%>/Album/AltaAlbum.jsp">Crear album</a></li>
+                        <li><a href="#">Opcion3</a></li>
+                        <li><a href="#">Opcion4</a></li>
+                        <%}%>                                                    
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-            
-                 <jsp:include page="/templates/loginfo.jsp"/>      
+
+                <jsp:include page="/templates/loginfo.jsp"/>      
 
             </ul>
         </div><!--/.nav-collapse -->

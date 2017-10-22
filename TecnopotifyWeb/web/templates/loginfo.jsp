@@ -46,9 +46,10 @@
     %>
 
 <%
-} else {
+} else {    if(user == null || user.isEmpty()){
 %>
 <li><a href="<%= request.getContextPath()%>/login.jsp">Login</a></li>
     <%
+            }
         }
     %>

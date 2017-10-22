@@ -136,7 +136,7 @@ public class Servletimagenes extends HttpServlet {
                         break;
                     case "altaTema":
                         Temas tema = crl.getTema(request.getParameter("id"));
-                        String idAlbum = (String) request.getAttribute("idAlbum");
+                        String idAlbum = request.getParameter("idAlbum");
                         tema.setArchivo(file.getAbsolutePath());
                         crl.setTema(tema);
                         request.setAttribute("id", idAlbum);
