@@ -2,6 +2,7 @@ package edu.tecnopotify.entidades;
 
 import edu.tecnopotify.datatypes.dataTemas;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,6 @@ public class Temas implements Serializable {
     
 //    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-
     private String nombre;
 
     private String duracion;
@@ -33,8 +33,8 @@ public class Temas implements Serializable {
     @ManyToMany
     public Map<String, ListaReproduccion> listaR = new HashMap<String,ListaReproduccion>();
     
-    @ManyToMany(mappedBy = "listTemas")
-    private List<Favoritos> listFavoritos;
+    @ManyToMany
+    private List<Favoritos> listFavoritos = new  ArrayList<Favoritos>();
     
 
     public Map<String, ListaReproduccion> getListaR() {
@@ -53,6 +53,7 @@ public class Temas implements Serializable {
         this.duracion = tema.getDuracion();
         this.posicion = tema.getPosicion();
         this.archivo = tema.getArchivo();
+      
     }
 
     public String getNombre() {
@@ -91,14 +92,15 @@ public class Temas implements Serializable {
     public void setArchivo(String archivo) {
         this.archivo = archivo;
     }
-    
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
+        int hash = 7;
+        hash = 83 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
         return hash;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {
@@ -112,11 +114,29 @@ public class Temas implements Serializable {
             return false;
         }
         final Temas other = (Temas) obj;
+        if (this.posicion != other.posicion) {
+            return false;
+        }
         if ((this.nombre == null) ? (other.nombre != null) : !this.nombre.equals(other.nombre)) {
+            return false;
+        }
+        if ((this.duracion == null) ? (other.duracion != null) : !this.duracion.equals(other.duracion)) {
+            return false;
+        }
+        if ((this.archivo == null) ? (other.archivo != null) : !this.archivo.equals(other.archivo)) {
+            return false;
+        }
+        if (this.listaR != other.listaR && (this.listaR == null || !this.listaR.equals(other.listaR))) {
+            return false;
+        }
+        if (this.listFavoritos != other.listFavoritos && (this.listFavoritos == null || !this.listFavoritos.equals(other.listFavoritos))) {
             return false;
         }
         return true;
     }
+    
+    
+    
     
     
 }

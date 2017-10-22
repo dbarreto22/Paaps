@@ -37,14 +37,17 @@ public class ExtJpaFavoritos extends FavoritosJpaController {
             {
                oFavorito=new Favoritos();
                oFavorito.setCliente(oCliente);
-            }
+               em.merge(oFavorito);
+            }else{
             List<Temas> attachedFavoritos = oFavorito.getListTemas();
             attachedFavoritos.add(objeto);//Agrego el tema a la lista de favs
             oFavorito.setListTemas(attachedFavoritos);
             oFavorito.setCliente(oCliente);
             oCliente.setFav(oFavorito);//Guardo los favs en el cliente
+            em.merge(oFavorito);
             em.merge(oCliente);//Y le hago merge
             em.getTransaction().commit();
+            }
         } catch (Exception e) {
             throw new PreexistingEntityException("Cliente " + oCliente.toString() + " da error no se cual.", e);
         }

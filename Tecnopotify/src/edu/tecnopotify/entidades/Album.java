@@ -18,31 +18,30 @@ public class Album implements Serializable {
 //    private static final long serialVersionUID = 1L;
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
-    
- 
+
     private String nombre;
-    
- 
+
     private int anioCreado;
     private String imagenAlbum;
+    
     @OneToMany
     private List<Temas> listTemas;
     @ManyToMany
     private List<Genero> listGenero;
-/*
+
+    @ManyToMany
+    private List<Favoritos> listFavoritos = new ArrayList<Favoritos>();
+
+    /*
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }*/
 
-   
-    
     public Album(dataAlbum album) {
         this.nombre = album.getNombre();
         this.anioCreado = album.getAnioCreado();
         this.imagenAlbum = album.getImagenAlbum();
         this.listGenero = new ArrayList<Genero>();
-       
-       
     }
 
     public Album() {
@@ -83,8 +82,8 @@ public class Album implements Serializable {
     public void setListGenero(List<Genero> listGenero) {
         this.listGenero = listGenero;
     }
-    
-     public List<Genero> getListGenero() {
+
+    public List<Genero> getListGenero() {
         return listGenero;
     }
 
@@ -112,9 +111,5 @@ public class Album implements Serializable {
         }
         return true;
     }
-     
-     
-    
-    
-   
+
 }

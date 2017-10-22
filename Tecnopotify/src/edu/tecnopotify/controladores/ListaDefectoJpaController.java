@@ -19,7 +19,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author Carlox
+ * @author diego-lucia
  */
 public class ListaDefectoJpaController implements Serializable {
 

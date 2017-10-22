@@ -36,10 +36,12 @@ public class ListaDefecto extends ListaReproduccion implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + (this.genero != null ? this.genero.hashCode() : 0);
+        int hash = 5;
+        hash = 97 * hash + (this.genero != null ? this.genero.hashCode() : 0);
         return hash;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {

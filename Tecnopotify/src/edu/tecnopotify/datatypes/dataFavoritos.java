@@ -4,16 +4,13 @@ import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.ListaReproduccion;
 import edu.tecnopotify.entidades.Temas;
+import java.util.ArrayList;
 import java.util.List;
 
-
-
-
 public class dataFavoritos {
-    
-   
+
     private Cliente cliente;
-    private List<Temas> listTemas;    
+    private List<Temas> listTemas;
     private List<Album> listAlbum;
     private List<ListaReproduccion> listRep;
 
@@ -25,6 +22,13 @@ public class dataFavoritos {
         this.listTemas = listTemas;
         this.listAlbum = listAlbum;
         this.listRep = listRep;
+    }
+
+    public dataFavoritos(Cliente cliente) {
+        this.cliente = cliente;
+        this.listTemas = new ArrayList<Temas>();
+        this.listAlbum = new ArrayList<Album>();
+        this.listRep = new ArrayList<ListaReproduccion>();
     }
 
     public Cliente getCliente() {
@@ -58,5 +62,5 @@ public class dataFavoritos {
     public void setListRep(List<ListaReproduccion> listRep) {
         this.listRep = listRep;
     }
-    
+
 }

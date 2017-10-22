@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -13,7 +14,7 @@ public class ListaParticular extends ListaReproduccion implements Serializable{
 
     private boolean esPrivada;
     
-    @OneToOne
+    @ManyToOne
     private Cliente cliente;
 
     public ListaParticular(boolean esPrivada, Cliente cliente, 
@@ -45,10 +46,12 @@ public class ListaParticular extends ListaReproduccion implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + (this.cliente != null ? this.cliente.hashCode() : 0);
+        int hash = 5;
+        hash = 97 * hash + (this.cliente != null ? this.cliente.hashCode() : 0);
         return hash;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {

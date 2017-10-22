@@ -13,7 +13,7 @@ import edu.tecnopotify.controladores.GeneroJpaController;
 import edu.tecnopotify.controladores.ListaDefectoJpaController;
 import edu.tecnopotify.controladores.ListaParticularJpaController;
 import edu.tecnopotify.controladores.ListaReproduccionJpaController;
-import edu.tecnopotify.controladores.SuscripcionJpaController1;
+import edu.tecnopotify.controladores.SuscripcionJpaController;
 import edu.tecnopotify.controladores.TemasJpaController;
 import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.entidades.ListaReproduccion;
@@ -70,7 +70,7 @@ public class Controlador implements IControlador {
         Suscripcion sus = new Suscripcion();
         cli.setSuscripcion(sus);
         //sus.setSuscripto(cli);
-        SuscripcionJpaController1 suscrl = new SuscripcionJpaController1(fact);
+        SuscripcionJpaController suscrl = new SuscripcionJpaController(fact);
         suscrl.create(sus);
         ClienteJpaController ctrCl = new ClienteJpaController(fact);
         try {
@@ -113,7 +113,7 @@ public class Controlador implements IControlador {
     @Override
     public void modificarSuscripcion(String nickname, String estadoSuscripcion, String pago) {
         //Cliente cli= seleccionarCliente(nickname);
-        SuscripcionJpaController1 suscrl = new SuscripcionJpaController1(fact);
+        SuscripcionJpaController suscrl = new SuscripcionJpaController(fact);
         ClienteJpaController ctrCl = new ClienteJpaController(fact);
         Cliente c = ctrCl.findCliente(nickname);
         Suscripcion sus = c.getSuscripcion();
@@ -382,13 +382,12 @@ public class Controlador implements IControlador {
         ExtJpaFavoritos fav = new ExtJpaFavoritos(fact);
         extJpaCliente clictrl = new extJpaCliente(fact);
         Cliente oCliente = clictrl.findCliente(idCliente);
+        Favoritos favor = new Favoritos(oCliente);
+        
         if (tema) {//Si voy a agregar un tema
             TemasJpaController temactrl = new TemasJpaController(fact);
             Temas oTema = temactrl.findTemas(idElemento);//Busco el tema
             try {
-                /*oFavorito.getListTemas().add(oTema);
-                oCliente.setFav(oFavorito);
-                clictrl.edit(oCliente);//*/
                 clictrl.agregarTemaFav(oTema, oCliente);    //Agrego el tema
             } catch (Exception ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -399,7 +398,7 @@ public class Controlador implements IControlador {
             ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
             ListaReproduccion oLista = listactrl.findListaReproduccion(idElemento);
             try {
-                fav.agregarListaFav(oLista, oCliente);
+                clictrl.agregarListaFav(oLista, oCliente);
             } catch (PreexistingEntityException ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -409,9 +408,6 @@ public class Controlador implements IControlador {
             AlbumJpaController albctrl = new AlbumJpaController(fact);
             Album oAlbum = albctrl.findAlbum(idElemento);
             try {
-                /*                oFavorito.getListAlbum().add(oAlbum);
-                oCliente.setFav(oFavorito);
-                clictrl.edit(oCliente);*/
                 clictrl.agregarAlbumFav(oAlbum, oCliente);
             } catch (Exception ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -425,7 +421,6 @@ public class Controlador implements IControlador {
             ExtUsuario usr = new ExtUsuario(fact);
             Cliente c = (Cliente) usrCtrl.findUsuario(nickCliente);
             Usuario u = usrCtrl.findUsuario(nickUsr);
-            //c.removeFromSeguidos(u);
             usr.quitarSeguidor(u, c);
             usrCtrl.edit(c);
         } catch (PreexistingEntityException ex) {
@@ -694,8 +689,10 @@ public class Controlador implements IControlador {
 
         agregarFavorito(true, false, false, "discoteishon", "tema2");
         agregarFavorito(true, false, false, "discoteishon", "tema3");
-        agregarFavorito(true, false, false, "discoteishon", "tema2");
+        agregarFavorito(true, false, false, "discoteishon", "tema1");
+        
         agregarFavorito(false, false, true, "discoteishon", "album1");
+        
         agregarFavorito(false, false, true, "db", "album3");
 
         agregarFavorito(true, false, false, "md", "tema3");

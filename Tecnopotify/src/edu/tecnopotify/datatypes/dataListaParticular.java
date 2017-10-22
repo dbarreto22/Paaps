@@ -13,7 +13,7 @@ public class dataListaParticular extends dataListaReproduccion {
 
     public dataListaParticular(boolean esPrivada, String nickCliente, 
             dataListaReproduccion listaRep) {
-        super(listaRep.getNombre(),listaRep.getImagen(), null);
+        super(listaRep.getNombre(),listaRep.getImagen());
         this.esPrivada = esPrivada;
         this.nickCliente = nickCliente;
     }
