@@ -2,6 +2,7 @@ package edu.tecnopotify.entidades;
 
 import edu.tecnopotify.datatypes.dataListaReproduccion;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -19,20 +20,23 @@ public class ListaReproduccion implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)*/
-    @Id
-  
+    @Id 
     private String nombre;
    
     private String imagen;
+    
     @ManyToMany
     private List<Temas> listaTemas ;
+    
+    @ManyToMany
+    private List<Favoritos> listFavoritos = new ArrayList<Favoritos>();
 
     
     
     public ListaReproduccion(dataListaReproduccion listaRep) {
         this.nombre = listaRep.getNombre();
         this.imagen = listaRep.getImagen();
-        this.listaTemas = listaRep.getListaTemas();
+        this.listaTemas = new ArrayList<Temas>();
     }
 
     public ListaReproduccion() {
@@ -65,10 +69,12 @@ public class ListaReproduccion implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
+        int hash = 3;
+        hash = 61 * hash + (this.nombre != null ? this.nombre.hashCode() : 0);
         return hash;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {
@@ -85,12 +91,20 @@ public class ListaReproduccion implements Serializable{
         if ((this.nombre == null) ? (other.nombre != null) : !this.nombre.equals(other.nombre)) {
             return false;
         }
+        if (this.listaTemas != other.listaTemas && (this.listaTemas == null || !this.listaTemas.equals(other.listaTemas))) {
+            return false;
+        }
+        if (this.listFavoritos != other.listFavoritos && (this.listFavoritos == null || !this.listFavoritos.equals(other.listFavoritos))) {
+            return false;
+        }
         return true;
     }
+
+
     
     public dataListaReproduccion toDataType()
     {
-        dataListaReproduccion retorno=new dataListaReproduccion(this.nombre, this.imagen, this.listaTemas);
+        dataListaReproduccion retorno=new dataListaReproduccion(this.nombre, this.imagen);
         return retorno;
     }
 }

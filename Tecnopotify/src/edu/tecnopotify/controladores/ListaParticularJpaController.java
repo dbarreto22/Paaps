@@ -7,13 +7,16 @@ package edu.tecnopotify.controladores;
 
 import edu.tecnopotify.controladores.exceptions.NonexistentEntityException;
 import edu.tecnopotify.controladores.exceptions.PreexistingEntityException;
-import edu.tecnopotify.entidades.ListaParticular;
 import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.ListaParticular;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 
 /**
  *
@@ -35,7 +38,16 @@ public class ListaParticularJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Cliente cliente = listaParticular.getCliente();
+            if (cliente != null) {
+                cliente = em.getReference(cliente.getClass(), cliente.getNickname());
+                listaParticular.setCliente(cliente);
+            }
             em.persist(listaParticular);
+            if (cliente != null) {
+                cliente.getListasReprParticular().add(listaParticular);
+                cliente = em.merge(cliente);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findListaParticular(listaParticular.getNombre()) != null) {
@@ -54,7 +66,22 @@ public class ListaParticularJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            ListaParticular persistentListaParticular = em.find(ListaParticular.class, listaParticular.getNombre());
+            Cliente clienteOld = persistentListaParticular.getCliente();
+            Cliente clienteNew = listaParticular.getCliente();
+            if (clienteNew != null) {
+                clienteNew = em.getReference(clienteNew.getClass(), clienteNew.getNickname());
+                listaParticular.setCliente(clienteNew);
+            }
             listaParticular = em.merge(listaParticular);
+            if (clienteOld != null && !clienteOld.equals(clienteNew)) {
+                clienteOld.getListasReprParticular().remove(listaParticular);
+                clienteOld = em.merge(clienteOld);
+            }
+            if (clienteNew != null && !clienteNew.equals(clienteOld)) {
+                clienteNew.getListasReprParticular().add(listaParticular);
+                clienteNew = em.merge(clienteNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -84,6 +111,11 @@ public class ListaParticularJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The listaParticular with id " + id + " no longer exists.", enfe);
             }
+            Cliente cliente = listaParticular.getCliente();
+            if (cliente != null) {
+                cliente.getListasReprParticular().remove(listaParticular);
+                cliente = em.merge(cliente);
+            }
             em.remove(listaParticular);
             em.getTransaction().commit();
         } finally {
@@ -104,7 +136,9 @@ public class ListaParticularJpaController implements Serializable {
     private List<ListaParticular> findListaParticularEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from ListaParticular as o");
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(ListaParticular.class));
+            Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -127,7 +161,10 @@ public class ListaParticularJpaController implements Serializable {
     public int getListaParticularCount() {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select count(o) from ListaParticular as o");
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            Root<ListaParticular> rt = cq.from(ListaParticular.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();

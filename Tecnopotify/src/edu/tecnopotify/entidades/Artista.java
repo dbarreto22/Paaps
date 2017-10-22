@@ -52,6 +52,8 @@ public class Artista extends Usuario implements Serializable {
     public List<Album> getListAlbum() {
         return listAlbum;
     }
+
+
     
     
 

@@ -6,6 +6,7 @@
 package edu.tecnopotify.controladores;
 
 import edu.tecnopotify.controladores.exceptions.PreexistingEntityException;
+import edu.tecnopotify.datatypes.dataFavoritos;
 import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.Favoritos;
@@ -30,21 +31,28 @@ public class extJpaCliente extends ClienteJpaController {
         EntityManager em = null;
         /* Query query=em.createQuery("Insert into favoritos_temas values "
         + ""+oCliente.getFav().getId()+","+objeto.getNombre()+"");*/
+        
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             // query.executeUpdate();
             //Creo un objeto favorito y le asigno el del cliente
-            if (oCliente.getFav() == null) //Si el cliente no tiene favoritos
-            {
+            if (oCliente.getFav() == null) { //Si el cliente no tiene favoritos
                 Favoritos oFavorito = new Favoritos();
                 oFavorito.setCliente(oCliente);
                 oCliente.setFav(oFavorito);
+                oCliente.getFav().getListTemas().add(objeto);//Agrego el tema a la lista de favs           
+                em.merge(oCliente);//Y le hago merge
+                em.merge(oCliente.getFav());
+                 em.getTransaction().commit();
+ 
+            }else{
+                oCliente.getFav().getListTemas().add(objeto);//Agrego el tema a la lista de favs           
+                em.merge(oCliente);//Y le hago merge
+                Favoritos f = oCliente.getFav();
+                em.merge(f);
+                em.getTransaction().commit();
             }
-            oCliente.getFav().getListTemas().add(objeto);//Agrego el tema a la lista de favs
-            em.merge(objeto);
-            em.merge(oCliente);//Y le hago merge
-            em.getTransaction().commit();
         } catch (Exception e) {
             throw new PreexistingEntityException("Cliente " + oCliente.toString() + " da error no se cual.", e);
         } finally {
@@ -63,10 +71,11 @@ public class extJpaCliente extends ClienteJpaController {
             if (oCliente.getFav() == null) {
                 oFavorito = new Favoritos();
                 oFavorito.setCliente(oCliente);
-                 oCliente.setFav(oFavorito);
+                oCliente.setFav(oFavorito);
             }
             oCliente.getFav().getListAlbum().add(objeto);
-            em.merge(oCliente);
+            em.merge(oCliente);//Y le hago merge
+            em.merge(oCliente.getFav());;
             em.getTransaction().commit();
         } catch (Exception e) {
             throw new PreexistingEntityException("Cliente " + oCliente.toString() + " da error no se cual.", e);
@@ -91,7 +100,8 @@ public class extJpaCliente extends ClienteJpaController {
             attachedFavoritos.add(objeto);
             oFavorito.setListRep(attachedFavoritos);
             oCliente.setFav(oFavorito);
-            em.merge(oCliente);
+            em.merge(oCliente);//Y le hago merge
+            em.merge(oCliente.getFav());
             em.getTransaction().commit();
         } catch (Exception e) {
             throw new PreexistingEntityException("Cliente " + oCliente.toString() + " da error no se cual.", e);

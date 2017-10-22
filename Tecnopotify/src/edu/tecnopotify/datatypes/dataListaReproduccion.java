@@ -15,7 +15,7 @@ public class dataListaReproduccion{
     private List<Temas> listaTemas;
 
     
-    public dataListaReproduccion(String nombre, String imagen, List<Temas> listaTemas) {
+    public dataListaReproduccion(String nombre, String imagen) {
         this.nombre = nombre;
         this.imagen = imagen;
     //    this.listaTemas = listaTemas;

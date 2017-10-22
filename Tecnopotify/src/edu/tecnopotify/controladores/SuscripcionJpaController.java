@@ -6,23 +6,24 @@
 package edu.tecnopotify.controladores;
 
 import edu.tecnopotify.controladores.exceptions.NonexistentEntityException;
-import edu.tecnopotify.entidades.Suscripcion;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import edu.tecnopotify.entidades.Cliente;
+import edu.tecnopotify.entidades.Suscripcion;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author menan
+ * @author diego-lucia
  */
-public class SuscripcionJpaController1 implements Serializable {
+public class SuscripcionJpaController implements Serializable {
 
-    public SuscripcionJpaController1(EntityManagerFactory emf) {
+    public SuscripcionJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -36,7 +37,21 @@ public class SuscripcionJpaController1 implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Cliente suscripto = suscripcion.getSuscripto();
+            if (suscripto != null) {
+                suscripto = em.getReference(suscripto.getClass(), suscripto.getNickname());
+                suscripcion.setSuscripto(suscripto);
+            }
             em.persist(suscripcion);
+            if (suscripto != null) {
+                Suscripcion oldSuscripcionOfSuscripto = suscripto.getSuscripcion();
+                if (oldSuscripcionOfSuscripto != null) {
+                    oldSuscripcionOfSuscripto.setSuscripto(null);
+                    oldSuscripcionOfSuscripto = em.merge(oldSuscripcionOfSuscripto);
+                }
+                suscripto.setSuscripcion(suscripcion);
+                suscripto = em.merge(suscripto);
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,7 +65,27 @@ public class SuscripcionJpaController1 implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Suscripcion persistentSuscripcion = em.find(Suscripcion.class, suscripcion.getId());
+            Cliente suscriptoOld = persistentSuscripcion.getSuscripto();
+            Cliente suscriptoNew = suscripcion.getSuscripto();
+            if (suscriptoNew != null) {
+                suscriptoNew = em.getReference(suscriptoNew.getClass(), suscriptoNew.getNickname());
+                suscripcion.setSuscripto(suscriptoNew);
+            }
             suscripcion = em.merge(suscripcion);
+            if (suscriptoOld != null && !suscriptoOld.equals(suscriptoNew)) {
+                suscriptoOld.setSuscripcion(null);
+                suscriptoOld = em.merge(suscriptoOld);
+            }
+            if (suscriptoNew != null && !suscriptoNew.equals(suscriptoOld)) {
+                Suscripcion oldSuscripcionOfSuscripto = suscriptoNew.getSuscripcion();
+                if (oldSuscripcionOfSuscripto != null) {
+                    oldSuscripcionOfSuscripto.setSuscripto(null);
+                    oldSuscripcionOfSuscripto = em.merge(oldSuscripcionOfSuscripto);
+                }
+                suscriptoNew.setSuscripcion(suscripcion);
+                suscriptoNew = em.merge(suscriptoNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -79,6 +114,11 @@ public class SuscripcionJpaController1 implements Serializable {
                 suscripcion.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The suscripcion with id " + id + " no longer exists.", enfe);
+            }
+            Cliente suscripto = suscripcion.getSuscripto();
+            if (suscripto != null) {
+                suscripto.setSuscripcion(null);
+                suscripto = em.merge(suscripto);
             }
             em.remove(suscripcion);
             em.getTransaction().commit();

@@ -5,6 +5,7 @@
  */
 package edu.tecnopotify.entidades;
 
+import edu.tecnopotify.datatypes.dataFavoritos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
 @Entity
 public class Favoritos implements Serializable {
 
@@ -27,18 +27,16 @@ public class Favoritos implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-        
-   
+
     @OneToOne
     private Cliente cliente;
-   
+
     @ManyToMany
     private List<Temas> listTemas;
-   
+
     @ManyToMany
     private List<Album> listAlbum;
-   
+
     @ManyToMany
     private List<ListaReproduccion> listRep;
 
@@ -46,7 +44,6 @@ public class Favoritos implements Serializable {
         this.listTemas = new ArrayList<Temas>();
         this.listAlbum = new ArrayList<Album>();
         this.listRep = new ArrayList<ListaReproduccion>();
-
     }
 
     public Favoritos(Cliente cliente) {
@@ -55,7 +52,7 @@ public class Favoritos implements Serializable {
         this.listAlbum = new ArrayList<Album>();
         this.listRep = new ArrayList<ListaReproduccion>();
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -100,22 +97,40 @@ public class Favoritos implements Serializable {
         this.listRep = listRep;
     }
 
-
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
+
+
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Favoritos)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Favoritos other = (Favoritos) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Favoritos other = (Favoritos) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        if (this.cliente != other.cliente && (this.cliente == null || !this.cliente.equals(other.cliente))) {
+            return false;
+        }
+        if (this.listTemas != other.listTemas && (this.listTemas == null || !this.listTemas.equals(other.listTemas))) {
+            return false;
+        }
+        if (this.listAlbum != other.listAlbum && (this.listAlbum == null || !this.listAlbum.equals(other.listAlbum))) {
+            return false;
+        }
+        if (this.listRep != other.listRep && (this.listRep == null || !this.listRep.equals(other.listRep))) {
             return false;
         }
         return true;
@@ -125,5 +140,5 @@ public class Favoritos implements Serializable {
     public String toString() {
         return "edu.tecnopotify.entidades.Favoritos[ id=" + id + " ]";
     }
-    
+
 }

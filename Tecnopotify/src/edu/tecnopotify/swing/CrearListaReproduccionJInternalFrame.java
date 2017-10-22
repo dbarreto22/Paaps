@@ -230,7 +230,7 @@ public class CrearListaReproduccionJInternalFrame extends javax.swing.JInternalF
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
         String nombre = jTextFieldNombreLista.getText();
-        dataListaReproduccion dtLista = new dataListaReproduccion(nombre, path, null);
+        dataListaReproduccion dtLista = new dataListaReproduccion(nombre, path);
 
         if (jCheckBoxListaParticular.isSelected()) {
             //*crear lista en un cliente            

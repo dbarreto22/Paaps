@@ -25,6 +25,7 @@ public class Usuario implements Serializable {
     private dataFecha f_nac;
     private String imagen;
     private String contrasenia;
+    
     @ManyToMany
     private List<Usuario> lstSeguidos;
 
@@ -121,6 +122,7 @@ public class Usuario implements Serializable {
         hash = 59 * hash + (this.contrasenia != null ? this.contrasenia.hashCode() : 0);
         return hash;
     }
+    
 
     @Override
     public boolean equals(Object obj) {
