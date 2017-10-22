@@ -1,8 +1,3 @@
-<%-- 
-    Document   : scripts
-    Created on : 21/09/2016, 06:41:04 PM
-    Author     : emi
---%>
 
 <%@page import="edu.tecnopotify.entidades.Usuario"%>
 <%@page import="edu.tecnopotify.fabrica.Fabrica"%>
@@ -49,5 +44,18 @@
     }
 </script>
 
+<script type="text/javascript">
+    function ComboG(tipo){
+        tipo="Genero";
+        var index = document.forms[0].elements[0].value;
+        return index;   
+    }
+</script>
 
+<script type="text/javascript">
+    function ComboA(tipo){
+        tipo="Artista";
+        var index = document.forms[0].elements[1].value;
+        return index;   
+    }
 </script>
