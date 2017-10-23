@@ -35,7 +35,6 @@ import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Cliente;
 import edu.tecnopotify.entidades.Favoritos;
 import edu.tecnopotify.entidades.ListaDefecto;
-import static edu.tecnopotify.entidades.ListaDefecto_.genero;
 import edu.tecnopotify.entidades.ListaParticular;
 import edu.tecnopotify.entidades.Suscripcion;
 import static edu.tecnopotify.entidades.Suscripcion.estado.CANCELADA;
@@ -109,17 +108,30 @@ public class Controlador implements IControlador {
         
         return retorno;
     }
+    
+    public String obtenerPagoSuscripcion(String nickCliente){
+        Cliente cliS = this.seleccionarCliente(nickCliente);
+        String retorno = null;
+        if (cliS.getSuscripcion().cuota == SEMANAL){
+            retorno = "SEMANAL";
+        } 
+        if (cliS.getSuscripcion().cuota == MENSUAL){
+            retorno = "MENSUAL";
+        } 
+        if (cliS.getSuscripcion().cuota == ANUAL){
+            retorno = "ANUAL";
+        } 
+        return retorno;
+    }
 
     @Override
-public void modificarSuscripcion(String nickname, String estadoSuscripcion, String pago) {
+    public void modificarSuscripcion(String nickname, String estadoSuscripcion, String pago) {
         //Cliente cli= seleccionarCliente(nickname);
         SuscripcionJpaController suscrl = new SuscripcionJpaController(fact);
         ClienteJpaController ctrCl = new ClienteJpaController(fact);
         Cliente c = ctrCl.findCliente(nickname);
         Suscripcion sus = c.getSuscripcion();
         boolean modificacionValida = false;
-        
-        String estado = sus.status.toString();
         
         if (sus.status == PENDIENTE && (estadoSuscripcion.equals("VIGENTE") || estadoSuscripcion.equals("CANCELADA"))){
             modificacionValida = true;
@@ -384,12 +396,13 @@ public void modificarSuscripcion(String nickname, String estadoSuscripcion, Stri
         ExtJpaFavoritos fav = new ExtJpaFavoritos(fact);
         extJpaCliente clictrl = new extJpaCliente(fact);
         Cliente oCliente = clictrl.findCliente(idCliente);
-        Favoritos favor = new Favoritos(oCliente);
-        
         if (tema) {//Si voy a agregar un tema
             TemasJpaController temactrl = new TemasJpaController(fact);
             Temas oTema = temactrl.findTemas(idElemento);//Busco el tema
             try {
+                /*oFavorito.getListTemas().add(oTema);
+                oCliente.setFav(oFavorito);
+                clictrl.edit(oCliente);//*/
                 clictrl.agregarTemaFav(oTema, oCliente);    //Agrego el tema
             } catch (Exception ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -400,7 +413,7 @@ public void modificarSuscripcion(String nickname, String estadoSuscripcion, Stri
             ListaReproduccionJpaController listactrl = new ListaReproduccionJpaController(fact);
             ListaReproduccion oLista = listactrl.findListaReproduccion(idElemento);
             try {
-                clictrl.agregarListaFav(oLista, oCliente);
+                fav.agregarListaFav(oLista, oCliente);
             } catch (PreexistingEntityException ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -410,6 +423,9 @@ public void modificarSuscripcion(String nickname, String estadoSuscripcion, Stri
             AlbumJpaController albctrl = new AlbumJpaController(fact);
             Album oAlbum = albctrl.findAlbum(idElemento);
             try {
+                /*                oFavorito.getListAlbum().add(oAlbum);
+                oCliente.setFav(oFavorito);
+                clictrl.edit(oCliente);*/
                 clictrl.agregarAlbumFav(oAlbum, oCliente);
             } catch (Exception ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
@@ -423,6 +439,7 @@ public void modificarSuscripcion(String nickname, String estadoSuscripcion, Stri
             ExtUsuario usr = new ExtUsuario(fact);
             Cliente c = (Cliente) usrCtrl.findUsuario(nickCliente);
             Usuario u = usrCtrl.findUsuario(nickUsr);
+            //c.removeFromSeguidos(u);
             usr.quitarSeguidor(u, c);
             usrCtrl.edit(c);
         } catch (PreexistingEntityException ex) {
@@ -695,10 +712,8 @@ public void modificarSuscripcion(String nickname, String estadoSuscripcion, Stri
 
         agregarFavorito(true, false, false, "discoteishon", "tema2");
         agregarFavorito(true, false, false, "discoteishon", "tema3");
-        agregarFavorito(true, false, false, "discoteishon", "tema1");
-        
+        agregarFavorito(true, false, false, "discoteishon", "tema2");
         agregarFavorito(false, false, true, "discoteishon", "album1");
-        
         agregarFavorito(false, false, true, "db", "album3");
 
         agregarFavorito(true, false, false, "md", "tema3");

@@ -29,7 +29,7 @@
 
                 <input type="checkbox" name="Dejar de seguir" value="Si"/>Dejar de seguir usuario?<br/>
                 <input type="hidden"  name="comando" value="seguirUsuario" />
-                <input type="text" name="usrASeguir" /><br>
+                <input type="text" name="usrASeguir"/><br/>
                 <input type="submit" value="Enviar" />
             </form>
             <%

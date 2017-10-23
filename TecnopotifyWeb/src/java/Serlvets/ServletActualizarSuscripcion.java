@@ -5,7 +5,8 @@
  */
 package Serlvets;
 
-import edu.tecnopotify.entidades.Usuario;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.String;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
@@ -17,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author emi
+ * @author menan
  */
-public class ServletAutenticacion extends HttpServlet {
+public class ServletActualizarSuscripcion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,51 +31,21 @@ public class ServletAutenticacion extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private IControlador crl;
+        private IControlador crl;
 
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
+        String suscripcion = crl.obtenerEstadoSuscripcion((String) request.getSession().getAttribute("user"));
+        String pago = crl.obtenerPagoSuscripcion((String) request.getSession().getAttribute("user"));
+        request.setAttribute("susc", suscripcion);
+        request.setAttribute("pago", pago);
 
-        String comando = request.getParameter("comando");
-        Usuario usr = null;
-        if ((comando != null) && (comando.equals("login"))) {
-            //obtener parametros y autenticar
-            String user = request.getParameter("user");
-            String pass = request.getParameter("pass");
-            String a = "@";
-            if(user.contains(a)){
-            usr = crl.buscarUsrMail(user);
-            }else{
-                 usr = crl.getUsuario(user);
-            }
-            try {
-                if (user.contains(a)) {
-                    usr = crl.buscarUsrMail(user);
-                } else {
-                    usr = crl.getUsuario(user);
-                }
-                //consultar a la logica
-                if (pass.equals(usr.getContrasenia())) {
-                    request.getSession().setAttribute("user", usr.getNickname());
-                    request.getSession().setAttribute("tipoUser", usr.getClass().getName());
-                    request.getRequestDispatcher("/ppal.jsp").forward(request, response);
-                } else {
-                    request.setAttribute("error", "Usuario o contraseña incorrecto.");
-                    request.getRequestDispatcher("/login.jsp").forward(request, response);
-                }
-            } catch (Exception e) {
-                System.out.println("Error, no se encuentra el usuario");
-                request.getRequestDispatcher("/ppal.jsp").forward(request, response);
-            }
-        } else if ((comando != null) && (comando.equals("logout"))) {
-            request.getSession().invalidate();
-            request.getRequestDispatcher("/").forward(request, response);
-        } else {
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -115,5 +86,9 @@ public class ServletAutenticacion extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private java.lang.String nickCliente(Type String) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
