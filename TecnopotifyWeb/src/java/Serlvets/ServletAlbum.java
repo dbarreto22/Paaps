@@ -7,6 +7,7 @@ package Serlvets;
 
 import edu.tecnopotify.datatypes.dataAlbum;
 import edu.tecnopotify.entidades.Artista;
+import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.fabrica.Fabrica;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -75,7 +76,19 @@ public class ServletAlbum extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        fabrica = Fabrica.getInstance();
+        iCtrl = fabrica.getInstancia();
+        String comando= request.getParameter("comando");
+        String path = "";
+        if (comando != null && comando.equals("altaAlbum")) {
+        }else{// Es mostrar album
+            List<Genero> lstGenero = iCtrl.listarGeneros();
+            List<Artista> lstArtista = iCtrl.listarArtistas();
+            request.setAttribute("lstGenero", lstGenero);
+            request.setAttribute("lstArtista", lstArtista);
+            request.getRequestDispatcher("/Album/ConsultarAlbum.jsp").forward(request, response);
+        }
+        
     }
 
     /**
