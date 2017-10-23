@@ -24,7 +24,7 @@
                 if (request.getSession().getAttribute("user") != null) {
             %>
             <form action="<%= request.getContextPath()%>/seguirUsuario?comando=seguirUsuario"
-                  method="post" enctype = "multipart/form-data">
+                  method="post">
                 <label for="male">Usuario en línea: <%=request.getSession().getAttribute("user")%></label> <br>
 
                 <input type="checkbox" name="Dejar de seguir" value="Si"/>Dejar de seguir usuario?<br/>

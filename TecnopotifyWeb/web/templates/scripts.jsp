@@ -45,17 +45,15 @@
 </script>
 
 <script type="text/javascript">
-    function ComboG(tipo){
-        tipo="Genero";
+    function ComboG(){
         var index = document.forms[0].elements[0].value;
-        return index;   
     }
 </script>
 
 <script type="text/javascript">
-    function ComboA(tipo){
-        tipo="Artista";
-        var index = document.forms[0].elements[1].value;
-        return index;   
+    function ComboA(){
+       var index = document.forms[0].elements[1].value;
+       alert(index);
+        document.location.href = "${pageContext.request.contextPath}/Album";
     }
 </script>

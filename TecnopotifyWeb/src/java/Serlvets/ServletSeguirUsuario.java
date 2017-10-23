@@ -6,7 +6,9 @@
 package Serlvets;
 
 import edu.tecnopotify.entidades.Cliente;
+import static edu.tecnopotify.entidades.Favoritos_.cliente;
 import edu.tecnopotify.entidades.Suscripcion;
+import static edu.tecnopotify.entidades.Suscripcion.estado.VIGENTE;
 import static edu.tecnopotify.entidades.Suscripcion_.status;
 import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
@@ -35,29 +37,22 @@ public class ServletSeguirUsuario extends HttpServlet {
      */
     private IControlador crl;
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
+        String seguido ="lala";
         String comando = request.getParameter("comando");
-        String nickUsr = (String) request.getSession().getAttribute("user");
-        
-        //Suscripción creada para comparar estados
-        Suscripcion suscr = new Suscripcion();
-        suscr.setStatus("VIGENTE");
-        
-        Usuario cl = crl.getUsuario(nickUsr);
-        if ((Cliente) cl != null) {
-            Cliente cliente = (Cliente) cl;
-            if (comando != null && comando.equals("seguirUsuario") && (cliente.getSuscripcion().status == suscr.getStatus())) {
-                String usrSeguido = request.getParameter("usrASeguir");
-                boolean dejarSeguir = (!"Si".equals(request.getParameter("Dejar de seguir").toString()));
-                if (dejarSeguir) {
-                    crl.dejarDeSeguirUsuario(nickUsr, usrSeguido);
-                } else {
-                    crl.seguirUsuario(nickUsr, usrSeguido);
-                }
+        if (comando != null && comando.equals("seguirUsuario")) {
+            //COMENTADO EL CONTROL DE LA SUSCRIPCIÓN DEL USUARIO LOGUEADO
+            String nickUsr = (String) request.getSession().getAttribute("user");
+            seguido = request.getParameter("usrASeguir");
+            boolean dejarSeguir = (!"Si".equals(request.getAttribute("Dejar de seguir")));
+            if (dejarSeguir) {
+                crl.dejarDeSeguirUsuario(nickUsr, seguido);
+            } else {
+                crl.seguirUsuario(nickUsr, seguido);
             }
         }
         request.getRequestDispatcher("/ppal.jsp").forward(request, response);
