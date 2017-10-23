@@ -6,9 +6,12 @@
 package Serlvets;
 
 import edu.tecnopotify.datatypes.dataAlbum;
+import edu.tecnopotify.datatypes.dataArtista;
+import edu.tecnopotify.datatypes.dataGenero;
 import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Genero;
+import edu.tecnopotify.entidades.Temas;
 import edu.tecnopotify.fabrica.Fabrica;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import edu.tecnopotify.interfaces.IControlador;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -82,23 +84,22 @@ public class ServletAlbum extends HttpServlet {
         iCtrl = fabrica.getInstancia();
         String comando = request.getParameter("comando");
         String path = "";
+        String destino="/ppal.jsp";
         if (comando != null && comando.equals("altaAlbum")) {
+        }else if (comando != null && comando.equals("mostrarAlbum")) {
+            String album = (String)request.getParameter("idAlbum");
+            Album oAlbum = iCtrl.buscarAlbum(album);
+            List<Temas> lstTemas = oAlbum.getListTemas();
+            destino="/Album/MostrarAlbum.jsp";
+            request.setAttribute("lstTemas", lstTemas);
         } else {// Es mostrar album
             List<Genero> lstGenero = iCtrl.listarGeneros();
             List<Artista> lstArtista = iCtrl.listarArtistas();
             request.setAttribute("lstGenero", lstGenero);
             request.setAttribute("lstArtista", lstArtista);
-            request.getRequestDispatcher("/Album/ConsultarAlbum.jsp").forward(request, response);
+            destino="/Album/ConsultarAlbum.jsp";
         }
-        
-        
-         
-
-        
-        if (comando != null && comando.equals("mostrarAlbum")) {
-
-            String nombre = (String) request.getAttribute("user");
-        }
+        request.getRequestDispatcher(destino).forward(request, response);
 
     }
 
@@ -118,6 +119,7 @@ public class ServletAlbum extends HttpServlet {
         iCtrl = fabrica.getInstancia();
         String comando = request.getParameter("comando");
         String path = "";
+        String destino="/ppal.jsp";
         if (comando != null && comando.equals("altaAlbum")) {
             Artista artista;
             String idAlbum = request.getParameter("nombreAlbum");
@@ -128,41 +130,26 @@ public class ServletAlbum extends HttpServlet {
             iCtrl.crearAlbum(artista.getNickname(), oDtAlbum);
             request.setAttribute("comando", comando);
             request.setAttribute("id", idAlbum);
-
-            request.getRequestDispatcher("/subirImg.jsp").forward(request, response);
-        }
-
-        if (comando != null && comando.equals("elegirGenero")) {
-            if (request.getParameter("generoSelect") != null && !request.getParameter("generoSelect").isEmpty()) {
-                String nomGen = request.getParameter("generoSelect");
-                Genero gen = iCtrl.buscarGenero(nomGen);
-                List<Album> listAl = gen.getListAlbum();
-                Iterator<Album> itA = listAl.iterator();
-                List<String> nomAl = new ArrayList<>();
-                while (itA.hasNext()) {
-                    nomAl.add(itA.next().getNombre());
+            destino="/subirImg.jsp";
+        } else if (comando != null && comando.equals("listarAlbum")) {
+            String genero = (String)request.getParameter("GeneroSelect");
+            String artista = (String)request.getParameter("ArtistaSelect");
+            if (genero == "" && artista=="") {
+                destino="/ppal.jsp";
+            }else{  
+                List<Album> lstAlbum=null;
+                if (genero != null && genero != "") {
+                    Genero oGenero=iCtrl.buscarGenero(genero);
+                    lstAlbum=oGenero.getListAlbum();
+                } else{
+                    Artista oArtista = iCtrl.seleccionarArtista(artista);
+                    lstAlbum=oArtista.getListAlbum();
                 }
-
-                request.setAttribute("nomAl", nomAl);
-                RequestDispatcher despachador = request.getRequestDispatcher("/mostrarAlbum.jsp");
-                despachador.forward(request, response);
-            }
-        } else if (comando != null && comando.equals("elegirArtista")) {
-            if (request.getParameter("artistaSelect") != null && !request.getParameter("artistaSelect").isEmpty()) {
-                String nomArt = request.getParameter("artistaSelect");
-                Artista art = iCtrl.seleccionarArtista(nomArt);
-                List<Album> listAlart = art.getListAlbum();
-                Iterator<Album> itA = listAlart.iterator();
-                List<String> nomAlart = new ArrayList<>();
-                while (itA.hasNext()) {
-                    nomAlart.add(itA.next().getNombre());
-                }
-
-                request.setAttribute("nomAlart", nomAlart);
-                RequestDispatcher despachador = request.getRequestDispatcher("/mostrarAlbum.jsp");
-                despachador.forward(request, response);
+                request.setAttribute("lstAlbum", lstAlbum);
+                destino="/Album/listarAlbum.jsp";
             }
         }
+        request.getRequestDispatcher(destino).forward(request, response);
     }
 
     /**

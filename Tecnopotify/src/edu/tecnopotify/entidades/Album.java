@@ -112,4 +112,9 @@ public class Album implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Album{" + "nombre=" + nombre + ", anioCreado=" + anioCreado + ", imagenAlbum=" + imagenAlbum + '}';
+    }
+
 }

@@ -45,6 +45,7 @@
 </script>
 
 <script type="text/javascript">
+<<<<<<< HEAD
 
     function ComboB(){
        var index = document.forms[0].elements[1].value;
@@ -69,3 +70,21 @@
     }
 </script>
 
+=======
+    function Combo(tipo){
+        tipo="Genero";
+        var index = document.forms[0].elements[0].value;
+        if(index==="" || index===null)
+        {
+            var index = document.forms[0].elements[1].value;
+            if(index==="" || index===null)
+            {
+                alert("Debe seleccionar un album o un genero");
+            }else
+                tipo="Artista";
+        }
+        return index;
+        
+    }
+</script>
+>>>>>>> 888702963785908ae4527f6eea3404224c4a248c
