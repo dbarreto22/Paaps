@@ -4,6 +4,10 @@
     Author     : diego-lucia
 --%>
 
+<%@page import="edu.tecnopotify.interfaces.IControlador"%>
+<%@page import="edu.tecnopotify.fabrica.Fabrica"%>
+<%@page import="edu.tecnopotify.entidades.ListaParticular"%>
+<%@page import="edu.tecnopotify.entidades.Usuario"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -20,23 +24,59 @@
         <div class="container">
             <h1>Datos Cliente</h1>
         </div>
-
+        <%
+            List<String> seguidores = (ArrayList) request.getAttribute("litseg");
+            Iterator<String> itS = seguidores.iterator();
+            List<String> listPart = (ArrayList) request.getAttribute("repPropia");
+            Iterator<String> itR = listPart.iterator();
+            List<String> album = (ArrayList) request.getAttribute("album");
+            Iterator<String> itA = album.iterator();
+            List<String> lisRep = (ArrayList) request.getAttribute("listRep");
+            Iterator<String> itLR = lisRep.iterator();
+        %>
 
 
         <form   method = "post" >
             <input type="hidden"  name="comando" value="mostrarCliente" />
             <div class="container">
-                <h4>Nombre: </h4>
+                <h6>NickName: </h6>
+                <input type="text"  value =<%= request.getAttribute("nickName")%> /> <br/>
+                <h6>Nombre: </h6>
                 <input type="text"  value =<%= request.getAttribute("nombre")%> /> <br/>
-                <h4>Apellido </h4>
+                <h6>Apellido </h6>
                 <input type="text"  value =<%= request.getAttribute("apellido")%> /> <br/>
-                <h4>Mail: </h4>
+                <h6>Mail: </h6>
                 <input type="text"  value =<%= request.getAttribute("mail")%> /> <br/>
-                <h4>Imagen: </h4>
-                <div class="container" style="margin-top: 60px">
-                <img   src="<%= request.getContextPath() + "/imagenes/" + request.getAttribute("imagen") %>" /> <br/>
-                </div> 
+                <h6>Fecha de Nacimiento: </h6>
+                <input type="text"  value =<%= request.getAttribute("dia")%> /> / 
+                <input type="text"  value =<%= request.getAttribute("mes")%> />
+                <input type="text"  value =<%= request.getAttribute("anio")%> />
+                <br/>
 
+
+
+                <h6>Lista de Seguidores: </h6>
+                <% while (itS.hasNext()) {%> 
+                <ol>
+                    <li>  <%out.print(itR.next()); %></li> 
+                </ol>
+                <%}%>
+
+
+                <h6>Lista de Reproduccione Favoritas: </h6>
+                <% while (itR.hasNext()) {%> 
+                <ol>
+                    <li> <a href="<%= request.getContextPath()%>/mostrarListaReproduccion.jsp"> <%out.print(itR.next()); %></a></li>
+                </ol>
+                <%}%>
+
+
+                <h6>Lista de Album Favoritos: </h6>
+                <% while (itA.hasNext()) {%> 
+                <ol>
+                    <li> <a href="<%= request.getContextPath()%>/mostrarAlbum.jsp"> <%out.print(itA.next()); %></a></li> </li>
+                </ol>
+                <%}%>
 
             </div>
         </form>   
