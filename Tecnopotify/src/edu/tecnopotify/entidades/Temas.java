@@ -134,6 +134,11 @@ public class Temas implements Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Temas{" + "nombre=" + nombre + ", duracion=" + duracion + ", posicion=" + posicion + ", archivo=" + archivo + '}';
+    }
     
     
     

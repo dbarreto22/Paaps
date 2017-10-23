@@ -11,6 +11,7 @@ import edu.tecnopotify.datatypes.dataGenero;
 import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Genero;
+import edu.tecnopotify.entidades.Temas;
 import edu.tecnopotify.fabrica.Fabrica;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -85,6 +86,12 @@ public class ServletAlbum extends HttpServlet {
         String path = "";
         String destino="/ppal.jsp";
         if (comando != null && comando.equals("altaAlbum")) {
+        }else if (comando != null && comando.equals("mostrarAlbum")) {
+            String album = (String)request.getParameter("idAlbum");
+            Album oAlbum = iCtrl.buscarAlbum(album);
+            List<Temas> lstTemas = oAlbum.getListTemas();
+            destino="/Album/MostrarAlbum.jsp";
+            request.setAttribute("lstTemas", lstTemas);
         } else {// Es mostrar album
             List<Genero> lstGenero = iCtrl.listarGeneros();
             List<Artista> lstArtista = iCtrl.listarArtistas();
@@ -124,7 +131,7 @@ public class ServletAlbum extends HttpServlet {
             request.setAttribute("comando", comando);
             request.setAttribute("id", idAlbum);
             destino="/subirImg.jsp";
-        } else if (comando != null && comando.equals("mostrarAlbum")) {
+        } else if (comando != null && comando.equals("listarAlbum")) {
             String genero = (String)request.getParameter("GeneroSelect");
             String artista = (String)request.getParameter("ArtistaSelect");
             if (genero == "" && artista=="") {
@@ -139,7 +146,7 @@ public class ServletAlbum extends HttpServlet {
                     lstAlbum=oArtista.getListAlbum();
                 }
                 request.setAttribute("lstAlbum", lstAlbum);
-                destino="/Album/mostrarAlbum.jsp";
+                destino="/Album/listarAlbum.jsp";
             }
         }
         request.getRequestDispatcher(destino).forward(request, response);

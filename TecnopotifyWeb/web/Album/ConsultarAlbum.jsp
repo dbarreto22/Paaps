@@ -44,7 +44,7 @@
                                 <option value="<%=artista.getNickname()%>"><%=artista.getNombre()%></option>
                             <%}%>
                 </select>
-                <input type="hidden" name="comando" value="mostrarAlbum">
+                <input type="hidden" name="comando" value="listarAlbum">
                 <input type="submit" value="Enviar" />
             </div>
         </form>
