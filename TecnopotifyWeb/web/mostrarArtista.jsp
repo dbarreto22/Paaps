@@ -23,12 +23,12 @@
         <jsp:include page="/templates/header.jsp" />
 
         <h1>Datos Artista</h1>
-        
+
         <%
             List<String> listAl = (ArrayList) request.getAttribute("albumArt");
             Iterator<String> itAl = listAl.iterator();
-        
-        
+
+
         %>
 
         <form   method = "post" >
@@ -51,22 +51,26 @@
                 <input type="text"  value =<%= request.getAttribute("biografia")%> /> <br/>
                 <h6>Link: </h6>
                 <input type="text"  value =<%= request.getAttribute("link")%> /> <br/>
-                
-                
+
+
                 <h6>Imagen: </h6>
                 <img type="text"  src="<%= request.getAttribute("imagen")%>" /> <br/>
-                
+
                 <h6>Lista de Album Favoritos: </h6>
-                <% while (itAl.hasNext()) {%> 
+                <%if (!listAl.isEmpty()) {
+                        while (itAl.hasNext()) {%> 
                 <ol>
                     <li> <a href="<%= request.getContextPath()%>/mostrarAlbum.jsp"> <%out.print(itAl.next()); %></a></li> </li>
                 </ol>
+                <%}
+                } else {%>
+                <h6>NO tiene Albums</h6>
                 <%}%>
 
             </div>
         </form> 
-        </div>
+    </div>
 
-        <jsp:include page="/templates/scripts.jsp" />
-    </body>
+    <jsp:include page="/templates/scripts.jsp" />
+</body>
 </html>

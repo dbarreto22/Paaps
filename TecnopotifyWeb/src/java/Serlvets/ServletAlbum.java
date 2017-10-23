@@ -6,6 +6,7 @@
 package Serlvets;
 
 import edu.tecnopotify.datatypes.dataAlbum;
+import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.fabrica.Fabrica;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import edu.tecnopotify.interfaces.IControlador;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -78,10 +80,10 @@ public class ServletAlbum extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         fabrica = Fabrica.getInstance();
         iCtrl = fabrica.getInstancia();
-        String comando= request.getParameter("comando");
+        String comando = request.getParameter("comando");
         String path = "";
         if (comando != null && comando.equals("altaAlbum")) {
-        }else{// Es mostrar album
+        } else {// Es mostrar album
             List<Genero> lstGenero = iCtrl.listarGeneros();
             List<Artista> lstArtista = iCtrl.listarArtistas();
             request.setAttribute("lstGenero", lstGenero);
@@ -89,6 +91,15 @@ public class ServletAlbum extends HttpServlet {
             request.getRequestDispatcher("/Album/ConsultarAlbum.jsp").forward(request, response);
         }
         
+        
+         
+
+        
+        if (comando != null && comando.equals("mostrarAlbum")) {
+
+            String nombre = (String) request.getAttribute("user");
+        }
+
     }
 
     /**
@@ -105,7 +116,7 @@ public class ServletAlbum extends HttpServlet {
         response.setContentType("text/html");
         fabrica = Fabrica.getInstance();
         iCtrl = fabrica.getInstancia();
-        String comando= request.getParameter("comando");
+        String comando = request.getParameter("comando");
         String path = "";
         if (comando != null && comando.equals("altaAlbum")) {
             Artista artista;
@@ -117,8 +128,41 @@ public class ServletAlbum extends HttpServlet {
             iCtrl.crearAlbum(artista.getNickname(), oDtAlbum);
             request.setAttribute("comando", comando);
             request.setAttribute("id", idAlbum);
+
+            request.getRequestDispatcher("/subirImg.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("/subirImg.jsp").forward(request, response);
+
+        if (comando != null && comando.equals("elegirGenero")) {
+            if (request.getParameter("generoSelect") != null && !request.getParameter("generoSelect").isEmpty()) {
+                String nomGen = request.getParameter("generoSelect");
+                Genero gen = iCtrl.buscarGenero(nomGen);
+                List<Album> listAl = gen.getListAlbum();
+                Iterator<Album> itA = listAl.iterator();
+                List<String> nomAl = new ArrayList<>();
+                while (itA.hasNext()) {
+                    nomAl.add(itA.next().getNombre());
+                }
+
+                request.setAttribute("nomAl", nomAl);
+                RequestDispatcher despachador = request.getRequestDispatcher("/mostrarAlbum.jsp");
+                despachador.forward(request, response);
+            }
+        } else if (comando != null && comando.equals("elegirArtista")) {
+            if (request.getParameter("artistaSelect") != null && !request.getParameter("artistaSelect").isEmpty()) {
+                String nomArt = request.getParameter("artistaSelect");
+                Artista art = iCtrl.seleccionarArtista(nomArt);
+                List<Album> listAlart = art.getListAlbum();
+                Iterator<Album> itA = listAlart.iterator();
+                List<String> nomAlart = new ArrayList<>();
+                while (itA.hasNext()) {
+                    nomAlart.add(itA.next().getNombre());
+                }
+
+                request.setAttribute("nomAlart", nomAlart);
+                RequestDispatcher despachador = request.getRequestDispatcher("/mostrarAlbum.jsp");
+                despachador.forward(request, response);
+            }
+        }
     }
 
     /**

@@ -650,6 +650,10 @@ public void modificarSuscripcion(String nickname, String estadoSuscripcion, Stri
         Genero G1 = new Genero(g1);
         Genero G2 = new Genero(g2);
         Genero G3 = new Genero(g3);
+        
+        Cliente cliPrueba  = new Cliente(u7);
+        Artista uPrueba = new Artista("axaxaxa", "www.ji.com",u1);
+        cliPrueba.addToSeguidos(uPrueba);
 
         altaGenero(g1);
         altaGenero(g2);

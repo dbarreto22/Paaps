@@ -45,7 +45,7 @@
 </script>
 
 <script type="text/javascript">
-<<<<<<< HEAD
+
     function ComboB(){
        var index = document.forms[0].elements[1].value;
        document.location.href = "${pageContext.request.contextPath}/usuarios?comando=mostrarClienteGuest";
@@ -57,10 +57,8 @@
 </script>
 
 
-=======
-    function ComboG(){
-        var index = document.forms[0].elements[0].value;
-    }
+
+
 </script>
 
 <script type="text/javascript">
@@ -70,4 +68,4 @@
         document.location.href = "${pageContext.request.contextPath}/Album";
     }
 </script>
->>>>>>> ef1be766578d71c54b2ca4e7b1b2941c879ce395
+
