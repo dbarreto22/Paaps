@@ -674,13 +674,13 @@ public class Controlador implements IControlador {
         dataTemas t7 = new dataTemas("tema7", "2:38", 3, "www.youtube.com");
         dataTemas t8 = new dataTemas("tema8", "2:39", 4, "www.youtube.com");
         Album A1 = new Album(a1);
-        //       A1.getListGenero().add(G1);
+        A1.getListGenero().add(G1);
         Album A2 = new Album(a2);
-        //A2.getListGenero().add(G2);
+        A2.getListGenero().add(G2);
         Album A3 = new Album(a3);
-        // A3.getListGenero().add(G3);
+         A3.getListGenero().add(G3);
         Album A4 = new Album(a4);
-        // A4.getListGenero().add(G3);
+         A4.getListGenero().add(G3);
 
         altaTema(t1, A1.getNombre());
         altaTema(t2, A1.getNombre());
@@ -693,7 +693,7 @@ public class Controlador implements IControlador {
 
         agregarFavorito(true, false, false, "discoteishon", "tema2");
         agregarFavorito(true, false, false, "discoteishon", "tema3");
-        agregarFavorito(true, false, false, "discoteishon", "tema2");
+        agregarFavorito(true, false, false, "discoteishon", "tema4");
         agregarFavorito(false, false, true, "discoteishon", "album1");
         agregarFavorito(false, false, true, "db", "album3");
 
