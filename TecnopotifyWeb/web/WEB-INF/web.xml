@@ -44,6 +44,10 @@
         <servlet-name>actualizarSuscripcion</servlet-name>
         <servlet-class>Serlvets.ServletActualizarSuscripcion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletActualizarSuscripcionAuxiliar</servlet-name>
+        <servlet-class>Serlvets.ServletActualizarSuscripcionAuxiliar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsr</servlet-name>
         <url-pattern>/usuarios</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>actualizarSuscripcion</servlet-name>
         <url-pattern>/actualizarSuscripcion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletActualizarSuscripcionAuxiliar</servlet-name>
+        <url-pattern>/ctualizarSuscripcionAuxiliar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

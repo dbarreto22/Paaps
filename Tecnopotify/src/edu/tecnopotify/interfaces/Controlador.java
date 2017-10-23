@@ -132,6 +132,7 @@ public class Controlador implements IControlador {
         Cliente c = ctrCl.findCliente(nickname);
         Suscripcion sus = c.getSuscripcion();
         boolean modificacionValida = false;
+        /*desde el estado “Pendiente” a "Cancelada" y desde el estado "Vencida" a "Cancelada" o "Vigente" para el caso actualizarSuscripcion*/
         
         if (sus.status == PENDIENTE && (estadoSuscripcion.equals("VIGENTE") || estadoSuscripcion.equals("CANCELADA"))){
             modificacionValida = true;

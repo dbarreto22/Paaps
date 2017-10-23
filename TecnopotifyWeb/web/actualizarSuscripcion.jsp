@@ -28,9 +28,9 @@
     "Cancelada" o "Vigente", registrándose la fecha del cambio (según la decha
     del sistema). En otro caso no se puede realizar la modificación.-->
             <%
-                if (request.getSession().getAttribute("user") != null) {
+                if (request.getSession().getAttribute("user") != null) { //1
             %>
-            <form action="<%= request.getContextPath()%>/contratarSuscripcion?comando=contratarSuscripcion"
+            <form action="<%= request.getContextPath()%>/actualizarSuscripcion?comando=actualizarSuscripcion"
                   method="post">
                 <label for="male">Usuario en línea: <%=request.getSession().getAttribute("user")%></label> <br/><br/>
                 <!--SUSCRIPCION ACTUAL-->
@@ -38,19 +38,26 @@
                 <%
                     if (request.getAttribute("susc") == "VIGENTE") {
                 %>
-                <label>Suscripción: <%=request.getAttribute("pago")%></label> <br/><br/>
+                        <label>No se puede actualizar su suscripción, se encuentra en estado vigente.</label> <br/>
+                <%
+                    }
+                    if (request.getAttribute("susc") == "PENDIENTE") {
+                %>
+                <input type="checkbox" name="suscripcionCancelada" value="Si"/>Cancelar suscripción<br/>
+                <%
+                    }
+                    if (request.getAttribute("susc") == "VENCIDA") {
+                %>
+                <input type="checkbox" name="suscripcionCancelada" value="Si"/>Cancelar suscripción<br/>
+                <input type="checkbox" name="suscripcionVigente" value="Si"/>Alta suscripción<br/>
                 <%
                     }
                 %>
-                <input type="checkbox" name="suscripcionSemanal" value="Si"/>SEMANAL<br/>
-                <input type="checkbox" name="suscripcionMensual" value="Si"/>MENSUAL<br/>
-                <input type="checkbox" name="suscripcionAnual" value="Si"/>ANUAL<br/>
-
                 <input type="hidden"  name="comando" value="contratarSuscripcion">
                 <input type="submit" value="Enviar" />
             </form>
             <%
-            } else {
+                } else { //1
             %>
             <h3>No hay usuario con sesión inciada!</h3>
             <a href="login.jsp">Iniciar sesión</a>
