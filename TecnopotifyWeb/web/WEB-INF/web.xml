@@ -40,6 +40,10 @@
         <servlet-name>contratarSuscripcion</servlet-name>
         <servlet-class>Serlvets.ServletContratarSuscripcion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>actualizarSuscripcion</servlet-name>
+        <servlet-class>Serlvets.ServletActualizarSuscripcion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsr</servlet-name>
         <url-pattern>/usuarios</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>contratarSuscripcion</servlet-name>
         <url-pattern>/contratarSuscripcion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>actualizarSuscripcion</servlet-name>
+        <url-pattern>/actualizarSuscripcion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

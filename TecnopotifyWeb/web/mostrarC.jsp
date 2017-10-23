@@ -22,11 +22,11 @@
     <body>
         <jsp:include page="/templates/header.jsp" />
         <div class="container">
-            <h1>Datos Cliente</h1>
+            <h3>Datos Cliente</h3>
         </div>
         <%
-            List<String> seguidores = (ArrayList) request.getAttribute("litseg");
-            Iterator<String> itS = seguidores.iterator();
+            //List<String> seguidores = (ArrayList) request.getAttribute("litseg");
+            //Iterator<String> itS = seguidores.iterator();
             List<String> listPart = (ArrayList) request.getAttribute("repPropia");
             Iterator<String> itR = listPart.iterator();
             List<String> album = (ArrayList) request.getAttribute("album");
@@ -55,27 +55,52 @@
 
 
 
-                <h6>Lista de Seguidores: </h6>
-                <% while (itS.hasNext()) {%> 
+                <%--          <h6>Lista de Seguidores: </h6>
+
+                <%if (!seguidores.isEmpty()) {
+                        while (itS.hasNext()) {%> 
                 <ol>
                     <li>  <%out.print(itR.next()); %></li> 
                 </ol>
-                <%}%>
-
-
-                <h6>Lista de Reproduccione Favoritas: </h6>
-                <% while (itR.hasNext()) {%> 
+                <%}
+                } else {%>
+                <h6>NO hay Usuarios que lo sigan</h6>
+                <%}%>--%>
+                
+                <h6>Lista de Reproducciones Particulares: </h6>
+                <% if (!listPart.isEmpty()) {
+                        while (itR.hasNext()) {%> 
                 <ol>
                     <li> <a href="<%= request.getContextPath()%>/mostrarListaReproduccion.jsp"> <%out.print(itR.next()); %></a></li>
                 </ol>
+                <%}
+                } else {%>
+                <h6>NO hay listas de reproducciones favoritas</h6>
+                <%}%>
+
+                <h6>Lista de Reproduccione Favoritas: </h6>
+                <% if (!lisRep.isEmpty()) {
+                        while (itLR.hasNext()) {%> 
+                <ol>
+                    <li> <a href="<%= request.getContextPath()%>/mostrarListaReproduccion.jsp"> <%out.print(itLR.next()); %></a></li>
+                </ol>
+                <%}
+                } else {%>
+                <h6>NO hay listas de reproducciones favoritas</h6>
                 <%}%>
 
 
                 <h6>Lista de Album Favoritos: </h6>
-                <% while (itA.hasNext()) {%> 
+                <% if (!album.isEmpty()) {
+                    String nom;
+                        while (itA.hasNext()) {
+                            nom = itA.next();                     %> 
                 <ol>
-                    <li> <a href="<%= request.getContextPath()%>/mostrarAlbum.jsp"> <%out.print(itA.next()); %></a></li> </li>
+                    <li> <a href="<%= request.getContextPath()%>/Album?idAlbum=<%= nom %>&comando=mostrarAlbum"> <%= nom %></a></li>
                 </ol>
+                <%}
+                } else {%>
+                <h6>NO tiene Albums Favoritos</h6>
                 <%}%>
 
             </div>

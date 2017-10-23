@@ -21,24 +21,27 @@
             <h2>Contratar suscripción</h2>
             <input type="hidden"  name="comando" value="contratarSuscripcion">
 
-        <!--El caso de uso consiste en actualizar el estado de una suscripción existente
-en el sistema. El Sistema lista las suscripciones realizadas por el cliente que
-previamente inició sesión. El Cliente tendrá la opción de modificar desde
-el estado “Pendiente” a "Cancelada" y desde el estado "Vencida" a
-"Cancelada" o "Vigente", registrándose la fecha del cambio (según la decha
-del sistema). En otro caso no se puede realizar la modificación.-->
+            <!--El caso de uso consiste en actualizar el estado de una suscripción existente
+    en el sistema. El Sistema lista las suscripciones realizadas por el cliente que
+    previamente inició sesión. El Cliente tendrá la opción de modificar desde
+    el estado “Pendiente” a "Cancelada" y desde el estado "Vencida" a
+    "Cancelada" o "Vigente", registrándose la fecha del cambio (según la decha
+    del sistema). En otro caso no se puede realizar la modificación.-->
             <%
                 if (request.getSession().getAttribute("user") != null) {
             %>
             <form action="<%= request.getContextPath()%>/contratarSuscripcion?comando=contratarSuscripcion"
                   method="post">
-                <label for="male">Usuario en línea: <%=request.getSession().getAttribute("user")%></label> <br/>
-                <!--LISTAR TIPOS DE SUSCRIPCIONES POSIBLES
-                public enum estado 
-                PENDIENTE, VENCIDA, VIGENTE, CANCELADA
-                public enum pago 
-                SUSCRIPCION_PENDIENTE, SEMANAL, MENSUAL, ANUAL
-                -->
+                <label for="male">Usuario en línea: <%=request.getSession().getAttribute("user")%></label> <br/><br/>
+                <!--SUSCRIPCION ACTUAL-->
+                <label>Suscripción: <%=request.getAttribute("susc")%></label> <br/>
+                <%
+                    if (request.getAttribute("susc") == "VIGENTE") {
+                %>
+                <label>Suscripción: <%=request.getAttribute("pago")%></label> <br/><br/>
+                <%
+                    }
+                %>
                 <input type="checkbox" name="suscripcionSemanal" value="Si"/>SEMANAL<br/>
                 <input type="checkbox" name="suscripcionMensual" value="Si"/>MENSUAL<br/>
                 <input type="checkbox" name="suscripcionAnual" value="Si"/>ANUAL<br/>
