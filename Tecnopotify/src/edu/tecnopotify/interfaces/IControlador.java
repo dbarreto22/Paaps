@@ -32,8 +32,10 @@ public interface IControlador {
 
     public String obtenerEstadoSuscripcion(String nickCliente);
 
+    public String obtenerPagoSuscripcion(String nickCliente);
+
     public void modificarSuscripcion(String nickname, String estadoSuscripcion, String pago);
-            
+
     public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum);
 
     public void altaTema(dataTemas tema, String album);

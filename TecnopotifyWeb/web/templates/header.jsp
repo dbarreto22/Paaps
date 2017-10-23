@@ -21,11 +21,16 @@
                         <li><a href="<%= request.getContextPath()%>/altaArtista.jsp">Crear Artista</a></li>
                         <li><a href="<%= request.getContextPath()%>/Guest.jsp">Mostrar datos de Usuarios</a></li>
                             <% String comando = "mostrarCliente"; %>
-                            <% if(request.getSession().getAttribute("user") != null) {%>
+                            <%
+                                if (request.getSession().getAttribute("user") != null) {
+                            %>
                         <li><a href="<%= request.getContextPath()%>/usuarios?comando=<%=comando%>"  >Dats Usuario Logueado</a></li>                
                         <li><a href="<%= request.getContextPath()%>/seguirUsuario.jsp">Seguir/Dejar de seguir Usuario</a></li>
                         <li><a href="<%= request.getContextPath()%>/contratarSuscripcion.jsp">Contratar Suscripción</a></li>
-                        <%}%>
+                        <li><a href="<%= request.getContextPath()%>/actualizarSuscripcion.jsp">Actualizar Suscripción</a></li>
+
+                        <%      }
+                        %>
                     </ul>
                 </li>
                 <li class="Album">

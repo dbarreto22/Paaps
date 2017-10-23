@@ -5,6 +5,10 @@
  */
 package Serlvets;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.String;
+import edu.tecnopotify.fabrica.Fabrica;
+import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -27,21 +31,21 @@ public class ServletActualizarSuscripcion extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+        private IControlador crl;
+
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ServletActualizarSuscripcion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ServletActualizarSuscripcion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        String suscripcion = crl.obtenerEstadoSuscripcion((String) request.getSession().getAttribute("user"));
+        String pago = crl.obtenerPagoSuscripcion((String) request.getSession().getAttribute("user"));
+        request.setAttribute("susc", suscripcion);
+        request.setAttribute("pago", pago);
+
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -82,5 +86,9 @@ public class ServletActualizarSuscripcion extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private java.lang.String nickCliente(Type String) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

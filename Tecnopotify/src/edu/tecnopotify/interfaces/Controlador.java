@@ -108,6 +108,21 @@ public class Controlador implements IControlador {
         
         return retorno;
     }
+    
+    public String obtenerPagoSuscripcion(String nickCliente){
+        Cliente cliS = this.seleccionarCliente(nickCliente);
+        String retorno = null;
+        if (cliS.getSuscripcion().cuota == SEMANAL){
+            retorno = "SEMANAL";
+        } 
+        if (cliS.getSuscripcion().cuota == MENSUAL){
+            retorno = "MENSUAL";
+        } 
+        if (cliS.getSuscripcion().cuota == ANUAL){
+            retorno = "ANUAL";
+        } 
+        return retorno;
+    }
 
     @Override
     public void modificarSuscripcion(String nickname, String estadoSuscripcion, String pago) {
