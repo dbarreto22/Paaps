@@ -55,6 +55,15 @@ public class ServletTema extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        fabrica = Fabrica.getInstance();
+        iCtrl = fabrica.getInstancia();
+        String comando = request.getParameter("comando");
+        String destino="/ppal.jsp";
+        if (comando != null && comando.equals("altaAlbum")) {
+        }else{
+        }    
+        request.getRequestDispatcher(destino).forward(request, response);
+
     }
 
     /**
