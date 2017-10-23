@@ -45,15 +45,20 @@
 </script>
 
 <script type="text/javascript">
-    function ComboG(){
+    function Combo(tipo){
+        tipo="Genero";
         var index = document.forms[0].elements[0].value;
+        if(index==="" || index===null)
+        {
+            var index = document.forms[0].elements[1].value;
+            if(index==="" || index===null)
+            {
+                alert("Debe seleccionar un album o un genero");
+            }else
+                tipo="Artista";
+        }
+        return index;
+        
     }
 </script>
 
-<script type="text/javascript">
-    function ComboA(){
-       var index = document.forms[0].elements[1].value;
-       alert(index);
-        document.location.href = "${pageContext.request.contextPath}/Album";
-    }
-</script>

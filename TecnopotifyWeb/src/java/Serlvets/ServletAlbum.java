@@ -6,6 +6,9 @@
 package Serlvets;
 
 import edu.tecnopotify.datatypes.dataAlbum;
+import edu.tecnopotify.datatypes.dataArtista;
+import edu.tecnopotify.datatypes.dataGenero;
+import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
 import edu.tecnopotify.entidades.Genero;
 import edu.tecnopotify.fabrica.Fabrica;
@@ -78,17 +81,19 @@ public class ServletAlbum extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         fabrica = Fabrica.getInstance();
         iCtrl = fabrica.getInstancia();
-        String comando= request.getParameter("comando");
+        String comando = request.getParameter("comando");
         String path = "";
+        String destino="/ppal.jsp";
         if (comando != null && comando.equals("altaAlbum")) {
-        }else{// Es mostrar album
+        } else {// Es mostrar album
             List<Genero> lstGenero = iCtrl.listarGeneros();
             List<Artista> lstArtista = iCtrl.listarArtistas();
             request.setAttribute("lstGenero", lstGenero);
             request.setAttribute("lstArtista", lstArtista);
-            request.getRequestDispatcher("/Album/ConsultarAlbum.jsp").forward(request, response);
+            destino="/Album/ConsultarAlbum.jsp";
         }
-        
+        request.getRequestDispatcher(destino).forward(request, response);
+
     }
 
     /**
@@ -105,8 +110,9 @@ public class ServletAlbum extends HttpServlet {
         response.setContentType("text/html");
         fabrica = Fabrica.getInstance();
         iCtrl = fabrica.getInstancia();
-        String comando= request.getParameter("comando");
+        String comando = request.getParameter("comando");
         String path = "";
+        String destino="/ppal.jsp";
         if (comando != null && comando.equals("altaAlbum")) {
             Artista artista;
             String idAlbum = request.getParameter("nombreAlbum");
@@ -117,8 +123,26 @@ public class ServletAlbum extends HttpServlet {
             iCtrl.crearAlbum(artista.getNickname(), oDtAlbum);
             request.setAttribute("comando", comando);
             request.setAttribute("id", idAlbum);
+            destino="/subirImg.jsp";
+        } else if (comando != null && comando.equals("mostrarAlbum")) {
+            String genero = (String)request.getParameter("GeneroSelect");
+            String artista = (String)request.getParameter("ArtistaSelect");
+            if (genero == "" && artista=="") {
+                destino="/ppal.jsp";
+            }else{  
+                List<Album> lstAlbum=null;
+                if (genero != null && genero != "") {
+                    Genero oGenero=iCtrl.buscarGenero(genero);
+                    lstAlbum=oGenero.getListAlbum();
+                } else{
+                    Artista oArtista = iCtrl.seleccionarArtista(artista);
+                    lstAlbum=oArtista.getListAlbum();
+                }
+                request.setAttribute("lstAlbum", lstAlbum);
+                destino="/Album/mostrarAlbum.jsp";
+            }
         }
-        request.getRequestDispatcher("/subirImg.jsp").forward(request, response);
+        request.getRequestDispatcher(destino).forward(request, response);
     }
 
     /**

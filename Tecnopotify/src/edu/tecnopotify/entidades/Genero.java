@@ -112,5 +112,15 @@ public class Genero implements Serializable{
         }
         return true;
     }
+
+    public dataGenero toData(){
+        dataGenero retorno = null;
+        retorno.setNombre(this.getNombre());
+        retorno.setPadre(this.getPadre());
+        retorno.setListasReprGenero((List<ListaDefecto>) this.getListasReprGenero());
+        retorno.setGenerosHijos(this.getListHijos());
+        retorno.setGenerosHijos(this.getListHijos());
+        return retorno;
+    }    
     
 }

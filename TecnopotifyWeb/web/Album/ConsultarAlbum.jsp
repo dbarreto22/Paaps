@@ -20,28 +20,32 @@
     <body>
         <jsp:include page="/templates/header.jsp" />
         <h1>Consultar Album</h1>
-        <form name="FormCombos" method="post">
+        <form name="FormCombos" method="post" 
+              action="<%=request.getContextPath()%>/Album"
+              onsubmit="id=Combo(tipo)">
             <div>
                 <% List<Genero> lstGenero = (List<Genero>)request.getAttribute("lstGenero");
-                    List<Artista> lstArtista = (List<Artista>)request.getAttribute("lstArtista"); %>
+                    List<Artista> lstArtista = (List<Artista>)request.getAttribute("lstArtista");
+                    String id="";
+                    String tipo="";%>
                     Genero:
-                <select id="GeneroSelect" name="GeneroSelect"
-                        onchange="ComboG()">
+                <select id="GeneroSelect" name="GeneroSelect">
                        <option value=""> </option>
                        <% if (lstGenero != null)
                             for (Genero genero : lstGenero) {%>
                                 <option value="<%=genero.getNombre()%>"><%=genero.getNombre()%></option>
                             <%}%>>
                 </select>
-                Album:
-                <select id="ArtistaSelect" name="ArtistaSelect"
-                        onchange="ComboA()">
+                Artista:
+                <select id="ArtistaSelect" name="ArtistaSelect">
                        <option value=""> </option>
                        <% if (lstGenero != null)
                             for (Artista artista : lstArtista) {%>
                                 <option value="<%=artista.getNickname()%>"><%=artista.getNombre()%></option>
-                            <%}%>>
+                            <%}%>
                 </select>
+                <input type="hidden" name="comando" value="mostrarAlbum">
+                <input type="submit" value="Enviar" />
             </div>
         </form>
     </body>
