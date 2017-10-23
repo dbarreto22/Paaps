@@ -59,6 +59,7 @@ public class ServletAutenticacion extends HttpServlet {
                 //consultar a la logica
                 if (pass.equals(usr.getContrasenia())) {
                     request.getSession().setAttribute("user", usr.getNickname());
+                    request.getSession().setAttribute("tipoUser", usr.getClass().getName());
                     request.getRequestDispatcher("/ppal.jsp").forward(request, response);
                 } else {
                     request.setAttribute("error", "Usuario o contraseña incorrecto.");
