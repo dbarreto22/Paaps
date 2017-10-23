@@ -111,13 +111,15 @@ public class Controlador implements IControlador {
     }
 
     @Override
-    public void modificarSuscripcion(String nickname, String estadoSuscripcion, String pago) {
+public void modificarSuscripcion(String nickname, String estadoSuscripcion, String pago) {
         //Cliente cli= seleccionarCliente(nickname);
         SuscripcionJpaController suscrl = new SuscripcionJpaController(fact);
         ClienteJpaController ctrCl = new ClienteJpaController(fact);
         Cliente c = ctrCl.findCliente(nickname);
         Suscripcion sus = c.getSuscripcion();
         boolean modificacionValida = false;
+        
+        String estado = sus.status.toString();
         
         if (sus.status == PENDIENTE && (estadoSuscripcion.equals("VIGENTE") || estadoSuscripcion.equals("CANCELADA"))){
             modificacionValida = true;

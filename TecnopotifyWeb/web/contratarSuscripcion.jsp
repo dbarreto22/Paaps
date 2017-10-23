@@ -24,26 +24,29 @@
             monto total correspondiente a la suscripción, y si el Cliente confirma se
             crea una suscripción con fecha actual del Sistema en estado = “Pendiente”..-->
             <h2>Contratar suscripción</h2>
+            
+
             <%
                 if (request.getSession().getAttribute("user") != null) {
             %>
-            <form action="<%= request.getContextPath()%>/contratarSuscripcion?comando=contratarSuscripcion"
+            <form action="/Tecnopotify/contratarSuscripcion?comando=contratarSuscripcion"
                   method="post" enctype = "multipart/form-data">
                 <label for="male">Usuario en línea: <%=request.getSession().getAttribute("user")%></label> <br/>
+                <input type="hidden"  name="comando" value="contratarSuscripcion"/>
                 <!--LISTAR TIPOS DE SUSCRIPCIONES POSIBLES
                 public enum estado 
                 PENDIENTE, VENCIDA, VIGENTE, CANCELADA
                 public enum pago 
                 SUSCRIPCION_PENDIENTE, SEMANAL, MENSUAL, ANUAL
                 -->
-                <select name="tipoSus" class="container">
-                    <option value="semanal">SEMANAL -- $70</option>
-                    <option value="mensual">MENSUAL -- $280</option>
-                    <option value="anual">ANUAL -- $3000</option>
+                <select  name="tipoSus" >
+                    <option value= "SEMANAL" >SEMANAL</option>
+                    <option value="MENSUAL" >MENSUAL</option>
+                    <option value="ANUAL" >ANUAL</option>
                 </select>
-                <input type="hidden"  name="comando" value="contratarSuscripcion">
-                 <button class="btn btn-lg btn-primary btn-block" 
-                        type="submit">Enviar</button>
+                
+                   
+                <input type="submit" value="Enviar" />
             </form>
             <%
             } else {
@@ -56,3 +59,5 @@
         </div>
     </body>
 </html>
+
+

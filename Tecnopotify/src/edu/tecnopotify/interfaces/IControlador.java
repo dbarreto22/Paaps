@@ -117,5 +117,6 @@ public interface IControlador {
     public void setImage(Album aux);
     
     public void setTema(Temas aux);
+    
 }
 

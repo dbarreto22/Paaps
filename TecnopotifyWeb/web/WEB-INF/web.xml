@@ -36,6 +36,10 @@
         <servlet-name>ServletTemas</servlet-name>
         <servlet-class>Serlvets.ServletTema</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>contratarSuscripcion</servlet-name>
+        <servlet-class>Serlvets.ServletContratarSuscripcion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsr</servlet-name>
         <url-pattern>/usuarios</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>ServletTemas</servlet-name>
         <url-pattern>/Temas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>contratarSuscripcion</servlet-name>
+        <url-pattern>/contratarSuscripcion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

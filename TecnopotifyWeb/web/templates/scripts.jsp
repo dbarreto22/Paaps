@@ -49,5 +49,15 @@
     }
 </script>
 
+<script type="text/javascript">
+    function ComboB(){
+       var index = document.forms[0].elements[1].value;
+       document.location.href = "${pageContext.request.contextPath}/usuarios?comando=mostrarClienteGuest";
+        
+    }
+</script>
+
 
 </script>
+
+
