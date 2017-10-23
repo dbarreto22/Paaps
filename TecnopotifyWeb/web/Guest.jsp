@@ -40,7 +40,7 @@
         %>
 
         <form action="/Tecnopotify/usuarios?comando=mostrarClienteGuest" method = "post" >
-            <input type="hidden"  name="comando" value="mostrarArtista" />
+            <input type="hidden"  name="comando" value="mostrarClienteGuest" />
 
             <div class="container">
                 <select id="ArtistaSelect" name="ArtistaSelect">

@@ -17,47 +17,50 @@
 <script>
     function validarDatos() {
         var esCorrecto = true;
-
         var nickname = $('#nickname').val();
         if (nickname === '') {
             alert("Ingrese Nickname");
             esCorrecto = false;
         }
-
         var valcontrasenia = $('#validarContrasenia').val();
         if (valcontrasenia === '') {
             alert("Ingrese Contraseña");
             esCorrecto = false;
         }
-
         var contrasenia = $('#contrasenia').val();
         if (contrasenia === '') {
             alert("Ingrese Contraseña");
             esCorrecto = false;
         }
-
         if (contrasenia != valcontrasenia) {
             alert("Contraseña incorrecta, Ingrese nuevamente");
             esCorrecto = false;
         }
+        var nombreL = $('#nombreL').val();
+        if (nombreL === '') {
+            alert("Ingrese nombre");
+            esCorrecto = false;
+        }
+
         return esCorrecto;
     }
 </script>
 
 <script type="text/javascript">
-    function Combo(tipo){
-        tipo="Genero";
+    function Combo(tipo) {
+        tipo = "Genero";
         var index = document.forms[0].elements[0].value;
-        if(index==="" || index===null)
+        if (index === "" || index === null)
         {
             var index = document.forms[0].elements[1].value;
-            if(index==="" || index===null)
+            if (index === "" || index === null)
             {
                 alert("Debe seleccionar un album o un genero");
-            }else
-                tipo="Artista";
+            } else
+                tipo = "Artista";
         }
         return index;
-        
+
     }
 </script>
+

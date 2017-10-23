@@ -8,6 +8,8 @@ package Serlvets;
 import edu.tecnopotify.datatypes.dataArtista;
 import edu.tecnopotify.datatypes.dataCliente;
 import edu.tecnopotify.datatypes.dataFecha;
+import edu.tecnopotify.datatypes.dataListaParticular;
+import edu.tecnopotify.datatypes.dataListaReproduccion;
 import edu.tecnopotify.datatypes.dataUsuario;
 import edu.tecnopotify.entidades.Album;
 import edu.tecnopotify.entidades.Artista;
@@ -280,6 +282,23 @@ public class ServletUsr extends HttpServlet {
                     despachador.forward(request, response);
                 }
             }
+            
+             if (comando != null && comando.equals("listaRep")) {
+                 
+                 String nombreL =  request.getParameter("nombre");
+                 String nick = (String) request.getSession().getAttribute("user");
+                 Cliente cli = crl.getCli(nick);
+                 dataListaReproduccion listaP =  new dataListaReproduccion(nombreL, "");                
+                 crl.crearListaParticular(true,nick,listaP);
+                 
+                request.setAttribute("id", nombreL);
+               
+
+                RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
+                despachador.forward(request, response);
+                 
+                         
+             }
 
 
         }

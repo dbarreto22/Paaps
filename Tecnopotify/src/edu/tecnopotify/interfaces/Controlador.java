@@ -668,6 +668,10 @@ public class Controlador implements IControlador {
         Genero G1 = new Genero(g1);
         Genero G2 = new Genero(g2);
         Genero G3 = new Genero(g3);
+        
+        Cliente cliPrueba  = new Cliente(u7);
+        Artista uPrueba = new Artista("axaxaxa", "www.ji.com",u1);
+        cliPrueba.addToSeguidos(uPrueba);
 
         altaGenero(g1);
         altaGenero(g2);
@@ -714,6 +718,14 @@ public class Controlador implements IControlador {
         agregarFavorito(false, false, true, "db", "album3");
 
         agregarFavorito(true, false, false, "md", "tema3");
+        
+        dataListaReproduccion listaRep = new dataListaReproduccion("lista1", "");
+        ListaParticular listapar1 = new ListaParticular(true, cliPrueba, listaRep);
+        dataListaReproduccion listaRep2 = new dataListaReproduccion("lista2", "");
+        ListaParticular listapar2 = new ListaParticular(true, cliPrueba, listaRep2);
+        
+        crearListaParticular(true, cliPrueba.getNickname(), listaRep);
+        crearListaParticular(true, cliPrueba.getNickname(), listaRep2);
 
     }
 
