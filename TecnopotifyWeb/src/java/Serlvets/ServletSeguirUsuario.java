@@ -6,10 +6,8 @@
 package Serlvets;
 
 import edu.tecnopotify.entidades.Cliente;
-import static edu.tecnopotify.entidades.Favoritos_.cliente;
 import edu.tecnopotify.entidades.Suscripcion;
 import static edu.tecnopotify.entidades.Suscripcion.estado.VIGENTE;
-import static edu.tecnopotify.entidades.Suscripcion_.status;
 import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
 import edu.tecnopotify.interfaces.IControlador;
@@ -37,22 +35,21 @@ public class ServletSeguirUsuario extends HttpServlet {
      */
     private IControlador crl;
 
-protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Fabrica fabrica = Fabrica.getInstance();
         crl = fabrica.getInstancia();
-        String seguido ="lala";
         String comando = request.getParameter("comando");
-        if (comando != null && comando.equals("seguirUsuario")) {
-            //COMENTADO EL CONTROL DE LA SUSCRIPCIÓN DEL USUARIO LOGUEADO
-            String nickUsr = (String) request.getSession().getAttribute("user");
-            seguido = request.getParameter("usrASeguir");
-            boolean dejarSeguir = (!"Si".equals(request.getAttribute("Dejar de seguir")));
-            if (dejarSeguir) {
-                crl.dejarDeSeguirUsuario(nickUsr, seguido);
+        String nickUsr = (String) request.getSession().getAttribute("user");
+
+        Cliente cliente = crl.seleccionarCliente(nickUsr);
+        if (comando != null && comando.equals("seguirUsuario") && (cliente.getSuscripcion().status == VIGENTE)) {
+            String usrSeguido = request.getParameter("usrASeguir");
+            if (request.getParameter("Dejar de seguir") != null) {
+                crl.dejarDeSeguirUsuario(nickUsr, usrSeguido);
             } else {
-                crl.seguirUsuario(nickUsr, seguido);
+                crl.seguirUsuario(nickUsr, usrSeguido);
             }
         }
         request.getRequestDispatcher("/ppal.jsp").forward(request, response);
