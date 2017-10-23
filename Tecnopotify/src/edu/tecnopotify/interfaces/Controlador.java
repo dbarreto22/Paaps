@@ -702,6 +702,14 @@ public void modificarSuscripcion(String nickname, String estadoSuscripcion, Stri
         agregarFavorito(false, false, true, "db", "album3");
 
         agregarFavorito(true, false, false, "md", "tema3");
+        
+        dataListaReproduccion listaRep = new dataListaReproduccion("lista1", "");
+        ListaParticular listapar1 = new ListaParticular(true, cliPrueba, listaRep);
+        dataListaReproduccion listaRep2 = new dataListaReproduccion("lista2", "");
+        ListaParticular listapar2 = new ListaParticular(true, cliPrueba, listaRep2);
+        
+        crearListaParticular(true, cliPrueba.getNickname(), listaRep);
+        crearListaParticular(true, cliPrueba.getNickname(), listaRep2);
 
     }
 

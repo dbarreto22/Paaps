@@ -22,7 +22,9 @@
     <body>
         <jsp:include page="/templates/header.jsp" />
 
-        <h1>Datos Artista</h1>
+        <div class="container">
+            <h3>Datos Artista</h3>
+        </div>
 
         <%
             List<String> listAl = (ArrayList) request.getAttribute("albumArt");
@@ -60,7 +62,7 @@
                 <%if (!listAl.isEmpty()) {
                         while (itAl.hasNext()) {%> 
                 <ol>
-                    <li> <a href="<%= request.getContextPath()%>/mostrarAlbum.jsp"> <%out.print(itAl.next()); %></a></li> </li>
+                    <li> <a href="<%= request.getContextPath()%>/Album/MostrarAlbum.jsp"> <%out.print(itAl.next()); %></a></li> </li>
                 </ol>
                 <%}
                 } else {%>

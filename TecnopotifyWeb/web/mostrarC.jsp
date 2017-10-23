@@ -22,11 +22,11 @@
     <body>
         <jsp:include page="/templates/header.jsp" />
         <div class="container">
-            <h1>Datos Cliente</h1>
+            <h3>Datos Cliente</h3>
         </div>
         <%
-            List<String> seguidores = (ArrayList) request.getAttribute("litseg");
-            Iterator<String> itS = seguidores.iterator();
+            //List<String> seguidores = (ArrayList) request.getAttribute("litseg");
+            //Iterator<String> itS = seguidores.iterator();
             List<String> listPart = (ArrayList) request.getAttribute("repPropia");
             Iterator<String> itR = listPart.iterator();
             List<String> album = (ArrayList) request.getAttribute("album");
@@ -55,7 +55,7 @@
 
 
 
-                <h6>Lista de Seguidores: </h6>
+                <%--          <h6>Lista de Seguidores: </h6>
 
                 <%if (!seguidores.isEmpty()) {
                         while (itS.hasNext()) {%> 
@@ -65,7 +65,7 @@
                 <%}
                 } else {%>
                 <h6>NO hay Usuarios que lo sigan</h6>
-                <%}%>
+                <%}%>--%>
                 
                 <h6>Lista de Reproducciones Particulares: </h6>
                 <% if (!listPart.isEmpty()) {
@@ -92,9 +92,11 @@
 
                 <h6>Lista de Album Favoritos: </h6>
                 <% if (!album.isEmpty()) {
-                        while (itA.hasNext()) {%> 
+                    String nom;
+                        while (itA.hasNext()) {
+                            nom = itA.next();                     %> 
                 <ol>
-                    <li> <a href="<%= request.getContextPath()%>/mostrarAlbum.jsp"> <%out.print(itA.next()); %></a></li> </li>
+                    <li> <a href="<%= request.getContextPath()%>/Album?idAlbum=<%= nom %>&comando=mostrarAlbum"> <%= nom %></a></li>
                 </ol>
                 <%}
                 } else {%>

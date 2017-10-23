@@ -17,74 +17,50 @@
 <script>
     function validarDatos() {
         var esCorrecto = true;
-
         var nickname = $('#nickname').val();
         if (nickname === '') {
             alert("Ingrese Nickname");
             esCorrecto = false;
         }
-
         var valcontrasenia = $('#validarContrasenia').val();
         if (valcontrasenia === '') {
             alert("Ingrese Contraseña");
             esCorrecto = false;
         }
-
         var contrasenia = $('#contrasenia').val();
         if (contrasenia === '') {
             alert("Ingrese Contraseña");
             esCorrecto = false;
         }
-
         if (contrasenia != valcontrasenia) {
             alert("Contraseña incorrecta, Ingrese nuevamente");
             esCorrecto = false;
         }
+        var nombreL = $('#nombreL').val();
+        if (nombreL === '') {
+            alert("Ingrese nombre");
+            esCorrecto = false;
+        }
+
         return esCorrecto;
     }
 </script>
 
 <script type="text/javascript">
-<<<<<<< HEAD
-
-    function ComboB(){
-       var index = document.forms[0].elements[1].value;
-       document.location.href = "${pageContext.request.contextPath}/usuarios?comando=mostrarClienteGuest";
-        
-    }
-</script>
-
-
-</script>
-
-
-
-
-</script>
-
-<script type="text/javascript">
-    function ComboA(){
-       var index = document.forms[0].elements[1].value;
-       alert(index);
-        document.location.href = "${pageContext.request.contextPath}/Album";
-    }
-</script>
-
-=======
-    function Combo(tipo){
-        tipo="Genero";
+    function Combo(tipo) {
+        tipo = "Genero";
         var index = document.forms[0].elements[0].value;
-        if(index==="" || index===null)
+        if (index === "" || index === null)
         {
             var index = document.forms[0].elements[1].value;
-            if(index==="" || index===null)
+            if (index === "" || index === null)
             {
                 alert("Debe seleccionar un album o un genero");
-            }else
-                tipo="Artista";
+            } else
+                tipo = "Artista";
         }
         return index;
-        
+
     }
 </script>
->>>>>>> 888702963785908ae4527f6eea3404224c4a248c
+
