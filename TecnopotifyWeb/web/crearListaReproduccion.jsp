@@ -15,15 +15,19 @@
     <body>
         <jsp:include page="/templates/header.jsp" />
         <div class="container">
-            <h3>Crear Lista Reproduccion/h3>
+            <div class="container">
+                <h4>Crear Lista Reproduccion</h4>
+            </div>
 
-                <form action="/Tecnopotify/usuarios?comando=listaRep" method = "post" 
-                      onsubmit="return validarDatos()" >
-                    <input type="hidden"  name="comando" value="listaRep" />
-                    <div class="container">
-                        <label>Nombre: </label>
-                        <input type="text" name="nombre" id="nombreL" /><br />    
+            <form action="/Tecnopotify/usuarios?comando=listaRep" method = "post" 
+                  onsubmit="return validarDatos()" >
+                <input type="hidden"  name="comando" value="listaRep" />
+                <div class="container">
+                    <label>Nombre: </label>
+                    <input type="text" name="nombre" id="nombreL" /><br /> 
 
-                    </div>
-    </body>
-</html>
+                    <input type="submit" name="aceptar" value="Aceptar" id="nombreL" />
+
+                </div>
+                </body>
+                </html>

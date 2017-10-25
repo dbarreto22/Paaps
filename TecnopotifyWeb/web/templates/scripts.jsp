@@ -32,13 +32,19 @@
             alert("Ingrese Contraseña");
             esCorrecto = false;
         }
-        if (contrasenia != valcontrasenia) {
+        if (contrasenia !== valcontrasenia) {
             alert("Contraseña incorrecta, Ingrese nuevamente");
             esCorrecto = false;
         }
         var nombreL = $('#nombreL').val();
         if (nombreL === '') {
             alert("Ingrese nombre");
+            esCorrecto = false;
+        }
+
+        var mail = $('#mail').val();
+        if (mail === '') {
+            alert("Ingrese mail");
             esCorrecto = false;
         }
 

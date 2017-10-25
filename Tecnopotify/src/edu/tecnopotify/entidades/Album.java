@@ -4,6 +4,7 @@ import edu.tecnopotify.datatypes.dataAlbum;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.jws.WebService;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+@WebService
 @Entity
 public class Album implements Serializable {
 
@@ -36,7 +38,8 @@ public class Album implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }*/
-
+    
+    
     public Album(dataAlbum album) {
         this.nombre = album.getNombre();
         this.anioCreado = album.getAnioCreado();

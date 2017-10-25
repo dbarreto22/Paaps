@@ -123,23 +123,25 @@ public class ServletUsr extends HttpServlet {
                 }
                 request.setAttribute("repPropia", nickRepPropia);
                 Favoritos fav = cli.getFav();
+                if (fav != null) {
+                    List<Album> album = fav.getListAlbum();
+                    Iterator<Album> itAlb = album.iterator();
+                    List<String> nickAlbum = new ArrayList<>();
 
-                List<Album> album = fav.getListAlbum();
-                Iterator<Album> itAlb = album.iterator();
-                List<String> nickAlbum = new ArrayList<>();
-                while (itAlb.hasNext()) {
-                    nickAlbum.add(itAlb.next().getNombre());
+                    while (itAlb.hasNext()) {
+                        nickAlbum.add(itAlb.next().getNombre());
+                    }
+                    request.setAttribute("album", nickAlbum);
+
+                    List<ListaReproduccion> listRep = fav.getListRep();
+                    Iterator<ListaReproduccion> itListRep = listRep.iterator();
+                    List<String> nickLrep = new ArrayList<>();
+                    while (itListRep.hasNext()) {
+                        nickLrep.add(itAlb.next().getNombre());
+                    }
+
+                    request.setAttribute("listRep", nickLrep);
                 }
-                request.setAttribute("album", nickAlbum);
-
-                List<ListaReproduccion> listRep = fav.getListRep();
-                Iterator<ListaReproduccion> itListRep = listRep.iterator();
-                List<String> nickLrep = new ArrayList<>();
-                while (itListRep.hasNext()) {
-                    nickLrep.add(itAlb.next().getNombre());
-                }
-
-                request.setAttribute("listRep", nickLrep);
 
                 RequestDispatcher despachador = request.getRequestDispatcher("/mostrarC.jsp");
                 despachador.forward(request, response);
@@ -172,70 +174,68 @@ public class ServletUsr extends HttpServlet {
             }
         }
 
-        
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        response.setContentType("text/html");
+
+        String comando = request.getParameter("comando");
+
+        Fabrica fabrica = Fabrica.getInstance();
+        crl = fabrica.getInstancia();
+        if (comando != null && comando.equals("altaCliente")) {
+            //Procesar el formulario  
+            String nickName = request.getParameter("nickname");
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String mail = request.getParameter("mail");
+            int dia = request.getIntHeader("dia");
+            int mes = request.getIntHeader("mes");
+            int anio = request.getIntHeader("anio");
+            dataFecha fecha = new dataFecha(dia, mes, anio);
+            String contrasenia = request.getParameter("contrasenia");
+            dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail,
+                    fecha, "", contrasenia);
+
+            crl.crearCliente(cli);
+
+            request.setAttribute("id", nickName);
+            request.setAttribute("comando", "altaCli");
+
+            RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
+            despachador.forward(request, response);
+
+        } else if (comando != null && comando.equals("altaArtista")) {
+            //Procesar el formulario  
+            String nickName = request.getParameter("nickname");
+            String nombre = request.getParameter("nombre");
+            String apellido = request.getParameter("apellido");
+            String mail = request.getParameter("mail");
+            int dia = request.getIntHeader("dia");
+            int mes = request.getIntHeader("mes");
+            int anio = request.getIntHeader("anio");
+            dataFecha fecha = new dataFecha(dia, mes, anio);
+            String contrasenia = request.getParameter("contrasenia");
+            String imagen = "";
+            String biografia = request.getParameter("biografia");
+            String link = request.getParameter("link");
+            dataUsuario art = new dataArtista(biografia, link, nickName, nombre, apellido, mail,
+                    fecha, contrasenia, "");
+            crl.crearArtista(biografia, link, art);
+            String altaArt = "altaArt";
+
+            request.setAttribute("id", nickName);
+            request.setAttribute("comando", altaArt);
+
+            RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
+            despachador.forward(request, response);
         }
 
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (comando != null && comando.equals("mostrarClienteGuest")) {
 
-            response.setContentType("text/html");
-
-            String comando = request.getParameter("comando");
-
-            Fabrica fabrica = Fabrica.getInstance();
-            crl = fabrica.getInstancia();
-            if (comando != null && comando.equals("altaCliente")) {
-                //Procesar el formulario  
-                String nickName = request.getParameter("nickname");
-                String nombre = request.getParameter("nombre");
-                String apellido = request.getParameter("apellido");
-                String mail = request.getParameter("mail");
-                int dia = request.getIntHeader("dia");
-                int mes = request.getIntHeader("mes");
-                int anio = request.getIntHeader("anio");
-                dataFecha fecha = new dataFecha(dia, mes, anio);
-                String contrasenia = request.getParameter("contrasenia");
-                dataUsuario cli = new dataCliente(nickName, nombre, apellido, mail,
-                        fecha, "", contrasenia);
-
-                crl.crearCliente(cli);
-
-                request.setAttribute("id", nickName);
-                request.setAttribute("comando", "altaCli");
-
-                RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
-                despachador.forward(request, response);
-
-            } else if (comando != null && comando.equals("altaArtista")) {
-                //Procesar el formulario  
-                String nickName = request.getParameter("nickname");
-                String nombre = request.getParameter("nombre");
-                String apellido = request.getParameter("apellido");
-                String mail = request.getParameter("mail");
-                int dia = request.getIntHeader("dia");
-                int mes = request.getIntHeader("mes");
-                int anio = request.getIntHeader("anio");
-                dataFecha fecha = new dataFecha(dia, mes, anio);
-                String contrasenia = request.getParameter("contrasenia");
-                String imagen = "";
-                String biografia = request.getParameter("biografia");
-                String link = request.getParameter("link");
-                dataUsuario art = new dataArtista(biografia, link, nickName, nombre, apellido, mail,
-                        fecha, contrasenia, "");
-                crl.crearArtista(biografia, link, art);
-                String altaArt = "altaArt";
-
-                request.setAttribute("id", nickName);
-                request.setAttribute("comando", altaArt);
-
-                RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
-                despachador.forward(request, response);
-            }
-            
-            if (comando != null && comando.equals("mostrarClienteGuest")) {
-
-            String nick =  request.getParameter("ArtistaSelect");
+            String nick = request.getParameter("ArtistaSelect");
             Usuario usr = crl.getUsuario(nick);
             if (usr.getClass().getName().contains("Artista")) {
                 Artista art = crl.seleccionarArtista(nick);
@@ -277,42 +277,37 @@ public class ServletUsr extends HttpServlet {
                         lpS.add(it.next().getNombre());
                     }
                 }
-                    request.setAttribute("lpS", lpS);
-                    RequestDispatcher despachador = request.getRequestDispatcher("/clienteguest.jsp");
-                    despachador.forward(request, response);
-                }
-            }
-            
-             if (comando != null && comando.equals("listaRep")) {
-                 
-                 String nombreL =  request.getParameter("nombre");
-                 String nick = (String) request.getSession().getAttribute("user");
-                 Cliente cli = crl.getCli(nick);
-                 dataListaReproduccion listaP =  new dataListaReproduccion(nombreL, "");                
-                 crl.crearListaParticular(true,nick,listaP);
-                 
-                request.setAttribute("id", nombreL);
-               
-
-                RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
+                request.setAttribute("lpS", lpS);
+                RequestDispatcher despachador = request.getRequestDispatcher("/clienteguest.jsp");
                 despachador.forward(request, response);
-                 
-                         
-             }
+            }
+        }
 
+        if (comando != null && comando.equals("listaRep")) {
+
+            String nombreL = request.getParameter("nombre");
+            String nick = (String) request.getSession().getAttribute("user");
+            Cliente cli = crl.getCli(nick);
+            dataListaReproduccion listaP = new dataListaReproduccion(nombreL, "");
+            crl.crearListaParticular(true, nick, listaP);
+
+            request.setAttribute("id", nombreL);
+
+            RequestDispatcher despachador = request.getRequestDispatcher("/subirImg.jsp");
+            despachador.forward(request, response);
 
         }
 
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
