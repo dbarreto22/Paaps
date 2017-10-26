@@ -52,18 +52,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.jws.WebMethod;
+import javax.jws.WebService;
+import javax.xml.ws.Endpoint;
 
+
+@WebService
 public class Controlador implements IControlador {
 
     EntityManagerFactory fact = Persistence.createEntityManagerFactory("EjemploJPAPU");
 
     public Controlador() {
-    }
 
+    }
+    @WebMethod
     public EntityManagerFactory getEntityManagerFactory() {
         return this.fact;
     }
-
+    @WebMethod
     public void crearCliente(dataUsuario usuario) {
         Cliente cli = new Cliente(usuario);
         Suscripcion sus = new Suscripcion();
@@ -78,7 +84,7 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @WebMethod
     public void crearArtista(String biografia, String link,
             dataUsuario usuario) {
         Usuario U = new Artista(biografia, link, usuario);
@@ -89,7 +95,7 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    @WebMethod
     public String obtenerEstadoSuscripcion(String nickCliente){
         Cliente cliS = this.seleccionarCliente(nickCliente);
         String retorno = null;
@@ -108,7 +114,7 @@ public class Controlador implements IControlador {
         
         return retorno;
     }
-    
+    @WebMethod
     public String obtenerPagoSuscripcion(String nickCliente){
         Cliente cliS = this.seleccionarCliente(nickCliente);
         String retorno = null;
@@ -125,6 +131,7 @@ public class Controlador implements IControlador {
     }
 
     @Override
+    @WebMethod
     public void modificarSuscripcion(String nickname, String estadoSuscripcion, String pago) {
         //Cliente cli= seleccionarCliente(nickname);
         SuscripcionJpaController suscrl = new SuscripcionJpaController(fact);
@@ -173,7 +180,7 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @WebMethod
     public void altaTema(dataTemas tema, String album) {
         ExtJpaAlbum crlAlbum = new ExtJpaAlbum(fact);
         Temas oTema = new Temas(tema);
@@ -185,7 +192,7 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @WebMethod
     public void crearListaDefecto(dataListaReproduccion listaD, String nombreGenero) {
         ListaDefectoJpaController crlListaD = new ListaDefectoJpaController(fact);
         GeneroJpaController genctrl = new GeneroJpaController(fact);
@@ -199,7 +206,7 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @WebMethod
     public void crearListaParticular(boolean privado, String nickCliente, dataListaReproduccion listaP) {
 
         Cliente cli = seleccionarCliente(nickCliente);
@@ -214,7 +221,7 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @WebMethod
     public void altaGenero(dataGenero oDtGenero) {
         Genero oGeneroPadre;
         Genero G = new Genero(oDtGenero);
@@ -233,31 +240,31 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @WebMethod
     public Artista seleccionarArtista(String nickname) {
         ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
         Artista aux = ctrArtista.findArtista(nickname);
         return aux;
     }
-
+    @WebMethod
     public Cliente seleccionarCliente(String nickname) {
         ClienteJpaController ctrCliente = new ClienteJpaController(fact);
         Cliente aux = ctrCliente.findCliente(nickname);
         return aux;
     }
-
+    @WebMethod
     public Album seleccionarAlbum(String id) {
         AlbumJpaController ctrAlbum = new AlbumJpaController(fact);
         Album aux = ctrAlbum.findAlbum(id);
         return aux;
     }
-
+    @WebMethod
     public ListaParticular seleccionarLista(String id) {
         ListaParticularJpaController ctrListaParticular = new ListaParticularJpaController(fact);
         ListaParticular aux = ctrListaParticular.findListaParticular(id);
         return aux;
     }
-
+    @WebMethod
     public void agregarTemaLista(String idTema, dataListaReproduccion listaR) {
 
         TemasJpaController ctrTema = new TemasJpaController(fact);
@@ -272,7 +279,7 @@ public class Controlador implements IControlador {
         }
 
     }
-
+    @WebMethod
     public void quitarTemaLista(String idTema, dataListaReproduccion listaR) {
         TemasJpaController ctrTema = new TemasJpaController(fact);
         ListaReproduccionJpaController ctrListaReproduccion = new ListaReproduccionJpaController(fact);
@@ -285,7 +292,7 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @WebMethod
     public void crearAlbum(String nickNameArtista, dataAlbum dtAlbum) {
         //Crea un album y lo agrega a su artista
         ExtJpaSrtista ctrArtista = new ExtJpaSrtista(fact);
@@ -309,13 +316,15 @@ public class Controlador implements IControlador {
         }
     }
 
+
     //debe devolver Dts?
+        @WebMethod
     public List<Genero> mostrarListaGenero() {
         GeneroJpaController ctrGenero = new GeneroJpaController(fact);
         List<Genero> resultados = ctrGenero.findGeneroEntities();
         return resultados;
     }
-
+    @WebMethod
     //sirven para consultar Album, se le pregunta al usuario por que quiere consultar
     public Collection<Album> consultarAlbumPorArtista(dataArtista artista) {
         ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
@@ -323,7 +332,7 @@ public class Controlador implements IControlador {
         Collection<Album> listAlbumArtista = oArtista.getListAlbum();
         return listAlbumArtista;
     }
-
+    @WebMethod
     public Collection<Album> consultarAlbumPorGenero(dataGenero genero) {
         //Funcion que obtiene los albums que pertenecen a un genero
         GeneroJpaController ctrGenero = new GeneroJpaController(fact);
@@ -336,7 +345,7 @@ public class Controlador implements IControlador {
     /*
     public void seleccionarLista(String a) {
 
-    }*/
+    }*/    @WebMethod
     public Collection<ListaReproduccion> consultarListaRep(boolean cliente, String id) {
         //el bool cliente se toma de la entrada, cuando el admin dice si la lista a consultar es de genero o artista
         //retorna en la variable lista la colección de listas de reproduccion a mostrar en pantalla
@@ -355,7 +364,7 @@ public class Controlador implements IControlador {
         }
         return lista;
     }
-
+    @WebMethod
     public void eliminarFavorito(boolean tema, boolean lista, boolean album, String nickCliente, String idElemento) {
         //eliminar tema/lista/album de los favoritos de un cliente
         //selecciono un favorito y saco el elemento de la lista que corresponda
@@ -392,7 +401,7 @@ public class Controlador implements IControlador {
             }
         }
     }
-
+    @WebMethod
     public void agregarFavorito(boolean tema, boolean lista, boolean album, String idCliente, String idElemento) {
         ExtJpaFavoritos fav = new ExtJpaFavoritos(fact);
         extJpaCliente clictrl = new extJpaCliente(fact);
@@ -433,7 +442,7 @@ public class Controlador implements IControlador {
             }
         }
     }
-
+    @WebMethod
     public void dejarDeSeguirUsuario(String nickCliente, String nickUsr) {
         try {
             UsuarioJpaController usrCtrl = new UsuarioJpaController(fact);
@@ -450,7 +459,7 @@ public class Controlador implements IControlador {
         }
 
     }
-
+    @WebMethod
     public void seguirUsuario(String nickCliente, String nickUsr) {
 
         try {
@@ -465,7 +474,7 @@ public class Controlador implements IControlador {
         }
 
     }
-
+    @WebMethod
     public void publicarLista(String idUsr, String nombreLista) {
         ListaParticularJpaController listCtrl = new ListaParticularJpaController(fact);
         ListaParticular lParticular = listCtrl.findListaParticular(nombreLista);
@@ -476,28 +485,28 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @WebMethod
     public List<Cliente> listarClientes() {
         List<Cliente> clientes = null;
         ClienteJpaController cliCtrl = new ClienteJpaController(fact);
         clientes = cliCtrl.findClienteEntities();
         return clientes;
     }
-
+    @WebMethod
     public List<Artista> listarArtistas() {
         List<Artista> artista = null;
         ArtistaJpaController cliCtrl = new ArtistaJpaController(fact);
         artista = cliCtrl.findArtistaEntities();
         return artista;
     }
-
+    @WebMethod
     public List<Genero> listarGeneros() {
         List<Genero> g = null;
         GeneroJpaController gCtrl = new GeneroJpaController(fact);
         g = gCtrl.findGeneroEntities();
         return g;
     }
-
+    @WebMethod
     public List<Genero> getListGenero(String nombre) {
         List<Genero> genero = null;
         Genero g = new Genero();
@@ -507,80 +516,80 @@ public class Controlador implements IControlador {
         genero = g.getListHijos();
         return genero;
     }
-
+    @WebMethod
     public Album buscarAlbum(String nombre) {
         Album a = null;
         AlbumJpaController crlA = new AlbumJpaController(fact);
         a = crlA.findAlbum(nombre);
         return a;
     }
-
+    @WebMethod
     public List<Album> listarAlbum() {
         List<Album> album = null;
         AlbumJpaController crlA = new AlbumJpaController(fact);
         album = crlA.findAlbumEntities();
         return album;
     }
-
+    @WebMethod
     public List<Usuario> listarUsuarios() {
         List<Usuario> lUsr = null;
         UsuarioJpaController crlU = new UsuarioJpaController(fact);
         lUsr = crlU.findUsuarioEntities();
         return lUsr;
     }
-
+    @WebMethod
     public Cliente getCli(String nickname) {
         Cliente c = null;
         ClienteJpaController crlU = new ClienteJpaController(fact);
         c = crlU.findCliente(nickname);
         return c;
     }
-
+    @WebMethod
     public Usuario getUsuario(String nickname) {
         Usuario c = null;
         UsuarioJpaController crlU = new UsuarioJpaController(fact);
         c = crlU.findUsuario(nickname);
         return c;
     }
-
+    @WebMethod
     public List<Temas> listarTemas() {
         List<Temas> temas = null;
         TemasJpaController crlT = new TemasJpaController(fact);
         temas = crlT.findTemasEntities();
         return temas;
     }
-
+    @WebMethod
     public Temas getTema(String name) {
         Temas t = null;
         TemasJpaController crlT = new TemasJpaController(fact);
         t = crlT.findTemas(name);
         return t;
     }
-
+    @WebMethod
     public ListaReproduccion getlr(String name) {
         ListaReproduccion lr = null;
         ListaReproduccionJpaController crllr = new ListaReproduccionJpaController(fact);
         lr = crllr.findListaReproduccion(name);
         return lr;
     }
-
+    @WebMethod
     public Genero buscarGenero(String nombre) {
         ExtJpaGenero crl = new ExtJpaGenero(fact);
         return crl.findGenero(nombre);
     }
-
+    @WebMethod
     public List<ListaDefecto> listarDefecto() {
         List<ListaDefecto> ld = null;
         ListaDefectoJpaController crlld = new ListaDefectoJpaController(fact);
         ld = crlld.findListaDefectoEntities();
         return ld;
     }
-
+    @WebMethod
     public List<ListaReproduccion> listarListaRepr() {
         ListaReproduccionJpaController ctrl = new ListaReproduccionJpaController(fact);
         return ctrl.findListaReproduccionEntities();
     }
-
+    @WebMethod
     public Usuario buscarUsrMail(String mail) {
         String nick = null;
         Usuario c = null;
@@ -596,7 +605,7 @@ public class Controlador implements IControlador {
 
         return aux = this.getUsuario(nick);
     }
-
+    @WebMethod
     public Artista seleccionarArtistaPorNombre(String name) {
         ArtistaJpaController ctrArtista = new ArtistaJpaController(fact);
         List<Artista> aux = ctrArtista.findArtistaEntities();
@@ -609,7 +618,7 @@ public class Controlador implements IControlador {
         return retorno;
 
     }
-
+    @WebMethod
     public void setImageCli(Cliente cli) {
         ClienteJpaController ctrCli = new ClienteJpaController(fact);
         try {
@@ -618,7 +627,7 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    @WebMethod
     public void setImageArt(Artista art) {
         ArtistaJpaController ctrCli = new ArtistaJpaController(fact);
         try {
@@ -627,7 +636,7 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+        @WebMethod
     public void setImage(Album aux) {
         AlbumJpaController ctr = new AlbumJpaController(fact);
         try {
@@ -636,7 +645,7 @@ public class Controlador implements IControlador {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
-
+    @WebMethod
     public void setTema(Temas aux) {
         TemasJpaController ctr = new TemasJpaController(fact);
         try {
@@ -729,4 +738,10 @@ public class Controlador implements IControlador {
 
     }
 
+    @WebMethod(exclude=true)
+    public void publicar()
+    {
+        Endpoint.publish("http://localhost:8080/Tecnopotify",this);
+    }
+    
 }
