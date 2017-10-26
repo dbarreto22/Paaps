@@ -12,7 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Temas implements Serializable {
     
@@ -30,9 +34,12 @@ public class Temas implements Serializable {
     
 
     
+    @XmlTransient
     @ManyToMany
     public Map<String, ListaReproduccion> listaR = new HashMap<String,ListaReproduccion>();
     
+    
+    @XmlTransient
     @ManyToMany
     private List<Favoritos> listFavoritos = new  ArrayList<Favoritos>();
     

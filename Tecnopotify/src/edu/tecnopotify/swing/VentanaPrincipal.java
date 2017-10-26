@@ -32,7 +32,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
         ctr.cargarDatos();
-
+        ctr.publicar();
     }
 
     protected void createFrameAltaCliente() {
