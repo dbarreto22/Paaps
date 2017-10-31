@@ -23,6 +23,7 @@ public class Genero implements Serializable{
 
     private String padre;
 
+    
     @OneToMany
     private Map<String, ListaDefecto> listasReprGenero = new HashMap<String, ListaDefecto>();
  

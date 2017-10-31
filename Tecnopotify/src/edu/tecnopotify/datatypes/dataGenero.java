@@ -5,13 +5,18 @@ import edu.tecnopotify.entidades.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 
-
+@XmlAccessorType(XmlAccessType.FIELD)
 public class dataGenero{
 
     private String nombre;
     private String padre;
+    @XmlTransient
     public List listasReprGenero;
+    @XmlTransient
     private List<Genero> generosHijos;
     
     public dataGenero(String nombre, String Padre) {

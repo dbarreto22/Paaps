@@ -18,7 +18,10 @@ import edu.tecnopotify.entidades.Usuario;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 import javax.persistence.EntityManagerFactory;
+
 
 public interface IControlador {
 

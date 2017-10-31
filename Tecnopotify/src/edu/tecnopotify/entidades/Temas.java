@@ -43,7 +43,7 @@ public class Temas implements Serializable {
     @ManyToMany
     private List<Favoritos> listFavoritos = new  ArrayList<Favoritos>();
     
-
+    @XmlTransient
     public Map<String, ListaReproduccion> getListaR() {
         return listaR;
     }

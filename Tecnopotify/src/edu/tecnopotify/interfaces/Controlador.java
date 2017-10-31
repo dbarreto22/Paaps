@@ -68,10 +68,11 @@ public class Controlador implements IControlador {
     public Controlador() {
 
     }
-    @WebMethod
+@WebMethod(exclude = true)
     public EntityManagerFactory getEntityManagerFactory() {
         return this.fact;
     }
+    
     @WebMethod
     public void crearCliente(dataUsuario usuario) {
         Cliente cli = new Cliente(usuario);
@@ -758,7 +759,7 @@ public class Controlador implements IControlador {
 
     }
 
-    @WebMethod(exclude=true)
+//    @WebMethod(exclude=true)
     public void publicar()
     {
         Endpoint.publish("http://localhost:9128/Tecnopotify",this);

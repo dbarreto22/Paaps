@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  *
@@ -23,6 +25,7 @@ integran los álbumes y listas de reproducción ofrecidas. Mediante el pago de u
 (semanal, mensual o anual) el Cliente accederá a diversos servicios, pudiendo optar por no
 renovar la suscripción en el momento de su vencimiento.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Suscripcion implements Serializable {
 

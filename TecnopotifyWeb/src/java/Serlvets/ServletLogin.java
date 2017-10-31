@@ -5,9 +5,9 @@
  */
 package Serlvets;
 
-/*import edu.tecnopotify.entidades.Usuario;
+import edu.tecnopotify.entidades.Usuario;
 import edu.tecnopotify.fabrica.Fabrica;
-import edu.tecnopotify.interfaces.IControlador;*/
+import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
