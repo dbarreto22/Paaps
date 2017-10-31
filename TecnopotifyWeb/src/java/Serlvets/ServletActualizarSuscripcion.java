@@ -7,8 +7,6 @@ package Serlvets;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.String;
-import edu.tecnopotify.fabrica.Fabrica;
-import edu.tecnopotify.interfaces.IControlador;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,31 +29,26 @@ public class ServletActualizarSuscripcion extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-        private IControlador crl;
-
-   
+  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        Fabrica fabrica = Fabrica.getInstance();
-        crl = fabrica.getInstancia();
-        String suscripcion = crl.obtenerEstadoSuscripcion((String) request.getSession().getAttribute("user"));
-        String pago = crl.obtenerPagoSuscripcion((String) request.getSession().getAttribute("user"));
+        String suscripcion = obtenerEstadoSuscripcion((String) request.getSession().getAttribute("user"));
+        String pago = obtenerPagoSuscripcion((String) request.getSession().getAttribute("user"));
         request.setAttribute("susc", suscripcion);
         request.setAttribute("pago", pago);
         request.getRequestDispatcher("actualizarSuscripcion.jsp").forward(request, response);
                         
         if (request.getParameter("suscripcionCancelada") != null) {
-            crl.modificarSuscripcion((String) request.getSession().getAttribute("user"), "CANCELADA", "");
+            modificarSuscripcion((String) request.getSession().getAttribute("user"), "CANCELADA", "");
         }
 
         if (request.getParameter("suscripcionCancelada") != null || request.getParameter("suscripcionVigente") != null) {
             if (request.getParameter("suscripcionCancelada") != null) {
-                crl.modificarSuscripcion((String) request.getSession().getAttribute("user"), "CANCELADA", "");
+                modificarSuscripcion((String) request.getSession().getAttribute("user"), "CANCELADA", "");
             }
             if (request.getParameter("suscripcionVigente") != null) {
-                crl.modificarSuscripcion((String) request.getSession().getAttribute("user"), "VIGENTE", "SEMANAL");
+                modificarSuscripcion((String) request.getSession().getAttribute("user"), "VIGENTE", "SEMANAL");
             }
         }
         
@@ -104,6 +97,24 @@ public class ServletActualizarSuscripcion extends HttpServlet {
 
     private java.lang.String nickCliente(Type String) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static java.lang.String obtenerEstadoSuscripcion(java.lang.String arg0) {
+        edu.tecnopotify.interfaces.ControladorService service = new edu.tecnopotify.interfaces.ControladorService();
+        edu.tecnopotify.interfaces.Controlador port = service.getControladorPort();
+        return port.obtenerEstadoSuscripcion(arg0);
+    }
+
+    private static java.lang.String obtenerPagoSuscripcion(java.lang.String arg0) {
+        edu.tecnopotify.interfaces.ControladorService service = new edu.tecnopotify.interfaces.ControladorService();
+        edu.tecnopotify.interfaces.Controlador port = service.getControladorPort();
+        return port.obtenerPagoSuscripcion(arg0);
+    }
+
+    private static void modificarSuscripcion(java.lang.String arg0, java.lang.String arg1, java.lang.String arg2) {
+        edu.tecnopotify.interfaces.ControladorService service = new edu.tecnopotify.interfaces.ControladorService();
+        edu.tecnopotify.interfaces.Controlador port = service.getControladorPort();
+        port.modificarSuscripcion(arg0, arg1, arg2);
     }
 
 }

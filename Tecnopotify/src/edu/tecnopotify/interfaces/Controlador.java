@@ -762,7 +762,7 @@ public class Controlador implements IControlador {
 //    @WebMethod(exclude=true)
     public void publicar()
     {
-        Endpoint.publish("http://localhost:9128/Tecnopotify",this);
+        Endpoint.publish("http://localhost:2425/Tecnopotify",this);
     }
     
 }

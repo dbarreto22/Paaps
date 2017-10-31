@@ -39,10 +39,12 @@ public class ComboArtistas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
           RequestDispatcher despachador;
+//********************************************************************************************************
           Fabrica fabrica=Fabrica.getInstance();
           IControlador iCtrl=fabrica.getInstancia();
           iCtrl.cargarDatos();
           List<Artista> lstArtista = iCtrl.listarArtistas();
+//********************************************************************************************************
           request.setAttribute("lstArtista", lstArtista);
           despachador = request.getRequestDispatcher("Album/AltaAlbum.jsp");//
           despachador.forward(request, response);

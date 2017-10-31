@@ -35,9 +35,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 @WebServlet(name = "ServletAlbum", urlPatterns = {"/ServletAlbum"})
 public class ServletAlbum extends HttpServlet {
-
+//******************************************************************************************
     private IControlador iCtrl;
     private Fabrica fabrica;
+//******************************************************************************************
     private static final long serialVersionUID = 1L;
     private ServletFileUpload uploader = null;
     private String fileDirStr = null;
@@ -54,8 +55,10 @@ public class ServletAlbum extends HttpServlet {
         DiskFileItemFactory fileFactory = new DiskFileItemFactory();
         fileFactory.setRepository(filesDir);
         this.uploader = new ServletFileUpload(fileFactory);
+//******************************************************************************************
         fabrica = Fabrica.getInstance();
         iCtrl = fabrica.getInstancia();
+//******************************************************************************************        
     }
 
     /**
@@ -80,16 +83,18 @@ public class ServletAlbum extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+//******************************************************************************************
         fabrica = Fabrica.getInstance();
         iCtrl = fabrica.getInstancia();
+//******************************************************************************************
         String comando = request.getParameter("comando");
         String path = "";
         String destino="/ppal.jsp";
         if (comando != null && comando.equals("altaAlbum")) {
         }else if (comando != null && comando.equals("mostrarAlbum")) {
             String album = (String)request.getParameter("idAlbum");
-            Album oAlbum = iCtrl.buscarAlbum(album);
-            List<Temas> lstTemas = oAlbum.getListTemas();
+            edu.tecnopotify.interfaces.Album oAlbum = buscarAlbum(album);
+            List<edu.tecnopotify.interfaces.Temas> lstTemas = oAlbum.getListTemas();
             destino="/Album/MostrarAlbum.jsp";
             request.setAttribute("lstTemas", lstTemas);
         } else {// Es mostrar album
@@ -161,5 +166,11 @@ public class ServletAlbum extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static edu.tecnopotify.interfaces.Album buscarAlbum(java.lang.String arg0) {
+        edu.tecnopotify.interfaces.ControladorService service = new edu.tecnopotify.interfaces.ControladorService();
+        edu.tecnopotify.interfaces.Controlador port = service.getControladorPort();
+        return port.buscarAlbum(arg0);
+    }
 
 }
