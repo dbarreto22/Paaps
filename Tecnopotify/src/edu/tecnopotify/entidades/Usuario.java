@@ -15,8 +15,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({Cliente.class, Artista.class})
 @Entity
 
 public class Usuario implements Serializable {

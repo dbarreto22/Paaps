@@ -16,8 +16,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({ListaParticular.class, ListaDefecto.class})
 @Entity
 public class ListaReproduccion implements Serializable{
     /*
