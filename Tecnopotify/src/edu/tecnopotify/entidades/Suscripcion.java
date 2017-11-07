@@ -27,7 +27,7 @@ integran los álbumes y listas de reproducción ofrecidas. Mediante el pago de u
 renovar la suscripción en el momento de su vencimiento.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@WebService
+
 @Entity
 public class Suscripcion implements Serializable {
 

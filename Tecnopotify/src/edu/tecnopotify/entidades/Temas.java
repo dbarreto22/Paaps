@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 
-@WebService
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Temas implements Serializable {

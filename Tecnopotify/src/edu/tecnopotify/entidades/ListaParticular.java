@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
-@WebService
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class ListaParticular extends ListaReproduccion implements Serializable{
     

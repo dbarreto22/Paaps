@@ -20,8 +20,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
-@WebService
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Favoritos implements Serializable {
 

@@ -13,8 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
-@WebService
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 
 public class Usuario implements Serializable {
