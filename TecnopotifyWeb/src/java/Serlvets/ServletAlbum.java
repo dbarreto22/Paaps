@@ -167,11 +167,13 @@ public class ServletAlbum extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private static edu.tecnopotify.interfaces.Album buscarAlbum(java.lang.String arg0) {
-        edu.tecnopotify.interfaces.ControladorService service = new edu.tecnopotify.interfaces.ControladorService();
-        edu.tecnopotify.interfaces.Controlador port = service.getControladorPort();
-        return port.buscarAlbum(arg0);
-    }
+
+
+
+
+
+
+ 
 
     private static void altaGenero(edu.tecnopotify.interfaces.DataGenero arg0) {
         edu.tecnopotify.interfaces.ControladorService service = new edu.tecnopotify.interfaces.ControladorService();
