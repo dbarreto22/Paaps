@@ -7,6 +7,7 @@ package edu.tecnopotify.entidades;
 
 import edu.tecnopotify.datatypes.dataFecha;
 import java.io.Serializable;
+import javax.jws.WebService;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +27,7 @@ integran los álbumes y listas de reproducción ofrecidas. Mediante el pago de u
 renovar la suscripción en el momento de su vencimiento.
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@WebService
 @Entity
 public class Suscripcion implements Serializable {
 

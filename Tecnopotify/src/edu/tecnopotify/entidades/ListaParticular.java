@@ -2,12 +2,14 @@ package edu.tecnopotify.entidades;
 
 import edu.tecnopotify.datatypes.dataListaReproduccion;
 import java.io.Serializable;
+import javax.jws.WebService;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+@WebService
 @Entity
 public class ListaParticular extends ListaReproduccion implements Serializable{
     

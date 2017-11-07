@@ -8,10 +8,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.jws.WebService;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+@WebService
 @Entity
 public class Cliente extends Usuario implements Serializable{
     

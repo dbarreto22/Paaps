@@ -6,6 +6,7 @@ import edu.tecnopotify.datatypes.dataFecha;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.jws.WebService;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+@WebService
 @Entity
 
 public class Usuario implements Serializable {

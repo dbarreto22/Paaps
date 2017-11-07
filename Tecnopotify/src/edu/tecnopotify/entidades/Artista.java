@@ -5,10 +5,12 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import javax.jws.WebService;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+@WebService
 @Entity
 public class Artista extends Usuario implements Serializable {
 

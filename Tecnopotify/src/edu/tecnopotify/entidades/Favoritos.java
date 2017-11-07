@@ -9,6 +9,7 @@ import edu.tecnopotify.datatypes.dataFavoritos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.jws.WebService;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+@WebService
 @Entity
 public class Favoritos implements Serializable {
 
