@@ -173,4 +173,10 @@ public class ServletAlbum extends HttpServlet {
         return port.buscarAlbum(arg0);
     }
 
+    private static void altaGenero(edu.tecnopotify.interfaces.DataGenero arg0) {
+        edu.tecnopotify.interfaces.ControladorService service = new edu.tecnopotify.interfaces.ControladorService();
+        edu.tecnopotify.interfaces.Controlador port = service.getControladorPort();
+        port.altaGenero(arg0);
+    }
+
 }
